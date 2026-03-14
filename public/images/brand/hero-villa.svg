@@ -1,0 +1,15 @@
+<svg width="1600" height="2000" viewBox="0 0 1600 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="2000" fill="#EFE6DB"/>
+  <rect x="72" y="72" width="1456" height="1856" rx="56" fill="url(#paint0_linear_1_2)"/>
+  <path d="M260 1360C472 1124 705 980 1020 884C1174 837 1298 786 1390 734V1728H224C254 1604 309 1481 260 1360Z" fill="rgba(255,255,255,0.28)"/>
+  <path d="M274 944C430 770 640 672 898 648C1041 635 1188 572 1338 458" stroke="#F7F3EE" stroke-width="3" stroke-linecap="round"/>
+  <text x="132" y="1718" fill="#F8F6F2" font-family="Georgia, serif" font-size="120" letter-spacing="6">VILLA RAFFAELLI</text>
+  <text x="138" y="1816" fill="#F3EEE7" font-family="Arial, sans-serif" font-size="36" letter-spacing="10">UPPER TUSCANY</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_2" x1="232" y1="164" x2="1392" y2="1788" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C6B8A6"/>
+      <stop offset="0.54" stop-color="#8C7E6F"/>
+      <stop offset="1" stop-color="#5D544D"/>
+    </linearGradient>
+  </defs>
+</svg>

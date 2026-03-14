@@ -1,0 +1,15 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" fill="#16120F"/>
+  <rect x="60" y="60" width="1480" height="1080" rx="44" fill="url(#paint0_linear_6_8)"/>
+  <rect x="178" y="166" width="620" height="860" rx="30" fill="rgba(255,255,255,0.16)"/>
+  <rect x="834" y="166" width="588" height="432" rx="30" fill="rgba(255,255,255,0.08)"/>
+  <rect x="834" y="634" width="588" height="392" rx="30" fill="rgba(255,255,255,0.24)"/>
+  <text x="122" y="1080" fill="#F9F4EE" font-family="Georgia, serif" font-size="80" letter-spacing="6">JOURNAL / STORIES OF PLACE</text>
+  <defs>
+    <linearGradient id="paint0_linear_6_8" x1="216" y1="116" x2="1422" y2="1096" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#604E41"/>
+      <stop offset="0.58" stop-color="#231B15"/>
+      <stop offset="1" stop-color="#090705"/>
+    </linearGradient>
+  </defs>
+</svg>

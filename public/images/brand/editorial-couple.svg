@@ -1,0 +1,15 @@
+<svg width="1600" height="2000" viewBox="0 0 1600 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="2000" fill="#F0ECE6"/>
+  <rect x="96" y="96" width="1408" height="1808" rx="48" fill="url(#paint0_linear_2_5)"/>
+  <ellipse cx="580" cy="1040" rx="246" ry="428" fill="rgba(249, 243, 234, 0.72)"/>
+  <ellipse cx="920" cy="1118" rx="214" ry="472" fill="rgba(71, 58, 45, 0.44)"/>
+  <rect x="1152" y="224" width="220" height="820" rx="110" fill="rgba(255,255,255,0.24)"/>
+  <text x="136" y="1780" fill="#FBF8F5" font-family="Georgia, serif" font-size="104" letter-spacing="4">EDITORIAL QUIET</text>
+  <defs>
+    <linearGradient id="paint0_linear_2_5" x1="220" y1="180" x2="1310" y2="1844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9CCBF"/>
+      <stop offset="0.5" stop-color="#8A796C"/>
+      <stop offset="1" stop-color="#332B24"/>
+    </linearGradient>
+  </defs>
+</svg>

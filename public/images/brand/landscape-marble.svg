@@ -1,0 +1,14 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1200" fill="#ECE8E0"/>
+  <rect x="54" y="54" width="1492" height="1092" rx="48" fill="url(#paint0_linear_4_9)"/>
+  <path d="M146 884C386 746 544 706 734 700C1012 692 1146 518 1450 466V1052H146V884Z" fill="rgba(255,255,255,0.24)"/>
+  <path d="M120 920C364 782 576 742 812 760C1040 778 1228 666 1482 620" stroke="#F7F2EA" stroke-width="5" stroke-linecap="round"/>
+  <text x="118" y="1024" fill="#F8F4EF" font-family="Georgia, serif" font-size="92" letter-spacing="4">UPPER TUSCANY / MARBLE LIGHT</text>
+  <defs>
+    <linearGradient id="paint0_linear_4_9" x1="258" y1="114" x2="1394" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BDC4BA"/>
+      <stop offset="0.48" stop-color="#7C8A7F"/>
+      <stop offset="1" stop-color="#596861"/>
+    </linearGradient>
+  </defs>
+</svg>

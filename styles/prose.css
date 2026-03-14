@@ -1,0 +1,28 @@
+.prose-dolcevilla {
+  color: var(--color-ink);
+  line-height: 1.8;
+}
+
+.prose-dolcevilla h2,
+.prose-dolcevilla h3 {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-dolcevilla p,
+.prose-dolcevilla ul,
+.prose-dolcevilla ol {
+  margin-bottom: 1rem;
+}
+
+.prose-dolcevilla strong {
+  font-weight: 700;
+}
+
+.prose-dolcevilla a {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}

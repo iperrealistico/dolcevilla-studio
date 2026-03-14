@@ -1,0 +1,17 @@
+<svg width="1600" height="2000" viewBox="0 0 1600 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="2000" fill="#181512"/>
+  <rect x="72" y="72" width="1456" height="1856" rx="56" fill="url(#paint0_linear_3_7)"/>
+  <circle cx="476" cy="1108" r="54" fill="#F3CF9E"/>
+  <circle cx="700" cy="1182" r="44" fill="#F5D9B8"/>
+  <circle cx="936" cy="1080" r="62" fill="#F0C487"/>
+  <circle cx="1164" cy="1210" r="48" fill="#F6D3A8"/>
+  <rect x="214" y="1364" width="1172" height="14" rx="7" fill="rgba(255,255,255,0.36)"/>
+  <text x="132" y="1760" fill="#FAF1E8" font-family="Georgia, serif" font-size="110">DINNER INTO NIGHT</text>
+  <defs>
+    <linearGradient id="paint0_linear_3_7" x1="314" y1="184" x2="1282" y2="1848" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4A3C30"/>
+      <stop offset="0.58" stop-color="#1E1814"/>
+      <stop offset="1" stop-color="#090806"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -12,7 +12,7 @@ export const homePage = servicePageContentSchema.parse({
       "Dolcevilla Studio creates emotionally rich wedding imagery through a hybrid film-and-digital approach shaped by Upper Tuscany, Villa Raffaelli, and the quiet rhythm of real places.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See selected stories", href: "/journal" },
-    imageIds: ["homeHeroVilla", "filmCameraCollectionStudioTable", "filmHasselbladGroundGlassOliveCeremony", "welcomeDinnerLanterns"],
+    imageIds: ["homeHeroVilla", "villaCourtyard", "homeCoupleQuiet", "villaLibraryPortrait"],
     variant: "home",
   },
   intro: {

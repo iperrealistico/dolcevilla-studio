@@ -10,7 +10,7 @@ export const aboutPage = servicePageContentSchema.parse({
     subtitle:
       "Dolcevilla Studio was formed around Villa Raffaelli, Upper Tuscany, and a belief that traditional photographic tools still tell the truth differently when they are used with real skill.",
     primaryCta: { label: "Get in touch", href: "/contact" },
-    imageIds: ["filmNikonFVintageVillaLibrary", "filmRolleiflexBridalPrep", "filmHasselblad500cmWindowGarden"],
+    imageIds: ["villaLibraryPortrait", "homeCoupleQuiet", "villaCourtyard"],
     variant: "editorial",
   },
   intro: {

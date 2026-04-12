@@ -17,7 +17,7 @@ export const filmWeddingPhotographyPage = servicePageContentSchema.parse({
       "Place still matters to us, but so does the physical truth of an image. One photographer always works with film alongside digital coverage, moving between 35mm, 120 medium format, and in selected moments large format.",
     primaryCta: { label: "Ask about film coverage", href: "/contact" },
     secondaryCta: { label: "Read the journal", href: "/journal", variant: "secondary" },
-    imageIds: ["filmCameraCollectionStudioTable", "filmHasselbladGroundGlassOliveCeremony", "filmNikonFVintageVillaLibrary", "darkroomHangingPrintsRedLight"],
+    imageIds: ["villaLibraryPortrait", "homeCoupleQuiet", "homeHeroVilla", "villaCourtyard"],
     variant: "service",
   },
   intro: {

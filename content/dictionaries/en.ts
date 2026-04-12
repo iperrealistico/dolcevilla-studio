@@ -43,10 +43,10 @@ export const dictionary = uiDictionarySchema.parse({
     legal: "Legal",
   },
   consent: {
-    title: "Step quietly into our world",
-    body: "Choose the experience you want. We only activate analytics and advertising after explicit permission.",
-    essentialOnly: "Essential only",
-    acceptAll: "Accept analytics and marketing",
+    title: "Choose how the site should accompany you",
+    body: "Optional analytics and marketing remain off until you explicitly allow them.",
+    essentialOnly: "Continue with essential only",
+    acceptAll: "Allow the full studio experience",
   },
   cta: {
     inquire: "Start your inquiry",

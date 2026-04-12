@@ -1,40 +1,46 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ConsentActions } from "@/components/consent/ConsentActions";
-import { Heading } from "@/components/ui/Heading";
 import { useConsent } from "@/hooks/useConsent";
 import { useScrollLock } from "@/hooks/useScrollLock";
 
 export function ConsentDoorway() {
-  const { consent } = useConsent();
-  useScrollLock(!consent.hasInteracted);
+  const { isConsentDialogOpen } = useConsent();
+  useScrollLock(isConsentDialogOpen);
 
-  if (consent.hasInteracted) {
+  if (!isConsentDialogOpen) {
     return null;
   }
 
   return (
-    <div
+    <motion.div
       aria-modal="true"
       role="dialog"
-      className="fixed inset-0 z-[90] overflow-y-auto bg-[rgb(20_17_14_/_0.8)] p-4 sm:p-5"
+      aria-labelledby="consent-doorway-title"
+      aria-describedby="consent-doorway-description"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.24, ease: "easeOut" } }}
+      className="fixed inset-0 z-[90] overflow-y-auto bg-[linear-gradient(180deg,rgba(16,13,10,0.82),rgba(16,13,10,0.74))] backdrop-blur-md p-3 sm:p-5"
     >
-      <div className="flex min-h-full items-end justify-center py-4 sm:items-center">
-        <div className="max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,#1D1916,#4B4034)] px-6 py-8 text-[var(--color-paper)] shadow-2xl md:px-10 md:py-12">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[rgb(244_235_224_/_0.7)]">
-            Consent
-          </p>
-          <Heading className="max-w-xl text-[2.6rem] text-[var(--color-paper)] md:text-6xl">
-            Step quietly into our world.
-          </Heading>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-[rgb(244_235_224_/_0.8)]">
-            Choose the experience you want. We only activate analytics and advertising after explicit permission, and we never use a generic cookie banner.
-          </p>
-          <div className="mt-8">
-            <ConsentActions />
+      <div className="flex min-h-full items-center justify-center py-3 sm:py-4">
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 16, scale: 0.985 }}
+          transition={{ duration: 0.56, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-6xl"
+        >
+          <div id="consent-doorway-description" className="sr-only">
+            Choose whether optional analytics and marketing should be enabled before browsing the site further.
           </div>
-        </div>
+          <div id="consent-doorway-title" className="sr-only">
+            Welcome and privacy choices
+          </div>
+          <ConsentActions />
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Instagram } from "lucide-react";
+import { OpenConsentManagerButton } from "@/components/consent/OpenConsentManagerButton";
 import { footerContent } from "@/content/site/footer";
 import { siteSettings } from "@/content/site/settings";
 import { Container } from "@/components/ui/Container";
@@ -59,9 +60,10 @@ export function Footer() {
             >
               <Instagram size={16} /> Instagram
             </Link>
-            <div className="flex gap-4 pt-2">
+            <div className="flex flex-wrap gap-4 pt-2">
               <Link href="/privacy">Privacy</Link>
               <Link href="/legal">Legal</Link>
+              <OpenConsentManagerButton />
             </div>
           </div>
         </div>

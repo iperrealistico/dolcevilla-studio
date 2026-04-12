@@ -2,6 +2,7 @@
 
 import { LinkButton } from "@/components/ui/LinkButton";
 import { StickyBottomBar } from "@/components/mobile/StickyBottomBar";
+import { useConsent } from "@/hooks/useConsent";
 import { useMobileUI } from "@/contexts/MobileUIContext";
 
 type StickyMobileCTAProps = {
@@ -11,8 +12,9 @@ type StickyMobileCTAProps = {
 
 export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
   const { isMenuOpen } = useMobileUI();
+  const { consent } = useConsent();
 
-  if (isMenuOpen) {
+  if (isMenuOpen || !consent.hasInteracted) {
     return null;
   }
 

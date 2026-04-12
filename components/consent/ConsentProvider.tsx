@@ -58,10 +58,14 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     }),
     [consent],
   );
+  const isConsentPending = !consent.hasInteracted;
+  const modalLockProps = isConsentPending ? ({ inert: true } as Record<string, boolean>) : {};
 
   return (
     <ConsentContext.Provider value={value}>
-      {children}
+      <div aria-hidden={isConsentPending} {...modalLockProps}>
+        {children}
+      </div>
       <ConsentDoorway />
     </ConsentContext.Provider>
   );

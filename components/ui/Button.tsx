@@ -44,7 +44,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-pill)] px-5 py-3 text-sm font-semibold transition",
+        "inline-flex min-h-11 touch-manipulation items-center justify-center gap-2 rounded-[var(--radius-pill)] px-5 py-3 text-sm font-semibold transition",
         buttonVariants[variant],
         className,
       )}

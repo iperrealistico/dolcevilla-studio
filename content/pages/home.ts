@@ -12,7 +12,7 @@ export const homePage = servicePageContentSchema.parse({
       "Dolcevilla Studio creates emotionally rich wedding imagery through a hybrid film-and-digital approach shaped by Upper Tuscany, Villa Raffaelli, and the quiet rhythm of real places.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See selected stories", href: "/journal" },
-    imageIds: ["homeHeroVilla", "florenceLoggiaBlueHour", "welcomeDinnerLanterns", "valDorciaCypressVows"],
+    imageIds: ["homeHeroVilla", "filmCameraCollectionStudioTable", "filmHasselbladGroundGlassOliveCeremony", "welcomeDinnerLanterns"],
     variant: "home",
   },
   intro: {
@@ -24,12 +24,12 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
-    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
+    { id: "filmCameraCollectionStudioTable", layoutVariant: "landscape" },
+    { id: "filmNikonFVintageVillaLibrary", layoutVariant: "portrait" },
+    { id: "filmRolleiflexBridalPrep", layoutVariant: "portrait" },
+    { id: "filmHasselbladGroundGlassOliveCeremony", layoutVariant: "landscape" },
+    { id: "filmHasselblad500cmWindowGarden", layoutVariant: "portrait" },
+    { id: "darkroomHangingPrintsRedLight", layoutVariant: "landscape" },
   ]),
   highlights: [
     {

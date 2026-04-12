@@ -196,3 +196,42 @@
   - attempted to resume analog-specific AI image generation for film rolls, film cameras, POV ground-glass frames, and darkroom scenes
   - the OpenAI image API remains blocked by `billing_hard_limit_reached`
   - no new requested film-camera or darkroom image assets could be generated truthfully in this session, so the site was cleaned up and motion-polished without fabricating those missing visuals
+
+## 2026-04-12 — Analog Image Library Generation And Sitewide Integration
+
+- Resumed the `imagegen` workflow after the API became available again and generated a new 18-image analog-focused placeholder set specifically for the film identity work. The batch covered:
+  - 35mm, 120, and 4x5 film stock still lifes
+  - a Nikon F, Nikon F5, Rolleiflex 3.5, Hasselblad 500cm, black wooden 8x10 view camera, and 4x5 Smartflex/Graflex-like body
+  - three Hasselblad waist-level finder / ground-glass POV scenes
+  - five darkroom scenes with hanging prints, chemistry trays, enlarger equipment, shelves, and sink area
+  - one broader film-camera collection still life for shared brand surfaces
+- Wrote the batch outputs to `output/imagegen/film-batch/`, then copied the approved WebP files into `public/images/brand/film-generated/` for production use. The generated files are:
+  - `35mm-film-roll-still-life.webp`
+  - `120-film-roll-styling.webp`
+  - `4x5-sheet-film-box-holder.webp`
+  - `nikon-f-vintage-villa-library.webp`
+  - `nikon-f5-reception-corner.webp`
+  - `rolleiflex-35-bridal-prep.webp`
+  - `hasselblad-500cm-window-garden.webp`
+  - `8x10-view-camera-olive-grove.webp`
+  - `smartflex-4x5-courtyard.webp`
+  - `hasselblad-ground-glass-olive-ceremony.webp`
+  - `hasselblad-ground-glass-bridal-window.webp`
+  - `hasselblad-ground-glass-reception.webp`
+  - `darkroom-hanging-prints-red-light.webp`
+  - `darkroom-chemistry-trays-hands.webp`
+  - `darkroom-enlarger-workbench.webp`
+  - `darkroom-film-shelves-tools.webp`
+  - `darkroom-sink-prints-portrait.webp`
+  - `film-camera-collection-studio-table.webp`
+- Extended `lib/images/imageManifest.ts` with typed entries for the entire new analog library, including alt text, dimensions, and tone metadata so the content model can reference the images normally.
+- Reworked the key film-related page payloads to actually use the new images rather than simply storing them:
+  - `content/pages/home.ts` now introduces the analog-craft imagery directly on the home hero rotation and home gallery
+  - `content/pages/about.ts` now uses film tools, rolls, and darkroom images to support the studio’s process story
+  - `content/pages/experience.ts` now uses ground-glass and hybrid-coverage imagery to show how the workflow feels in practice
+  - `content/pages/film-wedding-photography.ts` now uses a much larger camera / format / darkroom gallery instead of generic couple-only imagery
+- Updated the supporting journal entries so the new imagery propagates into story cards and editorial proof surfaces:
+  - `content/journal/guides/35mm-120-large-format-wedding-photography.mdx`
+  - `content/journal/guides/why-we-photograph-weddings-on-film-and-digital.mdx`
+  - `content/journal/stories-of-place/inside-our-darkroom.mdx`
+- Deleted the temporary batch JSONL file after the run so `tmp/imagegen/` stays clean and the repo only keeps the final public assets.

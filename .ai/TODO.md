@@ -63,4 +63,4 @@
 - [x] Spread the hybrid film-and-digital story across Home, About, Experience, Weddings, Elopements, Pricing, Contact, FAQs, navigation, and journal internal linking.
 - [x] Add supporting journal entries for the hybrid philosophy, film formats, and darkroom perspective.
 - [x] Remove the preview-only contact-sheet composites from the public image manifest and all live page surfaces.
-- [ ] Generate and integrate a fresh analog-focused AI placeholder library with film rolls, camera bodies, ground-glass POVs, and darkroom scenes once the image API billing limit is resolved.
+- [x] Generate and integrate a fresh analog-focused AI placeholder library with film rolls, camera bodies, ground-glass POVs, and darkroom scenes.

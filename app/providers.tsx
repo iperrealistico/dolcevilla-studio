@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { MobileUIProvider } from "@/contexts/MobileUIContext";
 import { LightboxProvider } from "@/contexts/LightboxContext";
+import { StudioCursor } from "@/components/cursor/StudioCursor";
 import { useViewportHeight } from "@/hooks/useViewportHeight";
 
 type ProvidersProps = {
@@ -22,6 +23,7 @@ export function Providers({ children }: ProvidersProps) {
         <LightboxProvider>
           <ViewportSync />
           {children}
+          <StudioCursor />
         </LightboxProvider>
       </MobileUIProvider>
     </ConsentProvider>

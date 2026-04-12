@@ -218,6 +218,25 @@
   - `hasselblad-ground-glass-olive-ceremony.webp`
   - `hasselblad-ground-glass-bridal-window.webp`
   - `hasselblad-ground-glass-reception.webp`
+
+## 2026-04-12 — Bespoke Desktop Cursor Experience
+
+- Added a new lightweight branded cursor system instead of pulling in a third-party cursor package. The implementation lives in `components/cursor/StudioCursor.tsx` and is mounted globally from `app/providers.tsx`.
+- Chose a bespoke implementation because the site already has the motion primitives it needs, and a custom cursor is sensitive to bundle size, event-listener churn, and accessibility. A small local component gives more control than a generic library over:
+  - inertia tuning
+  - ring-to-dot click behavior
+  - fine-pointer-only activation
+  - reduced-motion fallback
+- Built the cursor as a single fixed overlay with one `requestAnimationFrame` loop and direct CSS variable updates for position, avoiding React re-renders on pointer movement.
+- The new cursor behavior includes:
+  - hidden native cursor for fine-pointer desktop sessions only
+  - an idle hollow ring with a soft pulse
+  - a larger interactive state over links, buttons, summaries, and form controls
+  - a satisfying click response that collapses the ring into a solid dot with a quick burst animation
+  - eased follow motion so the cursor carries slight inertia instead of snapping rigidly to the pointer
+- Added `lib/cursor/getCursorMode.ts` so interactive-target detection stays centralized and testable rather than being buried inside the component.
+- Added unit coverage in `tests/unit/cursor-mode.test.ts` for nested links, label/form interactions, and non-interactive surfaces.
+- Updated `app/globals.css` with the custom-cursor shell, pulse keyframes, interactive/pressed variants, and a fine-pointer media-query guard so touch devices keep the native browser behavior.
   - `darkroom-hanging-prints-red-light.webp`
   - `darkroom-chemistry-trays-hands.webp`
   - `darkroom-enlarger-workbench.webp`

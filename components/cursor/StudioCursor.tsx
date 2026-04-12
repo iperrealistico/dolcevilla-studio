@@ -1,0 +1,283 @@
+"use client";
+
+import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { getCursorMode, type CursorMode } from "@/lib/cursor/getCursorMode";
+
+const CLICK_RELEASE_DELAY_MS = 120;
+const IDLE_EASE = 0.18;
+const INTERACTIVE_EASE = 0.14;
+const PRESSED_EASE = 0.24;
+const CURSOR_MEDIA_QUERY = "(hover: hover) and (pointer: fine)";
+
+function subscribeToCursorCapability(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => undefined;
+  }
+
+  const mediaQuery = window.matchMedia(CURSOR_MEDIA_QUERY);
+  mediaQuery.addEventListener("change", onStoreChange);
+
+  return () => {
+    mediaQuery.removeEventListener("change", onStoreChange);
+  };
+}
+
+export function StudioCursor() {
+  const reduceMotion = useReducedMotion();
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const burstRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number | null>(null);
+  const releaseTimeoutRef = useRef<number | null>(null);
+  const targetRef = useRef({ x: -120, y: -120 });
+  const currentRef = useRef({ x: -120, y: -120 });
+  const hasPointerRef = useRef(false);
+  const visibleRef = useRef(false);
+  const modeRef = useRef<CursorMode>("idle");
+  const pressedRef = useRef(false);
+  const enabled = useSyncExternalStore(
+    subscribeToCursorCapability,
+    () => {
+      if (typeof window === "undefined") {
+        return false;
+      }
+
+      return !reduceMotion && window.matchMedia(CURSOR_MEDIA_QUERY).matches;
+    },
+    () => false,
+  );
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (!enabled) {
+      delete root.dataset.customCursor;
+      return;
+    }
+
+    root.dataset.customCursor = "enabled";
+
+    return () => {
+      delete root.dataset.customCursor;
+    };
+  }, [enabled]);
+
+  useEffect(() => {
+    if (!enabled) {
+      visibleRef.current = false;
+      modeRef.current = "idle";
+      pressedRef.current = false;
+      hasPointerRef.current = false;
+      return;
+    }
+
+    const syncDataAttributes = () => {
+      const cursor = cursorRef.current;
+
+      if (!cursor) {
+        return;
+      }
+
+      cursor.dataset.visible = String(visibleRef.current);
+      cursor.dataset.mode = modeRef.current;
+      cursor.dataset.pressed = String(pressedRef.current);
+    };
+
+    const updateVisible = (nextVisible: boolean) => {
+      if (visibleRef.current === nextVisible) {
+        return;
+      }
+
+      visibleRef.current = nextVisible;
+      syncDataAttributes();
+    };
+
+    const updateMode = (nextMode: CursorMode) => {
+      if (modeRef.current === nextMode) {
+        return;
+      }
+
+      modeRef.current = nextMode;
+      syncDataAttributes();
+    };
+
+    const updatePressed = (nextPressed: boolean) => {
+      if (pressedRef.current === nextPressed) {
+        return;
+      }
+
+      pressedRef.current = nextPressed;
+      syncDataAttributes();
+    };
+
+    const clearReleaseTimer = () => {
+      if (releaseTimeoutRef.current !== null) {
+        window.clearTimeout(releaseTimeoutRef.current);
+        releaseTimeoutRef.current = null;
+      }
+    };
+
+    const releasePress = () => {
+      clearReleaseTimer();
+      releaseTimeoutRef.current = window.setTimeout(() => {
+        updatePressed(false);
+        releaseTimeoutRef.current = null;
+      }, CLICK_RELEASE_DELAY_MS);
+    };
+
+    const syncPointer = (event: PointerEvent) => {
+      targetRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+
+      if (!hasPointerRef.current) {
+        currentRef.current = {
+          x: event.clientX,
+          y: event.clientY,
+        };
+        hasPointerRef.current = true;
+      }
+
+      updateVisible(true);
+      updateMode(getCursorMode(event.target));
+    };
+
+    const animateBurst = () => {
+      burstRef.current?.animate(
+        [
+          {
+            opacity: 0,
+            transform: "translate(-50%, -50%) scale(0.72)",
+          },
+          {
+            opacity: 0.24,
+            transform: "translate(-50%, -50%) scale(1.06)",
+            offset: 0.35,
+          },
+          {
+            opacity: 0,
+            transform: "translate(-50%, -50%) scale(1.9)",
+          },
+        ],
+        {
+          duration: 420,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        },
+      );
+    };
+
+    const step = () => {
+      const cursor = cursorRef.current;
+
+      if (cursor) {
+        const ease =
+          pressedRef.current
+            ? PRESSED_EASE
+            : modeRef.current === "interactive"
+              ? INTERACTIVE_EASE
+              : IDLE_EASE;
+
+        currentRef.current.x += (targetRef.current.x - currentRef.current.x) * ease;
+        currentRef.current.y += (targetRef.current.y - currentRef.current.y) * ease;
+
+        cursor.style.setProperty("--cursor-x", `${currentRef.current.x.toFixed(2)}px`);
+        cursor.style.setProperty("--cursor-y", `${currentRef.current.y.toFixed(2)}px`);
+      }
+
+      frameRef.current = window.requestAnimationFrame(step);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") {
+        return;
+      }
+
+      syncPointer(event);
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") {
+        return;
+      }
+
+      syncPointer(event);
+      clearReleaseTimer();
+      updatePressed(true);
+      animateBurst();
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") {
+        return;
+      }
+
+      syncPointer(event);
+      releasePress();
+    };
+
+    const hideCursor = () => {
+      updateVisible(false);
+      updateMode("idle");
+      clearReleaseTimer();
+      updatePressed(false);
+    };
+
+    const handleMouseOut = (event: MouseEvent) => {
+      if (event.relatedTarget === null) {
+        hideCursor();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState !== "visible") {
+        hideCursor();
+      }
+    };
+
+    frameRef.current = window.requestAnimationFrame(step);
+    syncDataAttributes();
+
+    document.addEventListener("pointermove", handlePointerMove, { passive: true });
+    document.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    document.addEventListener("pointerup", handlePointerUp, { passive: true });
+    document.addEventListener("pointercancel", hideCursor);
+    document.addEventListener("mouseout", handleMouseOut);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("blur", hideCursor);
+
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+
+      clearReleaseTimer();
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("pointerup", handlePointerUp);
+      document.removeEventListener("pointercancel", hideCursor);
+      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("blur", hideCursor);
+    };
+  }, [enabled]);
+
+  if (!enabled) {
+    return null;
+  }
+
+  return (
+    <div
+      ref={cursorRef}
+      aria-hidden="true"
+      className="studio-cursor"
+      data-mode="idle"
+      data-pressed="false"
+      data-visible="false"
+    >
+      <div ref={burstRef} className="studio-cursor__burst" />
+      <div className="studio-cursor__pulse" />
+      <div className="studio-cursor__core" />
+    </div>
+  );
+}

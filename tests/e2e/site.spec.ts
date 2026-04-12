@@ -6,9 +6,11 @@ test("consent doorway appears and the home page remains accessible after opting 
   await page.goto("/");
 
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByText("Step quietly into our world.")).toBeVisible();
+  await expect(
+    page.getByText("A Tuscan studio where film, light, and modern restraint still belong together."),
+  ).toBeVisible();
 
-  await page.getByRole("button", { name: "Essential only" }).click();
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
 
   await expect(
     page.getByRole("heading", {
@@ -24,9 +26,9 @@ test("mobile consent doorway can be dismissed without hidden fixed UI intercepti
   await page.goto("/");
 
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Essential only" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue with essential only" })).toBeVisible();
 
-  await page.getByRole("button", { name: "Essential only" }).click();
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
 
   await expect(page.getByRole("dialog")).toBeHidden();
   await expect(page.getByRole("link", { name: "Start your inquiry" }).last()).toBeVisible();
@@ -34,7 +36,7 @@ test("mobile consent doorway can be dismissed without hidden fixed UI intercepti
 
 test("journal index is reachable after consent", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Essential only" }).click();
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
   await page.getByRole("navigation").getByRole("link", { name: "Journal" }).click();
 
   await expect(
@@ -46,7 +48,7 @@ test("journal index is reachable after consent", async ({ page }) => {
 
 test("public pages no longer render preview contact-sheet imagery", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Essential only" }).click();
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
 
   const homeImageSources = await page.locator("img").evaluateAll((images) =>
     images

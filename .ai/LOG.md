@@ -78,3 +78,42 @@
   - `pnpm lint` passed
   - `pnpm build` passed with all public routes still statically generated
   - `pnpm test:e2e` initially failed because Playwright's Chromium binary was missing from the local cache; installed it with `pnpm exec playwright install chromium`, then reran the suite successfully with 2/2 tests passing
+
+## 2026-04-12 — Production Inquiry Endpoint And Tracking Readiness
+
+- Completed the next open launch-readiness item by hardening the external inquiry submission path and making the consent-gated tracking stack production-oriented instead of dev-placeholder-oriented.
+- Added a tracked `.env.example` and updated `.gitignore` so the repository now carries an explicit environment contract for:
+  - `NEXT_PUBLIC_INQUIRY_ENDPOINT`
+  - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+  - `NEXT_PUBLIC_GOOGLE_ADS_ID`
+  - `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL`
+  - `NEXT_PUBLIC_META_PIXEL_ID`
+- Refreshed `.ai/GIT.md` so future sessions no longer start from the stale bootstrap assumption that the repository had no published branches or no pushed history.
+- Updated `README.md` to document how the public endpoint is expected to behave, how production IDs are supplied, and how inquiry success now maps to real marketing events.
+- Added a new route-aware tracking client component at `components/consent/AnalyticsPageTracker.tsx` and mounted it in `app/layout.tsx` behind `Suspense` so page views fire on both initial load and App Router navigation after consent is granted.
+- Adjusted the script bootstrap behavior in the analytics helpers:
+  - `lib/analytics/ga.ts` now disables GA4 auto pageview dispatch (`send_page_view: false`) so page views are owned centrally by the route tracker and do not double-fire.
+  - `lib/analytics/meta.ts` now initializes the Meta Pixel without immediately firing `PageView`, again leaving page-view ownership to the shared route tracker.
+  - `lib/analytics/googleAds.ts` now derives an optional `send_to` destination from the Google Ads tag ID plus a new conversion label environment variable.
+- Refactored `lib/analytics/tracking.ts` so the site continues to expose the same app-level event names while mapping the launch-critical ones to provider-appropriate semantics:
+  - page views now call GA `page_view` plus Meta `PageView`
+  - contact CTA clicks now map to GA `contact` plus Meta `Contact`
+  - inquiry starts now map to GA `form_start`
+  - inquiry submissions now map to GA `generate_lead`, optional Google Ads `conversion`, and Meta `Lead`
+- Hardened `lib/forms/submitInquiry.ts` for real-world failures:
+  - added a 10-second timeout with `AbortController`
+  - set `Accept` plus `Content-Type` headers for JSON-first form services and webhook endpoints
+  - disabled request caching
+  - surfaced concise endpoint-provided JSON or plain-text error messages when safe
+  - preserved the existing development fallback when no endpoint is configured outside production
+- Added unit coverage for the new launch plumbing:
+  - `tests/unit/tracking.test.ts` verifies page-view dispatch and Google Ads conversion mapping on inquiry submission
+  - `tests/unit/submit-inquiry.test.ts` verifies missing-endpoint behavior, JSON error propagation, and successful submission handling
+- Verification for this step:
+  - `pnpm lint` passed
+  - `pnpm typecheck` passed
+  - `pnpm content:validate` passed
+  - `pnpm test` passed with 5 test files and 10 tests
+  - `pnpm build` passed with all public routes still statically generated
+  - `pnpm test:e2e` passed with 2/2 Playwright tests
+- Important implementation note: no live production secrets or endpoint URLs were invented or committed. The codebase is now ready to accept the real values through deployment environment configuration without further front-end refactoring.

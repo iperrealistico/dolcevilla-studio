@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Bodoni_Moda, Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
+import { AnalyticsPageTracker } from "@/components/consent/AnalyticsPageTracker";
 import { buildDefaultMetadata } from "@/lib/seo/metadata";
 import { ConsentScriptGate } from "@/components/consent/ConsentScriptGate";
 
@@ -34,6 +36,9 @@ export default function RootLayout({
         <Providers>
           {children}
           <ConsentScriptGate />
+          <Suspense fallback={null}>
+            <AnalyticsPageTracker />
+          </Suspense>
         </Providers>
       </body>
     </html>

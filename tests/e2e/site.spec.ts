@@ -62,6 +62,17 @@ test("journal index is reachable after consent", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("desktop mouse movement activates the custom studio cursor", async ({ page, browserName }) => {
+  test.skip(browserName !== "chromium", "Cursor activation is validated in the Chromium stack.");
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
+  await page.mouse.move(320, 220);
+
+  await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "enabled");
+  await expect(page.locator(".studio-cursor")).toHaveAttribute("data-visible", "true");
+});
+
 test("public pages no longer render preview contact-sheet imagery", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Continue with essential only" }).click();

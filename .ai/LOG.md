@@ -1,5 +1,19 @@
 # Project Log
 
+## 2026-04-12 — Brave-Safe Cursor Activation Fix
+
+- Reworked the bespoke cursor activation logic in `components/cursor/StudioCursor.tsx` so it no longer depends on Chromium media-query capability detection (`(hover: hover) and (pointer: fine)`), which could fail on privacy-hardened Chromium builds such as Brave.
+- The cursor now activates from real pointer input instead:
+  - the component mounts whenever reduced motion is not requested
+  - the site only hides the native cursor after a real mouse event is received
+  - touch/pen input immediately deactivates the custom cursor and restores native behavior
+- This keeps the original behavior goals intact while making activation more robust across desktop browsers with stricter fingerprinting/privacy settings.
+- Strengthened cursor visibility in `app/globals.css` so it reads clearly over the large editorial image surfaces:
+  - raised the overlay to a top-level z-index
+  - removed the previous containment-based clipping risk
+  - increased ring contrast with a brighter outline, darker edge definition, and slightly stronger interactive styling
+- Added a focused Playwright regression in `tests/e2e/site.spec.ts` that verifies desktop mouse movement enables the custom cursor and flips the site into `data-custom-cursor="enabled"` mode before navigation begins.
+
 ## 2026-03-14 — Kickoff And Foundation Build
 
 - Reviewed `.ai/TECHNICAL_DESIGN_DOC.md` and `.ai/MASTER_WEBSITE_BRIEF.md` to align the implementation with the brand world, conversion goals, content architecture, consent model, and route map.

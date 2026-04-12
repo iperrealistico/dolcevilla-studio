@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { getCursorMode, type CursorMode } from "@/lib/cursor/getCursorMode";
 
@@ -8,20 +8,6 @@ const CLICK_RELEASE_DELAY_MS = 120;
 const IDLE_EASE = 0.18;
 const INTERACTIVE_EASE = 0.14;
 const PRESSED_EASE = 0.24;
-const CURSOR_MEDIA_QUERY = "(hover: hover) and (pointer: fine)";
-
-function subscribeToCursorCapability(onStoreChange: () => void) {
-  if (typeof window === "undefined") {
-    return () => undefined;
-  }
-
-  const mediaQuery = window.matchMedia(CURSOR_MEDIA_QUERY);
-  mediaQuery.addEventListener("change", onStoreChange);
-
-  return () => {
-    mediaQuery.removeEventListener("change", onStoreChange);
-  };
-}
 
 export function StudioCursor() {
   const reduceMotion = useReducedMotion();
@@ -35,17 +21,8 @@ export function StudioCursor() {
   const visibleRef = useRef(false);
   const modeRef = useRef<CursorMode>("idle");
   const pressedRef = useRef(false);
-  const enabled = useSyncExternalStore(
-    subscribeToCursorCapability,
-    () => {
-      if (typeof window === "undefined") {
-        return false;
-      }
-
-      return !reduceMotion && window.matchMedia(CURSOR_MEDIA_QUERY).matches;
-    },
-    () => false,
-  );
+  const customCursorActiveRef = useRef(false);
+  const enabled = !reduceMotion;
 
   useEffect(() => {
     const root = document.documentElement;
@@ -68,6 +45,7 @@ export function StudioCursor() {
       modeRef.current = "idle";
       pressedRef.current = false;
       hasPointerRef.current = false;
+      customCursorActiveRef.current = false;
       return;
     }
 
@@ -110,6 +88,21 @@ export function StudioCursor() {
       syncDataAttributes();
     };
 
+    const setCustomCursorActive = (nextActive: boolean) => {
+      if (customCursorActiveRef.current === nextActive) {
+        return;
+      }
+
+      customCursorActiveRef.current = nextActive;
+
+      if (nextActive) {
+        document.documentElement.dataset.customCursor = "enabled";
+        return;
+      }
+
+      delete document.documentElement.dataset.customCursor;
+    };
+
     const clearReleaseTimer = () => {
       if (releaseTimeoutRef.current !== null) {
         window.clearTimeout(releaseTimeoutRef.current);
@@ -139,6 +132,7 @@ export function StudioCursor() {
         hasPointerRef.current = true;
       }
 
+      setCustomCursorActive(true);
       updateVisible(true);
       updateMode(getCursorMode(event.target));
     };
@@ -167,6 +161,14 @@ export function StudioCursor() {
       );
     };
 
+    const deactivateCustomCursor = () => {
+      setCustomCursorActive(false);
+      updateVisible(false);
+      updateMode("idle");
+      clearReleaseTimer();
+      updatePressed(false);
+    };
+
     const step = () => {
       const cursor = cursorRef.current;
 
@@ -190,6 +192,7 @@ export function StudioCursor() {
 
     const handlePointerMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") {
+        deactivateCustomCursor();
         return;
       }
 
@@ -198,6 +201,7 @@ export function StudioCursor() {
 
     const handlePointerDown = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") {
+        deactivateCustomCursor();
         return;
       }
 
@@ -209,6 +213,7 @@ export function StudioCursor() {
 
     const handlePointerUp = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") {
+        deactivateCustomCursor();
         return;
       }
 
@@ -216,22 +221,15 @@ export function StudioCursor() {
       releasePress();
     };
 
-    const hideCursor = () => {
-      updateVisible(false);
-      updateMode("idle");
-      clearReleaseTimer();
-      updatePressed(false);
-    };
-
     const handleMouseOut = (event: MouseEvent) => {
       if (event.relatedTarget === null) {
-        hideCursor();
+        deactivateCustomCursor();
       }
     };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState !== "visible") {
-        hideCursor();
+        deactivateCustomCursor();
       }
     };
 
@@ -241,10 +239,10 @@ export function StudioCursor() {
     document.addEventListener("pointermove", handlePointerMove, { passive: true });
     document.addEventListener("pointerdown", handlePointerDown, { passive: true });
     document.addEventListener("pointerup", handlePointerUp, { passive: true });
-    document.addEventListener("pointercancel", hideCursor);
+    document.addEventListener("pointercancel", deactivateCustomCursor);
     document.addEventListener("mouseout", handleMouseOut);
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("blur", hideCursor);
+    window.addEventListener("blur", deactivateCustomCursor);
 
     return () => {
       if (frameRef.current !== null) {
@@ -252,13 +250,14 @@ export function StudioCursor() {
       }
 
       clearReleaseTimer();
+      deactivateCustomCursor();
       document.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("pointerup", handlePointerUp);
-      document.removeEventListener("pointercancel", hideCursor);
+      document.removeEventListener("pointercancel", deactivateCustomCursor);
       document.removeEventListener("mouseout", handleMouseOut);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("blur", hideCursor);
+      window.removeEventListener("blur", deactivateCustomCursor);
     };
   }, [enabled]);
 

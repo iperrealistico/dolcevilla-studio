@@ -117,3 +117,60 @@
   - `pnpm build` passed with all public routes still statically generated
   - `pnpm test:e2e` passed with 2/2 Playwright tests
 - Important implementation note: no live production secrets or endpoint URLs were invented or committed. The codebase is now ready to accept the real values through deployment environment configuration without further front-end refactoring.
+
+## 2026-04-12 — Brand Repositioning Around Hybrid Film Craft
+
+- Rebalanced the brand architecture so the site no longer reads as though Villa Raffaelli alone is the identity. The messaging now treats Villa Raffaelli as the studio’s origin while elevating hybrid film-and-digital craft to equal importance across the commercial pages.
+- Expanded the shared content model in `lib/content/schemas.ts` with a new optional `craft` block for service pages. This let the sitewide brand shift stay data-driven instead of pushing raw new marketing copy into route files.
+- Added new reusable presentation blocks:
+  - `components/blocks/CraftIdentityBlock.tsx`
+  - `components/blocks/PointsEditorialBlock.tsx`
+  - `components/templates/FilmPageTemplate.tsx`
+- Updated the shared site shell and content surfaces to surface the new direction:
+  - `components/templates/SitePageTemplate.tsx` now renders the craft block when present
+  - `components/blocks/WhyChooseUs.tsx` now frames the brand around place, craft, and clarity
+  - `content/site/navigation.ts` now exposes the new `Film` route in primary navigation
+  - `content/site/settings.ts`, `content/site/faqs.ts`, `content/site/testimonials.ts`, and `content/pages/journal.ts` now reflect the hybrid analog identity
+- Rewrote the core page payloads so the film story is distributed across the site rather than isolated on one page:
+  - `content/pages/home.ts`
+  - `content/pages/about.ts`
+  - `content/pages/experience.ts`
+  - `content/pages/weddings.ts`
+  - `content/pages/elopements.ts`
+  - `content/pages/pricing.ts`
+  - `content/pages/contact.ts`
+- Added a new contact-form signal for analog interest:
+  - `lib/forms/formSchema.ts` and `components/forms/InquiryForm.tsx` now capture `filmInterest`
+  - `content/dictionaries/en.ts` was updated so the form vocabulary and navigation dictionary stay aligned
+- Added the dedicated film route with substantial educational and commercial content:
+  - `content/pages/film-wedding-photography.ts` introduces the base page payload plus dedicated detail sections for:
+    - 10 reasons film gives something digital cannot fully replace
+    - why digital is still essential
+    - 35mm / 120 / large format format explanations
+    - why few photographers can work this way well
+    - the role of the darkroom
+  - `app/(site)/film-wedding-photography/page.tsx` mounts the new page
+- Extended editorial proof around the new positioning by adding three journal entries:
+  - `content/journal/guides/why-we-photograph-weddings-on-film-and-digital.mdx`
+  - `content/journal/guides/35mm-120-large-format-wedding-photography.mdx`
+  - `content/journal/stories-of-place/inside-our-darkroom.mdx`
+- Updated route wiring and page consumers so the new editorial content actually appears on the relevant pages:
+  - `content/pages/index.ts`
+  - `app/(site)/about/page.tsx`
+  - `app/(site)/experience/page.tsx`
+- Extended the temporary image manifest in `lib/images/imageManifest.ts` with two proof-sheet-style contact-sheet assets derived from the existing AI image library:
+  - `filmContactSheetEditorial`
+  - `filmContactSheetProofs`
+- Image-generation attempt and blocker:
+  - Used the `imagegen` skill workflow and wrote a 20-job batch prompt file under `tmp/imagegen/` for a new analog-focused placeholder library covering film cameras, darkroom scenes, contact sheets, behind-the-scenes craft, and hybrid camera kits.
+  - The live OpenAI image batch failed immediately for every job with `billing_hard_limit_reached`, so no new analog-specific AI imagery could be generated in this session.
+  - Rather than fabricate success, reused the existing temporary AI library plus the two proof-sheet derivatives copied into `public/images/brand/ai-temp/film/` so the new film page and journal entries have at least some craft-oriented visual support until billing is restored or new source assets arrive.
+  - Deleted the temporary JSONL batch file after the failed run to keep the repo clean.
+- Updated `README.md` and `.ai/TODO.md` so future sessions understand both the completed brand shift and the remaining image-generation blocker.
+- Verification for this step:
+  - `pnpm typecheck` passed
+  - `pnpm lint` passed
+  - `pnpm content:validate` passed with 11 structured pages, 8 landing pages, 8 journal entries, and 24 manifest images
+  - `pnpm test` passed with 5 test files and 10 tests
+  - `pnpm build` passed with the new `/film-wedding-photography` route and all public routes still statically generated
+  - `pnpm test:e2e` passed with 2/2 Playwright tests after updating the journal heading assertion to match the new editorial copy

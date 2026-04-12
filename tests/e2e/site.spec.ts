@@ -24,7 +24,7 @@ test("journal index is reachable after consent", async ({ page }) => {
 
   await expect(
     page.getByRole("heading", {
-      name: "Stories, guides, and proof pages that deepen trust without losing atmosphere.",
+      name: "Stories, guides, and proof pages about place, process, and the craft behind the photographs.",
     }),
   ).toBeVisible();
 });

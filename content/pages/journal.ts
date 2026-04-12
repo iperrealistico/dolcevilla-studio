@@ -3,9 +3,9 @@ import { richSectionSchema, ctaSectionSchema, seoSchema } from "@/lib/content/sc
 export const journalPageContent = {
   intro: richSectionSchema.parse({
     eyebrow: "Journal",
-    heading: "Stories, guides, and proof pages that deepen trust without losing atmosphere.",
+    heading: "Stories, guides, and proof pages about place, process, and the craft behind the photographs.",
     body: [
-      "The journal supports search, proof, and brand depth. It stays lighter than the commercial pages, but still carries the same editorial point of view.",
+      "The journal supports search, proof, and brand depth. It stays lighter than the commercial pages, but still carries the same editorial point of view, including the hybrid film-and-digital practice behind the work.",
     ],
   }),
   cta: ctaSectionSchema.parse({

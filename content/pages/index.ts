@@ -2,6 +2,7 @@ export { homePage } from "@/content/pages/home";
 export { weddingsPage } from "@/content/pages/weddings";
 export { elopementsPage } from "@/content/pages/elopements";
 export { experiencePage } from "@/content/pages/experience";
+export { filmWeddingPhotographyPage } from "@/content/pages/film-wedding-photography";
 export { pricingPage } from "@/content/pages/pricing";
 export { aboutPage } from "@/content/pages/about";
 export { contactPage } from "@/content/pages/contact";
@@ -13,6 +14,7 @@ import { aboutPage } from "@/content/pages/about";
 import { contactPage } from "@/content/pages/contact";
 import { elopementsPage } from "@/content/pages/elopements";
 import { experiencePage } from "@/content/pages/experience";
+import { filmWeddingPhotographyPage } from "@/content/pages/film-wedding-photography";
 import { homePage } from "@/content/pages/home";
 import { legalPage } from "@/content/pages/legal";
 import { pricingPage } from "@/content/pages/pricing";
@@ -25,6 +27,7 @@ export const pages = {
   weddings: weddingsPage,
   elopements: elopementsPage,
   experience: experiencePage,
+  "film-wedding-photography": filmWeddingPhotographyPage,
   pricing: pricingPage,
   about: aboutPage,
   contact: contactPage,

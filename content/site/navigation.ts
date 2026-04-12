@@ -5,6 +5,7 @@ export const navigationItems = [
   { label: "Weddings", href: "/weddings" },
   { label: "Elopements", href: "/elopements" },
   { label: "Experience", href: "/experience" },
+  { label: "Film", href: "/film-wedding-photography" },
   { label: "Journal", href: "/journal" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

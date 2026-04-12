@@ -13,7 +13,7 @@ export function WhyChooseUs({ items }: { items: Point[] }) {
       <div>
         <Eyebrow>Why choose us</Eyebrow>
         <Heading className="text-3xl md:text-5xl">
-          A premium experience held together by place and clarity.
+          A premium experience held together by place, craft, and clarity.
         </Heading>
       </div>
       <div className="grid gap-5 md:grid-cols-3">

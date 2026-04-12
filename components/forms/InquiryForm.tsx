@@ -32,6 +32,7 @@ export function InquiryForm() {
       celebrationType: "",
       photographyBudgetRange: "",
       message: "",
+      filmInterest: false,
       villaInterest: false,
       honey: "",
     },
@@ -102,6 +103,10 @@ export function InquiryForm() {
       <FormField label="Message" error={form.formState.errors.message?.message}>
         <textarea className={`${inputClassName} min-h-40`} {...form.register("message")} />
       </FormField>
+      <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-white/50 px-4 py-4 text-sm text-[var(--color-mist)]">
+        <input className="mt-1 size-4" type="checkbox" {...form.register("filmInterest")} />
+        Interested in hybrid film coverage, including 35mm, 120, or selected large-format frames
+      </label>
       <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-white/50 px-4 py-4 text-sm text-[var(--color-mist)]">
         <input className="mt-1 size-4" type="checkbox" {...form.register("villaInterest")} />
         Curious about portraits or a very private Villa Raffaelli-related context

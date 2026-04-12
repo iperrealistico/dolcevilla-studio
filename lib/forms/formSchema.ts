@@ -10,6 +10,7 @@ export const inquiryFormSchema = z.object({
   celebrationType: z.string().min(1, "Please select the celebration type."),
   photographyBudgetRange: z.string().min(1, "Please select a budget range."),
   message: z.string().min(20, "Please tell us a little more about your plans."),
+  filmInterest: z.boolean().default(false),
   villaInterest: z.boolean().default(false),
   pageUrl: z.string().optional(),
   referrer: z.string().optional(),

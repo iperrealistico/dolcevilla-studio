@@ -8,26 +8,31 @@ export const faqs = {
         "Yes. Multi-day celebrations are central to the way we work because they reveal the atmosphere, family rhythm, and landscape around the wedding itself.",
     },
     {
+      question: "Do you shoot film at weddings?",
+      answer:
+        "Yes. One photographer always works with film alongside digital coverage. We move between 35mm for energy, 120 medium format for depth, and in selected moments large format for rare, deliberate portraiture.",
+    },
+    {
+      question: "Why not photograph the whole wedding on film only?",
+      answer:
+        "Because weddings move too quickly for ideology. Film gives texture, pace, and an unfakeable physical character, while digital protects speed, changing light, low-light reliability, and the completeness of the final story.",
+    },
+    {
       question: "Do you help with timelines and visual flow?",
       answer:
         "Absolutely. We guide where timing affects light, movement, and emotional pace so the experience stays calm and visually coherent.",
     },
-    {
-      question: "Are you best suited to destination weddings?",
-      answer:
-        "Yes. Most of our couples are planning from abroad and want clear communication, local knowledge, and a premium but human process.",
-    },
   ].map((item) => faqItemSchema.parse(item)),
   elopements: [
     {
-      question: "Can you help shape an intimate Tuscany elopement plan?",
+      question: "Can film be part of an intimate Tuscany elopement?",
       answer:
-        "Yes. We support couples who want a quieter structure with real place, freedom, and visual honesty rather than a generic luxury formula.",
+        "Very much so. Smaller days often give film more room to breathe, especially for portraits, movement through landscape, and quiet transitional moments.",
     },
     {
-      question: "Do you photograph only official elopements?",
+      question: "Do you offer 120 or large format for elopements?",
       answer:
-        "No. We also photograph intimate celebrations, private vows, and portrait-driven days built around atmosphere and time together.",
+        "Yes, when the rhythm of the day supports it. Medium format is a natural fit for intimate portraiture, and large format can work beautifully for a few rare, slow frames that deserve real stillness.",
     },
     {
       question: "Is Villa Raffaelli available as a public venue?",
@@ -37,9 +42,9 @@ export const faqs = {
   ].map((item) => faqItemSchema.parse(item)),
   experience: [
     {
-      question: "How quickly do you reply?",
+      question: "How does hybrid film-and-digital coverage work in practice?",
       answer:
-        "We aim to respond within two business days with a thoughtful next step rather than an automated sales sequence.",
+        "One photographer always carries film while the broader coverage remains digitally dependable. That lets us use film where its pace and tonal character matter most without sacrificing responsiveness, speed, or delivery completeness.",
     },
     {
       question: "Do you travel across Tuscany?",
@@ -49,19 +54,19 @@ export const faqs = {
     {
       question: "What does support look like before the wedding?",
       answer:
-        "We help shape flow, light, portrait rhythm, and practical timing so the day feels clear and spacious rather than rushed.",
+        "We help shape flow, light, portrait rhythm, and the moments where film genuinely makes sense, so the day feels clear and spacious rather than forced around gear.",
     },
   ].map((item) => faqItemSchema.parse(item)),
   pricing: [
     {
-      question: "What do most couples invest?",
+      question: "Is film included in your proposals?",
       answer:
-        "Most couples invest from the high four figures upward depending on coverage, travel, structure, and the rhythm of the celebration.",
+        "Yes. Hybrid film-and-digital coverage is part of the studio point of view rather than an optional gimmick. Some celebrations may also add more film stock or selected large-format work depending on the plan.",
     },
     {
-      question: "Do you offer bespoke proposals?",
+      question: "Can we request more film or specific formats?",
       answer:
-        "Yes. We tailor proposals around days of coverage, locations, and how the celebration actually unfolds.",
+        "Absolutely. If 35mm, medium format, or selected large-format portraits matter to you, we can shape the proposal around that intention and the pace of the day.",
     },
   ].map((item) => faqItemSchema.parse(item)),
 };

@@ -1,4 +1,5 @@
 import { CTASection } from "@/components/blocks/CTASection";
+import { CraftIdentityBlock } from "@/components/blocks/CraftIdentityBlock";
 import { EditorialTextBlock } from "@/components/blocks/EditorialTextBlock";
 import { ExperiencePreview } from "@/components/blocks/ExperiencePreview";
 import { FAQBlock } from "@/components/blocks/FAQBlock";
@@ -45,6 +46,7 @@ export function SitePageTemplate({
       )}
       {page.gallery.length ? <SignatureGallery items={page.gallery} /> : null}
       <WhyChooseUs items={page.highlights} />
+      <CraftIdentityBlock craft={page.craft} />
       <GeographyBlock geography={page.geography} />
       <LocationLinks items={page.locationLinks} />
       {stories.length ? <StoryCardGrid stories={stories} /> : null}

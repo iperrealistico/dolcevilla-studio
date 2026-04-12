@@ -80,7 +80,7 @@ export function FilmPageTemplate({
         <FAQBlock items={details.faqs} />
       </ScrollParallax>
       <ScrollParallax from="left">
-        <StoryCardGrid stories={stories} />
+        <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
       </ScrollParallax>
       <ScrollParallax from="right" intensity="lg">
         <CTASection section={page.cta} />

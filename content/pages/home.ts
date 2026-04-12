@@ -106,6 +106,7 @@ export const homePage = servicePageContentSchema.parse({
     eyebrow: "Villa Raffaelli",
     title: "Our private creative home",
     body: "The villa is where our eye was formed: quiet architecture, lived-in beauty, and a cultivated way of seeing Tuscany. It remains the origin of the taste, not the whole definition of the studio.",
+    imageId: "homeHeroVilla",
   },
   cta: {
     eyebrow: "Inquire",

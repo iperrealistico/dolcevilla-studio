@@ -3,7 +3,7 @@ import { JournalEntryTemplate } from "@/components/templates/JournalEntryTemplat
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getEntryBySlug } from "@/lib/content/getEntryBySlug";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
-import { getStoryCardsBySlugs } from "@/lib/content/storyCards";
+import { getExpandedStoryCardsBySlugs } from "@/lib/content/storyCards";
 import { buildGallery } from "@/lib/images/imageManifest";
 
 type JournalEntryPageProps = {
@@ -40,7 +40,7 @@ export default async function JournalEntryPage({ params }: JournalEntryPageProps
     notFound();
   }
 
-  const relatedStories = await getStoryCardsBySlugs(entry.relatedSlugs ?? []);
+  const relatedStories = await getExpandedStoryCardsBySlugs(entry.relatedSlugs ?? []);
   const gallery = buildGallery(entry.galleryImageIds.map((id) => ({ id: id as never, layoutVariant: "portrait" })));
 
   return <JournalEntryTemplate entry={entry} gallery={gallery} relatedStories={relatedStories} />;

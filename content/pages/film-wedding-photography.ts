@@ -65,6 +65,7 @@ export const filmWeddingPhotographyPage = servicePageContentSchema.parse({
     title: "35mm, 120, large format, and digital each solve a different part of the wedding day.",
     body:
       "This is why the work feels both tactile and dependable. We are not trying to force one ideology over the whole day. We are trying to make the strongest pictures possible with the right pace, the right tool, and the right amount of pressure for each moment.",
+    imageId: "filmCameraCollectionStudioTable",
     points: [
       {
         title: "35mm",

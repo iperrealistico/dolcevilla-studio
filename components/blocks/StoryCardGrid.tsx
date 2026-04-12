@@ -3,30 +3,52 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
+import { LinkButton } from "@/components/ui/LinkButton";
 import { FloatIn } from "@/components/motion/FloatIn";
 import type { StoryCard } from "@/types/content";
 
-export function StoryCardGrid({ stories }: { stories: StoryCard[] }) {
+type StoryCardGridProps = {
+  stories: StoryCard[];
+  maxItems?: number;
+  showMoreHref?: string;
+  showMoreLabel?: string;
+};
+
+export function StoryCardGrid({
+  stories,
+  maxItems,
+  showMoreHref,
+  showMoreLabel = "See more stories",
+}: StoryCardGridProps) {
   if (!stories.length) {
     return null;
   }
 
+  const previewStories = maxItems ? stories.slice(0, maxItems) : stories;
+
   return (
     <Container className="space-y-8">
       <FloatIn from="left">
-        <div>
-          <Eyebrow>Selected stories</Eyebrow>
-          <Heading className="text-3xl md:text-5xl">
-            Proof with atmosphere, not filler.
-          </Heading>
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <Eyebrow>Selected stories</Eyebrow>
+            <Heading className="text-3xl md:text-5xl">
+              Proof with atmosphere, not filler.
+            </Heading>
+          </div>
+          {showMoreHref ? (
+            <LinkButton href={showMoreHref} variant="secondary" className="self-start">
+              {showMoreLabel}
+            </LinkButton>
+          ) : null}
         </div>
       </FloatIn>
       <div className="grid gap-5 md:grid-cols-3">
-        {stories.map((story, index) => (
+        {previewStories.map((story, index) => (
           <FloatIn key={story.slug} from={index % 2 === 0 ? "bottom" : "right"} delay={index * 0.06}>
             <Link
               href={`/journal/${story.slug}`}
-              className="block overflow-hidden rounded-[1.75rem] border border-[var(--color-line)] bg-white/70 shadow-[0_24px_48px_rgba(30,20,12,0.08)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_30px_60px_rgba(30,20,12,0.12)]"
+              className="block overflow-hidden rounded-[1.75rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.78)] shadow-[0_22px_44px_rgba(30,20,12,0.08)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_30px_60px_rgba(30,20,12,0.12)]"
             >
               <Image
                 src={story.heroImage.src}

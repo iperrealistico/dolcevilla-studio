@@ -1,5 +1,27 @@
 # Project Log
 
+## 2026-04-12 — Story Presentation, Section Imagery, And Lightbox Refinement
+
+- Refined the gallery lightbox in `components/galleries/GalleryLightbox.tsx` so it adapts more naturally to the image orientation:
+  - portrait and landscape images now size themselves against the viewport rather than being forced into the same oversized frame
+  - the image caption/description now sits below the image instead of overlaying it
+  - the previous/next controls, close control, and viewport anchoring from the earlier lightbox fix remain intact
+- Reworked `components/blocks/StoryCardGrid.tsx` so story sections feel cleaner and more consistent:
+  - the grid remains three columns on desktop
+  - non-journal templates now show a three-card preview row with a `See more stories` button linking to `/journal`
+  - card shadows were cleaned up visually while preserving the editorial look
+- Fixed the broken-looking shadow artifact reported in the `Selected stories` area by removing paint containment from `components/motion/FloatIn.tsx`, which had been clipping or distorting shadows during animated reveal.
+- Added a more consistent journal-story sourcing model in `lib/content/storyCards.ts`:
+  - `getAllStoryCards()` now powers the journal index so it shows the full archive instead of only featured entries
+  - `getExpandedStoryCardsBySlugs()` lets non-journal pages keep their preferred stories first, then tops up to a full three-card row using the featured/newest journal pool
+- Updated all major site and landing routes that render story sections to use the expanded story helper, so the sections no longer feel under-populated or arbitrarily limited.
+- Added missing supporting imagery across the core brand sections:
+  - film images were added to the `craft` sections on `home`, `about`, `contact`, `elopements`, `weddings`, `experience`, and `film-wedding-photography`
+  - Villa Raffaelli imagery was added to the villa-identity blocks, with a default image path so location pages also inherit a proper villa visual instead of text-only treatment
+- Upgraded the CTA presentation in `components/blocks/CTASection.tsx` with a right-aligned envelope accent whenever the primary CTA leads to inquiry/contact, so the invitation blocks feel more intentionally contact-oriented.
+- Improved the contact template in `components/templates/SitePageTemplate.tsx` with a styled direct-email row including a mail icon, making the `Prefer email?` area feel designed rather than incidental.
+- Extended the content schema in `lib/content/schemas.ts` to support image-backed villa blocks while keeping the content model typed and validation-safe.
+
 ## 2026-04-12 — Cursor Anchor And Lightbox Viewport Fix
 
 - Fixed a shared overlay-positioning bug affecting both the bespoke cursor and the gallery lightbox. The root cause was a filtered motion wrapper in `components/consent/ConsentProvider.tsx`, which caused `position: fixed` descendants to anchor against that transformed/filtered ancestor instead of the real viewport.

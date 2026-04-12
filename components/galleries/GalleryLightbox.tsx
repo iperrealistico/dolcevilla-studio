@@ -103,31 +103,31 @@ export function GalleryLightbox() {
 
             <motion.figure
               key={currentImage.id}
-              className="relative flex max-h-[min(90vh,960px)] w-full max-w-[min(92vw,1440px)] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[rgb(18_15_12_/_0.66)] p-3 shadow-[0_40px_120px_rgba(0,0,0,0.38)] sm:p-5"
+              className="flex w-auto max-w-[min(94vw,1600px)] flex-col gap-4 rounded-[2rem] border border-white/10 bg-[rgb(18_15_12_/_0.72)] p-3 shadow-[0_40px_120px_rgba(0,0,0,0.38)] sm:p-5"
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.985 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="relative flex max-h-[calc(90vh-2.5rem)] w-full items-center justify-center overflow-hidden rounded-[1.5rem] bg-[rgb(31_25_21_/_0.42)]">
+              <div className="relative flex items-center justify-center overflow-hidden rounded-[1.5rem] bg-[rgb(31_25_21_/_0.42)] px-2 py-2 sm:px-3 sm:py-3">
                 <Image
                   key={currentImage.id}
                   src={currentImage.src}
                   alt={currentImage.alt}
                   width={currentImage.width}
                   height={currentImage.height}
-                  sizes="(min-width: 1280px) 1200px, 92vw"
+                  sizes="(min-width: 1280px) 1280px, 94vw"
                   placeholder="blur"
                   blurDataURL={currentImage.blurDataURL}
                   priority
-                  className="max-h-[calc(90vh-2.5rem)] h-auto w-auto max-w-full object-contain"
+                  className="h-auto w-auto max-h-[74vh] max-w-[min(90vw,1400px)] object-contain"
                 />
               </div>
 
-              <figcaption className="pointer-events-none absolute inset-x-5 bottom-4 flex items-end justify-between gap-4 text-[0.72rem] uppercase tracking-[0.26em] text-white/72 sm:inset-x-7 sm:bottom-5">
-                <span className="max-w-[75%] text-balance">{currentImage.alt}</span>
-                <span>
+              <figcaption className="flex items-start justify-between gap-4 px-2 pb-1 text-[0.72rem] uppercase tracking-[0.24em] text-white/72">
+                <span className="max-w-[75%] text-balance leading-6">{currentImage.alt}</span>
+                <span className="whitespace-nowrap">
                   {state.index + 1} / {state.images.length}
                 </span>
               </figcaption>

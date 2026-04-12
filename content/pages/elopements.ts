@@ -50,6 +50,7 @@ export const elopementsPage = servicePageContentSchema.parse({
     title: "The quieter the day, the more film can breathe.",
     body:
       "Elopements and intimate celebrations often create the exact conditions film needs: time, calm, and visual honesty. We can slow down without becoming precious, using traditional formats where they add emotional depth rather than spectacle.",
+    imageId: "filmHasselblad500cmWindowGarden",
     points: [
       {
         title: "120 for portraits",
@@ -77,6 +78,7 @@ export const elopementsPage = servicePageContentSchema.parse({
     variant: "quote",
     title: "Villa Raffaelli stays in the background, while craft and intimacy come forward.",
     body: "It still informs how we see stillness, architecture, and quiet intimacy, but the day itself is led by the emotional truth of the moment.",
+    imageId: "villaCourtyard",
   },
   faqs: faqs.elopements,
   cta: {

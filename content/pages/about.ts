@@ -49,6 +49,7 @@ export const aboutPage = servicePageContentSchema.parse({
     title: "35mm, 120, large format, and the judgment to know when each belongs.",
     body:
       "Not everybody can work this way well. Each format asks for a different pace, different exposure judgment, and different discipline under real wedding pressure. That is exactly why it matters to us.",
+    imageId: "filmCameraCollectionStudioTable",
     points: [
       {
         title: "35mm",
@@ -73,6 +74,7 @@ export const aboutPage = servicePageContentSchema.parse({
     variant: "editorial",
     title: "Villa Raffaelli is part of the origin, not the total identity.",
     body: "It is where the brand’s taste, stillness, and point of view were formed, but the studio is equally defined by how it photographs: hybrid, tactile, and technically intentional.",
+    imageId: "homeHeroVilla",
   },
   cta: {
     title: "If this world feels close to yours, let’s talk.",

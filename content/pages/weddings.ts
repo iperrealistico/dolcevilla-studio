@@ -52,6 +52,7 @@ export const weddingsPage = servicePageContentSchema.parse({
     title: "Film belongs to the weekend, not just the portraits.",
     body:
       "Wedding weekends have enough breathing room for film to matter across more than one type of moment. That might mean 35mm at dinner, medium format through portraits, and selected large-format frames when a setting deserves real ceremony.",
+    imageId: "filmHasselbladGroundGlassReception",
     points: [
       {
         title: "35mm for movement",
@@ -86,6 +87,7 @@ export const weddingsPage = servicePageContentSchema.parse({
     variant: "minimal",
     title: "Rooted in a real place, not trapped inside one.",
     body: "Villa Raffaelli shapes our visual point of view, but the work is equally defined by the seriousness of the photographic method.",
+    imageId: "villaCourtyard",
   },
   faqs: faqs.weddings,
   cta: {

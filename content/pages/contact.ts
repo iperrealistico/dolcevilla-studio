@@ -17,6 +17,7 @@ export const contactPage = servicePageContentSchema.parse({
     title: "If film matters to you, say so early.",
     body:
       "Some couples know immediately that 35mm, medium format, or selected large-format portraits belong in the story. Others simply know they want something tactile and authentic. Either is useful context for the first conversation.",
+    imageId: "film35mmRollStillLife",
     points: [
       {
         title: "Tell us the mood",

@@ -32,7 +32,7 @@ export function FloatIn({
       style={{
         willChange: "transform, opacity, filter",
         backfaceVisibility: "hidden",
-        contain: "layout paint style",
+        contain: "layout style",
       }}
       initial={
         reduceMotion

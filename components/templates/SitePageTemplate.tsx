@@ -16,6 +16,7 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { Container } from "@/components/ui/Container";
+import { Mail } from "lucide-react";
 import type { ServicePageContent, StoryCard } from "@/types/content";
 
 type SitePageTemplateProps = {
@@ -72,7 +73,7 @@ export function SitePageTemplate({
       </ScrollParallax>
       {stories.length ? (
         <ScrollParallax from="left">
-          <StoryCardGrid stories={stories} />
+          <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
         </ScrollParallax>
       ) : null}
       {page.pageType === "home" ? (
@@ -116,10 +117,14 @@ export function SitePageTemplate({
                 </>
               ) : null}
               {page.directEmail ? (
-                <p className="text-sm text-[var(--color-mist)]">
-                  Prefer email?{" "}
-                  <a href={`mailto:${page.directEmail}`}>{page.directEmail}</a>
-                </p>
+                <div className="flex items-center gap-3 rounded-[1.2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.68)] px-4 py-3 text-sm text-[var(--color-mist)] shadow-[0_18px_38px_rgba(30,20,12,0.08)]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.1)] text-[var(--color-ink)]">
+                    <Mail size={18} strokeWidth={1.7} />
+                  </div>
+                  <p>
+                    Prefer email? <a href={`mailto:${page.directEmail}`}>{page.directEmail}</a>
+                  </p>
+                </div>
               ) : null}
               {page.nextSteps.length ? (
                 <ul className="space-y-2 text-sm leading-7 text-[var(--color-mist)]">

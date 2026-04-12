@@ -35,7 +35,7 @@ export function LandingPageTemplate({ landing, stories }: LandingPageTemplatePro
         <WhyChooseUs items={landing.whyWeFit} />
       </ScrollParallax>
       <ScrollParallax from="left">
-        <StoryCardGrid stories={stories} />
+        <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
       </ScrollParallax>
       <ScrollParallax from="right">
         <TestimonialsBlock items={[landing.testimonial]} />

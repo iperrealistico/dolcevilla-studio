@@ -13,7 +13,7 @@ export const weddingsPage = servicePageContentSchema.parse({
       "We photograph elegant multi-day celebrations in Tuscany with a calm, editorial eye and a deep understanding of place.",
     primaryCta: { label: "Check availability", href: "/contact" },
     secondaryCta: { label: "View pricing", href: "/pricing", variant: "secondary" },
-    imageIds: ["homeCoupleQuiet", "homeReceptionNight", "homeUpperTuscany"],
+    imageIds: ["florenceLoggiaBlueHour", "welcomeDinnerLanterns", "chiantiVineyardDinner"],
     variant: "service",
   },
   intro: {
@@ -24,12 +24,12 @@ export const weddingsPage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait", span: "lg" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
+    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait", span: "lg" },
+    { id: "chiantiVineyardDinner", layoutVariant: "landscape", span: "lg" },
     { id: "luccaEvening", layoutVariant: "portrait" },
-    { id: "intimateGesture", layoutVariant: "portrait" },
-    { id: "marblePath", layoutVariant: "landscape" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
   ]),
   highlights: [
     {

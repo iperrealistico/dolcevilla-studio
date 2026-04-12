@@ -12,7 +12,7 @@ export const elopementsPage = servicePageContentSchema.parse({
       "We photograph elopements and intimate wedding days in Tuscany with an emphasis on place, movement, and emotional honesty.",
     primaryCta: { label: "Plan your elopement", href: "/contact" },
     secondaryCta: { label: "See stories", href: "/journal", variant: "secondary" },
-    imageIds: ["intimateGesture", "marblePath", "homeUpperTuscany"],
+    imageIds: ["intimateGesture", "valDorciaCypressVows", "versiliaSeasideWalk"],
     variant: "service",
   },
   intro: {
@@ -24,10 +24,10 @@ export const elopementsPage = servicePageContentSchema.parse({
   },
   gallery: buildGallery([
     { id: "intimateGesture", layoutVariant: "portrait", span: "lg" },
-    { id: "marblePath", layoutVariant: "landscape", span: "lg" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape" },
-    { id: "homePortraits", layoutVariant: "portrait" },
-    { id: "villaCourtyard", layoutVariant: "portrait" },
+    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
+    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
+    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
+    { id: "sienaCourtyardPortrait", layoutVariant: "portrait" },
   ]),
   highlights: [
     {

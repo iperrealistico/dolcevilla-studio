@@ -11,7 +11,7 @@ export const tuscanyLanding = locationLandingSchema.parse({
       "For international couples who want a Tuscany wedding photographer rooted in the region rather than passing through it.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See weddings", href: "/weddings", variant: "secondary" },
-    imageIds: ["homeUpperTuscany", "homeCoupleQuiet"],
+    imageIds: ["valDorciaCypressVows", "florenceLoggiaBlueHour"],
     variant: "landing",
   },
   intro: {
@@ -29,10 +29,10 @@ export const tuscanyLanding = locationLandingSchema.parse({
     { title: "Premium editorial eye", description: "The work is shaped to feel grounded, cinematic, and emotionally clear." },
   ],
   gallery: buildGallery([
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "marblePath", layoutVariant: "landscape" },
+    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
+    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
+    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
   ]),
   featuredStorySlugs: ["lucca-garden-weekend"],
   testimonial: {

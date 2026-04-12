@@ -34,6 +34,6 @@ pnpm test:e2e
 
 ## Current Notes
 
-- Temporary AI-generated WebP photography is now in place as a visual stand-in until final photography exports are supplied.
+- An expanded temporary AI-generated WebP editorial library is now in place as a visual stand-in, with 20 optimized images reducing repetition across core pages, landing pages, ads pages, and journal entries until final photography exports are supplied.
 - The contact form is ready for an external endpoint via `NEXT_PUBLIC_INQUIRY_ENDPOINT`.
 - Tracking IDs remain environment-driven and stay blocked until explicit consent.

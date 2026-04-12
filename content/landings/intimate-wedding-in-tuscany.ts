@@ -8,7 +8,7 @@ export const intimateWeddingLanding = locationLandingSchema.parse({
     title: "For intimate weddings in Tuscany that feel soulful, elegant, and unforced.",
     subtitle: "A premium photography experience for smaller celebrations that still want atmosphere, depth, and direction.",
     primaryCta: { label: "Plan your intimate wedding", href: "/contact" },
-    imageIds: ["intimateGesture", "homeReceptionNight"],
+    imageIds: ["intimateGesture", "candlelitCourtyardToast"],
     variant: "landing",
   },
   intro: {
@@ -25,9 +25,9 @@ export const intimateWeddingLanding = locationLandingSchema.parse({
   ],
   gallery: buildGallery([
     { id: "intimateGesture", layoutVariant: "portrait", span: "lg" },
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
-    { id: "homePortraits", layoutVariant: "portrait" },
+    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "oliveGardenCeremony", layoutVariant: "landscape", span: "lg" },
+    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["quarry-elopement", "villa-raffaelli-mornings"],
   testimonial: {

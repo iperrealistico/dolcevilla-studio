@@ -8,7 +8,7 @@ export const googleTuscanyAdsLanding = adsLandingSchema.parse({
     title: "Tuscany wedding photographer for destination couples",
     subtitle: "Premium, place-rooted wedding photography across Tuscany with clear pricing signals and a calm inquiry process.",
     primaryCta: { label: "Check availability", href: "/contact" },
-    imageIds: ["homeUpperTuscany", "homeCoupleQuiet"],
+    imageIds: ["valDorciaCypressVows", "florenceLoggiaBlueHour"],
     variant: "ads",
   },
   proof: [
@@ -16,9 +16,9 @@ export const googleTuscanyAdsLanding = adsLandingSchema.parse({
     { title: "Built for international couples", description: "Clear communication, premium process, and destination wedding fluency." },
   ],
   gallery: buildGallery([
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape" },
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
+    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
+    { id: "valDorciaCypressVows", layoutVariant: "landscape" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
   ]),
   caseStudySlug: "lucca-garden-weekend",
   pricingSignal: "Most couples invest from the high four figures upward.",

@@ -18,7 +18,7 @@ export const googleLuccaAdsLanding = adsLandingSchema.parse({
   gallery: buildGallery([
     { id: "luccaEvening", layoutVariant: "portrait" },
     { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
   ]),
   caseStudySlug: "lucca-garden-weekend",
   pricingSignal: "Collections begin with a premium starting point and are tailored to the structure of the day.",

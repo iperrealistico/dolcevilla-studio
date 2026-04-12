@@ -10,7 +10,7 @@ export const aboutPage = servicePageContentSchema.parse({
     subtitle:
       "Dolcevilla Studio was formed around Villa Raffaelli and a part of Tuscany that feels more layered, more private, and more surprising than the postcard version.",
     primaryCta: { label: "Get in touch", href: "/contact" },
-    imageIds: ["studioInterior", "villaCourtyard", "homePortraits"],
+    imageIds: ["villaLibraryPortrait", "villaCourtyard", "bridalPrepWindowSilk"],
     variant: "editorial",
   },
   intro: {
@@ -21,9 +21,9 @@ export const aboutPage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "studioInterior", layoutVariant: "portrait" },
+    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
     { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "homePortraits", layoutVariant: "portrait" },
+    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
     { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
   ]),
   highlights: [

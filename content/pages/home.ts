@@ -12,7 +12,7 @@ export const homePage = servicePageContentSchema.parse({
       "Dolcevilla Studio creates emotionally rich wedding imagery rooted at Villa Raffaelli and shaped by the quiet rhythm of Upper Tuscany.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See selected stories", href: "/journal" },
-    imageIds: ["homeHeroVilla", "homeCoupleQuiet", "homeReceptionNight", "homeUpperTuscany"],
+    imageIds: ["homeHeroVilla", "florenceLoggiaBlueHour", "welcomeDinnerLanterns", "valDorciaCypressVows"],
     variant: "home",
   },
   intro: {
@@ -25,11 +25,11 @@ export const homePage = servicePageContentSchema.parse({
   },
   gallery: buildGallery([
     { id: "homeCoupleQuiet", layoutVariant: "portrait", span: "lg" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
-    { id: "homePortraits", layoutVariant: "portrait" },
+    { id: "oliveGardenCeremony", layoutVariant: "landscape", span: "lg" },
+    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
     { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "marblePath", layoutVariant: "landscape", span: "lg" },
+    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
+    { id: "versiliaSeasideWalk", layoutVariant: "landscape", span: "lg" },
   ]),
   highlights: [
     {

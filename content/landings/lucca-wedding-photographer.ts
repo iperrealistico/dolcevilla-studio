@@ -29,7 +29,7 @@ export const luccaLanding = locationLandingSchema.parse({
   gallery: buildGallery([
     { id: "luccaEvening", layoutVariant: "portrait" },
     { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape", span: "lg" },
     { id: "homeCoupleQuiet", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["lucca-garden-weekend"],

@@ -48,3 +48,33 @@
 - Updated `README.md` so the repo now documents that temporary AI-generated WebP imagery is in use, while still making clear that final photography exports are the real target.
 - Verification: `pnpm content:validate` passed, `pnpm typecheck` passed, `pnpm lint` passed, and `pnpm build` passed after the asset swap. A browser-based sanity check also confirmed the new imagery is rendering on the home hero and secondary content surfaces.
 - Intentionally kept the `.ai/TODO.md` note for final photography exports unchecked, because these AI images are temporary placeholders and should still be replaced by real optimized photography before launch.
+
+## 2026-04-12 — AI Editorial Library Expansion And Sitewide Image Remap
+
+- Expanded the temporary media library with 10 additional AI-generated WebP images via the bundled OpenAI Image CLI, using a structured batch prompt set targeted at the actual content gaps in the site: Florence architecture, Siena portraiture, Chianti hospitality, Val d'Orcia vows, olive-garden ceremony coverage, bridal preparation, Villa Raffaelli interiors, Versilia coastline, candlelit toasts, and welcome-dinner atmosphere.
+- Generated the new assets into `output/imagegen/new/`, visually reviewed the resulting contact sheet, then copied the approved WebPs into `public/images/brand/ai-temp/` so the production-facing asset tree remains static and portable.
+- Added 10 new typed entries to `lib/images/imageManifest.ts` with dimensions, alt text, and dominant-tone metadata:
+  - `florenceLoggiaBlueHour`
+  - `sienaCourtyardPortrait`
+  - `chiantiVineyardDinner`
+  - `valDorciaCypressVows`
+  - `oliveGardenCeremony`
+  - `bridalPrepWindowSilk`
+  - `villaLibraryPortrait`
+  - `versiliaSeasideWalk`
+  - `candlelitCourtyardToast`
+  - `welcomeDinnerLanterns`
+- Rebalanced image usage across the highest-visibility content sources instead of only appending new files:
+  - updated the core service pages in `content/pages/home.ts`, `weddings.ts`, `elopements.ts`, and `about.ts`
+  - updated all major SEO landing pages in `content/landings/`
+  - updated all ads landing payloads in `content/ads/`
+  - updated journal frontmatter in `content/journal/` so story cards and article templates stop reusing the same generic `journalCover`
+- The remap materially reduced old-image repetition. After the change, legacy placeholder-heavy IDs like `homeReceptionNight`, `homeUpperTuscany`, `homePortraits`, `journalCover`, and `storyFrame` dropped sharply or to zero usage in content, while the new imagery now carries the differentiation load across pages and journal cards.
+- Updated `README.md` so repository context now reflects the expanded temporary AI image library rather than the earlier 10-image state.
+- Updated `.ai/TODO.md` to mark the media step complete against the newly executed scope: replacing the old placeholder system with a larger optimized editorial image library and reducing repeated image usage across the site.
+- Verification:
+  - `pnpm content:validate` passed with 22 manifest images
+  - `pnpm typecheck` passed
+  - `pnpm lint` passed
+  - `pnpm build` passed with all public routes still statically generated
+  - `pnpm test:e2e` initially failed because Playwright's Chromium binary was missing from the local cache; installed it with `pnpm exec playwright install chromium`, then reran the suite successfully with 2/2 tests passing

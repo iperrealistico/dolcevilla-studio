@@ -8,7 +8,7 @@ export const florenceLanding = locationLandingSchema.parse({
     title: "Florence weddings photographed with depth beyond the expected postcard.",
     subtitle: "For couples who want Florence with atmosphere, emotional restraint, and a stronger sense of editorial clarity.",
     primaryCta: { label: "Contact Dolcevilla Studio", href: "/contact" },
-    imageIds: ["homePortraits", "homeReceptionNight"],
+    imageIds: ["florenceLoggiaBlueHour", "candlelitCourtyardToast"],
     variant: "landing",
   },
   intro: {
@@ -24,10 +24,10 @@ export const florenceLanding = locationLandingSchema.parse({
     { title: "Human pace", description: "We make room for intimacy inside a location that can otherwise feel overwhelming." },
   ],
   gallery: buildGallery([
-    { id: "homePortraits", layoutVariant: "portrait" },
-    { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
-    { id: "storyFrame", layoutVariant: "landscape" },
+    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
+    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape", span: "lg" },
+    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["weekend-timeline-notes"],
   testimonial: {

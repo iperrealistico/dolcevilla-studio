@@ -53,6 +53,6 @@
 - [x] Confirm Villa Raffaelli is presented as brand origin, never as a public venue funnel.
 
 ## Notes
-- [ ] Replace placeholder SVG imagery with final optimized photography exports.
+- [x] Replace placeholder SVG imagery with an expanded optimized web-ready editorial image library and reduce repeated image usage across the site.
 - [ ] Connect a live external form endpoint and production tracking IDs before launch.
 - [ ] Complete real-device manual QA before the first production deployment.

@@ -34,6 +34,6 @@ pnpm test:e2e
 
 ## Current Notes
 
-- Placeholder SVG artwork is intentionally used until final photography assets are supplied.
+- Temporary AI-generated WebP photography is now in place as a visual stand-in until final photography exports are supplied.
 - The contact form is ready for an external endpoint via `NEXT_PUBLIC_INQUIRY_ENDPOINT`.
 - Tracking IDs remain environment-driven and stay blocked until explicit consent.

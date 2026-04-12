@@ -25,78 +25,90 @@ function createAsset(
 export const imageManifest = {
   homeHeroVilla: createAsset(
     "home-hero-villa",
-    "/images/brand/hero-villa.svg",
+    "/images/brand/ai-temp/villa-raffaelli-dawn.webp",
     "Morning light crossing the facade of Villa Raffaelli.",
-    1600,
-    2000,
+    1024,
+    1536,
     "linen",
   ),
   homeCoupleQuiet: createAsset(
     "home-couple-quiet",
-    "/images/brand/editorial-couple.svg",
+    "/images/brand/ai-temp/editorial-couple-loggia.webp",
     "A couple framed in quiet afternoon light among Tuscan textures.",
+    1024,
+    1536,
   ),
   homeReceptionNight: createAsset(
     "home-reception-night",
-    "/images/brand/reception-evening.svg",
+    "/images/brand/ai-temp/reception-evening-candles.webp",
     "A candlelit dinner scene set beneath a darkening Tuscan sky.",
+    1024,
+    1536,
   ),
   homeUpperTuscany: createAsset(
     "home-upper-tuscany",
-    "/images/brand/landscape-marble.svg",
+    "/images/brand/ai-temp/upper-tuscany-marble-landscape.webp",
     "Upper Tuscany hills with marble-toned light and layered distance.",
-    1600,
-    1200,
+    1536,
+    1024,
     "sage",
   ),
   homePortraits: createAsset(
     "home-portraits",
-    "/images/brand/portrait-studio.svg",
+    "/images/brand/ai-temp/portrait-studio-window-light.webp",
     "Portrait fragments shaped by artful interior light.",
+    1024,
+    1536,
   ),
   journalCover: createAsset(
     "journal-cover",
-    "/images/brand/journal-story.svg",
-    "A journal cover image with layered editorial typography.",
-    1600,
-    1200,
+    "/images/brand/ai-temp/journal-garden-story.webp",
+    "A couple moving through a Tuscan garden reception in late afternoon light.",
+    1536,
+    1024,
     "ink",
   ),
   villaCourtyard: createAsset(
     "villa-courtyard",
-    "/images/brand/hero-villa.svg",
+    "/images/brand/ai-temp/villa-courtyard-morning.webp",
     "The courtyard at Villa Raffaelli in the quiet of the morning.",
-    1600,
-    2000,
+    1024,
+    1536,
   ),
   luccaEvening: createAsset(
     "lucca-evening",
-    "/images/brand/reception-evening.svg",
+    "/images/brand/ai-temp/lucca-evening-garden.webp",
     "An evening celebration near Lucca with warm candlelight and depth.",
+    1024,
+    1536,
   ),
   marblePath: createAsset(
     "marble-path",
-    "/images/brand/landscape-marble.svg",
+    "/images/brand/ai-temp/marble-ridges-distance.webp",
     "Layered mountain light and marble-toned ridges above the coast.",
-    1600,
-    1200,
+    1536,
+    1024,
   ),
   intimateGesture: createAsset(
     "intimate-gesture",
-    "/images/brand/editorial-couple.svg",
+    "/images/brand/ai-temp/intimate-gesture-garden.webp",
     "An intimate gesture between partners in a calm editorial frame.",
+    1024,
+    1536,
   ),
   studioInterior: createAsset(
     "studio-interior",
-    "/images/brand/portrait-studio.svg",
-    "Still-life fragments from the studio world at Villa Raffaelli.",
+    "/images/brand/ai-temp/portrait-studio-window-light.webp",
+    "A quiet portrait fragment inside the studio world of Villa Raffaelli.",
+    1024,
+    1536,
   ),
   storyFrame: createAsset(
     "story-frame",
-    "/images/brand/journal-story.svg",
-    "A layered story image used across journal previews.",
-    1600,
-    1200,
+    "/images/brand/ai-temp/journal-garden-story.webp",
+    "A layered editorial story image used across journal previews.",
+    1536,
+    1024,
   ),
 } as const;
 
@@ -107,7 +119,11 @@ export function getImageAsset(id: ImageManifestKey): ImageAsset {
 }
 
 export function buildGallery(
-  items: { id: ImageManifestKey; layoutVariant?: GalleryItem["layoutVariant"]; span?: GalleryItem["span"] }[],
+  items: {
+    id: ImageManifestKey;
+    layoutVariant?: GalleryItem["layoutVariant"];
+    span?: GalleryItem["span"];
+  }[],
 ): GalleryItem[] {
   return items.map(({ id, layoutVariant = "portrait", span }) => ({
     image: getImageAsset(id),

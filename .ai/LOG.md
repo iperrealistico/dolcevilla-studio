@@ -37,3 +37,14 @@
 - Cleaned up the mobile navigation state by hiding the sticky mobile inquiry bar while the bottom-sheet menu is open, preventing layered call-to-action clutter beneath the navigation overlay.
 - Re-verified the QA fixes with fresh Playwright checks: the desktop hero CTA and mobile sticky CTA now both render light text on dark backgrounds, reduced motion keeps the hero image stable over time, delayed image requests still leave the hero heading readable, `pnpm typecheck` passed, `pnpm lint` passed, `pnpm content:validate` passed, and `pnpm build` passed.
 - Left the separate launch note `Complete real-device manual QA before the first production deployment.` intentionally open in `.ai/TODO.md` as the remaining production hardening reminder beyond this implementation step.
+
+## 2026-04-12 — Temporary AI Photography Replacement
+
+- The next open note item (`Replace placeholder SVG imagery with final optimized photography exports.`) was still blocked by the absence of supplied real photo assets in the repository. To improve the live visual quality without falsely closing that note, generated a temporary 10-image editorial set via the OpenAI Image API instead of waiting for final exports.
+- Used the `imagegen` skill workflow and the bundled CLI to batch-generate ten photorealistic wedding/editorial scenes aligned to the Dolcevilla brand world: villa exteriors, intimate couple portraits, reception atmosphere, Upper Tuscany landscapes, and journal/story horizontals.
+- Wrote generation outputs as compressed WebP assets into `output/imagegen/`, then copied the integrated set into `public/images/brand/ai-temp/`. The final temporary public folder weighs about 2.3 MB total across ten images.
+- Replaced the old SVG stand-ins in `lib/images/imageManifest.ts` with the new AI-generated WebP paths, updated the referenced image dimensions to match the generated files, and refreshed a few alt descriptions so they accurately describe the new content.
+- Reused the 10 generated images across the existing 12 manifest slots where the site architecture already expected repeated editorial imagery (`journalCover` / `storyFrame`, `homePortraits` / `studioInterior`) rather than introducing unnecessary content-model churn.
+- Updated `README.md` so the repo now documents that temporary AI-generated WebP imagery is in use, while still making clear that final photography exports are the real target.
+- Verification: `pnpm content:validate` passed, `pnpm typecheck` passed, `pnpm lint` passed, and `pnpm build` passed after the asset swap. A browser-based sanity check also confirmed the new imagery is rendering on the home hero and secondary content surfaces.
+- Intentionally kept the `.ai/TODO.md` note for final photography exports unchecked, because these AI images are temporary placeholders and should still be replaced by real optimized photography before launch.

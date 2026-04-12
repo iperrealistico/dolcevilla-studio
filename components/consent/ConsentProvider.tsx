@@ -150,7 +150,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         animate={
           isConsentDialogOpen
             ? { opacity: 0.4, filter: "blur(8px)" }
-            : { opacity: 1, filter: "blur(0px)" }
+            : { opacity: 1, filter: "none" }
         }
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         {...modalLockProps}

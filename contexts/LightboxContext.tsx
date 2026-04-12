@@ -12,6 +12,8 @@ type LightboxContextValue = {
   state: LightboxState | null;
   openLightbox: (images: ImageAsset[], index?: number) => void;
   closeLightbox: () => void;
+  goToNext: () => void;
+  goToPrevious: () => void;
 };
 
 const LightboxContext = createContext<LightboxContextValue | null>(null);
@@ -22,8 +24,37 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       state,
-      openLightbox: (images: ImageAsset[], index = 0) => setState({ images, index }),
+      openLightbox: (images: ImageAsset[], index = 0) =>
+        setState({
+          images,
+          index:
+            images.length > 0
+              ? Math.min(Math.max(index, 0), images.length - 1)
+              : 0,
+        }),
       closeLightbox: () => setState(null),
+      goToNext: () =>
+        setState((current) => {
+          if (!current || current.images.length < 2) {
+            return current;
+          }
+
+          return {
+            ...current,
+            index: (current.index + 1) % current.images.length,
+          };
+        }),
+      goToPrevious: () =>
+        setState((current) => {
+          if (!current || current.images.length < 2) {
+            return current;
+          }
+
+          return {
+            ...current,
+            index: (current.index - 1 + current.images.length) % current.images.length,
+          };
+        }),
     }),
     [state],
   );

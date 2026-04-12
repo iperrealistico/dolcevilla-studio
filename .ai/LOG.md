@@ -1,5 +1,27 @@
 # Project Log
 
+## 2026-04-12 — Cursor Anchor And Lightbox Viewport Fix
+
+- Fixed a shared overlay-positioning bug affecting both the bespoke cursor and the gallery lightbox. The root cause was a filtered motion wrapper in `components/consent/ConsentProvider.tsx`, which caused `position: fixed` descendants to anchor against that transformed/filtered ancestor instead of the real viewport.
+- Updated `components/consent/ConsentProvider.tsx` so the non-consent state resolves to `filter: none` instead of `blur(0px)`, removing the persistent containing-block side effect once the consent flow is closed.
+- Reworked `components/cursor/StudioCursor.tsx` so the cursor now renders through a portal to `document.body`, which makes it viewport-anchored regardless of ancestor effects and prevents scroll-offset drift.
+- Tightened the cursor behavior at the same time:
+  - native cursor is only hidden after real mouse activity activates the custom cursor
+  - inertia remains, but the follow easing is more responsive
+  - large pointer jumps now snap immediately instead of trailing far behind the actual pointer
+- Reworked the gallery overlay in `components/galleries/GalleryLightbox.tsx` to also render through a portal to `document.body`, eliminating the misplaced off-screen lightbox image bug that could appear after scrolling.
+- Hardened the lightbox interaction model:
+  - added proper dialog semantics
+  - backdrop click closes the overlay
+  - `Escape` closes the overlay
+  - left/right arrows navigate multi-image galleries
+  - body scroll locks while the lightbox is open
+  - active image now loads eagerly with its blur placeholder
+- Simplified the image-card lightbox trigger in `components/galleries/ImageCard.tsx` to use the already-known gallery index directly rather than re-deriving it from image IDs.
+- Expanded `tests/e2e/site.spec.ts` with two higher-value browser checks:
+  - the custom cursor stays visually aligned after scrolling and mouse movement
+  - gallery clicks open a visible viewport-anchored lightbox instead of rendering the image outside the screen
+
 ## 2026-04-12 — Brave-Safe Cursor Activation Fix
 
 - Reworked the bespoke cursor activation logic in `components/cursor/StudioCursor.tsx` so it no longer depends on Chromium media-query capability detection (`(hover: hover) and (pointer: fine)`), which could fail on privacy-hardened Chromium builds such as Brave.

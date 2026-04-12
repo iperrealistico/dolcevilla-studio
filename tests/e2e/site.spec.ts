@@ -67,10 +67,47 @@ test("desktop mouse movement activates the custom studio cursor", async ({ page,
 
   await page.goto("/");
   await page.getByRole("button", { name: "Continue with essential only" }).click();
-  await page.mouse.move(320, 220);
+  await page.evaluate(() => window.scrollTo(0, 1600));
+  await page.mouse.move(640, 280);
+  await page.waitForTimeout(100);
 
   await expect(page.locator("html")).toHaveAttribute("data-custom-cursor", "enabled");
   await expect(page.locator(".studio-cursor")).toHaveAttribute("data-visible", "true");
+
+  const cursorMetrics = await page.locator(".studio-cursor").evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return {
+      centerX: rect.left + rect.width / 2,
+      centerY: rect.top + rect.height / 2,
+    };
+  });
+
+  expect(Math.abs(cursorMetrics.centerX - 640)).toBeLessThan(22);
+  expect(Math.abs(cursorMetrics.centerY - 280)).toBeLessThan(22);
+});
+
+test("gallery images open a visible viewport-anchored lightbox", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Continue with essential only" }).click();
+
+  const galleryCard = page.locator("button:has(img)").first();
+  await galleryCard.scrollIntoViewIfNeeded();
+  await galleryCard.click();
+
+  const lightbox = page.getByRole("dialog", { name: "Gallery lightbox" });
+  await expect(lightbox).toBeVisible();
+  await expect(lightbox.getByRole("button", { name: "Close gallery lightbox" })).toBeVisible();
+
+  const imageBox = await lightbox.locator("img").boundingBox();
+  const viewport = page.viewportSize();
+
+  expect(imageBox).not.toBeNull();
+  expect(viewport).not.toBeNull();
+
+  if (imageBox && viewport) {
+    expect(imageBox.y).toBeGreaterThanOrEqual(0);
+    expect(imageBox.y + imageBox.height).toBeLessThanOrEqual(viewport.height);
+  }
 });
 
 test("public pages no longer render preview contact-sheet imagery", async ({ page }) => {

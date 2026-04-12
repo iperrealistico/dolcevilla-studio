@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { getCursorMode, type CursorMode } from "@/lib/cursor/getCursorMode";
 
 const CLICK_RELEASE_DELAY_MS = 120;
-const IDLE_EASE = 0.18;
-const INTERACTIVE_EASE = 0.14;
-const PRESSED_EASE = 0.24;
+const IDLE_EASE = 0.34;
+const INTERACTIVE_EASE = 0.4;
+const PRESSED_EASE = 0.56;
+const SNAP_DISTANCE_PX = 96;
 
 export function StudioCursor() {
   const reduceMotion = useReducedMotion();
@@ -25,18 +27,11 @@ export function StudioCursor() {
   const enabled = !reduceMotion;
 
   useEffect(() => {
-    const root = document.documentElement;
-
-    if (!enabled) {
-      delete root.dataset.customCursor;
+    if (enabled) {
       return;
     }
 
-    root.dataset.customCursor = "enabled";
-
-    return () => {
-      delete root.dataset.customCursor;
-    };
+    delete document.documentElement.dataset.customCursor;
   }, [enabled]);
 
   useEffect(() => {
@@ -46,6 +41,8 @@ export function StudioCursor() {
       pressedRef.current = false;
       hasPointerRef.current = false;
       customCursorActiveRef.current = false;
+      targetRef.current = { x: -120, y: -120 };
+      currentRef.current = { x: -120, y: -120 };
       return;
     }
 
@@ -124,7 +121,11 @@ export function StudioCursor() {
         y: event.clientY,
       };
 
-      if (!hasPointerRef.current) {
+      const deltaX = event.clientX - currentRef.current.x;
+      const deltaY = event.clientY - currentRef.current.y;
+      const distance = Math.hypot(deltaX, deltaY);
+
+      if (!hasPointerRef.current || distance > SNAP_DISTANCE_PX) {
         currentRef.current = {
           x: event.clientX,
           y: event.clientY,
@@ -261,11 +262,11 @@ export function StudioCursor() {
     };
   }, [enabled]);
 
-  if (!enabled) {
+  if (!enabled || typeof document === "undefined") {
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       ref={cursorRef}
       aria-hidden="true"
@@ -277,6 +278,7 @@ export function StudioCursor() {
       <div ref={burstRef} className="studio-cursor__burst" />
       <div className="studio-cursor__pulse" />
       <div className="studio-cursor__core" />
-    </div>
+    </div>,
+    document.body,
   );
 }

@@ -47,7 +47,7 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={reduceMotion ? undefined : { y: -6, scale: 1.018 }}
-      onClick={() => openLightbox(gallery.map((entry) => entry.image), gallery.findIndex((entry) => entry.image.id === item.image.id))}
+      onClick={() => openLightbox(gallery.map((entry) => entry.image), index)}
     >
       <Image
         src={item.image.src}

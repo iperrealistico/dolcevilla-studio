@@ -21,7 +21,9 @@ export function PageShell({ children, stickyCta, simplifiedHeader = false }: Pag
       <SkipLink />
       <Header simplified={simplifiedHeader} />
       <BottomSheetMenu />
-      <main id="main-content">{children}</main>
+      <main id="main-content" className="overflow-x-clip">
+        {children}
+      </main>
       <Footer />
       <GalleryLightbox />
       {stickyCta ? <StickyMobileCTA label={stickyCta.label} href={stickyCta.href} /> : null}

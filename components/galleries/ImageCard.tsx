@@ -23,6 +23,11 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
     <motion.button
       type="button"
       className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-[1.75rem] border border-white/20 bg-[var(--color-shell)] text-left shadow-[0_28px_60px_rgba(26,20,15,0.14)]"
+      style={{
+        willChange: "transform, opacity, filter",
+        backfaceVisibility: "hidden",
+        contain: "layout paint style",
+      }}
       initial={
         reduceMotion
           ? { opacity: 0 }
@@ -50,6 +55,8 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
         width={item.image.width}
         height={item.image.height}
         sizes={DEFAULT_IMAGE_SIZES}
+        placeholder="blur"
+        blurDataURL={item.image.blurDataURL}
         className="h-auto w-full object-cover transition duration-700 ease-out group-hover:scale-[1.06]"
       />
       {item.caption ? (

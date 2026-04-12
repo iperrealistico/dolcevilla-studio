@@ -104,6 +104,7 @@ export const craftIdentitySchema = z.object({
   eyebrow: z.string().optional(),
   title: z.string().min(1),
   body: z.string().min(1),
+  imageId: z.string().min(1).optional(),
   points: z.array(pointSchema).default([]),
 });
 

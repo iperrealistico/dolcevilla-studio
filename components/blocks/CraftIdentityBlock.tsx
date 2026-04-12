@@ -1,6 +1,8 @@
+import Image from "next/image";
 import type { ServicePageContent } from "@/types/content";
 import { FloatIn } from "@/components/motion/FloatIn";
 import { Container } from "@/components/ui/Container";
+import { getImageAsset } from "@/lib/images/imageManifest";
 
 export function CraftIdentityBlock({
   craft,
@@ -11,18 +13,34 @@ export function CraftIdentityBlock({
     return null;
   }
 
+  const image = craft.imageId ? getImageAsset(craft.imageId as never) : null;
+
   return (
     <Container>
       <div className="rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] px-6 py-8 shadow-[var(--shadow-soft)] md:px-10">
         <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr]">
           <FloatIn from="left">
-            <div>
+            <div className="space-y-6">
               <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                 {craft.eyebrow ?? "Hybrid craft"}
               </p>
               <h3 className="font-display-face mt-3 text-3xl tracking-[-0.03em] md:text-4xl">
                 {craft.title}
               </h3>
+              {image ? (
+                <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-shell)] shadow-[0_24px_56px_rgba(30,20,12,0.12)]">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    sizes="(min-width: 1280px) 28vw, (min-width: 768px) 40vw, 92vw"
+                    placeholder="blur"
+                    blurDataURL={image.blurDataURL}
+                    className="aspect-[4/5] h-full w-full object-cover"
+                  />
+                </div>
+              ) : null}
             </div>
           </FloatIn>
           <FloatIn delay={0.08}>

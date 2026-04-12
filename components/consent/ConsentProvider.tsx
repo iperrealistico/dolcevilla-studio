@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { ConsentDoorway } from "@/components/consent/ConsentDoorway";
 import { ConsentContext } from "@/contexts/ConsentContext";
 import { CONSENT_STORAGE_KEY } from "@/lib/analytics/consentedScriptLoader";
@@ -14,25 +14,29 @@ const defaultConsent: ConsentState = {
 };
 
 export function ConsentProvider({ children }: { children: ReactNode }) {
-  const [consent, setConsentState] = useState<ConsentState>(() => {
-    if (typeof window === "undefined") {
-      return defaultConsent;
-    }
+  const [consent, setConsentState] = useState<ConsentState>(defaultConsent);
+  const [hasHydrated, setHasHydrated] = useState(false);
 
+  useEffect(() => {
     const raw = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+
     if (!raw) {
-      return defaultConsent;
+      setHasHydrated(true);
+      return;
     }
 
     try {
-      return JSON.parse(raw) as ConsentState;
+      setConsentState(JSON.parse(raw) as ConsentState);
     } catch {
-      return defaultConsent;
+      setConsentState(defaultConsent);
+    } finally {
+      setHasHydrated(true);
     }
-  });
+  }, []);
 
   const setConsent = (nextState: ConsentState) => {
     setConsentState(nextState);
+    setHasHydrated(true);
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(nextState));
   };
 
@@ -58,7 +62,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     }),
     [consent],
   );
-  const isConsentPending = !consent.hasInteracted;
+  const isConsentPending = hasHydrated && !consent.hasInteracted;
   const modalLockProps = isConsentPending ? ({ inert: true } as Record<string, boolean>) : {};
 
   return (

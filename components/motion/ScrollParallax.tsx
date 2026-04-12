@@ -54,9 +54,22 @@ export function ScrollParallax({
     <motion.div
       ref={ref}
       className={cn("will-change-transform", className)}
-      style={{ x, y, scale, rotate, opacity }}
+      style={{
+        x,
+        y,
+        scale,
+        rotate,
+        opacity,
+        willChange: "transform, opacity",
+        backfaceVisibility: "hidden",
+        contain: "layout paint style",
+      }}
     >
       <motion.div
+        style={{
+          willChange: "transform, opacity, filter",
+          backfaceVisibility: "hidden",
+        }}
         initial={{
           opacity: 0,
           x: xStart,

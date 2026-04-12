@@ -24,12 +24,12 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "filmCameraCollectionStudioTable", layoutVariant: "landscape" },
-    { id: "filmNikonFVintageVillaLibrary", layoutVariant: "portrait" },
-    { id: "filmRolleiflexBridalPrep", layoutVariant: "portrait" },
-    { id: "filmHasselbladGroundGlassOliveCeremony", layoutVariant: "landscape" },
-    { id: "filmHasselblad500cmWindowGarden", layoutVariant: "portrait" },
-    { id: "darkroomHangingPrintsRedLight", layoutVariant: "landscape" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
+    { id: "villaCourtyard", layoutVariant: "portrait" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
+    { id: "valDorciaCypressVows", layoutVariant: "landscape" },
   ]),
   highlights: [
     {
@@ -51,6 +51,7 @@ export const homePage = servicePageContentSchema.parse({
     title: "One photographer always carries film.",
     body:
       "We do not use film as a gimmick or a nostalgic accessory. It is part of the working method: 35mm for movement, 120 medium format for depth, and selected large-format frames when a moment deserves genuine stillness, all supported by digital coverage for speed, security, and completeness.",
+    imageId: "filmRolleiflexBridalPrep",
     points: [
       {
         title: "35mm for energy",

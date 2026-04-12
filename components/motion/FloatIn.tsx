@@ -29,6 +29,11 @@ export function FloatIn({
   return (
     <motion.div
       className={cn("will-change-transform", className)}
+      style={{
+        willChange: "transform, opacity, filter",
+        backfaceVisibility: "hidden",
+        contain: "layout paint style",
+      }}
       initial={
         reduceMotion
           ? { opacity: 0 }

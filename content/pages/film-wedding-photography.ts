@@ -29,12 +29,12 @@ export const filmWeddingPhotographyPage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "filmContactSheetEditorial", layoutVariant: "portrait" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait", span: "lg" },
-    { id: "filmContactSheetProofs", layoutVariant: "portrait" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
     { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape", span: "lg" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
     { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
   ]),
   highlights: [
     {

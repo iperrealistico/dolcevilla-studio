@@ -62,5 +62,5 @@
 - [x] Add reusable craft-first content support plus a dedicated film wedding photography page covering reasons for film, why digital is still essential, format education, uncommon skill requirements, and the darkroom.
 - [x] Spread the hybrid film-and-digital story across Home, About, Experience, Weddings, Elopements, Pricing, Contact, FAQs, navigation, and journal internal linking.
 - [x] Add supporting journal entries for the hybrid philosophy, film formats, and darkroom perspective.
-- [x] Reuse the current temporary AI image library plus contact-sheet derivatives so the new film story has at least some matching visual language.
-- [ ] Generate and integrate a fresh 20-image analog-focused AI placeholder library once the image API billing limit is resolved.
+- [x] Remove the preview-only contact-sheet composites from the public image manifest and all live page surfaces.
+- [ ] Generate and integrate a fresh analog-focused AI placeholder library with film rolls, camera bodies, ground-glass POVs, and darkroom scenes once the image API billing limit is resolved.

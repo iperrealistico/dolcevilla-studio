@@ -190,22 +190,6 @@ export const imageManifest = {
     1024,
     "olive",
   ),
-  filmContactSheetEditorial: createAsset(
-    "film-contact-sheet-editorial",
-    "/images/brand/ai-temp/film/contact-sheet-editorial.jpg",
-    "An editorial proof-sheet style contact sheet built from the temporary AI image library.",
-    672,
-    1454,
-    "linen",
-  ),
-  filmContactSheetProofs: createAsset(
-    "film-contact-sheet-proofs",
-    "/images/brand/ai-temp/film/contact-sheet-proofs.jpg",
-    "A proof-board style contact sheet from the temporary AI image library, used as a placeholder for film-proof storytelling.",
-    640,
-    1340,
-    "stone",
-  ),
 } as const;
 
 export type ImageManifestKey = keyof typeof imageManifest;

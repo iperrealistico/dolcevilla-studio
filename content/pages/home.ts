@@ -24,12 +24,12 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "homeCoupleQuiet", layoutVariant: "portrait", span: "lg" },
-    { id: "oliveGardenCeremony", layoutVariant: "landscape", span: "lg" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
     { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "filmContactSheetProofs", layoutVariant: "portrait" },
+    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
     { id: "homeReceptionNight", layoutVariant: "portrait" },
-    { id: "versiliaSeasideWalk", layoutVariant: "landscape", span: "lg" },
+    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
   ]),
   highlights: [
     {

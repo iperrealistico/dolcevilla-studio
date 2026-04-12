@@ -174,3 +174,25 @@
   - `pnpm test` passed with 5 test files and 10 tests
   - `pnpm build` passed with the new `/film-wedding-photography` route and all public routes still statically generated
   - `pnpm test:e2e` passed with 2/2 Playwright tests after updating the journal heading assertion to match the new editorial copy
+
+## 2026-04-12 — Contact-Sheet Removal, Gallery Rebuild, And Scroll Motion Pass
+
+- Removed the preview-only contact-sheet assets from the live site after they leaked onto public surfaces. Deleted both `filmContactSheetEditorial` and `filmContactSheetProofs` from `lib/images/imageManifest.ts`, rewired the affected service pages and journal frontmatter to use normal editorial stills instead, and removed the two underlying files from `public/images/brand/ai-temp/film/`.
+- Cleaned the film-oriented journal metadata after the image swap so no duplicated gallery IDs remain in:
+  - `content/journal/guides/35mm-120-large-format-wedding-photography.mdx`
+  - `content/journal/guides/why-we-photograph-weddings-on-film-and-digital.mdx`
+  - `content/journal/stories-of-place/inside-our-darkroom.mdx`
+- Rebuilt the shared gallery system to behave like a real tiled photo wall instead of the old grid-plus-carousel hybrid:
+  - `components/galleries/ImageGallery.tsx` now renders a single editorial wall
+  - `components/galleries/EditorialGrid.tsx` now uses a multi-column masonry layout
+  - `components/galleries/ImageCard.tsx` now uses break-inside-safe cards, natural image aspect ratios, and stronger reveal / hover motion
+- Added a reusable scroll-motion system to make the pages feel more cinematic while preserving `prefers-reduced-motion` support:
+  - new `components/motion/ScrollParallax.tsx`
+  - expanded `components/motion/FloatIn.tsx`
+  - applied the new motion wrappers across the shared templates and major blocks, including heroes, editorial sections, proof grids, testimonials, process cards, and the film-specific educational sections
+- Upgraded `components/galleries/HeroSequence.tsx` so hero imagery now eases between frames instead of swapping abruptly.
+- Updated `README.md` and `.ai/TODO.md` so future sessions understand that the contact-sheet composites were intentionally removed and should not be reused.
+- Image-generation blocker status for this step:
+  - attempted to resume analog-specific AI image generation for film rolls, film cameras, POV ground-glass frames, and darkroom scenes
+  - the OpenAI image API remains blocked by `billing_hard_limit_reached`
+  - no new requested film-camera or darkroom image assets could be generated truthfully in this session, so the site was cleaned up and motion-polished without fabricating those missing visuals

@@ -36,7 +36,7 @@ pnpm test:e2e
 
 - The brand system now balances place with craft, including a dedicated `/film-wedding-photography` page and supporting journal content about hybrid film coverage, formats, and the darkroom.
 - An expanded temporary AI-generated editorial library is still in place as a visual stand-in until final photography exports are supplied.
-- Two proof-sheet style contact-sheet derivatives from the existing temporary AI library are now also in use for the film-focused editorial surfaces.
+- Preview-only contact-sheet composites have been removed from all live page surfaces and from the public image manifest.
 - A fresh analog-specific AI image batch was attempted for this repositioning, but the live OpenAI image run is currently blocked by the account's billing hard limit.
 - The inquiry form posts JSON to a public external endpoint configured through `NEXT_PUBLIC_INQUIRY_ENDPOINT`, with timeout and response-error handling for production failures.
 - Tracking IDs remain environment-driven, route-aware, and blocked until explicit consent.

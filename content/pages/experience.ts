@@ -6,9 +6,9 @@ export const experiencePage = servicePageContentSchema.parse({
   slug: "experience",
   pageType: "experience",
   gallery: buildGallery([
-    { id: "filmContactSheetEditorial", layoutVariant: "portrait" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait", span: "lg" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape", span: "lg" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
   ]),
   intro: {
     eyebrow: "Experience",

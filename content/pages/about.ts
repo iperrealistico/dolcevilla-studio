@@ -23,9 +23,9 @@ export const aboutPage = servicePageContentSchema.parse({
   },
   gallery: buildGallery([
     { id: "villaLibraryPortrait", layoutVariant: "portrait" },
-    { id: "filmContactSheetEditorial", layoutVariant: "portrait" },
+    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
     { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "homeUpperTuscany", layoutVariant: "landscape", span: "lg" },
+    { id: "homeUpperTuscany", layoutVariant: "landscape" },
   ]),
   highlights: [
     {

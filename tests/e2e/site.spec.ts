@@ -43,3 +43,29 @@ test("journal index is reachable after consent", async ({ page }) => {
     }),
   ).toBeVisible();
 });
+
+test("public pages no longer render preview contact-sheet imagery", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Essential only" }).click();
+
+  const homeImageSources = await page.locator("img").evaluateAll((images) =>
+    images
+      .map((image) => image.getAttribute("src") ?? "")
+      .filter(Boolean),
+  );
+  expect(homeImageSources.some((src) => src.includes("contact-sheet"))).toBe(false);
+
+  await page.getByRole("navigation").getByRole("link", { name: "Film" }).click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Hybrid wedding photography for couples who want film to mean something real.",
+    }),
+  ).toBeVisible();
+
+  const filmImageSources = await page.locator("img").evaluateAll((images) =>
+    images
+      .map((image) => image.getAttribute("src") ?? "")
+      .filter(Boolean),
+  );
+  expect(filmImageSources.some((src) => src.includes("contact-sheet"))).toBe(false);
+});

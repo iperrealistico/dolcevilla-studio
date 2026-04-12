@@ -8,6 +8,7 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { SignatureGallery } from "@/components/blocks/SignatureGallery";
 import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
 import { EditorialTextBlock } from "@/components/blocks/EditorialTextBlock";
+import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import type { LocationLanding, StoryCard } from "@/types/content";
 
 type LandingPageTemplateProps = {
@@ -18,23 +19,45 @@ type LandingPageTemplateProps = {
 export function LandingPageTemplate({ landing, stories }: LandingPageTemplateProps) {
   return (
     <div className="space-y-14 pb-20">
-      <HeroStatement hero={landing.hero} />
-      <EditorialTextBlock section={landing.intro} />
-      <WhyChooseUs items={landing.whyThisPlaceMatters} />
-      <SignatureGallery items={landing.gallery} />
-      <WhyChooseUs items={landing.whyWeFit} />
-      <StoryCardGrid stories={stories} />
-      <TestimonialsBlock items={[landing.testimonial]} />
-      <InvestmentNote section={landing.investmentNote} />
-      <VillaIdentityBlock
-        villa={{
-          variant: landing.villaIdentityVariant,
-          title: "Villa Raffaelli remains a private source of the brand’s point of view.",
-          body: "It appears here only as an origin story, not as a public venue funnel.",
-        }}
-      />
-      <FAQBlock items={landing.faqItems} />
-      <CTASection section={landing.cta} />
+      <ScrollParallax intensity="lg">
+        <HeroStatement hero={landing.hero} />
+      </ScrollParallax>
+      <ScrollParallax from="left">
+        <EditorialTextBlock section={landing.intro} />
+      </ScrollParallax>
+      <ScrollParallax from="right">
+        <WhyChooseUs items={landing.whyThisPlaceMatters} />
+      </ScrollParallax>
+      <ScrollParallax from="left" intensity="lg">
+        <SignatureGallery items={landing.gallery} />
+      </ScrollParallax>
+      <ScrollParallax from="right">
+        <WhyChooseUs items={landing.whyWeFit} />
+      </ScrollParallax>
+      <ScrollParallax from="left">
+        <StoryCardGrid stories={stories} />
+      </ScrollParallax>
+      <ScrollParallax from="right">
+        <TestimonialsBlock items={[landing.testimonial]} />
+      </ScrollParallax>
+      <ScrollParallax from="left">
+        <InvestmentNote section={landing.investmentNote} />
+      </ScrollParallax>
+      <ScrollParallax from="right">
+        <VillaIdentityBlock
+          villa={{
+            variant: landing.villaIdentityVariant,
+            title: "Villa Raffaelli remains a private source of the brand’s point of view.",
+            body: "It appears here only as an origin story, not as a public venue funnel.",
+          }}
+        />
+      </ScrollParallax>
+      <ScrollParallax from="left">
+        <FAQBlock items={landing.faqItems} />
+      </ScrollParallax>
+      <ScrollParallax from="right" intensity="lg">
+        <CTASection section={landing.cta} />
+      </ScrollParallax>
     </div>
   );
 }

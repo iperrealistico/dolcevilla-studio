@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
 import { ConsentDoorway } from "@/components/consent/ConsentDoorway";
 import { ConsentContext } from "@/contexts/ConsentContext";
@@ -76,17 +76,20 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     () => defaultConsent,
   );
   const [isManagerOpen, setIsManagerOpen] = useState(false);
+  const [consentPanel, setConsentPanel] = useState<"choices" | "privacy">("choices");
   const isConsentDialogOpen = !consent.hasInteracted || isManagerOpen;
   const modalLockProps = isConsentDialogOpen ? ({ inert: true } as Record<string, boolean>) : {};
 
   const setConsent = (nextState: ConsentState) => {
     persistConsent(nextState);
+    setConsentPanel("choices");
     setIsManagerOpen(false);
   };
 
   const value = useMemo(
     () => ({
       consent,
+      consentPanel,
       isConsentDialogOpen,
       acceptAll: () =>
         setConsent({
@@ -115,26 +118,45 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
           marketing,
           timestamp: new Date().toISOString(),
         }),
-      openConsentManager: () => setIsManagerOpen(true),
+      openConsentManager: () => {
+        setConsentPanel("choices");
+        setIsManagerOpen(true);
+      },
+      openPrivacyManager: () => {
+        setConsentPanel("privacy");
+        setIsManagerOpen(true);
+      },
+      showConsentChoices: () => setConsentPanel("choices"),
       closeConsentManager: () => {
         if (consent.hasInteracted) {
+          setConsentPanel("choices");
           setIsManagerOpen(false);
         }
       },
       resetConsent: () => {
         persistConsent(defaultConsent);
+        setConsentPanel("choices");
         setIsManagerOpen(true);
       },
       setConsent,
     }),
-    [consent, isConsentDialogOpen],
+    [consent, consentPanel, isConsentDialogOpen],
   );
 
   return (
     <ConsentContext.Provider value={value}>
-      <div aria-hidden={isConsentDialogOpen} {...modalLockProps}>
+      <motion.div
+        aria-hidden={isConsentDialogOpen}
+        animate={
+          isConsentDialogOpen
+            ? { opacity: 0.4, filter: "blur(8px)" }
+            : { opacity: 1, filter: "blur(0px)" }
+        }
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        {...modalLockProps}
+      >
         {children}
-      </div>
+      </motion.div>
       <AnimatePresence>
         {isConsentDialogOpen ? <ConsentDoorway /> : null}
       </AnimatePresence>

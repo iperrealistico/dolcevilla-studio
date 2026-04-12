@@ -5,7 +5,7 @@ import { validateContent } from "@/lib/content/validateContent";
 describe("content system", () => {
   it("validates all structured content and journal references", async () => {
     await expect(validateContent()).resolves.toMatchObject({
-      pageCount: 11,
+      pageCount: 10,
       landingCount: 8,
       journalCount: 8,
     });

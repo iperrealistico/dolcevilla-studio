@@ -7,7 +7,6 @@ export { pricingPage } from "@/content/pages/pricing";
 export { aboutPage } from "@/content/pages/about";
 export { contactPage } from "@/content/pages/contact";
 export { thankYouPage } from "@/content/pages/thank-you";
-export { privacyPage } from "@/content/pages/privacy";
 export { legalPage } from "@/content/pages/legal";
 
 import { aboutPage } from "@/content/pages/about";
@@ -18,7 +17,6 @@ import { filmWeddingPhotographyPage } from "@/content/pages/film-wedding-photogr
 import { homePage } from "@/content/pages/home";
 import { legalPage } from "@/content/pages/legal";
 import { pricingPage } from "@/content/pages/pricing";
-import { privacyPage } from "@/content/pages/privacy";
 import { thankYouPage } from "@/content/pages/thank-you";
 import { weddingsPage } from "@/content/pages/weddings";
 
@@ -32,7 +30,6 @@ export const pages = {
   about: aboutPage,
   contact: contactPage,
   "thank-you": thankYouPage,
-  privacy: privacyPage,
   legal: legalPage,
 };
 

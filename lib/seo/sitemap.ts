@@ -16,7 +16,6 @@ export async function buildSitemapEntries(): Promise<MetadataRoute.Sitemap> {
     "about",
     "contact",
     "journal",
-    "privacy",
     "legal",
     ...pageSlugs.filter((slug) => !["home"].includes(slug)),
     ...landingSlugs,

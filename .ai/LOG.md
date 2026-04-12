@@ -237,6 +237,31 @@
 - Added `lib/cursor/getCursorMode.ts` so interactive-target detection stays centralized and testable rather than being buried inside the component.
 - Added unit coverage in `tests/unit/cursor-mode.test.ts` for nested links, label/form interactions, and non-interactive surfaces.
 - Updated `app/globals.css` with the custom-cursor shell, pulse keyframes, interactive/pressed variants, and a fine-pointer media-query guard so touch devices keep the native browser behavior.
+
+## 2026-04-12 — Consent Simplification And Inline Privacy Popup
+
+- Simplified the branded consent doorway so the first-contact experience is lighter and faster to parse. The left side now keeps only the `Welcome` label plus the core studio statement, while the right side focuses on:
+  - `Allow the full studio experience`
+  - `Continue with essential only`
+  - `Choose manually`
+  - `Read privacy details`
+- Removed the extra explanatory copy blocks, feature cards, inset image, and the bottom EU-notice paragraph from `components/consent/ConsentActions.tsx`, per the new UX direction.
+- Restyled the accept-all button to use a much lighter editorial cream treatment with dark text so it visually leads the choice set without hiding or weakening refusal.
+- Replaced the old `/privacy` page flow with an inline privacy popup layered inside the consent system:
+  - added structured popup copy in `content/site/privacy.ts`
+  - extended the consent context/provider with panel-state support (`choices` vs `privacy`)
+  - wired the footer `Privacy` control to open the same popup from anywhere on the site
+  - converted `Read privacy details` from a link into an inline popup trigger
+- Deleted the standalone privacy route and its related content wiring:
+  - removed `content/pages/privacy.ts`
+  - removed `app/(site)/privacy/page.tsx`
+  - removed privacy page exports from `content/pages/index.ts`
+  - removed `/privacy` from `lib/seo/sitemap.ts`
+- Refined the doorway dismissal animation so accepting or closing now feels more cinematic:
+  - doorway overlay fades and softens
+  - consent card zooms out while fading and blurring
+  - background site content fades back in and sharpens underneath
+- Updated `tests/e2e/site.spec.ts` so browser coverage matches the current consent copy and now checks that privacy details open as an in-place popup without navigating away.
   - `darkroom-hanging-prints-red-light.webp`
   - `darkroom-chemistry-trays-hands.webp`
   - `darkroom-enlarger-workbench.webp`

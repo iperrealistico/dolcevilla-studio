@@ -61,7 +61,7 @@ export function Footer() {
               <Instagram size={16} /> Instagram
             </Link>
             <div className="flex flex-wrap gap-4 pt-2">
-              <Link href="/privacy">Privacy</Link>
+              <OpenConsentManagerButton label="Privacy" panel="privacy" />
               <Link href="/legal">Legal</Link>
               <OpenConsentManagerButton />
             </div>

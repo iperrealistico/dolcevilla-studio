@@ -6,6 +6,7 @@ import type { ConsentState } from "@/types/consent";
 export type ConsentContextValue = {
   consent: ConsentState;
   isConsentDialogOpen: boolean;
+  consentPanel: "choices" | "privacy";
   acceptAll: () => void;
   essentialOnly: () => void;
   savePreferences: (preferences: {
@@ -13,6 +14,8 @@ export type ConsentContextValue = {
     marketing: boolean;
   }) => void;
   openConsentManager: () => void;
+  openPrivacyManager: () => void;
+  showConsentChoices: () => void;
   closeConsentManager: () => void;
   resetConsent: () => void;
   setConsent: (state: ConsentState) => void;

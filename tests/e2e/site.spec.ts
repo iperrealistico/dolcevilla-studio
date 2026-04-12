@@ -19,6 +19,22 @@ test("consent doorway appears and the home page remains accessible after opting 
   ).toBeVisible();
 });
 
+test("privacy details open inside the consent overlay instead of navigating away", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Read privacy details" }).click();
+
+  await expect(page.getByRole("dialog", { name: "Privacy details" })).toBeVisible();
+  await expect(
+    page.getByText(
+      "Inquiry information is used only to respond to you. Optional analytics and marketing remain blocked unless you explicitly allow them.",
+    ),
+  ).toBeVisible();
+  await expect(page).toHaveURL(/\/$/);
+});
+
 test("mobile consent doorway can be dismissed without hidden fixed UI intercepting taps", async ({
   page,
 }) => {

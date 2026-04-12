@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Aperture, ChartNoAxesColumnIncreasing, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowLeft, ChartNoAxesColumnIncreasing, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useConsent } from "@/hooks/useConsent";
 import { getImageAsset } from "@/lib/images/imageManifest";
+import { privacyDetails } from "@/content/site/privacy";
 
 const doorwayImage = getImageAsset("villaLibraryPortrait");
-const insetImage = getImageAsset("filmHasselbladGroundGlassOliveCeremony");
 
 function PreferenceToggle({
   title,
@@ -56,8 +55,11 @@ export function ConsentActions() {
     acceptAll,
     closeConsentManager,
     consent,
+    consentPanel,
     essentialOnly,
+    openPrivacyManager,
     savePreferences,
+    showConsentChoices,
   } = useConsent();
   const [showPreferences, setShowPreferences] = useState(false);
   const [preferences, setPreferences] = useState({
@@ -66,7 +68,7 @@ export function ConsentActions() {
   });
 
   return (
-    <div className="grid min-h-[min(88dvh,820px)] overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(140deg,#171311,#2d241e_42%,#43362d)] shadow-[0_40px_120px_rgba(17,12,8,0.48)] lg:grid-cols-[1.08fr_0.92fr]">
+    <div className="relative grid min-h-[min(82dvh,780px)] overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(140deg,#171311,#2d241e_42%,#43362d)] shadow-[0_40px_120px_rgba(17,12,8,0.48)] lg:grid-cols-[1.08fr_0.92fr]">
       <div className="relative min-h-[18rem] overflow-hidden">
         <Image
           src={doorwayImage.src}
@@ -78,7 +80,7 @@ export function ConsentActions() {
           sizes="(min-width: 1024px) 52vw, 100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,12,10,0.18),rgba(14,12,10,0.76))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,12,10,0.22),rgba(14,12,10,0.8))]" />
         <motion.div
           initial={{ opacity: 0, y: 22, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -90,7 +92,10 @@ export function ConsentActions() {
               <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[rgb(244_235_224_/_0.72)]">
                 Welcome
               </p>
-              <p className="mt-3 font-display-face text-3xl tracking-[-0.04em] md:text-5xl">
+              <p
+                id="consent-doorway-title"
+                className="mt-3 max-w-xl font-display-face text-3xl tracking-[-0.04em] md:text-5xl"
+              >
                 A Tuscan studio where film, light, and modern restraint still belong together.
               </p>
             </div>
@@ -105,35 +110,6 @@ export function ConsentActions() {
               </button>
             ) : null}
           </div>
-
-          <div className="space-y-5">
-            <p className="max-w-xl text-sm leading-7 text-[rgb(244_235_224_/_0.82)] md:text-base">
-              Before the site opens fully, we invite you into the atmosphere behind the work: intimate places, analog discipline, and a contemporary editorial eye shaped by Tuscany.
-            </p>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-[1.35rem] border border-white/10 bg-[rgb(18_15_12_/_0.28)] p-4 backdrop-blur-sm">
-                <Aperture size={18} className="text-[rgb(236_215_181_/_0.92)]" />
-                <p className="mt-3 text-sm font-semibold">Hybrid film craft</p>
-                <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.68)]">
-                  35mm, medium format, and digital each play a different role in the story.
-                </p>
-              </div>
-              <div className="rounded-[1.35rem] border border-white/10 bg-[rgb(18_15_12_/_0.28)] p-4 backdrop-blur-sm">
-                <Sparkles size={18} className="text-[rgb(236_215_181_/_0.92)]" />
-                <p className="mt-3 text-sm font-semibold">A contemporary eye</p>
-                <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.68)]">
-                  Quiet luxury, strong atmosphere, and no generic wedding visual language.
-                </p>
-              </div>
-              <div className="rounded-[1.35rem] border border-white/10 bg-[rgb(18_15_12_/_0.28)] p-4 backdrop-blur-sm">
-                <ShieldCheck size={18} className="text-[rgb(236_215_181_/_0.92)]" />
-                <p className="mt-3 text-sm font-semibold">Consent before tracking</p>
-                <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.68)]">
-                  Optional analytics and marketing stay off until you clearly say yes.
-                </p>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
 
@@ -141,55 +117,29 @@ export function ConsentActions() {
         initial={{ opacity: 0, x: 26 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-        className="relative flex flex-col justify-between gap-6 p-6 text-[var(--color-paper)] md:p-8 lg:p-10"
+        className="relative flex flex-col justify-center p-6 text-[var(--color-paper)] md:p-8 lg:p-10"
       >
-        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.32),transparent)] lg:left-0 lg:right-auto lg:top-10 lg:h-[calc(100%-5rem)] lg:w-px" />
-        <div className="relative z-10">
-          <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4 shadow-[0_20px_50px_rgba(8,6,5,0.22)]">
-            <div className="flex gap-4">
-              <div className="relative hidden h-20 w-24 shrink-0 overflow-hidden rounded-[1rem] sm:block">
-                <Image
-                  src={insetImage.src}
-                  alt={insetImage.alt}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={insetImage.blurDataURL}
-                  sizes="96px"
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[rgb(244_235_224_/_0.62)]">
-                  Your choice
-                </p>
-                <p className="mt-2 font-display-face text-3xl tracking-[-0.04em] md:text-4xl">
-                  Choose how the site should accompany you.
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[rgb(244_235_224_/_0.74)]">
-                  Allowing optional analytics and campaign measurement helps us understand which stories resonate and keep our marketing relevant. Refusing them changes nothing essential about browsing or inquiring.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div id="consent-doorway-description" className="sr-only">
+          Choose whether optional analytics and marketing should be enabled before browsing the site further.
+        </div>
 
-          <div className="mt-5 grid gap-3">
+        <div className="relative z-10">
+          <div className="grid gap-3">
             <button
               type="button"
               onClick={acceptAll}
-              className="w-full rounded-[1.5rem] border border-[rgb(236_215_181_/_0.32)] bg-[linear-gradient(135deg,rgba(236,215,181,0.18),rgba(255,255,255,0.08))] px-5 py-5 text-left transition hover:bg-[linear-gradient(135deg,rgba(236,215,181,0.24),rgba(255,255,255,0.11))]"
+              className="w-full rounded-[1.6rem] border border-[rgb(248_236_211_/_0.9)] bg-[linear-gradient(135deg,rgb(246_233_205),rgb(232_214_179))] px-5 py-5 text-left text-[var(--color-ink)] shadow-[0_26px_60px_rgba(12,8,4,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_70px_rgba(12,8,4,0.28)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-base font-semibold text-[var(--color-paper)]">
-                    Allow the full studio experience
-                  </p>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(244_235_224_/_0.74)]">
+                  <p className="text-base font-semibold">Allow the full studio experience</p>
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(44_34_24_/_0.82)]">
                     Enable analytics and marketing so we can understand how visitors arrive, which pages matter, and how to refine the experience over time.
                   </p>
                 </div>
                 <ChartNoAxesColumnIncreasing
                   size={18}
-                  className="mt-1 shrink-0 text-[rgb(236_215_181_/_0.92)]"
+                  className="mt-1 shrink-0 text-[rgb(56_43_31_/_0.9)]"
                 />
               </div>
             </button>
@@ -218,12 +168,13 @@ export function ConsentActions() {
             >
               {showPreferences ? "Hide detailed choices" : "Choose manually"}
             </Button>
-            <Link
-              href="/privacy"
-              className="text-sm text-[rgb(244_235_224_/_0.68)] underline underline-offset-4 hover:text-[var(--color-paper)]"
+            <button
+              type="button"
+              onClick={openPrivacyManager}
+              className="text-sm text-[rgb(244_235_224_/_0.68)] underline underline-offset-4 transition hover:text-[var(--color-paper)]"
             >
               Read privacy details
-            </Link>
+            </button>
           </div>
 
           <AnimatePresence initial={false}>
@@ -271,11 +222,95 @@ export function ConsentActions() {
             ) : null}
           </AnimatePresence>
         </div>
-
-        <p className="relative z-10 text-xs leading-6 text-[rgb(244_235_224_/_0.6)]">
-          EU-style consent notice: optional analytics and marketing scripts are blocked until you opt in. Refusing is available here with the same immediacy as accepting, and you can revisit your choice later through Privacy &amp; Cookie Settings.
-        </p>
       </motion.div>
+
+      <AnimatePresence>
+        {consentPanel === "privacy" ? (
+          <motion.div
+            key="privacy-overlay"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 z-20 flex items-center justify-center bg-[rgb(13_10_8_/_0.38)] p-4 md:p-6"
+          >
+            <motion.section
+              role="dialog"
+              aria-modal="true"
+              aria-label={privacyDetails.title}
+              initial={{ opacity: 0, y: 26, scale: 0.94, filter: "blur(14px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: 22, scale: 0.95, filter: "blur(16px)" }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-2xl rounded-[1.8rem] border border-white/14 bg-[linear-gradient(145deg,rgba(28,22,18,0.96),rgba(44,34,28,0.94))] p-6 text-[var(--color-paper)] shadow-[0_30px_90px_rgba(7,5,4,0.4)] md:p-8"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[rgb(244_235_224_/_0.6)]">
+                    Privacy
+                  </p>
+                  <h2 className="mt-3 font-display-face text-3xl tracking-[-0.04em] md:text-4xl">
+                    {privacyDetails.title}
+                  </h2>
+                </div>
+                <button
+                  type="button"
+                  aria-label={
+                    consent.hasInteracted
+                      ? "Close privacy details"
+                      : "Back to consent choices"
+                  }
+                  onClick={consent.hasInteracted ? closeConsentManager : showConsentChoices}
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/14 bg-[rgb(255_255_255_/_0.05)] transition hover:bg-[rgb(255_255_255_/_0.08)]"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[rgb(244_235_224_/_0.78)] md:text-base">
+                {privacyDetails.introduction}
+              </p>
+
+              <div className="mt-6 grid gap-3">
+                {privacyDetails.points.map((point) => (
+                  <div
+                    key={point.title}
+                    className="rounded-[1.3rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4"
+                  >
+                    <p className="text-sm font-semibold text-[var(--color-paper)]">{point.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
+                      {point.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div className="text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
+                  <p className="font-semibold text-[var(--color-paper)]">{privacyDetails.contactLabel}</p>
+                  <p>{privacyDetails.contactBody}</p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={showConsentChoices}
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-white/12 px-5 py-3 text-sm font-semibold transition hover:bg-[rgb(255_255_255_/_0.08)]"
+                  >
+                    <ArrowLeft size={16} />
+                    Back
+                  </button>
+                  <a
+                    href={`mailto:${privacyDetails.contactEmail}`}
+                    className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-pill)] bg-[rgb(255_255_255_/_0.92)] px-5 py-3 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-white"
+                  >
+                    {privacyDetails.contactEmail}
+                  </a>
+                </div>
+              </div>
+            </motion.section>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

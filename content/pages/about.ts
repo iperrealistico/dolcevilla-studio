@@ -23,21 +23,14 @@ export const aboutPage = servicePageContentSchema.parse({
   },
   team: {
     eyebrow: "The studio",
-    heading: "Four principal leads, backed by a 10-person studio.",
+    heading: "Four principal leads, with a wider studio behind the work.",
     body: [
-      "These four people shape direction, production, analog craft, archive culture, and finishing standards across the studio.",
-      "Around them is a wider 10-person group of photographers, assistants, producers, scanners, and postproduction specialists working to the same taste.",
+      "The visible direction of the studio sits with four people, but the work is carried by a wider circle of producers, photographers, film hands, and finishers shaped by the same taste.",
+      "That shared culture keeps the experience calm for the couple while the execution stays exacting from the first call to the final delivery.",
     ],
     groupNote:
-      "It is one working culture, not a loose roster, which is why the experience can stay calm for the couple while the work behind it stays exacting.",
-    supportingRoles: [
-      "Studio production",
-      "Second photographers",
-      "Set and lighting support",
-      "Film scanning",
-      "Archive handling",
-      "Retouching and delivery",
-    ],
+      "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
+    supportingRoles: [],
     members: [
       {
         name: "Lisa Mazzei",

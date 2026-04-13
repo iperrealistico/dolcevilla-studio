@@ -1,5 +1,27 @@
 # Project Log
 
+## 2026-04-13 — About Team Carousel Cleanup And Wider-Studio Portrait
+
+- Reworked the About page team section in `components/blocks/StudioTeamBlock.tsx` to remove the earlier squeezed-rail layout and replace it with a cleaner horizontal editorial carousel:
+  - all cards now share the same portrait aspect ratio and overall footprint
+  - the enlarged active-card treatment was removed so the rail reads as one calm sequence instead of one emphasized slide plus supporting fragments
+  - top-right control chips were removed in favor of minimal overlay arrows placed directly on the carousel edges
+  - autoplay was added for desktop-style ambient motion, while hover, focus, drag, and touch interaction pause the rail and resume it after a short idle delay
+  - mouse dragging was added so the carousel can be pulled naturally instead of relying only on arrows or trackpad scrolling
+- Removed the previous edge-fade masks and the decorative top gradient that were causing visible seams and awkward clipping in the About section header area.
+- Adjusted the carousel container spacing so card shadows now have room to breathe inside the section without truncating against the carousel bounds.
+- Rewrote the About page team copy in `content/pages/about.ts` so it still foregrounds the four visible principals while implying a broader same-minded studio behind the work, without locking the brand into a literal headcount claim.
+- Generated and integrated a new portrait-format Villa Raffaelli image for the wider-studio card:
+  - added the asset at `public/images/brand/team/wider-studio-villa-raffaelli.webp`
+  - registered it in `lib/images/imageManifest.ts` as `teamWiderStudioVillaRaffaelli`
+  - updated the studio card to use that portrait image instead of the mismatched landscape camera still-life
+- Verification for this refinement:
+  - `pnpm lint` passed
+  - `pnpm typecheck` passed
+  - `pnpm content:validate` passed
+  - `pnpm build` passed
+  - browser-based Playwright checks against `/about` confirmed the seam was gone, the carousel edges were cleaner, and the wider-studio card now matched the portrait rhythm of the headshots
+
 ## 2026-04-12 — Story Presentation, Section Imagery, And Lightbox Refinement
 
 - Refined the gallery lightbox in `components/galleries/GalleryLightbox.tsx` so it adapts more naturally to the image orientation:

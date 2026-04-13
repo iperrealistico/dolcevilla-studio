@@ -366,6 +366,14 @@ export const imageManifest = {
     1440,
     "stone",
   ),
+  teamWiderStudioVillaRaffaelli: createAsset(
+    "team-wider-studio-villa-raffaelli",
+    "/images/brand/team/wider-studio-villa-raffaelli.webp",
+    "Villa Raffaelli rising above Tuscan stone steps in soft morning light.",
+    1024,
+    1536,
+    "stone",
+  ),
 } as const;
 
 export type ImageManifestKey = keyof typeof imageManifest;

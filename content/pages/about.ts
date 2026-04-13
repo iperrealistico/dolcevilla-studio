@@ -21,6 +21,50 @@ export const aboutPage = servicePageContentSchema.parse({
       "We care deeply about Tuscany, but also about the authenticity of traditional tools. One photographer always works with film during a wedding, and the studio’s analog practice continues through proofing, darkroom thinking, and a slower relationship to the image.",
     ],
   },
+  team: {
+    eyebrow: "The studio",
+    heading: "Four principal leads, backed by a 10-person studio.",
+    body: [
+      "These four people shape direction, production, analog craft, archive culture, and finishing standards across the studio.",
+      "Around them is a wider 10-person group of photographers, assistants, producers, scanners, and postproduction specialists working to the same taste.",
+    ],
+    groupNote:
+      "It is one working culture, not a loose roster, which is why the experience can stay calm for the couple while the work behind it stays exacting.",
+    supportingRoles: [
+      "Studio production",
+      "Second photographers",
+      "Set and lighting support",
+      "Film scanning",
+      "Archive handling",
+      "Retouching and delivery",
+    ],
+    members: [
+      {
+        name: "Lisa Mazzei",
+        role: "Creative Director + Lead Photographer",
+        quote: "A wedding should feel observed from the inside, not styled from the outside.",
+        imageId: "teamLisaMazzei",
+      },
+      {
+        name: "Alberto Pellegrinetti",
+        role: "Managing Director / Executive Producer & Photographer",
+        quote: "The most luxurious production is the one the couple barely notices.",
+        imageId: "teamAlbertoPellegrinetti",
+      },
+      {
+        name: "Leonardo Fiori",
+        role: "Head of Film Lab + Archive Curator & Photographer",
+        quote: "Film matters because it is physical judgment, not an effect added later.",
+        imageId: "teamLeonardoFiori",
+      },
+      {
+        name: "Francesco Tarantino",
+        role: "Head of Postproduction + Digital Imaging Director & Photographer",
+        quote: "Finishing should preserve atmosphere and skin, not polish the life out of it.",
+        imageId: "teamFrancescoTarantino",
+      },
+    ],
+  },
   gallery: buildGallery([
     { id: "film35mmRollStillLife", layoutVariant: "portrait" },
     { id: "film120RollStyling", layoutVariant: "portrait" },

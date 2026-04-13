@@ -14,5 +14,7 @@ export type {
   ServicePageContent,
   SiteSettings,
   StoryCard,
+  TeamMember,
+  TeamSection,
   Testimonial,
 } from "@/lib/content/schemas";

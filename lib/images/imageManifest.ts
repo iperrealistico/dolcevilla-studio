@@ -334,6 +334,38 @@ export const imageManifest = {
     1536,
     "ink",
   ),
+  teamLisaMazzei: createAsset(
+    "team-lisa-mazzei",
+    "/images/brand/team/lisa-mazzei-headshot.webp",
+    "Editorial headshot of Lisa Mazzei against a warm textured studio backdrop.",
+    960,
+    1440,
+    "stone",
+  ),
+  teamAlbertoPellegrinetti: createAsset(
+    "team-alberto-pellegrinetti",
+    "/images/brand/team/alberto-pellegrinetti-headshot.webp",
+    "Editorial headshot of Alberto Pellegrinetti against a warm textured studio backdrop.",
+    960,
+    1440,
+    "stone",
+  ),
+  teamLeonardoFiori: createAsset(
+    "team-leonardo-fiori",
+    "/images/brand/team/leonardo-fiori-headshot.webp",
+    "Editorial headshot of Leonardo Fiori against a warm textured studio backdrop.",
+    960,
+    1440,
+    "stone",
+  ),
+  teamFrancescoTarantino: createAsset(
+    "team-francesco-tarantino",
+    "/images/brand/team/francesco-tarantino-headshot.webp",
+    "Editorial headshot of Francesco Tarantino against a warm textured studio backdrop.",
+    960,
+    1440,
+    "stone",
+  ),
 } as const;
 
 export type ImageManifestKey = keyof typeof imageManifest;

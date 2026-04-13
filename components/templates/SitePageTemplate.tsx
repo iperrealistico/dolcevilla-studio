@@ -9,6 +9,7 @@ import { InvestmentNote } from "@/components/blocks/InvestmentNote";
 import { LocationLinks } from "@/components/blocks/LocationLinks";
 import { ProcessPreviewBlock } from "@/components/blocks/ProcessPreviewBlock";
 import { SignatureGallery } from "@/components/blocks/SignatureGallery";
+import { StudioTeamBlock } from "@/components/blocks/StudioTeamBlock";
 import { StoryCardGrid } from "@/components/blocks/StoryCardGrid";
 import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
 import { VillaIdentityBlock } from "@/components/blocks/VillaIdentityBlock";
@@ -54,6 +55,11 @@ export function SitePageTemplate({
           </Container>
         </ScrollParallax>
       )}
+      {page.team ? (
+        <ScrollParallax from="right" intensity="lg">
+          <StudioTeamBlock team={page.team} />
+        </ScrollParallax>
+      ) : null}
       {page.gallery.length ? (
         <ScrollParallax from="right" intensity="lg">
           <SignatureGallery items={page.gallery} />

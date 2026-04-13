@@ -109,6 +109,22 @@ export const craftIdentitySchema = z.object({
   points: z.array(pointSchema).default([]),
 });
 
+export const teamMemberSchema = z.object({
+  name: z.string().min(1),
+  role: z.string().min(1),
+  quote: z.string().min(1),
+  imageId: z.string().min(1),
+});
+
+export const teamSectionSchema = z.object({
+  eyebrow: z.string().optional(),
+  heading: z.string().min(1),
+  body: z.array(z.string().min(1)).min(1),
+  groupNote: z.string().min(1).optional(),
+  supportingRoles: z.array(z.string().min(1)).default([]),
+  members: z.array(teamMemberSchema).min(1),
+});
+
 export const storyCardSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
@@ -161,6 +177,7 @@ export const servicePageContentSchema = z.object({
   gallery: z.array(galleryItemSchema).default([]),
   highlights: z.array(pointSchema).default([]),
   craft: craftIdentitySchema.optional(),
+  team: teamSectionSchema.optional(),
   geography: geographySchema.optional(),
   locationLinks: z.array(linkSchema).default([]),
   stories: z.array(z.string()).default([]),
@@ -244,6 +261,8 @@ export type FAQItem = z.infer<typeof faqItemSchema>;
 export type CTASection = z.infer<typeof ctaSectionSchema>;
 export type HeroContent = z.infer<typeof heroSchema>;
 export type CraftIdentity = z.infer<typeof craftIdentitySchema>;
+export type TeamMember = z.infer<typeof teamMemberSchema>;
+export type TeamSection = z.infer<typeof teamSectionSchema>;
 export type StoryCard = z.infer<typeof storyCardSchema>;
 export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 export type UIDictionary = z.infer<typeof uiDictionarySchema>;

@@ -337,3 +337,42 @@
   - `content/journal/guides/why-we-photograph-weddings-on-film-and-digital.mdx`
   - `content/journal/stories-of-place/inside-our-darkroom.mdx`
 - Deleted the temporary batch JSONL file after the run so `tmp/imagegen/` stays clean and the repo only keeps the final public assets.
+
+## 2026-04-13 — About Team Section And Contact Craft Cleanup
+
+- Removed the oversized film still-life image from the `What to tell us` craft section on the contact page so the block reads faster and gives more space back to the inquiry message.
+- Added a first-class team section to the shared service-page content schema in `lib/content/schemas.ts` instead of hardcoding an About-only block in route JSX. The new schema supports:
+  - section heading and editorial body copy
+  - optional group note
+  - supporting-role labels for the wider studio
+  - typed team members with name, role, quote, and image reference
+- Built `components/blocks/StudioTeamBlock.tsx` and wired it into `components/templates/SitePageTemplate.tsx` so the About page can introduce the leadership group as a premium editorial spread rather than a generic staff grid.
+- The final UI direction is:
+  - strong left-column editorial intro and studio-size proof
+  - horizontally scrollable leadership portraits on the right so the section suggests a larger studio system instead of a small fixed quartet
+  - supporting role chips that imply the wider 10-person group without inventing named profiles for everyone
+- Generated four new matching leadership headshots with the OpenAI Image API and added them to the public image library under `public/images/brand/team/`:
+  - `lisa-mazzei-headshot.webp`
+  - `alberto-pellegrinetti-headshot.webp`
+  - `leonardo-fiori-headshot.webp`
+  - `francesco-tarantino-headshot.webp`
+- Used one shared prompt family across all four jobs to keep the portraits coherent:
+  - photorealistic European editorial studio portrait
+  - chest-up 4:5 framing
+  - calm direct expression
+  - soft directional window-style light
+  - warm taupe limewash / plaster physical backdrop
+  - understated wardrobe in black, charcoal, olive, ivory, and stone
+  - no props, no white seamless background, no stock-photo vibe, no glamour retouching
+- Added typed manifest entries in `lib/images/imageManifest.ts` for the new team assets, then populated the new About-page team content in `content/pages/about.ts` with:
+  - the 4 named principals
+  - role titles
+  - quotes
+  - wider-studio framing around the 10-person group
+- Verified the changes with:
+  - `pnpm lint`
+  - `pnpm typecheck`
+  - `pnpm content:validate`
+  - `pnpm build`
+  - local Playwright screenshots of `/about` and `/contact` with consent preseeded in localStorage
+- Deleted the temporary image-generation JSONL after the batch finished so `tmp/imagegen/` stays clean.

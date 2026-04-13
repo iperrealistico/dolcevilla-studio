@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
   startTransition,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -28,7 +29,7 @@ type TeamSlide = {
 };
 
 const cardBaseClass =
-  "group relative flex min-h-[39rem] shrink-0 snap-start flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.9)] shadow-[0_26px_58px_rgba(30,20,12,0.12)]";
+  "group relative flex min-h-[39rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.9)] shadow-[0_26px_58px_rgba(30,20,12,0.12)] select-none";
 
 function buildMemberSlide(member: TeamMember): TeamSlide {
   return {
@@ -51,6 +52,8 @@ export function StudioTeamBlock({
   const viewportRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);
   const resumeTimeoutRef = useRef<number | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
+  const scrollTargetRef = useRef(0);
   const dragStateRef = useRef<{
     pointerId: number;
     startX: number;
@@ -82,12 +85,64 @@ export function StudioTeamBlock({
     ];
   }, [team]);
 
-  const clearResumeTimer = () => {
+  const clearResumeTimer = useCallback(() => {
     if (resumeTimeoutRef.current !== null) {
       window.clearTimeout(resumeTimeoutRef.current);
       resumeTimeoutRef.current = null;
     }
-  };
+  }, []);
+
+  const cancelScrollAnimation = useCallback(() => {
+    if (scrollFrameRef.current !== null) {
+      window.cancelAnimationFrame(scrollFrameRef.current);
+      scrollFrameRef.current = null;
+    }
+  }, []);
+
+  const clampScrollLeft = (viewport: HTMLDivElement, value: number) =>
+    Math.max(0, Math.min(value, viewport.scrollWidth - viewport.clientWidth));
+
+  const setScrollTarget = useCallback((nextLeft: number, immediate = false) => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    scrollTargetRef.current = clampScrollLeft(viewport, nextLeft);
+
+    if (immediate || reduceMotion) {
+      cancelScrollAnimation();
+      viewport.scrollLeft = scrollTargetRef.current;
+      return;
+    }
+
+    if (scrollFrameRef.current !== null) {
+      return;
+    }
+
+    const animate = () => {
+      const activeViewport = viewportRef.current;
+
+      if (!activeViewport) {
+        scrollFrameRef.current = null;
+        return;
+      }
+
+      const delta = scrollTargetRef.current - activeViewport.scrollLeft;
+
+      if (Math.abs(delta) < 0.6) {
+        activeViewport.scrollLeft = scrollTargetRef.current;
+        scrollFrameRef.current = null;
+        return;
+      }
+
+      activeViewport.scrollLeft += delta * 0.18;
+      scrollFrameRef.current = window.requestAnimationFrame(animate);
+    };
+
+    scrollFrameRef.current = window.requestAnimationFrame(animate);
+  }, [cancelScrollAnimation, reduceMotion]);
 
   const pauseAutoplay = () => {
     clearResumeTimer();
@@ -115,6 +170,11 @@ export function StudioTeamBlock({
 
     const viewportPaddingLeft =
       Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
+
+    if (scrollFrameRef.current === null && dragStateRef.current === null) {
+      scrollTargetRef.current = viewport.scrollLeft;
+    }
+
     let nextIndex = 0;
     let bestDistance = Number.POSITIVE_INFINITY;
 
@@ -153,11 +213,10 @@ export function StudioTeamBlock({
 
     const viewportPaddingLeft =
       Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
-
-    viewport.scrollTo({
-      left: target.offsetLeft - viewportPaddingLeft,
-      behavior,
-    });
+    setScrollTarget(
+      target.offsetLeft - viewportPaddingLeft,
+      behavior === "auto" || reduceMotion,
+    );
 
     startTransition(() => {
       setActiveIndex((currentIndex) =>
@@ -201,30 +260,25 @@ export function StudioTeamBlock({
       const viewportPaddingLeft =
         Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
 
-      viewport.scrollTo({
-        left: target.offsetLeft - viewportPaddingLeft,
-        behavior: reduceMotion ? "auto" : "smooth",
-      });
-
-      startTransition(() => {
-        setActiveIndex((currentIndex) =>
-          currentIndex === nextIndex ? currentIndex : nextIndex,
-        );
-      });
+      setScrollTarget(
+        target.offsetLeft - viewportPaddingLeft,
+        reduceMotion,
+      );
     }, 4600);
 
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [activeIndex, isAutoPaused, reduceMotion, slides.length]);
+  }, [activeIndex, isAutoPaused, reduceMotion, setScrollTarget, slides.length]);
 
   useEffect(
     () => () => {
       if (resumeTimeoutRef.current !== null) {
         window.clearTimeout(resumeTimeoutRef.current);
       }
+      cancelScrollAnimation();
     },
-    [],
+    [cancelScrollAnimation],
   );
 
   if (!team || !slides.length) {
@@ -283,6 +337,7 @@ export function StudioTeamBlock({
     };
     viewport.setPointerCapture(event.pointerId);
     pauseAutoplay();
+    cancelScrollAnimation();
     setIsDragging(true);
   };
 
@@ -295,7 +350,9 @@ export function StudioTeamBlock({
     }
 
     event.preventDefault();
-    viewport.scrollLeft = dragState.scrollLeft - (event.clientX - dragState.startX);
+    const nextLeft = dragState.scrollLeft - (event.clientX - dragState.startX);
+    viewport.scrollLeft = clampScrollLeft(viewport, nextLeft);
+    scrollTargetRef.current = viewport.scrollLeft;
   };
 
   const endDrag = (event?: React.PointerEvent<HTMLDivElement>) => {
@@ -312,8 +369,29 @@ export function StudioTeamBlock({
 
     dragStateRef.current = null;
     setIsDragging(false);
+    scrollTargetRef.current = viewport.scrollLeft;
     updateScrollState();
     scheduleAutoplayResume(2600);
+  };
+
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    const dominantDelta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+
+    if (Math.abs(dominantDelta) < 1) {
+      return;
+    }
+
+    event.preventDefault();
+    pauseAutoplay();
+    setScrollTarget(scrollTargetRef.current + dominantDelta * 1.08);
+    scheduleAutoplayResume(2800);
   };
 
   return (
@@ -365,9 +443,10 @@ export function StudioTeamBlock({
 
           <div
             ref={viewportRef}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 py-4 pb-8 [scrollbar-width:none] [-ms-overflow-style:none] md:px-6 lg:px-7 [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 overflow-x-auto overscroll-x-contain px-4 py-4 pb-8 [scrollbar-width:none] [-ms-overflow-style:none] md:px-6 lg:px-7 [&::-webkit-scrollbar]:hidden"
             style={{ scrollPaddingInline: "1.75rem" }}
             onScroll={updateScrollState}
+            onWheel={handleWheel}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={endDrag}
@@ -399,7 +478,11 @@ export function StudioTeamBlock({
                     sizes="(min-width: 1024px) 24rem, (min-width: 640px) 22rem, 82vw"
                     placeholder="blur"
                     blurDataURL={slide.image.blurDataURL}
-                    className="aspect-[4/5] w-full object-cover"
+                    className={
+                      slide.kind === "studio"
+                        ? "aspect-[4/5] w-full object-cover grayscale contrast-[1.05] brightness-[1.04]"
+                        : "aspect-[4/5] w-full object-cover grayscale transition-[filter,transform] duration-700 ease-out contrast-[1.03] group-hover:grayscale-0 group-focus-within:grayscale-0"
+                    }
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,11,0.02),rgba(18,14,11,0.14)_58%,rgba(18,14,11,0.48))]" />
 

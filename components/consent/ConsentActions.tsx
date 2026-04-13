@@ -3,7 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ChartNoAxesColumnIncreasing, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ChartNoAxesColumnIncreasing,
+  Settings2,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useConsent } from "@/hooks/useConsent";
 import { getImageAsset } from "@/lib/images/imageManifest";
@@ -165,14 +171,23 @@ export function ConsentActions() {
               className="border border-white/12 bg-[rgb(255_255_255_/_0.04)] px-4 hover:bg-[rgb(255_255_255_/_0.08)]"
               style={{ color: "var(--color-paper)" }}
               onClick={() => setShowPreferences((current) => !current)}
+              icon={
+                <Settings2
+                  size={16}
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                  className="shrink-0 opacity-85"
+                />
+              }
             >
               {showPreferences ? "Hide detailed choices" : "Choose manually"}
             </Button>
             <button
               type="button"
               onClick={openPrivacyManager}
-              className="text-sm text-[rgb(244_235_224_/_0.68)] underline underline-offset-4 transition hover:text-[var(--color-paper)]"
+              className="inline-flex items-center gap-2 text-sm text-[rgb(244_235_224_/_0.68)] underline underline-offset-4 transition hover:text-[var(--color-paper)]"
             >
+              <ShieldCheck size={15} strokeWidth={1.8} aria-hidden="true" />
               Read privacy details
             </button>
           </div>
@@ -214,6 +229,14 @@ export function ConsentActions() {
                     type="button"
                     onClick={() => savePreferences(preferences)}
                     className="mt-2 w-full"
+                    icon={
+                      <ShieldCheck
+                        size={16}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                        className="shrink-0 opacity-85"
+                      />
+                    }
                   >
                     Save my selection
                   </Button>

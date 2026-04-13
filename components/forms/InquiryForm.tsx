@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { BudgetSelect } from "@/components/forms/BudgetSelect";
 import { FormField } from "@/components/forms/FormField";
@@ -121,7 +122,11 @@ export function InquiryForm() {
       <input type="hidden" {...form.register("fbclid")} />
       <input type="text" tabIndex={-1} autoComplete="off" className="hidden" {...form.register("honey")} />
       {submitError ? <p className="text-sm text-[#9b3a2c]">{submitError}</p> : null}
-      <Button type="submit" disabled={form.formState.isSubmitting}>
+      <Button
+        type="submit"
+        disabled={form.formState.isSubmitting}
+        icon={<SendHorizontal size={16} strokeWidth={1.8} aria-hidden="true" className="shrink-0 opacity-85" />}
+      >
         {form.formState.isSubmitting ? "Sending..." : "Send inquiry"}
       </Button>
     </form>

@@ -369,7 +369,7 @@ export const imageManifest = {
   teamWiderStudioVillaRaffaelli: createAsset(
     "team-wider-studio-villa-raffaelli",
     "/images/brand/team/wider-studio-villa-raffaelli.webp",
-    "Villa Raffaelli rising above Tuscan stone steps in soft morning light.",
+    "A monochrome architectural sketch of Villa Raffaelli above Tuscan stone steps.",
     1024,
     1536,
     "stone",

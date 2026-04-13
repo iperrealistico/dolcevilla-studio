@@ -32,6 +32,8 @@ export const buttonVariantStyles: Record<
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: keyof typeof buttonVariants;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
 };
 
 export function Button({
@@ -39,6 +41,8 @@ export function Button({
   className,
   style,
   variant = "primary",
+  icon,
+  iconPosition = "left",
   ...props
 }: ButtonProps) {
   return (
@@ -51,7 +55,9 @@ export function Button({
       style={{ ...buttonVariantStyles[variant], ...style }}
       {...props}
     >
+      {iconPosition === "left" ? icon : null}
       {children}
+      {iconPosition === "right" ? icon : null}
     </button>
   );
 }

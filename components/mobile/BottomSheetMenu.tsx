@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { navigationItems } from "@/content/site/navigation";
 import { useMobileUI } from "@/contexts/MobileUIContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useScrollLock } from "@/hooks/useScrollLock";
+import { getNavigationIcon } from "@/lib/ui/iconography";
 
 export function BottomSheetMenu() {
   const { isMenuOpen, closeMenu } = useMobileUI();
@@ -36,16 +38,26 @@ export function BottomSheetMenu() {
               Navigation
             </p>
             <nav className="space-y-3">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="font-display-face block rounded-2xl border border-[var(--color-line)] bg-white/80 px-4 py-4 text-2xl tracking-[-0.03em]"
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navigationItems.map((item) => {
+                const Icon = getNavigationIcon(item.href);
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="font-display-face flex items-center justify-between rounded-2xl border border-[var(--color-line)] bg-white/80 px-4 py-4 text-2xl tracking-[-0.03em]"
+                    onClick={closeMenu}
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.08)] text-[var(--color-ink)]">
+                        <Icon size={18} strokeWidth={1.85} aria-hidden="true" />
+                      </span>
+                      <span>{item.label}</span>
+                    </span>
+                    <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" className="text-[var(--color-mist)]" />
+                  </Link>
+                );
+              })}
             </nav>
           </motion.div>
         </>

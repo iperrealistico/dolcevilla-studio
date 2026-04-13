@@ -1,5 +1,26 @@
 # Project Log
 
+## 2026-04-13 — Team Portrait Tone Shift, Sketch Card, And Shared Icon System
+
+- Refined the About page team carousel in `components/blocks/StudioTeamBlock.tsx` again to make the media treatment feel more editorial:
+  - principal portraits now render in black and white by default and transition back to color on hover/focus
+  - the wider-studio card was rebuilt around a dedicated monochrome architectural sketch asset rather than a photographic Villa image
+  - horizontal interaction was smoothed by removing the strict snap behavior during manual browsing and adding more natural drag and wheel-based horizontal motion while preserving autoplay
+- Regenerated `public/images/brand/team/wider-studio-villa-raffaelli.webp` as a vertical graphite-style architectural sketch of Villa Raffaelli and updated its manifest metadata in `lib/images/imageManifest.ts`.
+- Established the shared free icon direction around the already-installed `lucide-react` package instead of introducing a second icon dependency or any externally loaded asset:
+  - added `lib/ui/iconography.tsx` as the central route/action icon mapper
+  - upgraded `components/layout/Header.tsx` and `components/mobile/BottomSheetMenu.tsx` so navigation items now carry subtle route-specific icons
+  - upgraded `components/layout/Footer.tsx` and `components/consent/OpenConsentManagerButton.tsx` so footer utilities, privacy/cookie controls, and contact/social links all use the same icon language
+  - extended `components/ui/LinkButton.tsx` with automatic icon accents derived from href/label patterns so existing CTA buttons across heroes, section CTAs, story pagination, location pills, and sticky mobile CTAs inherit the new treatment without duplicating icon logic
+  - extended `components/ui/Button.tsx` with optional icon slots and used them in `components/forms/InquiryForm.tsx` and `components/consent/ConsentActions.tsx`
+  - added supporting icon accents to `components/blocks/StoryCardGrid.tsx` so the journal/story surface uses the same visual language as the rest of the site
+- Validation for this pass:
+  - `pnpm lint` passed
+  - `pnpm typecheck` passed
+  - `pnpm content:validate` passed
+  - `pnpm build` passed
+  - local browser checks confirmed the new icon system was rendering across shared navigation/CTA surfaces and that the About team rail now used the sketch card plus monochrome portrait treatment
+
 ## 2026-04-13 — About Team Carousel Cleanup And Wider-Studio Portrait
 
 - Reworked the About page team section in `components/blocks/StudioTeamBlock.tsx` to remove the earlier squeezed-rail layout and replace it with a cleaner horizontal editorial carousel:

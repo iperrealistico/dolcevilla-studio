@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MapPinned, NotebookText } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -31,7 +32,10 @@ export function StoryCardGrid({
       <FloatIn from="left">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <Eyebrow>Selected stories</Eyebrow>
+            <Eyebrow className="inline-flex items-center gap-2">
+              <NotebookText size={14} strokeWidth={1.8} aria-hidden="true" />
+              <span>Selected stories</span>
+            </Eyebrow>
             <Heading className="text-3xl md:text-5xl">
               Proof with atmosphere, not filler.
             </Heading>
@@ -58,8 +62,9 @@ export function StoryCardGrid({
                 className="aspect-[4/5] w-full object-cover transition duration-700 ease-out hover:scale-[1.04]"
               />
               <div className="space-y-2 p-5">
-                <p className="text-xs font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
-                  {story.location}
+                <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                  <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
+                  <span>{story.location}</span>
                 </p>
                 <h3 className="font-display-face text-2xl tracking-[-0.03em]">
                   {story.title}

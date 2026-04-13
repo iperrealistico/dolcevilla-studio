@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { buttonVariantStyles, buttonVariants } from "@/components/ui/Button";
+import { getLinkIconConfig } from "@/lib/ui/iconography";
 import { cn } from "@/lib/utils/cn";
 
 type LinkButtonProps = {
@@ -9,6 +10,9 @@ type LinkButtonProps = {
   variant?: keyof typeof buttonVariants;
   className?: string;
   style?: CSSProperties;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
+  hideAutoIcon?: boolean;
 };
 
 export function LinkButton({
@@ -17,7 +21,24 @@ export function LinkButton({
   variant = "primary",
   className,
   style,
+  icon,
+  iconPosition = "left",
+  hideAutoIcon = false,
 }: LinkButtonProps) {
+  const textLabel = typeof children === "string" ? children : undefined;
+  const autoIconConfig = !hideAutoIcon ? getLinkIconConfig(href, textLabel) : null;
+  const resolvedIcon =
+    icon ??
+    (autoIconConfig ? (
+      <autoIconConfig.Icon
+        size={16}
+        strokeWidth={1.8}
+        aria-hidden="true"
+        className="shrink-0 opacity-80"
+      />
+    ) : null);
+  const resolvedPosition = icon ? iconPosition : autoIconConfig?.placement ?? iconPosition;
+
   return (
     <Link
       href={href}
@@ -28,7 +49,9 @@ export function LinkButton({
       )}
       style={{ ...buttonVariantStyles[variant], ...style }}
     >
+      {resolvedPosition === "left" ? resolvedIcon : null}
       {children}
+      {resolvedPosition === "right" ? resolvedIcon : null}
     </Link>
   );
 }

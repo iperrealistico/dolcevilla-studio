@@ -1,5 +1,34 @@
 # Project Log
 
+## 2026-04-13 — Mobile Layout Audit And Motion Simplification
+
+- Audited the public site at a large iPhone-class viewport (`440x956`, used as a practical stand-in for an iPhone 17 Pro Max form factor) across the core route families:
+  - service/site templates (`/`, `/about`, `/weddings`, `/elopements`, `/experience`, `/film-wedding-photography`, `/pricing`, `/contact`)
+  - journal index and journal entries
+  - location landing pages
+  - legal and thank-you routes
+- Confirmed all audited routes were returning `200` locally, so the “pages not loading” symptom was not a routing/build failure but a mobile rendering/perception issue driven by the motion system.
+- Identified the main mobile UX problem as the scroll/reveal wrappers hiding too much content below the fold on narrow/coarse-pointer devices, creating long perceived blank sections during initial load and scroll.
+- Introduced `hooks/useSimplifiedMotion.ts` and used it to simplify motion on mobile/coarse-pointer devices without changing desktop composition:
+  - `components/motion/FloatIn.tsx` now renders statically on mobile instead of waiting for in-view reveal
+  - `components/motion/ScrollParallax.tsx` now falls back to a static wrapper on mobile and keeps the heavier scroll-linked transforms only on desktop
+  - `components/galleries/ImageCard.tsx` now skips the heavier reveal animation on mobile and opens as a direct, static card
+- Added a CSS safety net in `app/globals.css` with the `mobile-motion-static` override so mobile content stays visible from the first paint even before client-side motion preferences resolve.
+- Tightened the vertical rhythm for mobile throughout the shared templates:
+  - reduced inter-section spacing and bottom padding in `components/templates/SitePageTemplate.tsx`
+  - mirrored the same mobile spacing reductions in `components/templates/FilmPageTemplate.tsx`, `components/templates/LandingPageTemplate.tsx`, `components/templates/AdsLandingTemplate.tsx`, `components/templates/JournalEntryTemplate.tsx`, and `app/(site)/journal/page.tsx`
+- Rebalanced the hero for mobile in `components/blocks/HeroStatement.tsx`:
+  - reduced top/bottom padding
+  - reduced minimum hero height on mobile while preserving the existing desktop height
+  - slightly tightened the mobile headline scale
+- Softened the About team rail footprint on mobile by reducing the base card minimum height in `components/blocks/StudioTeamBlock.tsx`.
+- Verification:
+  - `pnpm lint` passed
+  - `pnpm typecheck` passed
+  - `pnpm content:validate` passed
+  - `pnpm build` passed
+  - post-fix mobile full-page screenshots confirmed that the homepage and About page no longer collapsed into large blank vertical stretches under the hero on a Pro Max-sized mobile viewport
+
 ## 2026-04-13 — Team Carousel Shadow Cleanup And Wheel Input Restriction
 
 - Refined `components/blocks/StudioTeamBlock.tsx` after live review of the About carousel:

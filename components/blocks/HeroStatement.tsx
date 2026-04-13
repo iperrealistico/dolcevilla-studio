@@ -10,10 +10,10 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
   const images = hero.imageIds.map((id) => getImageAsset(id as never));
 
   return (
-    <section className="dvh-panel relative px-5 pt-6 pb-10 md:px-8 lg:px-10">
-      <div className="relative min-h-[78dvh] overflow-hidden rounded-[2rem]">
+    <section className="dvh-panel relative px-5 pt-4 pb-8 md:px-8 md:pt-6 md:pb-10 lg:px-10">
+      <div className="relative min-h-[68svh] overflow-hidden rounded-[2rem] md:min-h-[78dvh]">
         <HeroSequence images={images} />
-        <Container className="relative z-10 flex min-h-[78dvh] flex-col justify-end px-0 py-10 md:py-14">
+        <Container className="relative z-10 flex min-h-[68svh] flex-col justify-end px-0 py-8 md:min-h-[78dvh] md:py-14">
           <div className="max-w-4xl space-y-6">
             {hero.eyebrow ? (
               <FloatIn from="left">
@@ -23,7 +23,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               </FloatIn>
             ) : null}
             <FloatIn from="left" delay={0.08}>
-              <h1 className="font-display-face max-w-5xl text-[3.5rem] leading-[0.9] tracking-[-0.06em] text-[var(--color-paper)] md:text-[6.8rem]">
+              <h1 className="font-display-face max-w-5xl text-[3rem] leading-[0.9] tracking-[-0.06em] text-[var(--color-paper)] sm:text-[3.5rem] md:text-[6.8rem]">
                 {hero.title}
               </h1>
             </FloatIn>

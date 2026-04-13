@@ -11,7 +11,7 @@ import type { AdsLanding, StoryCard } from "@/types/content";
 
 export function AdsLandingTemplate({ landing, story }: { landing: AdsLanding; story: StoryCard }) {
   return (
-    <div className="space-y-14 pb-20">
+    <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       <ScrollParallax intensity="lg">
         <HeroStatement hero={landing.hero} />
       </ScrollParallax>

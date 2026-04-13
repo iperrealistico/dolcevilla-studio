@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useSimplifiedMotion } from "@/hooks/useSimplifiedMotion";
 import { cn } from "@/lib/utils/cn";
 
 type ScrollParallaxProps = {
@@ -26,8 +27,34 @@ export function ScrollParallax({
   intensity = "md",
   delay = 0,
 }: ScrollParallaxProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const simplifyMotion = useSimplifiedMotion();
+
+  if (reduceMotion || simplifyMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <AnimatedScrollParallax
+      className={className}
+      from={from}
+      intensity={intensity}
+      delay={delay}
+    >
+      {children}
+    </AnimatedScrollParallax>
+  );
+}
+
+function AnimatedScrollParallax({
+  children,
+  className,
+  from,
+  intensity,
+  delay,
+}: Required<Pick<ScrollParallaxProps, "children" | "from" | "intensity" | "delay">> &
+  Pick<ScrollParallaxProps, "className">) {
+  const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 92%", "end 18%"],
@@ -46,14 +73,10 @@ export function ScrollParallax({
   const rotate = useTransform(scrollYProgress, [0, 1], rotation);
   const opacity = useTransform(scrollYProgress, [0, 0.16, 0.82, 1], [0.2, 1, 1, 0.94]);
 
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       ref={ref}
-      className={cn("will-change-transform", className)}
+      className={cn("mobile-motion-static will-change-transform", className)}
       style={{
         x,
         y,
@@ -66,6 +89,7 @@ export function ScrollParallax({
       }}
     >
       <motion.div
+        className="mobile-motion-static"
         style={{
           willChange: "transform, opacity, filter",
           backfaceVisibility: "hidden",

@@ -117,6 +117,16 @@ html[data-custom-cursor="enabled"] * {
   opacity: 1;
 }
 
+@media (max-width: 767px), (pointer: coarse) {
+  .mobile-motion-static {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    contain: none !important;
+    will-change: auto !important;
+  }
+}
+
 .studio-cursor__core,
 .studio-cursor__pulse,
 .studio-cursor__burst {

@@ -11,7 +11,7 @@ export default async function JournalIndexPage() {
   const stories = await getAllStoryCards();
 
   return (
-    <div className="space-y-14 pb-20 pt-12">
+    <div className="space-y-10 pb-16 pt-10 md:space-y-14 md:pb-20 md:pt-12">
       <EditorialTextBlock section={journalPageContent.intro} />
       <StoryCardGrid stories={stories} />
       <CTASection section={journalPageContent.cta} />

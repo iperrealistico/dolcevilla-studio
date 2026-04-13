@@ -29,7 +29,7 @@ type TeamSlide = {
 };
 
 const cardBaseClass =
-  "group relative flex min-h-[39rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.92)] select-none";
+  "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.92)] select-none md:min-h-[39rem]";
 
 function buildMemberSlide(member: TeamMember): TeamSlide {
   return {

@@ -30,7 +30,7 @@ export function SitePageTemplate({
   stories = [],
 }: SitePageTemplateProps) {
   return (
-    <div className="space-y-14 pb-20">
+    <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       {page.hero ? (
         <ScrollParallax intensity="lg">
           <HeroStatement hero={page.hero} />
@@ -42,7 +42,7 @@ export function SitePageTemplate({
         </ScrollParallax>
       ) : (
         <ScrollParallax from="left">
-          <Container className="pt-12">
+          <Container className="pt-10 md:pt-12">
             <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
               {page.intro.eyebrow ?? page.slug}
             </p>

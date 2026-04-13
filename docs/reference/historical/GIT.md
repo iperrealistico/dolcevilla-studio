@@ -1,5 +1,7 @@
 # Git Status Summary
 
+> Archived note: moved from `.ai/GIT.md` into `docs/reference/historical/GIT.md` on 2026-04-13. Internal references below are preserved as historical snapshot text.
+
 ## Remote
 
 - `origin` fetch URL: `https://github.com/iperrealistico/dolcevilla-studio.git`

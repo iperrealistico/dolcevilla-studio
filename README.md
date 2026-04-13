@@ -13,11 +13,16 @@ Static-first Next.js marketing site for a premium Tuscany wedding photography br
 
 ## Project Memory
 
-The repo stores implementation memory inside `.ai/` so future chats can recover context directly from the codebase.
+The repo keeps historical source material and prior AI project memory under `docs/reference/` so context survives without leaving root-level documentation clutter.
 
-- `.ai/TODO.md` tracks the phased plan and current completion state.
-- `.ai/LOG.md` records project progress and verification milestones.
-- `.ai/GIT.md` records repo and workflow decisions.
+- `docs/reference/original-request/`
+  - original brief and technical design inputs that shaped the first build.
+- `docs/reference/historical/TODO.md`
+  - phased implementation plan and completion history.
+- `docs/reference/historical/LOG.md`
+  - project progress and verification milestones.
+- `docs/reference/historical/GIT.md`
+  - repo and workflow decisions.
 
 ## Scripts
 

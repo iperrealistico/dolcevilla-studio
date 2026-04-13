@@ -1,5 +1,7 @@
 # Project Log
 
+> Archived note: moved from `.ai/LOG.md` into `docs/reference/historical/LOG.md` on 2026-04-13. Internal references below are preserved as historical snapshot text.
+
 ## 2026-04-13 — Mobile Layout Audit And Motion Simplification
 
 - Audited the public site at a large iPhone-class viewport (`440x956`, used as a practical stand-in for an iPhone 17 Pro Max form factor) across the core route families:

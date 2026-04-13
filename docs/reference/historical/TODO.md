@@ -1,5 +1,7 @@
 # Dolcevilla Studio Master TODO
 
+> Archived note: moved from `.ai/TODO.md` into `docs/reference/historical/TODO.md` on 2026-04-13. Internal references below are preserved as historical snapshot text.
+
 ## Phase 1 — Foundation And Project Memory
 - [x] Create `.ai/TODO.md` with this 5-phase checklist using strict markdown checkboxes.
 - [x] Create `.ai/LOG.md` with a kickoff entry covering document review, project scope, and the 5 planned phases.

@@ -52,7 +52,9 @@ function AnimatedScrollParallax({
   from,
   intensity,
   delay,
-}: Required<Pick<ScrollParallaxProps, "children" | "from" | "intensity" | "delay">> &
+}: Required<
+  Pick<ScrollParallaxProps, "children" | "from" | "intensity" | "delay">
+> &
   Pick<ScrollParallaxProps, "className">) {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
@@ -61,17 +63,31 @@ function AnimatedScrollParallax({
   });
 
   const settings = intensityMap[intensity];
-  const xStart = from === "left" ? -settings.entry : from === "right" ? settings.entry : 0;
+  const xStart =
+    from === "left" ? -settings.entry : from === "right" ? settings.entry : 0;
   const yStart = from === "bottom" ? settings.entry : settings.entry * 0.42;
-  const driftX = from === "left" ? [16, -8] : from === "right" ? [-16, 8] : [0, 0];
-  const driftY = from === "bottom" ? [settings.drift, -settings.lift] : [settings.drift * 0.58, -settings.lift];
-  const rotation = from === "left" ? [-0.8, 0.25] : from === "right" ? [0.8, -0.25] : [0.18, 0];
+  const driftX =
+    from === "left" ? [16, -8] : from === "right" ? [-16, 8] : [0, 0];
+  const driftY =
+    from === "bottom"
+      ? [settings.drift, -settings.lift]
+      : [settings.drift * 0.58, -settings.lift];
+  const rotation =
+    from === "left"
+      ? [-0.8, 0.25]
+      : from === "right"
+        ? [0.8, -0.25]
+        : [0.18, 0];
 
   const x = useTransform(scrollYProgress, [0, 1], driftX);
   const y = useTransform(scrollYProgress, [0, 1], driftY);
   const scale = useTransform(scrollYProgress, [0, 0.3, 1], [0.972, 1, 1.01]);
   const rotate = useTransform(scrollYProgress, [0, 1], rotation);
-  const opacity = useTransform(scrollYProgress, [0, 0.16, 0.82, 1], [0.2, 1, 1, 0.94]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.16, 0.82, 1],
+    [0.2, 1, 1, 0.94],
+  );
 
   return (
     <motion.div
@@ -85,7 +101,7 @@ function AnimatedScrollParallax({
         opacity,
         willChange: "transform, opacity",
         backfaceVisibility: "hidden",
-        contain: "layout paint style",
+        contain: "layout style",
       }}
     >
       <motion.div

@@ -47,3 +47,7 @@ next-env.d.ts
 /test-results
 .playwright-cli/
 /output/
+
+# local AI control plane
+START-HERE-AI.local.md
+documents-local/

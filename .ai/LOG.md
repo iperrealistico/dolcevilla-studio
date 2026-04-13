@@ -376,3 +376,26 @@
   - `pnpm build`
   - local Playwright screenshots of `/about` and `/contact` with consent preseeded in localStorage
 - Deleted the temporary image-generation JSONL after the batch finished so `tmp/imagegen/` stays clean.
+
+## 2026-04-13 — About Team Carousel Rework
+
+- Reworked the brand-new About team section after the first version proved too cramped in practice. The original split-column layout created:
+  - an overly thin left editorial column
+  - a detached explanatory line below the portraits
+  - a carousel area that felt squeezed rather than intentional
+- Rebuilt `components/blocks/StudioTeamBlock.tsx` as a client-side horizontal editorial carousel inspired more by premium travel / experience cards:
+  - one full-width section header above the carousel
+  - count chips and carousel controls grouped in the top-right
+  - a true scroll-snap horizontal track instead of a text-column-plus-cards layout
+  - card-first storytelling, so each slide now feels complete on its own
+- Added motion-driven card behavior with Framer Motion:
+  - active card emphasis via scale / elevation tuning
+  - animated title block and divider on the image plane
+  - animated description reveal beneath each image
+- Replaced the orphaned paragraph under the old carousel with content integrated into the cards themselves. The “wider studio” explanation now lives inside a dedicated final slide using the analog-studio imagery plus the supporting-role chips.
+- Simplified active-slide tracking:
+  - removed the earlier intersection-ratio approach, which was incorrectly favoring the centered visible card on desktop
+  - now derives the active index from the leftmost snapped card position so the counter and arrow buttons align with the actual scroll behavior
+- Re-verified the section visually with fresh local Playwright screenshots after the rework:
+  - `output/qa/about-team-carousel-initial-v2.png`
+  - `output/qa/about-team-carousel-next-v2.png`

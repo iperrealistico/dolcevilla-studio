@@ -29,7 +29,7 @@ type TeamSlide = {
 };
 
 const cardBaseClass =
-  "group relative flex min-h-[39rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.9)] shadow-[0_26px_58px_rgba(30,20,12,0.12)] select-none";
+  "group relative flex min-h-[39rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.92)] select-none";
 
 function buildMemberSlide(member: TeamMember): TeamSlide {
   return {
@@ -381,16 +381,19 @@ export function StudioTeamBlock({
       return;
     }
 
-    const dominantDelta =
-      Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    const horizontalDelta = event.deltaX;
+    const verticalDelta = event.deltaY;
 
-    if (Math.abs(dominantDelta) < 1) {
+    if (
+      Math.abs(horizontalDelta) < 1 ||
+      Math.abs(horizontalDelta) <= Math.abs(verticalDelta)
+    ) {
       return;
     }
 
     event.preventDefault();
     pauseAutoplay();
-    setScrollTarget(scrollTargetRef.current + dominantDelta * 1.08);
+    setScrollTarget(scrollTargetRef.current + horizontalDelta * 1.08);
     scheduleAutoplayResume(2800);
   };
 

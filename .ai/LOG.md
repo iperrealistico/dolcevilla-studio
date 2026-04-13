@@ -1,5 +1,19 @@
 # Project Log
 
+## 2026-04-13 — Team Carousel Shadow Cleanup And Wheel Input Restriction
+
+- Refined `components/blocks/StudioTeamBlock.tsx` after live review of the About carousel:
+  - removed the card-level drop shadow so the rail no longer shows clipped or abruptly truncated shadows against the carousel container
+  - tightened wheel handling so only true horizontal wheel/trackpad gestures move the carousel; ordinary vertical wheel input now falls through to normal page scrolling
+- Preserved the existing interaction model otherwise:
+  - mouse drag remains enabled
+  - touch swipe remains enabled through native horizontal overflow
+  - autoplay and arrow navigation remain intact
+- Verification:
+  - `pnpm lint` passed
+  - `pnpm typecheck` passed
+  - `pnpm build` passed
+
 ## 2026-04-13 — Team Portrait Tone Shift, Sketch Card, And Shared Icon System
 
 - Refined the About page team carousel in `components/blocks/StudioTeamBlock.tsx` again to make the media treatment feel more editorial:

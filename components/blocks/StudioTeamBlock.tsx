@@ -31,6 +31,21 @@ type TeamSlide = {
 const cardBaseClass =
   "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.92)] select-none md:min-h-[39rem]";
 
+function getMemberTitleLines(title: string): string[] {
+  const words = title.trim().split(/\s+/).filter(Boolean);
+
+  if (words.length <= 1) {
+    return [title];
+  }
+
+  const splitIndex = Math.ceil(words.length / 2);
+
+  return [
+    words.slice(0, splitIndex).join(" "),
+    words.slice(splitIndex).join(" "),
+  ];
+}
+
 function buildMemberSlide(member: TeamMember): TeamSlide {
   return {
     kind: "member",
@@ -502,8 +517,14 @@ export function StudioTeamBlock({
                     <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[rgb(244_235_224_/_0.82)]">
                       {slide.eyebrow}
                     </p>
-                    <h3 className="font-display-face max-w-[14ch] text-[2rem] leading-[0.96] tracking-[-0.04em] md:text-[2.25rem]">
-                      {slide.title}
+                    <h3 className="font-display-face min-h-[3.95rem] max-w-[14ch] text-[2rem] leading-[0.96] tracking-[-0.04em] md:min-h-[4.45rem] md:text-[2.25rem]">
+                      {slide.kind === "member"
+                        ? getMemberTitleLines(slide.title).map((line) => (
+                            <span key={`${slide.key}-${line}`} className="block">
+                              {line}
+                            </span>
+                          ))
+                        : slide.title}
                     </h3>
                     <motion.div
                       initial={reduceMotion ? false : { opacity: 0, scaleX: 0.65 }}

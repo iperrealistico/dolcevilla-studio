@@ -12,7 +12,11 @@ export const elopementsPage = servicePageContentSchema.parse({
       "We photograph elopements and intimate wedding days in Tuscany with an emphasis on place, movement, emotional honesty, and the tactile calm of hybrid analog coverage.",
     primaryCta: { label: "Plan your elopement", href: "/contact" },
     secondaryCta: { label: "See stories", href: "/journal", variant: "secondary" },
-    imageIds: ["intimateGesture", "valDorciaCypressVows", "versiliaSeasideWalk"],
+    imageIds: [
+      "page.elopements.hero.primary",
+      "page.elopements.hero.secondary",
+      "page.elopements.hero.tertiary",
+    ],
     variant: "service",
   },
   intro: {
@@ -24,11 +28,11 @@ export const elopementsPage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "intimateGesture", layoutVariant: "portrait", span: "lg" },
-    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
-    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
-    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "sienaCourtyardPortrait", layoutVariant: "portrait" },
+    { id: "page.elopements.gallery.1", layoutVariant: "portrait", span: "lg" },
+    { id: "page.elopements.gallery.2", layoutVariant: "landscape", span: "lg" },
+    { id: "page.elopements.gallery.3", layoutVariant: "landscape" },
+    { id: "page.elopements.gallery.4", layoutVariant: "portrait" },
+    { id: "page.elopements.gallery.5", layoutVariant: "portrait" },
   ]),
   highlights: [
     {
@@ -50,7 +54,7 @@ export const elopementsPage = servicePageContentSchema.parse({
     title: "The quieter the day, the more film can breathe.",
     body:
       "Elopements and intimate celebrations often create the exact conditions film needs: time, calm, and visual honesty. We can slow down without becoming precious, using traditional formats where they add emotional depth rather than spectacle.",
-    imageId: "filmHasselblad500cmWindowGarden",
+    imageId: "page.elopements.craft.image",
     points: [
       {
         title: "120 for portraits",
@@ -78,7 +82,7 @@ export const elopementsPage = servicePageContentSchema.parse({
     variant: "quote",
     title: "Villa Raffaelli stays in the background, while craft and intimacy come forward.",
     body: "It still informs how we see stillness, architecture, and quiet intimacy, but the day itself is led by the emotional truth of the moment.",
-    imageId: "villaCourtyard",
+    imageId: "page.elopements.villa.image",
   },
   faqs: faqs.elopements,
   cta: {

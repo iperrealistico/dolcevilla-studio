@@ -12,7 +12,12 @@ export const homePage = servicePageContentSchema.parse({
       "Dolcevilla Studio creates emotionally rich wedding imagery through a hybrid film-and-digital approach shaped by Upper Tuscany, Villa Raffaelli, and the quiet rhythm of real places.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See selected stories", href: "/journal" },
-    imageIds: ["homeHeroVilla", "villaCourtyard", "homeCoupleQuiet", "villaLibraryPortrait"],
+    imageIds: [
+      "page.home.hero.primary",
+      "page.home.hero.secondary",
+      "page.home.hero.tertiary",
+      "page.home.hero.quaternary",
+    ],
     variant: "home",
   },
   intro: {
@@ -24,12 +29,12 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
-    { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
-    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
-    { id: "valDorciaCypressVows", layoutVariant: "landscape" },
+    { id: "page.home.gallery.1", layoutVariant: "portrait" },
+    { id: "page.home.gallery.2", layoutVariant: "landscape" },
+    { id: "page.home.gallery.3", layoutVariant: "portrait" },
+    { id: "page.home.gallery.4", layoutVariant: "landscape" },
+    { id: "page.home.gallery.5", layoutVariant: "portrait" },
+    { id: "page.home.gallery.6", layoutVariant: "landscape" },
   ]),
   highlights: [
     {
@@ -51,7 +56,7 @@ export const homePage = servicePageContentSchema.parse({
     title: "One photographer always carries film.",
     body:
       "We do not use film as a gimmick or a nostalgic accessory. It is part of the working method: 35mm for movement, 120 medium format for depth, and selected large-format frames when a moment deserves genuine stillness, all supported by digital coverage for speed, security, and completeness.",
-    imageId: "filmRolleiflexBridalPrep",
+    imageId: "page.home.craft.image",
     points: [
       {
         title: "35mm for energy",
@@ -106,7 +111,7 @@ export const homePage = servicePageContentSchema.parse({
     eyebrow: "Villa Raffaelli",
     title: "Our private creative home",
     body: "The villa is where our eye was formed: quiet architecture, lived-in beauty, and a cultivated way of seeing Tuscany. It remains the origin of the taste, not the whole definition of the studio.",
-    imageId: "homeHeroVilla",
+    imageId: "page.home.villa.image",
   },
   cta: {
     eyebrow: "Inquire",

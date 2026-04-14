@@ -37,6 +37,13 @@ pnpm test:coverage
 pnpm test:e2e
 ```
 
+## Image Editing
+
+- Change image placement in `content/site/image-slots.json`.
+- Each slot points to a curated asset from `lib/images/imageLibrary.ts`.
+- Keep `alt` text with the slot entry when a specific placement needs different wording for SEO or accessibility.
+- Add brand-new source assets to `lib/images/imageLibrary.ts`; reuse existing curated assets by editing only `content/site/image-slots.json`.
+
 ## Current Notes
 
 - The brand system now balances place with craft, including a dedicated `/film-wedding-photography` page and supporting journal content about hybrid film coverage, formats, and the darkroom.

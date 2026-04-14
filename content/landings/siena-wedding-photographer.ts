@@ -8,7 +8,10 @@ export const sienaLanding = locationLandingSchema.parse({
     title: "Siena wedding photography with emotional clarity and old-world depth.",
     subtitle: "For couples who want the atmosphere of Siena held with restraint, taste, and a premium human experience.",
     primaryCta: { label: "Inquire for Siena", href: "/contact" },
-    imageIds: ["sienaCourtyardPortrait", "candlelitCourtyardToast"],
+    imageIds: [
+      "landing.siena-wedding-photographer.hero.primary",
+      "landing.siena-wedding-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -24,10 +27,10 @@ export const sienaLanding = locationLandingSchema.parse({
     { title: "Atmosphere-led", description: "We preserve space, architecture, and emotional softness in balance." },
   ],
   gallery: buildGallery([
-    { id: "sienaCourtyardPortrait", layoutVariant: "portrait", span: "lg" },
-    { id: "villaLibraryPortrait", layoutVariant: "portrait" },
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "landing.siena-wedding-photographer.gallery.1", layoutVariant: "portrait", span: "lg" },
+    { id: "landing.siena-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "landing.siena-wedding-photographer.gallery.3", layoutVariant: "portrait" },
+    { id: "landing.siena-wedding-photographer.gallery.4", layoutVariant: "landscape" },
   ]),
   featuredStorySlugs: ["villa-raffaelli-mornings"],
   testimonial: {

@@ -9,7 +9,10 @@ export const luccaLanding = locationLandingSchema.parse({
     subtitle:
       "Lucca and Upper Tuscany allow for a richer, more private visual world than the usual postcard version of the region.",
     primaryCta: { label: "Inquire for Lucca", href: "/contact" },
-    imageIds: ["luccaEvening", "villaCourtyard"],
+    imageIds: [
+      "landing.lucca-wedding-photographer.hero.primary",
+      "landing.lucca-wedding-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -27,10 +30,10 @@ export const luccaLanding = locationLandingSchema.parse({
     { title: "Emotion without noise", description: "The work stays refined, intimate, and visually articulate." },
   ],
   gallery: buildGallery([
-    { id: "luccaEvening", layoutVariant: "portrait" },
-    { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape", span: "lg" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
+    { id: "landing.lucca-wedding-photographer.gallery.1", layoutVariant: "portrait" },
+    { id: "landing.lucca-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "landing.lucca-wedding-photographer.gallery.3", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.lucca-wedding-photographer.gallery.4", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["lucca-garden-weekend"],
   testimonial: {

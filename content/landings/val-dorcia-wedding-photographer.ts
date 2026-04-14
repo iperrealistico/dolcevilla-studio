@@ -8,7 +8,10 @@ export const valDorciaLanding = locationLandingSchema.parse({
     title: "Val d’Orcia wedding photography with atmosphere instead of overstatement.",
     subtitle: "The landscape is iconic. The challenge is making it feel lived, intimate, and specific to you.",
     primaryCta: { label: "Plan your Val d’Orcia wedding", href: "/contact" },
-    imageIds: ["valDorciaCypressVows", "oliveGardenCeremony"],
+    imageIds: [
+      "landing.val-dorcia-wedding-photographer.hero.primary",
+      "landing.val-dorcia-wedding-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -24,10 +27,10 @@ export const valDorciaLanding = locationLandingSchema.parse({
     { title: "Calm pacing", description: "We keep the day grounded so the landscape supports the story rather than replacing it." },
   ],
   gallery: buildGallery([
-    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "oliveGardenCeremony", layoutVariant: "landscape" },
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
+    { id: "landing.val-dorcia-wedding-photographer.gallery.1", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.val-dorcia-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "landing.val-dorcia-wedding-photographer.gallery.3", layoutVariant: "landscape" },
+    { id: "landing.val-dorcia-wedding-photographer.gallery.4", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["upper-tuscany-guide"],
   testimonial: {

@@ -1,382 +1,57 @@
+import rawImageSlots from "@/content/site/image-slots.json";
 import { getBlurData } from "@/lib/images/getBlurData";
+import {
+  getImageLibraryAsset,
+  imageAssetLibrary,
+  type ImageAssetLibraryKey,
+} from "@/lib/images/imageLibrary";
 import type { GalleryItem, ImageAsset } from "@/types/gallery";
+
+type ImageSlotDefinition = {
+  asset: ImageAssetLibraryKey;
+  alt?: string;
+};
+
+type ImageSlotRecord = {
+  [K in keyof typeof rawImageSlots]: ImageSlotDefinition;
+};
+
+export const imageSlots = rawImageSlots as ImageSlotRecord;
 
 const blurDataURL = getBlurData();
 
-function createAsset(
-  id: string,
-  src: string,
-  alt: string,
-  width = 1600,
-  height = 2000,
-  dominantTone = "stone",
+function createSlotAsset(
+  slotId: string,
+  definition: ImageSlotDefinition,
 ): ImageAsset {
+  if (!(definition.asset in imageAssetLibrary)) {
+    throw new Error(
+      `Image slot "${slotId}" references unknown asset "${definition.asset}".`,
+    );
+  }
+
+  const sourceAsset = getImageLibraryAsset(definition.asset);
+
   return {
-    id,
-    src,
-    alt,
-    width,
-    height,
-    dominantTone,
+    ...sourceAsset,
+    id: slotId,
+    alt: definition.alt ?? sourceAsset.alt,
     blurDataURL,
   };
 }
 
-export const imageManifest = {
-  homeHeroVilla: createAsset(
-    "home-hero-villa",
-    "/images/brand/ai-temp/villa-raffaelli-dawn.webp",
-    "Morning light crossing the facade of Villa Raffaelli.",
-    1024,
-    1536,
-    "linen",
-  ),
-  homeCoupleQuiet: createAsset(
-    "home-couple-quiet",
-    "/images/brand/ai-temp/editorial-couple-loggia.webp",
-    "A couple framed in quiet afternoon light among Tuscan textures.",
-    1024,
-    1536,
-  ),
-  homeReceptionNight: createAsset(
-    "home-reception-night",
-    "/images/brand/ai-temp/reception-evening-candles.webp",
-    "A candlelit dinner scene set beneath a darkening Tuscan sky.",
-    1024,
-    1536,
-  ),
-  homeUpperTuscany: createAsset(
-    "home-upper-tuscany",
-    "/images/brand/ai-temp/upper-tuscany-marble-landscape.webp",
-    "Upper Tuscany hills with marble-toned light and layered distance.",
-    1536,
-    1024,
-    "sage",
-  ),
-  homePortraits: createAsset(
-    "home-portraits",
-    "/images/brand/ai-temp/portrait-studio-window-light.webp",
-    "Portrait fragments shaped by artful interior light.",
-    1024,
-    1536,
-  ),
-  journalCover: createAsset(
-    "journal-cover",
-    "/images/brand/ai-temp/journal-garden-story.webp",
-    "A couple moving through a Tuscan garden reception in late afternoon light.",
-    1536,
-    1024,
-    "ink",
-  ),
-  villaCourtyard: createAsset(
-    "villa-courtyard",
-    "/images/brand/ai-temp/villa-courtyard-morning.webp",
-    "The courtyard at Villa Raffaelli in the quiet of the morning.",
-    1024,
-    1536,
-  ),
-  luccaEvening: createAsset(
-    "lucca-evening",
-    "/images/brand/ai-temp/lucca-evening-garden.webp",
-    "An evening celebration near Lucca with warm candlelight and depth.",
-    1024,
-    1536,
-  ),
-  marblePath: createAsset(
-    "marble-path",
-    "/images/brand/ai-temp/marble-ridges-distance.webp",
-    "Layered mountain light and marble-toned ridges above the coast.",
-    1536,
-    1024,
-  ),
-  intimateGesture: createAsset(
-    "intimate-gesture",
-    "/images/brand/ai-temp/intimate-gesture-garden.webp",
-    "An intimate gesture between partners in a calm editorial frame.",
-    1024,
-    1536,
-  ),
-  studioInterior: createAsset(
-    "studio-interior",
-    "/images/brand/ai-temp/portrait-studio-window-light.webp",
-    "A quiet portrait fragment inside the studio world of Villa Raffaelli.",
-    1024,
-    1536,
-  ),
-  storyFrame: createAsset(
-    "story-frame",
-    "/images/brand/ai-temp/journal-garden-story.webp",
-    "A layered editorial story image used across journal previews.",
-    1536,
-    1024,
-  ),
-  florenceLoggiaBlueHour: createAsset(
-    "florence-loggia-blue-hour",
-    "/images/brand/ai-temp/florence-loggia-blue-hour.webp",
-    "A couple beneath a Renaissance loggia in Florence at blue hour.",
-    1024,
-    1536,
-    "ink",
-  ),
-  sienaCourtyardPortrait: createAsset(
-    "siena-courtyard-portrait",
-    "/images/brand/ai-temp/siena-courtyard-portrait.webp",
-    "A bride moving through a quiet Siena courtyard in late-afternoon light.",
-    1024,
-    1536,
-    "stone",
-  ),
-  chiantiVineyardDinner: createAsset(
-    "chianti-vineyard-dinner",
-    "/images/brand/ai-temp/chianti-vineyard-dinner.webp",
-    "A long candlelit wedding dinner among vines in Chianti at dusk.",
-    1536,
-    1024,
-    "olive",
-  ),
-  valDorciaCypressVows: createAsset(
-    "val-dorcia-cypress-vows",
-    "/images/brand/ai-temp/val-dorcia-cypress-vows.webp",
-    "A couple exchanging vows above the cypress-lined landscape of Val d'Orcia.",
-    1536,
-    1024,
-    "linen",
-  ),
-  oliveGardenCeremony: createAsset(
-    "olive-garden-ceremony",
-    "/images/brand/ai-temp/olive-garden-ceremony.webp",
-    "An intimate ceremony beneath olive trees in Tuscany.",
-    1536,
-    1024,
-    "sage",
-  ),
-  bridalPrepWindowSilk: createAsset(
-    "bridal-prep-window-silk",
-    "/images/brand/ai-temp/bridal-prep-window-silk.webp",
-    "A bride by a tall window in the quiet of morning preparation.",
-    1024,
-    1536,
-    "linen",
-  ),
-  villaLibraryPortrait: createAsset(
-    "villa-library-portrait",
-    "/images/brand/ai-temp/villa-library-portrait.webp",
-    "A couple in the library world of Villa Raffaelli in soft morning light.",
-    1024,
-    1536,
-    "stone",
-  ),
-  versiliaSeasideWalk: createAsset(
-    "versilia-seaside-walk",
-    "/images/brand/ai-temp/versilia-seaside-walk.webp",
-    "A couple walking the Versilia shoreline in soft coastal dusk.",
-    1536,
-    1024,
-    "ink",
-  ),
-  candlelitCourtyardToast: createAsset(
-    "candlelit-courtyard-toast",
-    "/images/brand/ai-temp/candlelit-courtyard-toast.webp",
-    "A candlelit toast in a Tuscan stone courtyard.",
-    1024,
-    1536,
-    "ink",
-  ),
-  welcomeDinnerLanterns: createAsset(
-    "welcome-dinner-lanterns",
-    "/images/brand/ai-temp/welcome-dinner-lanterns.webp",
-    "A welcome dinner beneath lanterns and cypress silhouettes in Tuscany.",
-    1536,
-    1024,
-    "olive",
-  ),
-  film35mmRollStillLife: createAsset(
-    "film-35mm-roll-still-life",
-    "/images/brand/film-generated/35mm-film-roll-still-life.webp",
-    "A 35mm film roll styled on a weathered studio table with loupe and exposure notes.",
-    1024,
-    1536,
-    "stone",
-  ),
-  film120RollStyling: createAsset(
-    "film-120-roll-styling",
-    "/images/brand/film-generated/120-film-roll-styling.webp",
-    "A 120 medium format film roll on a refined wedding styling surface.",
-    1024,
-    1536,
-    "linen",
-  ),
-  film4x5SheetHolder: createAsset(
-    "film-4x5-sheet-holder",
-    "/images/brand/film-generated/4x5-sheet-film-box-holder.webp",
-    "A 4x5 sheet film box and holder on a serious analog studio workbench.",
-    1536,
-    1024,
-    "ink",
-  ),
-  filmNikonFVintageVillaLibrary: createAsset(
-    "film-nikon-f-vintage-villa-library",
-    "/images/brand/film-generated/nikon-f-vintage-villa-library.webp",
-    "A vintage Nikon F camera resting in the library atmosphere of a Tuscan villa.",
-    1024,
-    1536,
-    "stone",
-  ),
-  filmNikonF5ReceptionCorner: createAsset(
-    "film-nikon-f5-reception-corner",
-    "/images/brand/film-generated/nikon-f5-reception-corner.webp",
-    "A Nikon F5 camera styled beside candlelight and florals at a Tuscan reception.",
-    1024,
-    1536,
-    "ink",
-  ),
-  filmRolleiflexBridalPrep: createAsset(
-    "film-rolleiflex-bridal-prep",
-    "/images/brand/film-generated/rolleiflex-35-bridal-prep.webp",
-    "A Rolleiflex camera on a bridal preparation table with silk details and morning light.",
-    1024,
-    1536,
-    "linen",
-  ),
-  filmHasselblad500cmWindowGarden: createAsset(
-    "film-hasselblad-500cm-window-garden",
-    "/images/brand/film-generated/hasselblad-500cm-window-garden.webp",
-    "A Hasselblad 500cm on a stone windowsill above a Tuscan wedding garden.",
-    1024,
-    1536,
-    "sage",
-  ),
-  film8x10ViewCameraOliveGrove: createAsset(
-    "film-8x10-view-camera-olive-grove",
-    "/images/brand/film-generated/8x10-view-camera-olive-grove.webp",
-    "A black wooden 8x10 view camera standing in an olive grove wedding location.",
-    1024,
-    1536,
-    "olive",
-  ),
-  filmSmartflex4x5Courtyard: createAsset(
-    "film-smartflex-4x5-courtyard",
-    "/images/brand/film-generated/smartflex-4x5-courtyard.webp",
-    "A 4x5 Graflex-like Smartflex camera at the edge of a Tuscan stone courtyard.",
-    1024,
-    1536,
-    "stone",
-  ),
-  filmHasselbladGroundGlassOliveCeremony: createAsset(
-    "film-hasselblad-ground-glass-olive-ceremony",
-    "/images/brand/film-generated/hasselblad-ground-glass-olive-ceremony.webp",
-    "A Hasselblad ground-glass view of a couple beneath olive trees during a Tuscany ceremony.",
-    1536,
-    1024,
-    "olive",
-  ),
-  filmHasselbladGroundGlassBridalWindow: createAsset(
-    "film-hasselblad-ground-glass-bridal-window",
-    "/images/brand/film-generated/hasselblad-ground-glass-bridal-window.webp",
-    "A Hasselblad ground-glass view of a bride by a tall villa window.",
-    1536,
-    1024,
-    "linen",
-  ),
-  filmHasselbladGroundGlassReception: createAsset(
-    "film-hasselblad-ground-glass-reception",
-    "/images/brand/film-generated/hasselblad-ground-glass-reception.webp",
-    "A Hasselblad ground-glass view of a candlelit wedding dinner in Tuscany.",
-    1536,
-    1024,
-    "ink",
-  ),
-  darkroomHangingPrintsRedLight: createAsset(
-    "darkroom-hanging-prints-red-light",
-    "/images/brand/film-generated/darkroom-hanging-prints-red-light.webp",
-    "A working darkroom under red safelight with wedding prints hanging to dry.",
-    1536,
-    1024,
-    "ink",
-  ),
-  darkroomChemistryTraysHands: createAsset(
-    "darkroom-chemistry-trays-hands",
-    "/images/brand/film-generated/darkroom-chemistry-trays-hands.webp",
-    "Gloved hands moving photographic paper through chemistry trays in a red-lit darkroom.",
-    1536,
-    1024,
-    "ink",
-  ),
-  darkroomEnlargerWorkbench: createAsset(
-    "darkroom-enlarger-workbench",
-    "/images/brand/film-generated/darkroom-enlarger-workbench.webp",
-    "A classic enlarger and darkroom tools arranged on a professional workbench.",
-    1536,
-    1024,
-    "ink",
-  ),
-  darkroomFilmShelvesTools: createAsset(
-    "darkroom-film-shelves-tools",
-    "/images/brand/film-generated/darkroom-film-shelves-tools.webp",
-    "Darkroom shelves holding film canisters, reels, and analog tools under safelight.",
-    1536,
-    1024,
-    "ink",
-  ),
-  filmCameraCollectionStudioTable: createAsset(
-    "film-camera-collection-studio-table",
-    "/images/brand/film-generated/film-camera-collection-studio-table.webp",
-    "A curated table of film cameras and film formats inside the Dolcevilla analog studio world.",
-    1536,
-    1024,
-    "stone",
-  ),
-  darkroomSinkPrintsPortrait: createAsset(
-    "darkroom-sink-prints-portrait",
-    "/images/brand/film-generated/darkroom-sink-prints-portrait.webp",
-    "A portrait view of the darkroom sink area with trays, prints, and red safelight.",
-    1024,
-    1536,
-    "ink",
-  ),
-  teamLisaMazzei: createAsset(
-    "team-lisa-mazzei",
-    "/images/brand/team/lisa-mazzei-headshot.webp",
-    "Editorial headshot of Lisa Mazzei against a warm textured studio backdrop.",
-    960,
-    1440,
-    "stone",
-  ),
-  teamAlbertoPellegrinetti: createAsset(
-    "team-alberto-pellegrinetti",
-    "/images/brand/team/alberto-pellegrinetti-headshot.webp",
-    "Editorial headshot of Alberto Pellegrinetti against a warm textured studio backdrop.",
-    960,
-    1440,
-    "stone",
-  ),
-  teamLeonardoFiori: createAsset(
-    "team-leonardo-fiori",
-    "/images/brand/team/leonardo-fiori-headshot.webp",
-    "Editorial headshot of Leonardo Fiori against a warm textured studio backdrop.",
-    960,
-    1440,
-    "stone",
-  ),
-  teamFrancescoTarantino: createAsset(
-    "team-francesco-tarantino",
-    "/images/brand/team/francesco-tarantino-headshot.webp",
-    "Editorial headshot of Francesco Tarantino against a warm textured studio backdrop.",
-    960,
-    1440,
-    "stone",
-  ),
-  teamWiderStudioVillaRaffaelli: createAsset(
-    "team-wider-studio-villa-raffaelli",
-    "/images/brand/team/wider-studio-villa-raffaelli.webp",
-    "A monochrome architectural sketch of Villa Raffaelli above Tuscan stone steps.",
-    1024,
-    1536,
-    "stone",
-  ),
-} as const;
+export const imageManifest = Object.fromEntries(
+  Object.entries(imageSlots).map(([slotId, definition]) => [
+    slotId,
+    createSlotAsset(slotId, definition),
+  ]),
+) as {
+  [K in keyof typeof imageSlots]: ImageAsset;
+};
 
 export type ImageManifestKey = keyof typeof imageManifest;
+export type ImageSlotKey = ImageManifestKey;
+export type ImageSlotAssetKey = keyof typeof imageAssetLibrary;
 
 export function getImageAsset(id: ImageManifestKey): ImageAsset {
   return imageManifest[id];

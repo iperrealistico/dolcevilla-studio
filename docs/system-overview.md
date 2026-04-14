@@ -42,6 +42,7 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 - Next.js 16.1.6 App Router frontend using React 19 and TypeScript.
 - Tailwind CSS 4 styling plus shared tokens and art-direction-heavy components.
 - Local typed content objects for core pages, landings, settings, FAQs, and ads payloads.
+- Frontend-only image placement via a local slot map in `content/site/image-slots.json`, resolved against the curated asset library in `lib/images/imageLibrary.ts`.
 - Local MDX journal pipeline for stories, guides, and planning content.
 - Consent-gated analytics integrations for GA4, Google Ads, and Meta Pixel.
 - External inquiry submission path configured through `NEXT_PUBLIC_INQUIRY_ENDPOINT`.

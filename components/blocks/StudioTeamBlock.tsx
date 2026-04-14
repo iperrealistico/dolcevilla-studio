@@ -95,7 +95,7 @@ export function StudioTeamBlock({
         description:
           team.groupNote ??
           "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
-        image: getImageAsset("teamWiderStudioVillaRaffaelli"),
+        image: getImageAsset("shared.team.wider-studio"),
       },
     ];
   }, [team]);

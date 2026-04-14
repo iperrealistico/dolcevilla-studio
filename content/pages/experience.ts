@@ -6,10 +6,10 @@ export const experiencePage = servicePageContentSchema.parse({
   slug: "experience",
   pageType: "experience",
   gallery: buildGallery([
-    { id: "filmNikonF5ReceptionCorner", layoutVariant: "portrait" },
-    { id: "filmHasselbladGroundGlassBridalWindow", layoutVariant: "landscape" },
-    { id: "filmHasselbladGroundGlassReception", layoutVariant: "landscape" },
-    { id: "filmSmartflex4x5Courtyard", layoutVariant: "portrait" },
+    { id: "page.experience.gallery.1", layoutVariant: "portrait" },
+    { id: "page.experience.gallery.2", layoutVariant: "landscape" },
+    { id: "page.experience.gallery.3", layoutVariant: "landscape" },
+    { id: "page.experience.gallery.4", layoutVariant: "portrait" },
   ]),
   intro: {
     eyebrow: "Experience",
@@ -39,7 +39,7 @@ export const experiencePage = servicePageContentSchema.parse({
     title: "Film for character. Digital for rhythm, speed, and certainty.",
     body:
       "A wedding day asks for range. Film gives the work a physical signature, but digital protects the moments that move too quickly, the light that shifts too fast, and the parts of the day that need reliability over ideology.",
-    imageId: "filmHasselbladGroundGlassBridalWindow",
+    imageId: "page.experience.craft.image",
     points: [
       {
         title: "We assign film deliberately",
@@ -67,7 +67,7 @@ export const experiencePage = servicePageContentSchema.parse({
     variant: "minimal",
     title: "Our point of view begins in a real place and is protected by real craft.",
     body: "Villa Raffaelli still matters because it taught us quiet beauty and hospitality, but the studio is equally defined by the seriousness of how it works.",
-    imageId: "homeHeroVilla",
+    imageId: "page.experience.villa.image",
   },
   faqs: faqs.experience,
   cta: {

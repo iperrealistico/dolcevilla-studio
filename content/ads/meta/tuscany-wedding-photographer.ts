@@ -8,7 +8,11 @@ export const metaTuscanyAdsLanding = adsLandingSchema.parse({
     title: "A modern editorial wedding studio rooted in Tuscany",
     subtitle: "For couples who want atmosphere, emotional depth, and a direct path to inquiry.",
     primaryCta: { label: "See if we’re the right fit", href: "/contact" },
-    imageIds: ["homeHeroVilla", "florenceLoggiaBlueHour", "welcomeDinnerLanterns"],
+    imageIds: [
+      "ads.meta.tuscany-wedding-photographer.hero.primary",
+      "ads.meta.tuscany-wedding-photographer.hero.secondary",
+      "ads.meta.tuscany-wedding-photographer.hero.tertiary",
+    ],
     variant: "ads",
   },
   proof: [
@@ -16,9 +20,9 @@ export const metaTuscanyAdsLanding = adsLandingSchema.parse({
     { title: "Premium experience", description: "Designed for international couples who value clarity as much as beauty." },
   ],
   gallery: buildGallery([
-    { id: "homeHeroVilla", layoutVariant: "portrait" },
-    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "ads.meta.tuscany-wedding-photographer.gallery.1", layoutVariant: "portrait" },
+    { id: "ads.meta.tuscany-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "ads.meta.tuscany-wedding-photographer.gallery.3", layoutVariant: "landscape" },
   ]),
   caseStudySlug: "villa-raffaelli-mornings",
   pricingSignal: "Most couples invest from the high four figures upward.",

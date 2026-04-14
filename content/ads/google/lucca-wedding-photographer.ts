@@ -8,7 +8,10 @@ export const googleLuccaAdsLanding = adsLandingSchema.parse({
     title: "Lucca wedding photographer with a premium local perspective",
     subtitle: "Elegant, emotionally rich wedding photography for couples planning in Lucca and Upper Tuscany.",
     primaryCta: { label: "Inquire for Lucca", href: "/contact" },
-    imageIds: ["luccaEvening", "villaCourtyard"],
+    imageIds: [
+      "ads.google.lucca-wedding-photographer.hero.primary",
+      "ads.google.lucca-wedding-photographer.hero.secondary",
+    ],
     variant: "ads",
   },
   proof: [
@@ -16,9 +19,9 @@ export const googleLuccaAdsLanding = adsLandingSchema.parse({
     { title: "Weekend-friendly", description: "We cover destination weddings and multi-day celebrations with a calm visual rhythm." },
   ],
   gallery: buildGallery([
-    { id: "luccaEvening", layoutVariant: "portrait" },
-    { id: "villaCourtyard", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "ads.google.lucca-wedding-photographer.gallery.1", layoutVariant: "portrait" },
+    { id: "ads.google.lucca-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "ads.google.lucca-wedding-photographer.gallery.3", layoutVariant: "landscape" },
   ]),
   caseStudySlug: "lucca-garden-weekend",
   pricingSignal: "Collections begin with a premium starting point and are tailored to the structure of the day.",

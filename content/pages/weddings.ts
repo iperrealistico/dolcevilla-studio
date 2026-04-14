@@ -13,7 +13,11 @@ export const weddingsPage = servicePageContentSchema.parse({
       "We photograph elegant multi-day celebrations in Tuscany with a calm editorial eye, a deep understanding of place, and a hybrid film-and-digital method built for real wedding rhythm.",
     primaryCta: { label: "Check availability", href: "/contact" },
     secondaryCta: { label: "View pricing", href: "/pricing", variant: "secondary" },
-    imageIds: ["florenceLoggiaBlueHour", "welcomeDinnerLanterns", "chiantiVineyardDinner"],
+    imageIds: [
+      "page.weddings.hero.primary",
+      "page.weddings.hero.secondary",
+      "page.weddings.hero.tertiary",
+    ],
     variant: "service",
   },
   intro: {
@@ -25,12 +29,12 @@ export const weddingsPage = servicePageContentSchema.parse({
     ],
   },
   gallery: buildGallery([
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
-    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait", span: "lg" },
-    { id: "chiantiVineyardDinner", layoutVariant: "landscape", span: "lg" },
-    { id: "luccaEvening", layoutVariant: "portrait" },
-    { id: "homeCoupleQuiet", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "page.weddings.gallery.1", layoutVariant: "portrait" },
+    { id: "page.weddings.gallery.2", layoutVariant: "portrait", span: "lg" },
+    { id: "page.weddings.gallery.3", layoutVariant: "landscape", span: "lg" },
+    { id: "page.weddings.gallery.4", layoutVariant: "portrait" },
+    { id: "page.weddings.gallery.5", layoutVariant: "portrait" },
+    { id: "page.weddings.gallery.6", layoutVariant: "landscape" },
   ]),
   highlights: [
     {
@@ -52,7 +56,7 @@ export const weddingsPage = servicePageContentSchema.parse({
     title: "Film belongs to the weekend, not just the portraits.",
     body:
       "Wedding weekends have enough breathing room for film to matter across more than one type of moment. That might mean 35mm at dinner, medium format through portraits, and selected large-format frames when a setting deserves real ceremony.",
-    imageId: "filmHasselbladGroundGlassReception",
+    imageId: "page.weddings.craft.image",
     points: [
       {
         title: "35mm for movement",
@@ -87,7 +91,7 @@ export const weddingsPage = servicePageContentSchema.parse({
     variant: "minimal",
     title: "Rooted in a real place, not trapped inside one.",
     body: "Villa Raffaelli shapes our visual point of view, but the work is equally defined by the seriousness of the photographic method.",
-    imageId: "villaCourtyard",
+    imageId: "page.weddings.villa.image",
   },
   faqs: faqs.weddings,
   cta: {

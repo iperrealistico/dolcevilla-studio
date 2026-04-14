@@ -12,7 +12,7 @@ export function VillaIdentityBlock({
     return null;
   }
 
-  const image = getImageAsset((villa.imageId ?? "homeHeroVilla") as never);
+  const image = getImageAsset((villa.imageId ?? "shared.villa.fallback") as never);
 
   return (
     <Container>

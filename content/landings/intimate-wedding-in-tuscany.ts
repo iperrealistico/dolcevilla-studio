@@ -8,7 +8,10 @@ export const intimateWeddingLanding = locationLandingSchema.parse({
     title: "For intimate weddings in Tuscany that feel soulful, elegant, and unforced.",
     subtitle: "A premium photography experience for smaller celebrations that still want atmosphere, depth, and direction.",
     primaryCta: { label: "Plan your intimate wedding", href: "/contact" },
-    imageIds: ["intimateGesture", "candlelitCourtyardToast"],
+    imageIds: [
+      "landing.intimate-wedding-in-tuscany.hero.primary",
+      "landing.intimate-wedding-in-tuscany.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -24,10 +27,10 @@ export const intimateWeddingLanding = locationLandingSchema.parse({
     { title: "Premium sensitivity", description: "The work stays elevated without becoming performative." },
   ],
   gallery: buildGallery([
-    { id: "intimateGesture", layoutVariant: "portrait", span: "lg" },
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
-    { id: "oliveGardenCeremony", layoutVariant: "landscape", span: "lg" },
-    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
+    { id: "landing.intimate-wedding-in-tuscany.gallery.1", layoutVariant: "portrait", span: "lg" },
+    { id: "landing.intimate-wedding-in-tuscany.gallery.2", layoutVariant: "portrait" },
+    { id: "landing.intimate-wedding-in-tuscany.gallery.3", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.intimate-wedding-in-tuscany.gallery.4", layoutVariant: "portrait" },
   ]),
   featuredStorySlugs: ["quarry-elopement", "villa-raffaelli-mornings"],
   testimonial: {

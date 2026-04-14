@@ -10,7 +10,11 @@ export const aboutPage = servicePageContentSchema.parse({
     subtitle:
       "Dolcevilla Studio was formed around Villa Raffaelli, Upper Tuscany, and a belief that traditional photographic tools still tell the truth differently when they are used with real skill.",
     primaryCta: { label: "Get in touch", href: "/contact" },
-    imageIds: ["villaLibraryPortrait", "homeCoupleQuiet", "villaCourtyard"],
+    imageIds: [
+      "page.about.hero.primary",
+      "page.about.hero.secondary",
+      "page.about.hero.tertiary",
+    ],
     variant: "editorial",
   },
   intro: {
@@ -36,35 +40,35 @@ export const aboutPage = servicePageContentSchema.parse({
         name: "Lisa Mazzei",
         role: "Creative Director + Lead Photographer",
         quote: "A wedding should feel observed from the inside, not styled from the outside.",
-        imageId: "teamLisaMazzei",
+        imageId: "page.about.team.lisa",
       },
       {
         name: "Alberto Pellegrinetti",
         role: "Managing Director / Executive Producer & Photographer",
         quote: "The most luxurious production is the one the couple barely notices.",
-        imageId: "teamAlbertoPellegrinetti",
+        imageId: "page.about.team.alberto",
       },
       {
         name: "Leonardo Fiori",
         role: "Head of Film Lab + Archive Curator & Photographer",
         quote: "Film matters because it is physical judgment, not an effect added later.",
-        imageId: "teamLeonardoFiori",
+        imageId: "page.about.team.leonardo",
       },
       {
         name: "Francesco Tarantino",
         role: "Head of Postproduction + Digital Imaging Director & Photographer",
         quote: "Finishing should preserve atmosphere and skin, not polish the life out of it.",
-        imageId: "teamFrancescoTarantino",
+        imageId: "page.about.team.francesco",
       },
     ],
   },
   gallery: buildGallery([
-    { id: "film35mmRollStillLife", layoutVariant: "portrait" },
-    { id: "film120RollStyling", layoutVariant: "portrait" },
-    { id: "film4x5SheetHolder", layoutVariant: "landscape" },
-    { id: "filmCameraCollectionStudioTable", layoutVariant: "landscape" },
-    { id: "darkroomFilmShelvesTools", layoutVariant: "landscape" },
-    { id: "darkroomSinkPrintsPortrait", layoutVariant: "portrait" },
+    { id: "page.about.gallery.1", layoutVariant: "portrait" },
+    { id: "page.about.gallery.2", layoutVariant: "portrait" },
+    { id: "page.about.gallery.3", layoutVariant: "landscape" },
+    { id: "page.about.gallery.4", layoutVariant: "landscape" },
+    { id: "page.about.gallery.5", layoutVariant: "landscape" },
+    { id: "page.about.gallery.6", layoutVariant: "portrait" },
   ]),
   highlights: [
     {
@@ -86,7 +90,7 @@ export const aboutPage = servicePageContentSchema.parse({
     title: "35mm, 120, large format, and the judgment to know when each belongs.",
     body:
       "Not everybody can work this way well. Each format asks for a different pace, different exposure judgment, and different discipline under real wedding pressure. That is exactly why it matters to us.",
-    imageId: "filmCameraCollectionStudioTable",
+    imageId: "page.about.craft.image",
     points: [
       {
         title: "35mm",
@@ -111,7 +115,7 @@ export const aboutPage = servicePageContentSchema.parse({
     variant: "editorial",
     title: "Villa Raffaelli is part of the origin, not the total identity.",
     body: "It is where the brand’s taste, stillness, and point of view were formed, but the studio is equally defined by how it photographs: hybrid, tactile, and technically intentional.",
-    imageId: "homeHeroVilla",
+    imageId: "page.about.villa.image",
   },
   cta: {
     title: "If this world feels close to yours, let’s talk.",

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { useConsent } from "@/hooks/useConsent";
 import { getImageAsset } from "@/lib/images/imageManifest";
 
-const doorwayImage = getImageAsset("villaLibraryPortrait");
+const doorwayImage = getImageAsset("consent.doorway.image");
 
 function PreferenceToggle({
   title,

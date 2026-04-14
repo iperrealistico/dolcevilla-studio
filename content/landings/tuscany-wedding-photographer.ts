@@ -11,7 +11,10 @@ export const tuscanyLanding = locationLandingSchema.parse({
       "For international couples who want a Tuscany wedding photographer rooted in the region rather than passing through it.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: { label: "See weddings", href: "/weddings", variant: "secondary" },
-    imageIds: ["valDorciaCypressVows", "florenceLoggiaBlueHour"],
+    imageIds: [
+      "landing.tuscany-wedding-photographer.hero.primary",
+      "landing.tuscany-wedding-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -29,10 +32,10 @@ export const tuscanyLanding = locationLandingSchema.parse({
     { title: "Premium editorial eye", description: "The work is shaped to feel grounded, cinematic, and emotionally clear." },
   ],
   gallery: buildGallery([
-    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
-    { id: "florenceLoggiaBlueHour", layoutVariant: "portrait" },
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
-    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
+    { id: "landing.tuscany-wedding-photographer.gallery.1", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.tuscany-wedding-photographer.gallery.2", layoutVariant: "portrait" },
+    { id: "landing.tuscany-wedding-photographer.gallery.3", layoutVariant: "portrait" },
+    { id: "landing.tuscany-wedding-photographer.gallery.4", layoutVariant: "landscape" },
   ]),
   featuredStorySlugs: ["lucca-garden-weekend"],
   testimonial: {

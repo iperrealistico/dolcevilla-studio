@@ -8,7 +8,10 @@ export const tuscanyElopementLanding = locationLandingSchema.parse({
     title: "Tuscany elopement photography for couples who want quiet, freedom, and place.",
     subtitle: "A lighter day structure with emotional honesty, local sensitivity, and an editorial visual language.",
     primaryCta: { label: "Plan your elopement", href: "/contact" },
-    imageIds: ["intimateGesture", "valDorciaCypressVows"],
+    imageIds: [
+      "landing.tuscany-elopement-photographer.hero.primary",
+      "landing.tuscany-elopement-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -24,10 +27,10 @@ export const tuscanyElopementLanding = locationLandingSchema.parse({
     { title: "Rooted perspective", description: "We know how to make the landscape feel real rather than generic." },
   ],
   gallery: buildGallery([
-    { id: "intimateGesture", layoutVariant: "portrait", span: "lg" },
-    { id: "valDorciaCypressVows", layoutVariant: "landscape", span: "lg" },
-    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
-    { id: "versiliaSeasideWalk", layoutVariant: "landscape" },
+    { id: "landing.tuscany-elopement-photographer.gallery.1", layoutVariant: "portrait", span: "lg" },
+    { id: "landing.tuscany-elopement-photographer.gallery.2", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.tuscany-elopement-photographer.gallery.3", layoutVariant: "portrait" },
+    { id: "landing.tuscany-elopement-photographer.gallery.4", layoutVariant: "landscape" },
   ]),
   featuredStorySlugs: ["quarry-elopement"],
   testimonial: {

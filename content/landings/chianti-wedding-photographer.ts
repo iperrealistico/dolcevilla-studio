@@ -8,7 +8,10 @@ export const chiantiLanding = locationLandingSchema.parse({
     title: "Chianti wedding photography with depth, movement, and restraint.",
     subtitle: "For celebrations that want warmth and elegance without generic countryside clichés.",
     primaryCta: { label: "Inquire for Chianti", href: "/contact" },
-    imageIds: ["chiantiVineyardDinner", "oliveGardenCeremony"],
+    imageIds: [
+      "landing.chianti-wedding-photographer.hero.primary",
+      "landing.chianti-wedding-photographer.hero.secondary",
+    ],
     variant: "landing",
   },
   intro: {
@@ -24,10 +27,10 @@ export const chiantiLanding = locationLandingSchema.parse({
     { title: "Weekend coverage fluency", description: "We know how to photograph dinners, gatherings, and movement with intention." },
   ],
   gallery: buildGallery([
-    { id: "candlelitCourtyardToast", layoutVariant: "portrait" },
-    { id: "chiantiVineyardDinner", layoutVariant: "landscape", span: "lg" },
-    { id: "intimateGesture", layoutVariant: "portrait" },
-    { id: "welcomeDinnerLanterns", layoutVariant: "landscape" },
+    { id: "landing.chianti-wedding-photographer.gallery.1", layoutVariant: "portrait" },
+    { id: "landing.chianti-wedding-photographer.gallery.2", layoutVariant: "landscape", span: "lg" },
+    { id: "landing.chianti-wedding-photographer.gallery.3", layoutVariant: "portrait" },
+    { id: "landing.chianti-wedding-photographer.gallery.4", layoutVariant: "landscape" },
   ]),
   featuredStorySlugs: ["lucca-garden-weekend"],
   testimonial: {

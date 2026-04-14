@@ -8,7 +8,10 @@ export const metaElopementAdsLanding = adsLandingSchema.parse({
     title: "Quiet, place-rooted elopements in Tuscany",
     subtitle: "For couples who want intimacy, beauty, and a refined photography experience.",
     primaryCta: { label: "Plan your day", href: "/contact" },
-    imageIds: ["intimateGesture", "valDorciaCypressVows"],
+    imageIds: [
+      "ads.meta.elopement-tuscany.hero.primary",
+      "ads.meta.elopement-tuscany.hero.secondary",
+    ],
     variant: "ads",
   },
   proof: [
@@ -16,9 +19,9 @@ export const metaElopementAdsLanding = adsLandingSchema.parse({
     { title: "Editorial but human", description: "The work feels elevated without losing emotional honesty." },
   ],
   gallery: buildGallery([
-    { id: "intimateGesture", layoutVariant: "portrait" },
-    { id: "valDorciaCypressVows", layoutVariant: "landscape" },
-    { id: "bridalPrepWindowSilk", layoutVariant: "portrait" },
+    { id: "ads.meta.elopement-tuscany.gallery.1", layoutVariant: "portrait" },
+    { id: "ads.meta.elopement-tuscany.gallery.2", layoutVariant: "landscape" },
+    { id: "ads.meta.elopement-tuscany.gallery.3", layoutVariant: "portrait" },
   ]),
   caseStudySlug: "quarry-elopement",
   pricingSignal: "Elopement collections begin with a premium baseline and scale with the structure of the day.",

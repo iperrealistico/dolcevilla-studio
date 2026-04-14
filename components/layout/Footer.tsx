@@ -31,7 +31,7 @@ export function Footer() {
               <span>Navigate</span>
             </span>
           </p>
-          <div className="space-y-2 text-sm text-[var(--color-mist)]">
+          <div className="flex flex-col gap-2 text-sm text-[var(--color-mist)]">
             {footerContent.navigationItems.map((item) => {
               const Icon = getNavigationIcon(item.href);
 
@@ -39,7 +39,7 @@ export function Footer() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"
+                  className="flex w-fit items-center gap-2 hover:text-[var(--color-ink)]"
                 >
                   <Icon size={15} strokeWidth={1.8} aria-hidden="true" className="opacity-75" />
                   <span>{item.label}</span>
@@ -55,7 +55,7 @@ export function Footer() {
               <span>Locations</span>
             </span>
           </p>
-          <div className="space-y-2 text-sm text-[var(--color-mist)]">
+          <div className="flex flex-col gap-2 text-sm text-[var(--color-mist)]">
             {footerContent.locationItems.map((item) => {
               const Icon = getNavigationIcon(item.href);
 
@@ -63,7 +63,7 @@ export function Footer() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"
+                  className="flex w-fit items-center gap-2 hover:text-[var(--color-ink)]"
                 >
                   <Icon size={15} strokeWidth={1.8} aria-hidden="true" className="opacity-75" />
                   <span>{item.label}</span>

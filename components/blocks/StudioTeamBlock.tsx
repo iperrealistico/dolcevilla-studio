@@ -472,7 +472,7 @@ export function StudioTeamBlock({
                   isDragging ? "cursor-grabbing" : "cursor-grab"
                 } min-w-[82vw] max-w-[82vw] sm:min-w-[22rem] sm:max-w-[22rem] lg:min-w-[24rem] lg:max-w-[24rem]`}
               >
-                <div className="relative overflow-hidden rounded-[1.75rem]">
+                <div className="relative overflow-hidden rounded-t-[1.75rem]">
                   <Image
                     src={slide.image.src}
                     alt={slide.image.alt}

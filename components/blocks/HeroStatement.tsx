@@ -31,6 +31,9 @@ function getMobileHeroContentId(hero: HeroContent) {
   return `hero-intro-${hero.variant}-${slug || "content"}`;
 }
 
+const MOBILE_HERO_OVERLAY_CLASS_NAME =
+  "bg-[radial-gradient(circle_at_50%_16%,rgba(255,255,255,0.2),transparent_24%),linear-gradient(180deg,rgba(29,22,18,0.04),rgba(29,22,18,0.14)_58%,rgba(29,22,18,0.42)_100%)]";
+
 const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   home: {
     desktopFrameClassName: "md:min-h-[min(80dvh,58rem)]",
@@ -101,6 +104,12 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
   const primaryImage = images[0];
   const styles = HERO_VARIANT_STYLES[hero.variant];
   const mobileContentId = getMobileHeroContentId(hero);
+  const isHomeResponsiveSlideshow = hero.variant === "home" && images.length > 1;
+  const slideIntervalMs = hero.variant === "home" ? 3000 : undefined;
+  const responsiveOverlayClassName = cn(
+    styles.desktopOverlayClassName,
+    MOBILE_HERO_OVERLAY_CLASS_NAME,
+  );
 
   return (
     <section
@@ -120,30 +129,47 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               styles.mobileImageHeightClassName,
             )}
           >
-            {primaryImage ? (
-              <Image
-                src={primaryImage.src}
-                alt={primaryImage.alt}
-                width={primaryImage.width}
-                height={primaryImage.height}
-                priority
-                loading="eager"
-                sizes="(max-width: 767px) 100vw, 0px"
-                placeholder="blur"
-                blurDataURL={primaryImage.blurDataURL}
-                className={cn(
-                  "h-full w-full object-cover md:hidden",
-                  styles.imageClassName,
-                )}
+            {isHomeResponsiveSlideshow ? (
+              <HeroSequence
+                images={images}
+                imageClassName={styles.imageClassName}
+                overlayClassName={responsiveOverlayClassName}
+                slideIntervalMs={slideIntervalMs}
               />
-            ) : null}
-            <HeroSequence
-              images={images}
-              className="hidden md:block"
-              imageClassName={styles.imageClassName}
-              overlayClassName={styles.desktopOverlayClassName}
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_16%,rgba(255,255,255,0.2),transparent_24%),linear-gradient(180deg,rgba(29,22,18,0.04),rgba(29,22,18,0.14)_58%,rgba(29,22,18,0.42)_100%)] md:hidden" />
+            ) : (
+              <>
+                {primaryImage ? (
+                  <Image
+                    src={primaryImage.src}
+                    alt={primaryImage.alt}
+                    width={primaryImage.width}
+                    height={primaryImage.height}
+                    priority
+                    loading="eager"
+                    sizes="(max-width: 767px) 100vw, 0px"
+                    placeholder="blur"
+                    blurDataURL={primaryImage.blurDataURL}
+                    className={cn(
+                      "h-full w-full object-cover md:hidden",
+                      styles.imageClassName,
+                    )}
+                  />
+                ) : null}
+                <HeroSequence
+                  images={images}
+                  className="hidden md:block"
+                  imageClassName={styles.imageClassName}
+                  overlayClassName={styles.desktopOverlayClassName}
+                  slideIntervalMs={slideIntervalMs}
+                />
+                <div
+                  className={cn(
+                    "absolute inset-0 md:hidden",
+                    MOBILE_HERO_OVERLAY_CLASS_NAME,
+                  )}
+                />
+              </>
+            )}
           </div>
           <a
             href={`#${mobileContentId}`}

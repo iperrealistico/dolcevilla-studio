@@ -3,13 +3,41 @@
   line-height: 1.8;
 }
 
+.prose-dolcevilla > :first-child {
+  margin-top: 0;
+}
+
 .prose-dolcevilla h2,
-.prose-dolcevilla h3 {
+.prose-dolcevilla h3,
+.prose-dolcevilla h4 {
+  color: var(--color-ink);
   font-family: var(--font-display), serif;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin-top: 2.5rem;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.prose-dolcevilla h2 {
+  font-size: clamp(2rem, 1.65rem + 1.1vw, 2.75rem);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  margin-top: 3rem;
   margin-bottom: 1rem;
+}
+
+.prose-dolcevilla h3 {
+  font-size: clamp(1.45rem, 1.28rem + 0.55vw, 1.9rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.prose-dolcevilla h4 {
+  font-size: 1.15rem;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+  margin-top: 1.5rem;
+  margin-bottom: 0.65rem;
 }
 
 .prose-dolcevilla p,
@@ -18,11 +46,47 @@
   margin-bottom: 1rem;
 }
 
+.prose-dolcevilla ul,
+.prose-dolcevilla ol {
+  padding-left: 1.4rem;
+}
+
+.prose-dolcevilla ul {
+  list-style: disc;
+}
+
+.prose-dolcevilla ol {
+  list-style: decimal;
+}
+
+.prose-dolcevilla li {
+  margin-bottom: 0.45rem;
+}
+
+.prose-dolcevilla li::marker {
+  color: rgb(117 107 95 / 0.92);
+}
+
 .prose-dolcevilla strong {
+  color: var(--color-ink);
   font-weight: 700;
+}
+
+.prose-dolcevilla em {
+  font-style: italic;
 }
 
 .prose-dolcevilla a {
   text-decoration: underline;
   text-underline-offset: 0.22em;
+}
+
+.prose-dolcevilla h2 + h3 {
+  margin-top: 1.15rem;
+}
+
+.prose-dolcevilla li > ul,
+.prose-dolcevilla li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }

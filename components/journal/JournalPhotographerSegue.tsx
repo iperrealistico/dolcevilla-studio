@@ -22,6 +22,7 @@ export function JournalPhotographerSegue() {
           <LinkButton
             href="/"
             variant="secondary"
+            className="no-underline"
             icon={<House size={16} strokeWidth={1.8} aria-hidden="true" />}
             hideAutoIcon
           >

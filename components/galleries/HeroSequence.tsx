@@ -3,12 +3,25 @@
 import { startTransition, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import type { ImageAsset } from "@/types/gallery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { cn } from "../../lib/utils/cn";
+import type { ImageAsset } from "../../types/gallery";
 
 const HERO_SLIDE_INTERVAL_MS = 5600;
 
-export function HeroSequence({ images }: { images: ImageAsset[] }) {
+type HeroSequenceProps = {
+  images: ImageAsset[];
+  className?: string;
+  imageClassName?: string;
+  overlayClassName?: string;
+};
+
+export function HeroSequence({
+  images,
+  className,
+  imageClassName,
+  overlayClassName,
+}: HeroSequenceProps) {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
 
@@ -31,14 +44,19 @@ export function HeroSequence({ images }: { images: ImageAsset[] }) {
   }
 
   return (
-    <div className="absolute inset-0 overflow-hidden rounded-[2rem] bg-[color:var(--surface-canvas)]">
+    <div
+      className={cn(
+        "absolute inset-0 overflow-hidden rounded-[2rem] bg-[var(--color-shell)]",
+        className,
+      )}
+    >
       {images.map((image, imageIndex) => {
         const isActive = imageIndex === index;
 
         return (
           <motion.div
             key={image.id}
-            className="absolute inset-0 will-change-transform will-change-opacity"
+            className="will-change-opacity absolute inset-0 will-change-transform"
             initial={false}
             animate={
               reduceMotion
@@ -68,15 +86,26 @@ export function HeroSequence({ images }: { images: ImageAsset[] }) {
               sizes="100vw"
               placeholder="blur"
               blurDataURL={image.blurDataURL}
-              className="h-full w-full object-cover"
+              className={cn("h-full w-full object-cover", imageClassName)}
             />
           </motion.div>
         );
       })}
       <motion.div
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,12,10,0.12),rgba(14,12,10,0.56))]"
-        animate={reduceMotion ? undefined : { opacity: [0.9, 1, 0.94], scale: [1, 1.015, 1] }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        className={cn(
+          "absolute inset-0 bg-[linear-gradient(180deg,rgba(14,12,10,0.12),rgba(14,12,10,0.56))]",
+          overlayClassName,
+        )}
+        animate={
+          reduceMotion
+            ? undefined
+            : { opacity: [0.9, 1, 0.94], scale: [1, 1.015, 1] }
+        }
+        transition={{
+          duration: 8,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
       />
     </div>
   );

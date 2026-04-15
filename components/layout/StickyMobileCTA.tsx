@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { StickyBottomBar } from "@/components/mobile/StickyBottomBar";
 import { useConsent } from "@/hooks/useConsent";
@@ -13,8 +14,40 @@ type StickyMobileCTAProps = {
 export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
   const { isMenuOpen } = useMobileUI();
   const { consent } = useConsent();
+  const [isHeroCtaVisible, setIsHeroCtaVisible] = useState(false);
 
-  if (isMenuOpen || !consent.hasInteracted) {
+  useEffect(() => {
+    const updateVisibility = () => {
+      const target = document.querySelector<HTMLElement>("[data-hero-cta-region='true']");
+
+      if (!target) {
+        setIsHeroCtaVisible(false);
+        return;
+      }
+
+      const rect = target.getBoundingClientRect();
+      const isVisible = rect.bottom >= 0 && rect.top <= window.innerHeight + 88;
+      setIsHeroCtaVisible(isVisible);
+    };
+
+    updateVisibility();
+
+    const mutationObserver = new MutationObserver(() => {
+      updateVisibility();
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+
+    return () => {
+      mutationObserver.disconnect();
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, []);
+
+  if (isMenuOpen || !consent.hasInteracted || isHeroCtaVisible) {
     return null;
   }
 

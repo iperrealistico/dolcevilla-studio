@@ -44,6 +44,10 @@ export function getNavigationIcon(href: string): LucideIcon {
     return Camera;
   }
 
+  if (href === "/villa-raffaelli") {
+    return MapPinned;
+  }
+
   if (href === "/journal" || href.startsWith("/journal/")) {
     return NotebookText;
   }
@@ -102,6 +106,13 @@ export function getLinkIconConfig(
 
   if (normalizedHref === "/film-wedding-photography") {
     return { Icon: Camera, placement: "left" };
+  }
+
+  if (
+    normalizedHref === "/villa-raffaelli" ||
+    normalizedLabel.includes("villa")
+  ) {
+    return { Icon: MapPinned, placement: "left" };
   }
 
   if (

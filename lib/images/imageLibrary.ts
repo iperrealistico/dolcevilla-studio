@@ -164,6 +164,22 @@ export const imageAssetLibrary = {
     1536,
     "stone",
   ),
+  villaPrivateCourtyardWedding: createAsset(
+    "villa-private-courtyard-wedding",
+    "/images/brand/villa-generated/villa-raffaelli-private-courtyard-wedding.webp",
+    "Two people exchanging private wedding vows in the courtyard of Villa Raffaelli.",
+    1536,
+    1024,
+    "stone",
+  ),
+  villaNewlywedsMountainGarden: createAsset(
+    "villa-newlyweds-mountain-garden",
+    "/images/brand/villa-generated/villa-raffaelli-newlyweds-mountain-garden.webp",
+    "Two newly married partners walking through the Villa Raffaelli garden with Garfagnana mountains behind them.",
+    1024,
+    1536,
+    "sage",
+  ),
   versiliaSeasideWalk: createAsset(
     "versilia-seaside-walk",
     "/images/brand/ai-temp/versilia-seaside-walk.webp",
@@ -376,6 +392,8 @@ export const imageAssetLibrary = {
 
 export type ImageAssetLibraryKey = keyof typeof imageAssetLibrary;
 
-export function getImageLibraryAsset(id: ImageAssetLibraryKey): ImageLibraryAsset {
+export function getImageLibraryAsset(
+  id: ImageAssetLibraryKey,
+): ImageLibraryAsset {
   return imageAssetLibrary[id];
 }

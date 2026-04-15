@@ -6,6 +6,7 @@ export const navigationItems = [
   { label: "Elopements", href: "/elopements" },
   { label: "Experience", href: "/experience" },
   { label: "Film", href: "/film-wedding-photography" },
+  { label: "Villa", href: "/villa-raffaelli" },
   { label: "Journal", href: "/journal" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -16,4 +17,5 @@ export const footerLocationLinks = [
   { label: "Lucca", href: "/lucca-wedding-photographer" },
   { label: "Florence", href: "/florence-wedding-photographer" },
   { label: "Chianti", href: "/chianti-wedding-photographer" },
+  { label: "Villa Raffaelli", href: "/villa-raffaelli" },
 ].map((item) => linkSchema.parse(item));

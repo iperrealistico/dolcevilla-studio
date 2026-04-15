@@ -22,14 +22,14 @@ export function BottomSheetMenu() {
           <motion.button
             type="button"
             aria-label="Close menu"
-            className="fixed inset-0 z-40 bg-black/35 md:hidden"
+            className="fixed inset-0 z-40 bg-black/35 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeMenu}
           />
           <motion.div
-            className="safe-bottom fixed inset-x-0 bottom-0 z-50 rounded-t-[2rem] border border-[var(--color-line)] bg-[var(--color-paper)] px-5 pt-6 pb-8 md:hidden"
+            className="safe-bottom fixed inset-x-0 bottom-0 z-50 rounded-t-[2rem] border border-[var(--color-line)] bg-[var(--color-paper)] px-5 pt-6 pb-8 lg:hidden"
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 48 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 32 }}
@@ -54,7 +54,12 @@ export function BottomSheetMenu() {
                       </span>
                       <span>{item.label}</span>
                     </span>
-                    <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" className="text-[var(--color-mist)]" />
+                    <ArrowUpRight
+                      size={18}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                      className="text-[var(--color-mist)]"
+                    />
                   </Link>
                 );
               })}

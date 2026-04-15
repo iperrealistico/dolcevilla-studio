@@ -40,6 +40,28 @@ export const faqs = {
         "No. It is our private creative home. In selected circumstances it may become part of a couple’s imagery or story, but never as a public venue funnel.",
     },
   ].map((item) => faqItemSchema.parse(item)),
+  villa: [
+    {
+      question: "Is Villa Raffaelli a public venue?",
+      answer:
+        "No. It remains a private creative base, not a public venue with an open booking calendar.",
+    },
+    {
+      question: "Can we get married there?",
+      answer:
+        "In selected circumstances, yes, but only for very intimate weddings where the scale, privacy, and atmosphere truly suit the place.",
+    },
+    {
+      question: "Can we use it for portraits if our wedding is elsewhere?",
+      answer:
+        "Yes. Some couples are interested in Villa Raffaelli for portraits, a first look, or a private editorial chapter around a larger celebration elsewhere in Tuscany.",
+    },
+    {
+      question: "Where is Villa Raffaelli?",
+      answer:
+        "It is in Garfagnana in north Tuscany, within practical reach of Lucca and Pisa and connected to the greener mountain side that leads toward the Cinque Terre.",
+    },
+  ].map((item) => faqItemSchema.parse(item)),
   experience: [
     {
       question: "How does hybrid film-and-digital coverage work in practice?",

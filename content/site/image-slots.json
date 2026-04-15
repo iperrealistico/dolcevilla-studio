@@ -392,6 +392,18 @@
   "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.4": {
     "asset": "florenceLoggiaBlueHour"
   },
+  "journal.how-much-does-a-tuscany-wedding-cost.cover": {
+    "asset": "journalCover"
+  },
+  "journal.how-much-does-a-tuscany-wedding-cost.gallery.1": {
+    "asset": "homeUpperTuscany"
+  },
+  "journal.how-much-does-a-tuscany-wedding-cost.gallery.2": {
+    "asset": "chiantiVineyardDinner"
+  },
+  "journal.how-much-does-a-tuscany-wedding-cost.gallery.3": {
+    "asset": "villaPrivateCourtyardWedding"
+  },
   "journal.why-we-photograph-weddings-on-film-and-digital.cover": {
     "asset": "filmHasselbladGroundGlassOliveCeremony"
   },

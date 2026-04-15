@@ -1,15 +1,10 @@
 import Link from "next/link";
 import { Mail, MapPinned, NotebookText } from "lucide-react";
-import { OpenConsentManagerButton } from "@/components/consent/OpenConsentManagerButton";
 import { footerContent } from "@/content/site/footer";
 import { siteSettings } from "@/content/site/settings";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { getNavigationIcon, getUtilityIcon } from "@/lib/ui/iconography";
-
-const PrivacyUtilityIcon = getUtilityIcon("privacy");
-const CookieUtilityIcon = getUtilityIcon("cookies");
-const LegalUtilityIcon = getUtilityIcon("legal");
+import { getNavigationIcon } from "@/lib/ui/iconography";
 const InstagramNavigationIcon = getNavigationIcon(siteSettings.instagramUrl);
 
 export function Footer() {
@@ -41,7 +36,12 @@ export function Footer() {
                   href={item.href}
                   className="flex w-fit items-center gap-2 hover:text-[var(--color-ink)]"
                 >
-                  <Icon size={15} strokeWidth={1.8} aria-hidden="true" className="opacity-75" />
+                  <Icon
+                    size={15}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                    className="opacity-75"
+                  />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -65,7 +65,12 @@ export function Footer() {
                   href={item.href}
                   className="flex w-fit items-center gap-2 hover:text-[var(--color-ink)]"
                 >
-                  <Icon size={15} strokeWidth={1.8} aria-hidden="true" className="opacity-75" />
+                  <Icon
+                    size={15}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                    className="opacity-75"
+                  />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -81,25 +86,13 @@ export function Footer() {
               href={siteSettings.instagramUrl}
               className="flex items-center gap-2 hover:text-[var(--color-ink)]"
             >
-              <InstagramNavigationIcon size={16} strokeWidth={1.8} aria-hidden="true" />
+              <InstagramNavigationIcon
+                size={16}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
               Instagram
             </Link>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <OpenConsentManagerButton
-                label="Privacy"
-                panel="privacy"
-                className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"
-                icon={<PrivacyUtilityIcon size={15} strokeWidth={1.8} aria-hidden="true" />}
-              />
-              <Link href="/legal" className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]">
-                <LegalUtilityIcon size={15} strokeWidth={1.8} aria-hidden="true" />
-                Legal
-              </Link>
-              <OpenConsentManagerButton
-                className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"
-                icon={<CookieUtilityIcon size={15} strokeWidth={1.8} aria-hidden="true" />}
-              />
-            </div>
           </div>
         </div>
       </Container>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { BottomSheetMenu } from "@/components/mobile/BottomSheetMenu";
 import { GalleryLightbox } from "@/components/galleries/GalleryLightbox";
 import { Footer } from "@/components/layout/Footer";
+import { FooterSocket } from "@/components/layout/FooterSocket";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
@@ -15,7 +16,11 @@ type PageShellProps = {
   simplifiedHeader?: boolean;
 };
 
-export function PageShell({ children, stickyCta, simplifiedHeader = false }: PageShellProps) {
+export function PageShell({
+  children,
+  stickyCta,
+  simplifiedHeader = false,
+}: PageShellProps) {
   return (
     <>
       <SkipLink />
@@ -24,9 +29,14 @@ export function PageShell({ children, stickyCta, simplifiedHeader = false }: Pag
       <main id="main-content" className="overflow-x-clip">
         {children}
       </main>
-      <Footer />
+      <footer aria-label="Site footer">
+        <Footer />
+        <FooterSocket />
+      </footer>
       <GalleryLightbox />
-      {stickyCta ? <StickyMobileCTA label={stickyCta.label} href={stickyCta.href} /> : null}
+      {stickyCta ? (
+        <StickyMobileCTA label={stickyCta.label} href={stickyCta.href} />
+      ) : null}
     </>
   );
 }

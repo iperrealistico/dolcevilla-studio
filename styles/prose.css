@@ -81,6 +81,10 @@
   text-underline-offset: 0.22em;
 }
 
+.prose-dolcevilla a.no-underline {
+  text-decoration: none;
+}
+
 .prose-dolcevilla h2 + h3 {
   margin-top: 1.15rem;
 }

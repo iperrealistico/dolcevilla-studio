@@ -377,6 +377,21 @@
   "journal.tuscany-wedding-guide-for-us-couples.gallery.4": {
     "asset": "valDorciaCypressVows"
   },
+  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.cover": {
+    "asset": "journalCover"
+  },
+  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.1": {
+    "asset": "homeUpperTuscany"
+  },
+  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.2": {
+    "asset": "villaPrivateCourtyardWedding"
+  },
+  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.3": {
+    "asset": "chiantiVineyardDinner"
+  },
+  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.4": {
+    "asset": "florenceLoggiaBlueHour"
+  },
   "journal.why-we-photograph-weddings-on-film-and-digital.cover": {
     "asset": "filmHasselbladGroundGlassOliveCeremony"
   },

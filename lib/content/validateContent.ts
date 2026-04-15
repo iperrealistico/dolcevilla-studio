@@ -5,6 +5,11 @@ import { landings } from "@/content/landings";
 import { pages } from "@/content/pages";
 import { imageManifest } from "@/lib/images/imageManifest";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
+import {
+  analyzeJournalSource,
+  extractInlineSlotIds,
+  journalSourceContainsPath,
+} from "@/lib/content/journalSource";
 import { googleLuccaAdsLanding } from "@/content/ads/google/lucca-wedding-photographer";
 import { googleTuscanyAdsLanding } from "@/content/ads/google/tuscany-wedding-photographer";
 import { metaElopementAdsLanding } from "@/content/ads/meta/elopement-tuscany";
@@ -62,9 +67,46 @@ export const validateContent = cache(async () => {
   journalEntries.forEach((entry) => {
     assertImageId(entry.coverImage);
     entry.galleryImageIds.forEach(assertImageId);
+    entry.inlineImageSlots.forEach(assertImageId);
     entry.relatedSlugs?.forEach((slug) =>
       assert(journalSlugs.has(slug), `Journal entry "${entry.slug}" references missing related slug "${slug}"`),
     );
+
+    const sourceAnalysis = analyzeJournalSource(entry.source);
+    const sourceInlineSlotIds = extractInlineSlotIds(entry.source);
+
+    sourceInlineSlotIds.forEach((slotId) =>
+      assertImageId(slotId),
+    );
+
+    if (entry.articleTemplate === "v2") {
+      assert(
+        sourceAnalysis.photographerSegueCount === 1,
+        `Journal entry "${entry.slug}" must include exactly one <JournalPhotographerSegue /> block.`,
+      );
+      assert(
+        entry.inlineImageSlots.length > 0,
+        `Journal entry "${entry.slug}" must declare inlineImageSlots for the journal V2 template.`,
+      );
+      assert(
+        sourceAnalysis.explicitInlineImageCount > 0,
+        `Journal entry "${entry.slug}" must include at least one explicit <JournalInlineImage /> block for the journal V2 template.`,
+      );
+      entry.inlineImageSlots.forEach((slotId) =>
+        assert(
+          sourceInlineSlotIds.has(slotId),
+          `Journal entry "${entry.slug}" declares inline slot "${slotId}" but does not use it in the article body.`,
+        ),
+      );
+      assert(
+        journalSourceContainsPath(entry.source, "/film-wedding-photography"),
+        `Journal entry "${entry.slug}" must include a natural backlink to /film-wedding-photography.`,
+      );
+      assert(
+        journalSourceContainsPath(entry.source, "/villa-raffaelli"),
+        `Journal entry "${entry.slug}" must include a natural backlink to /villa-raffaelli.`,
+      );
+    }
   });
 
   return {

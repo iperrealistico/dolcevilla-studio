@@ -225,6 +225,9 @@ export const adsLandingSchema = z.object({
 
 export const journalEntryFrontmatterSchema = z.object({
   slug: z.string().min(1),
+  articleTemplate: z.enum(["legacy", "v2"]).default("legacy"),
+  queueId: z.string().min(1).optional(),
+  workflowStatus: z.string().min(1).optional(),
   title: z.string().min(1),
   excerpt: z.string().min(1),
   category: z.enum([
@@ -237,8 +240,11 @@ export const journalEntryFrontmatterSchema = z.object({
   location: z.string().min(1),
   celebrationType: z.string().optional(),
   serviceType: z.string().optional(),
+  primaryKeyword: z.string().min(1).optional(),
+  searchIntent: z.string().min(1).optional(),
   coverImage: z.string().min(1),
-  galleryImageIds: z.array(z.string()).min(3),
+  galleryImageIds: z.array(z.string()).default([]),
+  inlineImageSlots: z.array(z.string()).default([]),
   publishedAt: z.string().min(1),
   updatedAt: z.string().optional(),
   seoTitle: z.string().min(1),

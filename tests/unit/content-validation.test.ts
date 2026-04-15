@@ -7,14 +7,16 @@ describe("content system", () => {
     await expect(validateContent()).resolves.toMatchObject({
       pageCount: 11,
       landingCount: 8,
-      journalCount: 9,
+      journalCount: 10,
     });
   });
 
   it("returns journal entries sorted by publish date descending", async () => {
     const entries = await getJournalEntries();
 
-    expect(entries[0]?.slug).toBe("tuscany-wedding-guide-for-us-couples");
+    expect(entries[0]?.slug).toBe(
+      "best-wedding-venues-in-tuscany-for-a-destination-wedding",
+    );
     expect(entries[entries.length - 1]?.slug).toBe("quarry-elopement");
   });
 });

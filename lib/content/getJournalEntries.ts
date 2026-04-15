@@ -10,9 +10,10 @@ export const getJournalEntries = cache(async () => {
 
   const entries = await Promise.all(
     files.map(async (filePath) => {
-      const { frontmatter } = await parseFrontmatter(filePath);
+      const { frontmatter, source } = await parseFrontmatter(filePath);
       return {
         ...frontmatter,
+        source,
         heroImage: imageManifest[frontmatter.coverImage as keyof typeof imageManifest],
       };
     }),

@@ -13,9 +13,6 @@ export const getEntryBySlug = cache(async (slug: string) => {
         ...parsed.frontmatter,
         source: parsed.source,
         coverAsset: imageManifest[parsed.frontmatter.coverImage as keyof typeof imageManifest],
-        galleryAssets: parsed.frontmatter.galleryImageIds.map(
-          (id) => imageManifest[id as keyof typeof imageManifest],
-        ),
       };
     }
   }

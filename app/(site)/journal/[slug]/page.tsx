@@ -4,7 +4,6 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { getEntryBySlug } from "@/lib/content/getEntryBySlug";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
 import { getExpandedStoryCardsBySlugs } from "@/lib/content/storyCards";
-import { buildGallery } from "@/lib/images/imageManifest";
 
 type JournalEntryPageProps = {
   params: Promise<{ slug: string }>;
@@ -41,7 +40,6 @@ export default async function JournalEntryPage({ params }: JournalEntryPageProps
   }
 
   const relatedStories = await getExpandedStoryCardsBySlugs(entry.relatedSlugs ?? []);
-  const gallery = buildGallery(entry.galleryImageIds.map((id) => ({ id: id as never, layoutVariant: "portrait" })));
 
-  return <JournalEntryTemplate entry={entry} gallery={gallery} relatedStories={relatedStories} />;
+  return <JournalEntryTemplate entry={entry} relatedStories={relatedStories} />;
 }

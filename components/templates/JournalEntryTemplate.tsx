@@ -58,7 +58,7 @@ export async function JournalEntryTemplate({
         coverAsset={entry.coverAsset}
       />
       <Container>
-        <RichText className="max-w-3xl">{content}</RichText>
+        <RichText className="mx-auto w-full">{content}</RichText>
       </Container>
       <RelatedStories stories={relatedStories} />
       {sourceAnalysis.photographerSegueCount === 0 ? (

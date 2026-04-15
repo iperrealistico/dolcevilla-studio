@@ -15,19 +15,36 @@ export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
   const { isMenuOpen } = useMobileUI();
   const { consent } = useConsent();
   const [isHeroCtaVisible, setIsHeroCtaVisible] = useState(false);
+  const [isHeroSectionVisible, setIsHeroSectionVisible] = useState(false);
 
   useEffect(() => {
     const updateVisibility = () => {
-      const target = document.querySelector<HTMLElement>("[data-hero-cta-region='true']");
+      const target = document.querySelector<HTMLElement>(
+        "[data-hero-cta-region='true']",
+      );
+      const heroSection = document.querySelector<HTMLElement>(
+        "[data-hero-section='true']",
+      );
 
       if (!target) {
         setIsHeroCtaVisible(false);
+      } else {
+        const rect = target.getBoundingClientRect();
+        const isVisible =
+          rect.bottom >= 0 && rect.top <= window.innerHeight + 88;
+        setIsHeroCtaVisible(isVisible);
+      }
+
+      if (!heroSection) {
+        setIsHeroSectionVisible(false);
         return;
       }
 
-      const rect = target.getBoundingClientRect();
-      const isVisible = rect.bottom >= 0 && rect.top <= window.innerHeight + 88;
-      setIsHeroCtaVisible(isVisible);
+      const heroRect = heroSection.getBoundingClientRect();
+      const isVisible =
+        heroRect.bottom >= window.innerHeight * 0.3 &&
+        heroRect.top <= window.innerHeight * 0.92;
+      setIsHeroSectionVisible(isVisible);
     };
 
     updateVisibility();
@@ -47,7 +64,12 @@ export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
     };
   }, []);
 
-  if (isMenuOpen || !consent.hasInteracted || isHeroCtaVisible) {
+  if (
+    isMenuOpen ||
+    !consent.hasInteracted ||
+    isHeroCtaVisible ||
+    isHeroSectionVisible
+  ) {
     return null;
   }
 

@@ -1,3 +1,4 @@
+import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { HeroSequence } from "../galleries/HeroSequence";
 import { FloatIn } from "../motion/FloatIn";
@@ -20,11 +21,22 @@ type HeroVariantStyle = {
   mobileImageHeightClassName: string;
 };
 
+function getMobileHeroContentId(hero: HeroContent) {
+  const slug = hero.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 56);
+
+  return `hero-intro-${hero.variant}-${slug || "content"}`;
+}
+
 const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   home: {
     desktopFrameClassName: "md:min-h-[min(80dvh,58rem)]",
     desktopContentClassName: "md:max-w-[44rem] xl:max-w-[48rem]",
-    desktopTitleClassName: "md:max-w-[13ch] md:text-[4.15rem] xl:text-[5.05rem]",
+    desktopTitleClassName:
+      "md:max-w-[13ch] md:text-[4.15rem] xl:text-[5.05rem]",
     desktopCopyClassName: "md:max-w-[31rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.12),rgba(29,22,18,0.32))] md:bg-[radial-gradient(circle_at_80%_18%,rgba(244,235,224,0.18),transparent_18%),linear-gradient(90deg,rgba(10,8,7,0.84)_0%,rgba(10,8,7,0.58)_38%,rgba(10,8,7,0.22)_70%,rgba(10,8,7,0.04)_100%),linear-gradient(180deg,rgba(10,8,7,0.12)_0%,rgba(10,8,7,0.62)_100%)]",
@@ -48,8 +60,7 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   editorial: {
     desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
     desktopContentClassName: "md:max-w-[38rem] xl:max-w-[42rem]",
-    desktopTitleClassName:
-      "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.35rem]",
+    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.35rem]",
     desktopCopyClassName: "md:max-w-[28rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.1),rgba(29,22,18,0.28))] md:bg-[radial-gradient(circle_at_82%_16%,rgba(244,235,224,0.14),transparent_16%),linear-gradient(90deg,rgba(12,10,9,0.8)_0%,rgba(12,10,9,0.52)_40%,rgba(12,10,9,0.16)_74%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.14)_0%,rgba(12,10,9,0.56)_100%)]",
@@ -89,19 +100,23 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
   const images = hero.imageIds.map((id) => getImageAsset(id as never));
   const primaryImage = images[0];
   const styles = HERO_VARIANT_STYLES[hero.variant];
+  const mobileContentId = getMobileHeroContentId(hero);
 
   return (
-    <section className="relative px-3 pt-3 pb-6 md:px-8 md:pt-6 md:pb-10 lg:px-10">
+    <section
+      className="relative px-3 pt-3 pb-6 md:px-8 md:pt-6 md:pb-10 lg:px-10"
+      data-hero-section="true"
+    >
       <div
         className={cn(
           "relative flex flex-col overflow-hidden rounded-[2rem] border border-[rgb(25_22_18_/_0.08)] bg-[linear-gradient(180deg,rgba(250,247,242,0.98),rgba(242,236,228,0.98))] shadow-[0_24px_60px_rgba(28,22,18,0.08)]",
           styles.desktopFrameClassName,
         )}
       >
-        <div className="order-2 px-3 pb-3 md:absolute md:inset-0 md:px-0 md:pb-0">
+        <div className="relative md:absolute md:inset-0">
           <div
             className={cn(
-              "relative overflow-hidden rounded-[1.65rem] md:h-full md:min-h-full md:rounded-[2rem]",
+              "relative overflow-hidden rounded-t-[2rem] rounded-b-[1.65rem] md:h-full md:min-h-full md:rounded-[2rem]",
               styles.mobileImageHeightClassName,
             )}
           >
@@ -128,16 +143,31 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               imageClassName={styles.imageClassName}
               overlayClassName={styles.desktopOverlayClassName}
             />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_20%,rgba(255,255,255,0.16),transparent_18%),linear-gradient(180deg,rgba(29,22,18,0.08),rgba(29,22,18,0.3))] md:hidden" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_16%,rgba(255,255,255,0.2),transparent_24%),linear-gradient(180deg,rgba(29,22,18,0.04),rgba(29,22,18,0.14)_58%,rgba(29,22,18,0.42)_100%)] md:hidden" />
           </div>
+          <a
+            href={`#${mobileContentId}`}
+            aria-label="Scroll to hero introduction"
+            className="absolute inset-x-0 bottom-0 z-20 flex translate-y-1/2 flex-col items-center gap-2 md:hidden"
+          >
+            <span className="text-[0.58rem] font-medium tracking-[0.34em] text-[rgb(250_247_242_/_0.86)] uppercase drop-shadow-[0_2px_10px_rgba(28,22,18,0.28)]">
+              Scroll
+            </span>
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgb(223_206_182_/_0.78)] bg-[rgb(250_247_242_/_0.92)] text-[var(--color-ink)] shadow-[0_16px_30px_rgba(28,22,18,0.16)] backdrop-blur-md">
+              <ArrowDown size={18} strokeWidth={1.7} aria-hidden="true" />
+            </span>
+          </a>
         </div>
         <Container
           className={cn(
-            "relative z-10 order-1 w-full px-0 md:flex md:items-end md:py-12 lg:py-14",
+            "relative z-10 w-full px-0 md:flex md:items-end md:py-12 lg:py-14",
             styles.desktopFrameClassName,
           )}
         >
-          <div className="px-6 pt-7 pb-6 md:px-0 md:pt-0 md:pb-0">
+          <div
+            id={mobileContentId}
+            className="scroll-mt-20 border-t border-[rgb(25_22_18_/_0.06)] px-6 pt-14 pb-7 md:border-t-0 md:px-0 md:pt-0 md:pb-0"
+          >
             <div
               className={cn(
                 "relative space-y-5 md:space-y-6",

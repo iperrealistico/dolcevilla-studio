@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FloatIn } from "@/components/motion/FloatIn";
+import { siteUi } from "@/content/site/ui";
 import type { Testimonial } from "@/types/content";
 
 export function TestimonialsBlock({ items }: { items: Testimonial[] }) {
@@ -11,9 +12,13 @@ export function TestimonialsBlock({ items }: { items: Testimonial[] }) {
   return (
     <Container className="grid gap-5 md:grid-cols-2">
       {items.map((item, index) => (
-        <FloatIn key={item.quote} from={index % 2 === 0 ? "left" : "right"} delay={index * 0.08}>
+        <FloatIn
+          key={item.quote}
+          from={index % 2 === 0 ? "left" : "right"}
+          delay={index * 0.08}
+        >
           <figure className="rounded-[1.75rem] border border-[var(--color-line)] bg-white/65 p-6">
-            <Eyebrow>Testimonial</Eyebrow>
+            <Eyebrow>{siteUi.sections.testimonials.eyebrow}</Eyebrow>
             <blockquote className="font-display-face text-2xl leading-[1.1] tracking-[-0.03em]">
               “{item.quote}”
             </blockquote>

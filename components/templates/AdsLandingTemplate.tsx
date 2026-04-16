@@ -7,9 +7,16 @@ import { StoryCardGrid } from "@/components/blocks/StoryCardGrid";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { Container } from "@/components/ui/Container";
+import { siteUi } from "@/content/site/ui";
 import type { AdsLanding, StoryCard } from "@/types/content";
 
-export function AdsLandingTemplate({ landing, story }: { landing: AdsLanding; story: StoryCard }) {
+export function AdsLandingTemplate({
+  landing,
+  story,
+}: {
+  landing: AdsLanding;
+  story: StoryCard;
+}) {
   return (
     <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       <ScrollParallax intensity="lg">
@@ -24,7 +31,9 @@ export function AdsLandingTemplate({ landing, story }: { landing: AdsLanding; st
       <ScrollParallax from="left">
         <Container>
           <div className="max-w-2xl rounded-[1.75rem] border border-[var(--color-line)] bg-white/70 p-6 text-sm leading-7 text-[var(--color-mist)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--color-mist)]">Pricing signal</p>
+            <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+              {siteUi.sections.ads.pricingSignalEyebrow}
+            </p>
             <p className="mt-3">{landing.pricingSignal}</p>
           </div>
         </Container>

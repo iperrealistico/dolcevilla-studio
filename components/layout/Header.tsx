@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Mail, Menu, X } from "lucide-react";
 import { navigationItems } from "@/content/site/navigation";
+import { siteSettings } from "@/content/site/settings";
+import { siteUi } from "@/content/site/ui";
 import { useMobileUI } from "@/contexts/MobileUIContext";
 import { getNavigationIcon } from "@/lib/ui/iconography";
 import { cn } from "@/lib/utils/cn";
@@ -21,7 +23,7 @@ export function Header({ simplified = false }: HeaderProps) {
           href="/"
           className="font-display-face shrink-0 text-2xl tracking-[-0.04em] whitespace-nowrap lg:text-[1.85rem] xl:text-2xl"
         >
-          Dolcevilla Studio
+          {siteSettings.siteName}
         </Link>
         {!simplified ? (
           <>
@@ -49,7 +51,11 @@ export function Header({ simplified = false }: HeaderProps) {
             <button
               type="button"
               aria-expanded={isMenuOpen}
-              aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+              aria-label={
+                isMenuOpen
+                  ? siteUi.header.closeNavigationLabel
+                  : siteUi.header.openNavigationLabel
+              }
               className={cn(
                 "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] lg:hidden",
               )}
@@ -64,7 +70,7 @@ export function Header({ simplified = false }: HeaderProps) {
             className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]"
           >
             <Mail size={14} strokeWidth={1.8} aria-hidden="true" />
-            Inquire
+            {siteUi.header.simplifiedInquiryLabel}
           </Link>
         )}
       </div>

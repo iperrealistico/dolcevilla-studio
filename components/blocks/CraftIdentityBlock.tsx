@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ServicePageContent } from "@/types/content";
 import { FloatIn } from "@/components/motion/FloatIn";
 import { Container } from "@/components/ui/Container";
+import { siteUi } from "@/content/site/ui";
 import { getImageAsset } from "@/lib/images/imageManifest";
 
 export function CraftIdentityBlock({
@@ -22,7 +23,7 @@ export function CraftIdentityBlock({
           <FloatIn from="left">
             <div className="space-y-6">
               <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-                {craft.eyebrow ?? "Hybrid craft"}
+                {craft.eyebrow ?? siteUi.sections.craft.defaultEyebrow}
               </p>
               <h3 className="font-display-face mt-3 text-3xl tracking-[-0.03em] md:text-4xl">
                 {craft.title}
@@ -45,7 +46,9 @@ export function CraftIdentityBlock({
           </FloatIn>
           <FloatIn delay={0.08}>
             <div className="space-y-4">
-              <p className="text-base leading-8 text-[var(--color-mist)]">{craft.body}</p>
+              <p className="text-base leading-8 text-[var(--color-mist)]">
+                {craft.body}
+              </p>
               {craft.points.length ? (
                 <div className="grid gap-4 sm:grid-cols-2">
                   {craft.points.map((point, index) => (

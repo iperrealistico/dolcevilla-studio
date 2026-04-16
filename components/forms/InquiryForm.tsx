@@ -8,8 +8,13 @@ import { SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { BudgetSelect } from "@/components/forms/BudgetSelect";
 import { FormField } from "@/components/forms/FormField";
+import { inquiryFormContent } from "@/content/site/forms";
 import { inquiryFormSchema } from "@/lib/forms/formSchema";
-import { getPersistedUtmPayload, persistUtmPayload, readUtmParams } from "@/lib/forms/utm";
+import {
+  getPersistedUtmPayload,
+  persistUtmPayload,
+  readUtmParams,
+} from "@/lib/forms/utm";
 import { submitInquiry } from "@/lib/forms/submitInquiry";
 import { trackEvent } from "@/lib/analytics/tracking";
 import type { InquiryFormValues } from "@/types/forms";
@@ -68,49 +73,95 @@ export function InquiryForm() {
   });
 
   return (
-    <form className="grid gap-5 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)]" onSubmit={onSubmit}>
+    <form
+      className="grid gap-5 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)]"
+      onSubmit={onSubmit}
+    >
       <div className="grid gap-5 md:grid-cols-2">
-        <FormField label="Names" error={form.formState.errors.names?.message}>
+        <FormField
+          label={inquiryFormContent.fields.names}
+          error={form.formState.errors.names?.message}
+        >
           <input className={inputClassName} {...form.register("names")} />
         </FormField>
-        <FormField label="Email" error={form.formState.errors.email?.message}>
-          <input className={inputClassName} type="email" {...form.register("email")} />
+        <FormField
+          label={inquiryFormContent.fields.email}
+          error={form.formState.errors.email?.message}
+        >
+          <input
+            className={inputClassName}
+            type="email"
+            {...form.register("email")}
+          />
         </FormField>
-        <FormField label="Wedding date" error={form.formState.errors.weddingDate?.message}>
-          <input className={inputClassName} type="date" {...form.register("weddingDate")} />
+        <FormField
+          label={inquiryFormContent.fields.weddingDate}
+          error={form.formState.errors.weddingDate?.message}
+        >
+          <input
+            className={inputClassName}
+            type="date"
+            {...form.register("weddingDate")}
+          />
         </FormField>
-        <FormField label="Location" error={form.formState.errors.location?.message}>
+        <FormField
+          label={inquiryFormContent.fields.location}
+          error={form.formState.errors.location?.message}
+        >
           <input className={inputClassName} {...form.register("location")} />
         </FormField>
-        <FormField label="Venue">
+        <FormField label={inquiryFormContent.fields.venue}>
           <input className={inputClassName} {...form.register("venue")} />
         </FormField>
-        <FormField label="Guest count">
+        <FormField label={inquiryFormContent.fields.guestCount}>
           <input className={inputClassName} {...form.register("guestCount")} />
         </FormField>
-        <FormField label="Celebration type" error={form.formState.errors.celebrationType?.message}>
-          <select className={inputClassName} {...form.register("celebrationType")}>
-            <option value="">Select one</option>
-            <option value="wedding-weekend">Wedding weekend</option>
-            <option value="wedding-day">Wedding day</option>
-            <option value="elopement">Elopement</option>
-            <option value="intimate-wedding">Intimate wedding</option>
+        <FormField
+          label={inquiryFormContent.fields.celebrationType}
+          error={form.formState.errors.celebrationType?.message}
+        >
+          <select
+            className={inputClassName}
+            {...form.register("celebrationType")}
+          >
+            {inquiryFormContent.celebrationTypeOptions.map((option) => (
+              <option key={option.value || "empty"} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
         </FormField>
-        <FormField label="Photography budget" error={form.formState.errors.photographyBudgetRange?.message}>
+        <FormField
+          label={inquiryFormContent.fields.photographyBudgetRange}
+          error={form.formState.errors.photographyBudgetRange?.message}
+        >
           <BudgetSelect props={form.register("photographyBudgetRange")} />
         </FormField>
       </div>
-      <FormField label="Message" error={form.formState.errors.message?.message}>
-        <textarea className={`${inputClassName} min-h-40`} {...form.register("message")} />
+      <FormField
+        label={inquiryFormContent.fields.message}
+        error={form.formState.errors.message?.message}
+      >
+        <textarea
+          className={`${inputClassName} min-h-40`}
+          {...form.register("message")}
+        />
       </FormField>
       <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-white/50 px-4 py-4 text-sm text-[var(--color-mist)]">
-        <input className="mt-1 size-4" type="checkbox" {...form.register("filmInterest")} />
-        Interested in hybrid film coverage, including 35mm, 120, or selected large-format frames
+        <input
+          className="mt-1 size-4"
+          type="checkbox"
+          {...form.register("filmInterest")}
+        />
+        {inquiryFormContent.checkboxes.filmInterest}
       </label>
       <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-white/50 px-4 py-4 text-sm text-[var(--color-mist)]">
-        <input className="mt-1 size-4" type="checkbox" {...form.register("villaInterest")} />
-        Curious about portraits or a very private Villa Raffaelli-related context
+        <input
+          className="mt-1 size-4"
+          type="checkbox"
+          {...form.register("villaInterest")}
+        />
+        {inquiryFormContent.checkboxes.villaInterest}
       </label>
       <input type="hidden" {...form.register("pageUrl")} />
       <input type="hidden" {...form.register("referrer")} />
@@ -120,14 +171,31 @@ export function InquiryForm() {
       <input type="hidden" {...form.register("utmContent")} />
       <input type="hidden" {...form.register("gclid")} />
       <input type="hidden" {...form.register("fbclid")} />
-      <input type="text" tabIndex={-1} autoComplete="off" className="hidden" {...form.register("honey")} />
-      {submitError ? <p className="text-sm text-[#9b3a2c]">{submitError}</p> : null}
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        {...form.register("honey")}
+      />
+      {submitError ? (
+        <p className="text-sm text-[#9b3a2c]">{submitError}</p>
+      ) : null}
       <Button
         type="submit"
         disabled={form.formState.isSubmitting}
-        icon={<SendHorizontal size={16} strokeWidth={1.8} aria-hidden="true" className="shrink-0 opacity-85" />}
+        icon={
+          <SendHorizontal
+            size={16}
+            strokeWidth={1.8}
+            aria-hidden="true"
+            className="shrink-0 opacity-85"
+          />
+        }
       >
-        {form.formState.isSubmitting ? "Sending..." : "Send inquiry"}
+        {form.formState.isSubmitting
+          ? inquiryFormContent.sendingLabel
+          : inquiryFormContent.submitLabel}
       </Button>
     </form>
   );

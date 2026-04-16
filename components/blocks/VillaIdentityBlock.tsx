@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ServicePageContent } from "@/types/content";
 import { Container } from "@/components/ui/Container";
+import { siteUi } from "@/content/site/ui";
 import { getImageAsset } from "@/lib/images/imageManifest";
 
 export function VillaIdentityBlock({
@@ -12,7 +13,9 @@ export function VillaIdentityBlock({
     return null;
   }
 
-  const image = getImageAsset((villa.imageId ?? "shared.villa.fallback") as never);
+  const image = getImageAsset(
+    (villa.imageId ?? "shared.villa.fallback") as never,
+  );
 
   return (
     <Container>
@@ -20,7 +23,7 @@ export function VillaIdentityBlock({
         <div className="grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-center">
           <div>
             <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-              Villa Raffaelli
+              {villa.eyebrow ?? siteUi.sections.villa.defaultEyebrow}
             </p>
             <h3 className="font-display-face mt-3 text-3xl tracking-[-0.03em] md:text-4xl">
               {villa.title}

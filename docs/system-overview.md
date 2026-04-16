@@ -4,13 +4,16 @@ This tracked document gives a repo-oriented overview of the workspace.
 It intentionally stays lighter and less sensitive than the local-only dossier.
 
 ## Scope And Source Of Truth
+
 - Use this file for the high-level architecture of the tracked codebase.
 - Use `docs/reference/` for historical intent and archived context.
 - Use `START-HERE-AI.local.md` and `documents-local/platform-dossier/` for current live-state, migration notes, incident history, and sensitive operational details.
 - When this file and the local dossier differ, trust the local dossier for operational truth and record the divergence.
 
 ## Product/System Summary
+
 Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany wedding photography brand. It combines:
+
 - a public editorial marketing site;
 - journal content rendered from local MDX files;
 - typed local content for core pages and landing pages;
@@ -19,6 +22,7 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 - an inquiry form that posts JSON to an external public endpoint.
 
 ## Repository Map
+
 - `app/`
   - App Router routes for public pages, journal entries, metadata endpoints, and ads pages.
 - `components/`
@@ -39,6 +43,7 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
   - local-only operational control plane and dossier.
 
 ## Main Components In The Current Workspace
+
 - Next.js 16.1.6 App Router frontend using React 19 and TypeScript.
 - Tailwind CSS 4 styling plus shared tokens and art-direction-heavy components.
 - Local typed content objects for core pages, landings, settings, FAQs, and ads payloads.
@@ -48,12 +53,14 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 - External inquiry submission path configured through `NEXT_PUBLIC_INQUIRY_ENDPOINT`.
 
 ## Known Live Or Runtime Divergence
+
 - Vercel production deployment metadata and public `*.vercel.app` aliases were verified on 2026-04-13.
 - The site metadata uses `https://dolcevilla.studio` as the canonical URL.
 - A direct DNS/HTTP check from this workspace could not resolve `dolcevilla.studio` on 2026-04-13, so the custom-domain status should be treated as unresolved until re-verified.
 - No shell-level access to the deployed runtime or Vercel environment variables was used during the first control-plane bootstrap.
 
 ## Developer Entry Points
+
 1. `README.md`
 2. `docs/system-overview.md`
 3. `START-HERE-AI.local.md`
@@ -63,7 +70,9 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 7. `lib/content/validateContent.ts`
 
 ## Related Documentation
+
 - `README.md`
+- `editing-site-text.md`
 - `docs/reference/README.md`
 - `../START-HERE-AI.local.md`
 - `../documents-local/platform-dossier/`

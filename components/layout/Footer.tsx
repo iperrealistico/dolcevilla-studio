@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mail, MapPinned, NotebookText } from "lucide-react";
 import { footerContent } from "@/content/site/footer";
 import { siteSettings } from "@/content/site/settings";
+import { siteUi } from "@/content/site/ui";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { getNavigationIcon } from "@/lib/ui/iconography";
@@ -13,7 +14,7 @@ export function Footer() {
       <Container className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="space-y-4">
           <p className="font-display-face text-3xl tracking-[-0.04em]">
-            Dolcevilla Studio
+            {siteSettings.siteName}
           </p>
           <p className="max-w-xl text-sm leading-7 text-[var(--color-mist)]">
             {footerContent.statement}
@@ -23,7 +24,7 @@ export function Footer() {
           <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
             <span className="inline-flex items-center gap-2">
               <NotebookText size={13} strokeWidth={1.8} aria-hidden="true" />
-              <span>Navigate</span>
+              <span>{siteUi.footer.navigationHeading}</span>
             </span>
           </p>
           <div className="flex flex-col gap-2 text-sm text-[var(--color-mist)]">
@@ -52,7 +53,7 @@ export function Footer() {
           <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
             <span className="inline-flex items-center gap-2">
               <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
-              <span>Locations</span>
+              <span>{siteUi.footer.locationsHeading}</span>
             </span>
           </p>
           <div className="flex flex-col gap-2 text-sm text-[var(--color-mist)]">
@@ -91,7 +92,7 @@ export function Footer() {
                 strokeWidth={1.8}
                 aria-hidden="true"
               />
-              Instagram
+              {siteUi.footer.instagramLabel}
             </Link>
           </div>
         </div>

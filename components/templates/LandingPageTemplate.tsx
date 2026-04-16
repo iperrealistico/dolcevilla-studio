@@ -9,6 +9,7 @@ import { SignatureGallery } from "@/components/blocks/SignatureGallery";
 import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
 import { EditorialTextBlock } from "@/components/blocks/EditorialTextBlock";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
+import { siteUi } from "@/content/site/ui";
 import type { LocationLanding, StoryCard } from "@/types/content";
 
 type LandingPageTemplateProps = {
@@ -16,7 +17,10 @@ type LandingPageTemplateProps = {
   stories: StoryCard[];
 };
 
-export function LandingPageTemplate({ landing, stories }: LandingPageTemplateProps) {
+export function LandingPageTemplate({
+  landing,
+  stories,
+}: LandingPageTemplateProps) {
   return (
     <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       <ScrollParallax intensity="lg">
@@ -47,8 +51,8 @@ export function LandingPageTemplate({ landing, stories }: LandingPageTemplatePro
         <VillaIdentityBlock
           villa={{
             variant: landing.villaIdentityVariant,
-            title: "Villa Raffaelli remains a private source of the brand’s point of view.",
-            body: "It appears here only as an origin story, not as a public venue funnel.",
+            title: siteUi.sections.villa.landingTitle,
+            body: siteUi.sections.villa.landingBody,
           }}
         />
       </ScrollParallax>

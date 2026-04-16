@@ -1,4 +1,5 @@
 export const privacyDetails = {
+  eyebrow: "Privacy",
   title: "Privacy details",
   introduction:
     "Inquiry information is used only to respond to you. Optional analytics and marketing remain blocked unless you explicitly allow them.",
@@ -21,6 +22,10 @@ export const privacyDetails = {
     },
   ],
   contactLabel: "Questions about privacy?",
-  contactBody: "Write to us directly and we will clarify how consent and inquiry data are handled.",
+  contactBody:
+    "Write to us directly and we will clarify how consent and inquiry data are handled.",
   contactEmail: "hello@dolcevilla.studio",
+  closeLabel: "Close privacy details",
+  backToChoicesLabel: "Back to consent choices",
+  backButtonLabel: "Back",
 } as const;

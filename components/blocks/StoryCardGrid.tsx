@@ -6,6 +6,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { FloatIn } from "@/components/motion/FloatIn";
+import { siteUi } from "@/content/site/ui";
 import type { StoryCard } from "@/types/content";
 
 type StoryCardGridProps = {
@@ -19,7 +20,7 @@ export function StoryCardGrid({
   stories,
   maxItems,
   showMoreHref,
-  showMoreLabel = "See more stories",
+  showMoreLabel = siteUi.sections.storyGrid.showMoreLabel,
 }: StoryCardGridProps) {
   if (!stories.length) {
     return null;
@@ -34,10 +35,10 @@ export function StoryCardGrid({
           <div>
             <Eyebrow className="inline-flex items-center gap-2">
               <NotebookText size={14} strokeWidth={1.8} aria-hidden="true" />
-              <span>Selected stories</span>
+              <span>{siteUi.sections.storyGrid.eyebrow}</span>
             </Eyebrow>
             <Heading className="text-3xl md:text-5xl">
-              Proof with atmosphere, not filler.
+              {siteUi.sections.storyGrid.heading}
             </Heading>
           </div>
           {showMoreHref ? (

@@ -1,15 +1,20 @@
 import { z } from "zod";
+import { inquiryFormContent } from "@/content/site/forms";
 
 export const inquiryFormSchema = z.object({
-  names: z.string().min(2, "Please share both names or a full name."),
-  email: z.email("Please enter a valid email address."),
-  weddingDate: z.string().min(1, "Please share your celebration date."),
-  location: z.string().min(2, "Please share your location."),
+  names: z.string().min(2, inquiryFormContent.validation.names),
+  email: z.email(inquiryFormContent.validation.email),
+  weddingDate: z.string().min(1, inquiryFormContent.validation.weddingDate),
+  location: z.string().min(2, inquiryFormContent.validation.location),
   venue: z.string().optional(),
   guestCount: z.string().optional(),
-  celebrationType: z.string().min(1, "Please select the celebration type."),
-  photographyBudgetRange: z.string().min(1, "Please select a budget range."),
-  message: z.string().min(20, "Please tell us a little more about your plans."),
+  celebrationType: z
+    .string()
+    .min(1, inquiryFormContent.validation.celebrationType),
+  photographyBudgetRange: z
+    .string()
+    .min(1, inquiryFormContent.validation.photographyBudgetRange),
+  message: z.string().min(20, inquiryFormContent.validation.message),
   filmInterest: z.boolean().default(false),
   villaInterest: z.boolean().default(false),
   pageUrl: z.string().optional(),

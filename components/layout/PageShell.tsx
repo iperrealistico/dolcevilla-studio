@@ -6,6 +6,7 @@ import { FooterSocket } from "@/components/layout/FooterSocket";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
+import { siteUi } from "@/content/site/ui";
 
 type PageShellProps = {
   children: ReactNode;
@@ -29,7 +30,7 @@ export function PageShell({
       <main id="main-content" className="overflow-x-clip">
         {children}
       </main>
-      <footer aria-label="Site footer">
+      <footer aria-label={siteUi.footer.ariaLabel}>
         <Footer />
         <FooterSocket />
       </footer>

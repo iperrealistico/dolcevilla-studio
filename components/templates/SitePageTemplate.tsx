@@ -17,6 +17,7 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { Container } from "@/components/ui/Container";
+import { inquiryFormContent } from "@/content/site/forms";
 import { Mail } from "lucide-react";
 import type { ServicePageContent, StoryCard } from "@/types/content";
 
@@ -79,7 +80,11 @@ export function SitePageTemplate({
       </ScrollParallax>
       {stories.length ? (
         <ScrollParallax from="left">
-          <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
+          <StoryCardGrid
+            stories={stories}
+            maxItems={3}
+            showMoreHref="/journal"
+          />
         </ScrollParallax>
       ) : null}
       {page.pageType === "home" ? (
@@ -128,7 +133,10 @@ export function SitePageTemplate({
                     <Mail size={18} strokeWidth={1.7} />
                   </div>
                   <p>
-                    Prefer email? <a href={`mailto:${page.directEmail}`}>{page.directEmail}</a>
+                    {inquiryFormContent.directEmailPrompt}{" "}
+                    <a href={`mailto:${page.directEmail}`}>
+                      {page.directEmail}
+                    </a>
                   </p>
                 </div>
               ) : null}

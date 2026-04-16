@@ -6,7 +6,11 @@ import { RelatedStories } from "@/components/blocks/RelatedStories";
 import { journalMdxComponents } from "@/components/journal/journalMdxComponents";
 import { Container } from "@/components/ui/Container";
 import { RichText } from "@/components/ui/RichText";
-import { analyzeJournalSource, prepareJournalSource } from "@/lib/content/journalSource";
+import { journalEntryTemplateContent } from "@/content/journal/template";
+import {
+  analyzeJournalSource,
+  prepareJournalSource,
+} from "@/lib/content/journalSource";
 import type { StoryCard } from "@/types/content";
 import type { ImageAsset } from "@/types/gallery";
 
@@ -30,7 +34,10 @@ export async function JournalEntryTemplate({
   relatedStories,
 }: JournalEntryTemplateProps) {
   const sourceAnalysis = analyzeJournalSource(entry.source);
-  const preparedSource = prepareJournalSource(entry.source, entry.galleryImageIds);
+  const preparedSource = prepareJournalSource(
+    entry.source,
+    entry.galleryImageIds,
+  );
   const { content } = await compileMDX({
     source: preparedSource,
     components: journalMdxComponents,
@@ -44,8 +51,11 @@ export async function JournalEntryTemplate({
       <Container className="pt-8 md:pt-10">
         <Breadcrumbs
           items={[
-            { label: "Home", href: "/" },
-            { label: "Journal", href: "/journal" },
+            { label: journalEntryTemplateContent.breadcrumbs.home, href: "/" },
+            {
+              label: journalEntryTemplateContent.breadcrumbs.journal,
+              href: "/journal",
+            },
             { label: entry.title, href: `/journal/${entry.slug}` },
           ]}
         />
@@ -62,17 +72,7 @@ export async function JournalEntryTemplate({
       </Container>
       <RelatedStories stories={relatedStories} />
       {sourceAnalysis.photographerSegueCount === 0 ? (
-        <CTASection
-          section={{
-            title: "Planning something with place and atmosphere at its center?",
-            body: "Tell us about the world you’re building and we’ll take it from there.",
-            primaryCta: {
-              label: "Start your inquiry",
-              href: "/contact",
-              variant: "primary",
-            },
-          }}
-        />
+        <CTASection section={journalEntryTemplateContent.fallbackCta} />
       ) : null}
     </div>
   );

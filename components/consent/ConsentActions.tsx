@@ -3,8 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChartNoAxesColumnIncreasing, Settings2, ShieldCheck, X } from "lucide-react";
+import {
+  ChartNoAxesColumnIncreasing,
+  Settings2,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { consentDoorwayContent } from "@/content/site/consent";
 import { useConsent } from "@/hooks/useConsent";
 import { getImageAsset } from "@/lib/images/imageManifest";
 
@@ -30,8 +36,12 @@ function PreferenceToggle({
       className="flex w-full items-start justify-between gap-4 rounded-[1.5rem] border border-white/12 bg-white/8 px-4 py-4 text-left transition hover:bg-white/12"
     >
       <div className="space-y-1">
-        <p className="text-sm font-semibold text-[var(--color-paper)]">{title}</p>
-        <p className="text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">{description}</p>
+        <p className="text-sm font-semibold text-[var(--color-paper)]">
+          {title}
+        </p>
+        <p className="text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
+          {description}
+        </p>
       </div>
       <span
         aria-hidden="true"
@@ -86,20 +96,20 @@ export function ConsentActions() {
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[rgb(244_235_224_/_0.72)]">
-                Welcome
+              <p className="text-xs font-semibold tracking-[0.34em] text-[rgb(244_235_224_/_0.72)] uppercase">
+                {consentDoorwayContent.eyebrow}
               </p>
               <p
                 id="consent-doorway-title"
-                className="mt-3 max-w-xl font-display-face text-3xl tracking-[-0.04em] md:text-5xl"
+                className="font-display-face mt-3 max-w-xl text-3xl tracking-[-0.04em] md:text-5xl"
               >
-                A Tuscan studio where film, light, and modern restraint still belong together.
+                {consentDoorwayContent.title}
               </p>
             </div>
             {consent.hasInteracted ? (
               <button
                 type="button"
-                aria-label="Close consent settings"
+                aria-label={consentDoorwayContent.closeSettingsLabel}
                 onClick={closeConsentManager}
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/14 bg-[rgb(18_15_12_/_0.32)] text-[var(--color-paper)] transition hover:bg-[rgb(18_15_12_/_0.5)]"
               >
@@ -117,7 +127,7 @@ export function ConsentActions() {
         className="relative flex flex-col justify-center p-6 text-[var(--color-paper)] md:p-8 lg:p-10"
       >
         <div id="consent-doorway-description" className="sr-only">
-          Choose whether optional analytics and marketing should be enabled before browsing the site further.
+          {consentDoorwayContent.description}
         </div>
 
         <div className="relative z-10">
@@ -129,9 +139,11 @@ export function ConsentActions() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-base font-semibold">Allow the full studio experience</p>
+                  <p className="text-base font-semibold">
+                    {consentDoorwayContent.acceptAll.title}
+                  </p>
                   <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(44_34_24_/_0.82)]">
-                    Enable analytics and marketing so we can understand how visitors arrive, which pages matter, and how to refine the experience over time.
+                    {consentDoorwayContent.acceptAll.body}
                   </p>
                 </div>
                 <ChartNoAxesColumnIncreasing
@@ -147,10 +159,10 @@ export function ConsentActions() {
               className="w-full rounded-[1.5rem] border border-white/12 bg-[rgb(255_255_255_/_0.05)] px-5 py-5 text-left transition hover:bg-[rgb(255_255_255_/_0.08)]"
             >
               <p className="text-base font-semibold text-[var(--color-paper)]">
-                Continue with essential only
+                {consentDoorwayContent.essentialOnly.title}
               </p>
               <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(244_235_224_/_0.7)]">
-                Browse the site and contact us with only the functionality required to make the experience work.
+                {consentDoorwayContent.essentialOnly.body}
               </p>
             </button>
           </div>
@@ -171,7 +183,9 @@ export function ConsentActions() {
                 />
               }
             >
-              {showPreferences ? "Hide detailed choices" : "Choose manually"}
+              {showPreferences
+                ? consentDoorwayContent.hideDetailedChoicesLabel
+                : consentDoorwayContent.chooseManuallyLabel}
             </Button>
             <button
               type="button"
@@ -179,7 +193,7 @@ export function ConsentActions() {
               className="inline-flex items-center gap-2 text-sm text-[rgb(244_235_224_/_0.68)] underline underline-offset-4 transition hover:text-[var(--color-paper)]"
             >
               <ShieldCheck size={15} strokeWidth={1.8} aria-hidden="true" />
-              Read privacy details
+              {consentDoorwayContent.readPrivacyDetailsLabel}
             </button>
           </div>
 
@@ -195,8 +209,10 @@ export function ConsentActions() {
               >
                 <div className="space-y-3 rounded-[1.5rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4">
                   <PreferenceToggle
-                    title="Site analytics"
-                    description="Anonymous measurement that helps us understand visits, popular pages, and overall site performance."
+                    title={consentDoorwayContent.preferences.analytics.title}
+                    description={
+                      consentDoorwayContent.preferences.analytics.description
+                    }
                     checked={preferences.analytics}
                     onClick={() =>
                       setPreferences((current) => ({
@@ -206,8 +222,10 @@ export function ConsentActions() {
                     }
                   />
                   <PreferenceToggle
-                    title="Marketing measurement"
-                    description="Ad campaign measurement that helps us understand whether our introductions to new couples are working."
+                    title={consentDoorwayContent.preferences.marketing.title}
+                    description={
+                      consentDoorwayContent.preferences.marketing.description
+                    }
                     checked={preferences.marketing}
                     onClick={() =>
                       setPreferences((current) => ({
@@ -229,7 +247,7 @@ export function ConsentActions() {
                       />
                     }
                   >
-                    Save my selection
+                    {consentDoorwayContent.preferences.saveSelectionLabel}
                   </Button>
                 </div>
               </motion.div>

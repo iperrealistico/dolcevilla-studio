@@ -7,6 +7,7 @@ import { Eyebrow } from "../ui/Eyebrow";
 import { LinkButton } from "../ui/LinkButton";
 import { getImageAsset } from "../../lib/images/imageManifest";
 import { cn } from "../../lib/utils/cn";
+import { siteUi } from "../../content/site/ui";
 import type { HeroContent } from "../../types/content";
 
 type HeroVariantStyle = {
@@ -46,7 +47,7 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
     imageClassName: "object-[58%_center] md:object-center",
     mobileTitleClassName: "max-w-[11ch] text-[2.55rem] sm:text-[2.95rem]",
     mobileCopyClassName: "max-w-[35ch]",
-    mobileImageHeightClassName: "min-h-[clamp(18.5rem,44svh,26rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(22.5rem,56svh,31rem)]",
   },
   service: {
     desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
@@ -104,7 +105,8 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
   const primaryImage = images[0];
   const styles = HERO_VARIANT_STYLES[hero.variant];
   const mobileContentId = getMobileHeroContentId(hero);
-  const isHomeResponsiveSlideshow = hero.variant === "home" && images.length > 1;
+  const isHomeResponsiveSlideshow =
+    hero.variant === "home" && images.length > 1;
   const slideIntervalMs = hero.variant === "home" ? 3000 : undefined;
   const responsiveOverlayClassName = cn(
     styles.desktopOverlayClassName,
@@ -173,11 +175,11 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
           </div>
           <a
             href={`#${mobileContentId}`}
-            aria-label="Scroll to hero introduction"
+            aria-label={siteUi.hero.scrollToIntroductionLabel}
             className="absolute inset-x-0 bottom-0 z-20 flex translate-y-1/2 flex-col items-center gap-2 md:hidden"
           >
             <span className="text-[0.58rem] font-medium tracking-[0.34em] text-[rgb(250_247_242_/_0.86)] uppercase drop-shadow-[0_2px_10px_rgba(28,22,18,0.28)]">
-              Scroll
+              {siteUi.hero.scrollLabel}
             </span>
             <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgb(223_206_182_/_0.78)] bg-[rgb(250_247_242_/_0.92)] text-[var(--color-ink)] shadow-[0_16px_30px_rgba(28,22,18,0.16)] backdrop-blur-md">
               <ArrowDown size={18} strokeWidth={1.7} aria-hidden="true" />

@@ -29,17 +29,23 @@ export function PrivacyDialog() {
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[rgb(244_235_224_/_0.6)]">
-                Privacy
+              <p className="text-xs font-semibold tracking-[0.3em] text-[rgb(244_235_224_/_0.6)] uppercase">
+                {privacyDetails.eyebrow}
               </p>
-              <h2 className="mt-3 font-display-face text-3xl tracking-[-0.04em] md:text-4xl">
+              <h2 className="font-display-face mt-3 text-3xl tracking-[-0.04em] md:text-4xl">
                 {privacyDetails.title}
               </h2>
             </div>
             <button
               type="button"
-              aria-label={consent.hasInteracted ? "Close privacy details" : "Back to consent choices"}
-              onClick={consent.hasInteracted ? closeConsentManager : showConsentChoices}
+              aria-label={
+                consent.hasInteracted
+                  ? privacyDetails.closeLabel
+                  : privacyDetails.backToChoicesLabel
+              }
+              onClick={
+                consent.hasInteracted ? closeConsentManager : showConsentChoices
+              }
               className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/14 bg-[rgb(255_255_255_/_0.05)] transition hover:bg-[rgb(255_255_255_/_0.08)]"
             >
               <X size={18} />
@@ -56,15 +62,21 @@ export function PrivacyDialog() {
                 key={point.title}
                 className="rounded-[1.3rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4"
               >
-                <p className="text-sm font-semibold text-[var(--color-paper)]">{point.title}</p>
-                <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">{point.body}</p>
+                <p className="text-sm font-semibold text-[var(--color-paper)]">
+                  {point.title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
+                  {point.body}
+                </p>
               </div>
             ))}
           </div>
 
           <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div className="text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
-              <p className="font-semibold text-[var(--color-paper)]">{privacyDetails.contactLabel}</p>
+              <p className="font-semibold text-[var(--color-paper)]">
+                {privacyDetails.contactLabel}
+              </p>
               <p>{privacyDetails.contactBody}</p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -74,7 +86,7 @@ export function PrivacyDialog() {
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-white/12 px-5 py-3 text-sm font-semibold transition hover:bg-[rgb(255_255_255_/_0.08)]"
               >
                 <ArrowLeft size={16} />
-                Back
+                {privacyDetails.backButtonLabel}
               </button>
               <a
                 href={`mailto:${privacyDetails.contactEmail}`}

@@ -11,6 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { siteUi } from "@/content/site/ui";
 import { Container } from "@/components/ui/Container";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { getImageAsset } from "@/lib/images/imageManifest";
@@ -50,7 +51,7 @@ function buildMemberSlide(member: TeamMember): TeamSlide {
   return {
     kind: "member",
     key: member.name,
-    eyebrow: "Principal lead",
+    eyebrow: siteUi.sections.team.principalLeadEyebrow,
     title: member.name,
     subtitle: member.role,
     description: member.quote,
@@ -88,13 +89,11 @@ export function StudioTeamBlock({
       {
         kind: "studio",
         key: "wider-studio",
-        eyebrow: "The wider studio",
-        title: "A larger circle behind the work",
-        subtitle:
-          "Production, second coverage, film handling, archive, and finishing all move to one shared standard.",
+        eyebrow: siteUi.sections.team.widerStudioEyebrow,
+        title: siteUi.sections.team.widerStudioTitle,
+        subtitle: siteUi.sections.team.widerStudioSubtitle,
         description:
-          team.groupNote ??
-          "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
+          team.groupNote ?? siteUi.sections.team.widerStudioDescription,
         image: getImageAsset("shared.team.wider-studio"),
       },
     ];
@@ -117,47 +116,50 @@ export function StudioTeamBlock({
   const clampScrollLeft = (viewport: HTMLDivElement, value: number) =>
     Math.max(0, Math.min(value, viewport.scrollWidth - viewport.clientWidth));
 
-  const setScrollTarget = useCallback((nextLeft: number, immediate = false) => {
-    const viewport = viewportRef.current;
+  const setScrollTarget = useCallback(
+    (nextLeft: number, immediate = false) => {
+      const viewport = viewportRef.current;
 
-    if (!viewport) {
-      return;
-    }
-
-    scrollTargetRef.current = clampScrollLeft(viewport, nextLeft);
-
-    if (immediate || reduceMotion) {
-      cancelScrollAnimation();
-      viewport.scrollLeft = scrollTargetRef.current;
-      return;
-    }
-
-    if (scrollFrameRef.current !== null) {
-      return;
-    }
-
-    const animate = () => {
-      const activeViewport = viewportRef.current;
-
-      if (!activeViewport) {
-        scrollFrameRef.current = null;
+      if (!viewport) {
         return;
       }
 
-      const delta = scrollTargetRef.current - activeViewport.scrollLeft;
+      scrollTargetRef.current = clampScrollLeft(viewport, nextLeft);
 
-      if (Math.abs(delta) < 0.6) {
-        activeViewport.scrollLeft = scrollTargetRef.current;
-        scrollFrameRef.current = null;
+      if (immediate || reduceMotion) {
+        cancelScrollAnimation();
+        viewport.scrollLeft = scrollTargetRef.current;
         return;
       }
 
-      activeViewport.scrollLeft += delta * 0.18;
+      if (scrollFrameRef.current !== null) {
+        return;
+      }
+
+      const animate = () => {
+        const activeViewport = viewportRef.current;
+
+        if (!activeViewport) {
+          scrollFrameRef.current = null;
+          return;
+        }
+
+        const delta = scrollTargetRef.current - activeViewport.scrollLeft;
+
+        if (Math.abs(delta) < 0.6) {
+          activeViewport.scrollLeft = scrollTargetRef.current;
+          scrollFrameRef.current = null;
+          return;
+        }
+
+        activeViewport.scrollLeft += delta * 0.18;
+        scrollFrameRef.current = window.requestAnimationFrame(animate);
+      };
+
       scrollFrameRef.current = window.requestAnimationFrame(animate);
-    };
-
-    scrollFrameRef.current = window.requestAnimationFrame(animate);
-  }, [cancelScrollAnimation, reduceMotion]);
+    },
+    [cancelScrollAnimation, reduceMotion],
+  );
 
   const pauseAutoplay = () => {
     clearResumeTimer();
@@ -275,10 +277,7 @@ export function StudioTeamBlock({
       const viewportPaddingLeft =
         Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
 
-      setScrollTarget(
-        target.offsetLeft - viewportPaddingLeft,
-        reduceMotion,
-      );
+      setScrollTarget(target.offsetLeft - viewportPaddingLeft, reduceMotion);
     }, 4600);
 
     return () => {
@@ -417,7 +416,7 @@ export function StudioTeamBlock({
       <section className="relative overflow-visible rounded-[2.75rem] border border-[var(--color-line)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(247,243,237,0.9))] px-6 py-8 shadow-[0_34px_84px_rgba(30,20,12,0.1)] md:px-8 md:py-10 lg:px-10">
         <div className="max-w-4xl space-y-4">
           <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-            {team.eyebrow ?? "The studio"}
+            {team.eyebrow ?? siteUi.sections.team.defaultEyebrow}
           </p>
           <h2 className="font-display-face max-w-5xl text-3xl leading-[0.96] tracking-[-0.04em] md:text-5xl">
             {team.heading}
@@ -442,17 +441,17 @@ export function StudioTeamBlock({
             <>
               <button
                 type="button"
-                aria-label="Show previous team card"
+                aria-label={siteUi.sections.team.previousCardLabel}
                 onClick={() => handleArrowClick(-1)}
-                className="absolute left-2 top-[38%] z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgb(255_255_255_/_0.72)] bg-[rgb(255_255_255_/_0.74)] text-[var(--color-ink)] shadow-[0_14px_28px_rgba(30,20,12,0.14)] backdrop-blur-md transition hover:bg-white md:left-4"
+                className="absolute top-[38%] left-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgb(255_255_255_/_0.72)] bg-[rgb(255_255_255_/_0.74)] text-[var(--color-ink)] shadow-[0_14px_28px_rgba(30,20,12,0.14)] backdrop-blur-md transition hover:bg-white md:left-4"
               >
                 <ArrowLeft size={18} strokeWidth={1.75} />
               </button>
               <button
                 type="button"
-                aria-label="Show next team card"
+                aria-label={siteUi.sections.team.nextCardLabel}
                 onClick={() => handleArrowClick(1)}
-                className="absolute right-2 top-[38%] z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgb(255_255_255_/_0.72)] bg-[rgb(255_255_255_/_0.74)] text-[var(--color-ink)] shadow-[0_14px_28px_rgba(30,20,12,0.14)] backdrop-blur-md transition hover:bg-white md:right-4"
+                className="absolute top-[38%] right-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgb(255_255_255_/_0.72)] bg-[rgb(255_255_255_/_0.74)] text-[var(--color-ink)] shadow-[0_14px_28px_rgba(30,20,12,0.14)] backdrop-blur-md transition hover:bg-white md:right-4"
               >
                 <ArrowRight size={18} strokeWidth={1.75} />
               </button>
@@ -461,7 +460,7 @@ export function StudioTeamBlock({
 
           <div
             ref={viewportRef}
-            className="flex gap-5 overflow-x-auto overscroll-x-contain px-4 py-4 pb-8 [scrollbar-width:none] [-ms-overflow-style:none] md:px-6 lg:px-7 [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 overflow-x-auto overscroll-x-contain px-4 py-4 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] md:px-6 lg:px-7 [&::-webkit-scrollbar]:hidden"
             style={{ scrollPaddingInline: "1.75rem" }}
             onScroll={updateScrollState}
             onWheel={handleWheel}
@@ -485,7 +484,7 @@ export function StudioTeamBlock({
                 }}
                 className={`${cardBaseClass} ${
                   isDragging ? "cursor-grabbing" : "cursor-grab"
-                } min-w-[82vw] max-w-[82vw] sm:min-w-[22rem] sm:max-w-[22rem] lg:min-w-[24rem] lg:max-w-[24rem]`}
+                } max-w-[82vw] min-w-[82vw] sm:max-w-[22rem] sm:min-w-[22rem] lg:max-w-[24rem] lg:min-w-[24rem]`}
               >
                 <div className="relative overflow-hidden rounded-t-[1.75rem]">
                   <Image
@@ -498,8 +497,8 @@ export function StudioTeamBlock({
                     blurDataURL={slide.image.blurDataURL}
                     className={
                       slide.kind === "studio"
-                        ? "aspect-[4/5] w-full object-cover grayscale contrast-[1.05] brightness-[1.04]"
-                        : "aspect-[4/5] w-full object-cover grayscale transition-[filter,transform] duration-700 ease-out contrast-[1.03] group-hover:grayscale-0 group-focus-within:grayscale-0"
+                        ? "aspect-[4/5] w-full object-cover brightness-[1.04] contrast-[1.05] grayscale"
+                        : "aspect-[4/5] w-full object-cover contrast-[1.03] grayscale transition-[filter,transform] duration-700 ease-out group-focus-within:grayscale-0 group-hover:grayscale-0"
                     }
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,11,0.02),rgba(18,14,11,0.14)_58%,rgba(18,14,11,0.48))]" />
@@ -514,20 +513,25 @@ export function StudioTeamBlock({
                     }}
                     className="absolute inset-x-0 bottom-0 space-y-3 p-5 text-[var(--color-paper)]"
                   >
-                    <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[rgb(244_235_224_/_0.82)]">
+                    <p className="text-[11px] font-semibold tracking-[0.24em] text-[rgb(244_235_224_/_0.82)] uppercase">
                       {slide.eyebrow}
                     </p>
                     <h3 className="font-display-face min-h-[3.95rem] max-w-[14ch] text-[2rem] leading-[0.96] tracking-[-0.04em] md:min-h-[4.45rem] md:text-[2.25rem]">
                       {slide.kind === "member"
                         ? getMemberTitleLines(slide.title).map((line) => (
-                            <span key={`${slide.key}-${line}`} className="block">
+                            <span
+                              key={`${slide.key}-${line}`}
+                              className="block"
+                            >
                               {line}
                             </span>
                           ))
                         : slide.title}
                     </h3>
                     <motion.div
-                      initial={reduceMotion ? false : { opacity: 0, scaleX: 0.65 }}
+                      initial={
+                        reduceMotion ? false : { opacity: 0, scaleX: 0.65 }
+                      }
                       animate={{ opacity: 1, scaleX: 1 }}
                       transition={{
                         duration: 0.48,
@@ -539,7 +543,7 @@ export function StudioTeamBlock({
                   </motion.div>
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between gap-5 px-5 pb-5 pt-4">
+                <div className="flex flex-1 flex-col justify-between gap-5 px-5 pt-4 pb-5">
                   <div className="space-y-3">
                     <p className="text-[11px] font-semibold tracking-[0.18em] text-[var(--color-mist)] uppercase">
                       {slide.subtitle}

@@ -66,6 +66,14 @@ export const imageAssetLibrary = {
     1024,
     "ink",
   ),
+  journalTuscanyWeddingGuideForUsCouplesCover: createAsset(
+    "journal-tuscany-wedding-guide-for-us-couples-cover",
+    "/images/brand/journal-generated/tuscany-wedding-guide-for-us-couples-cover.webp",
+    "A couple standing on a Tuscan villa terrace at sunset with the landscape opening beyond them.",
+    1536,
+    1024,
+    "linen",
+  ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

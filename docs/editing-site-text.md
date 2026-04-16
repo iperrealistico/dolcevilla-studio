@@ -29,7 +29,7 @@ Each main site page has its own text file:
 
 Each article lives in its own MDX file under `content/journal/`.
 
-- Example: `content/journal/guides/tuscany-wedding-guide-for-us-couples.mdx`
+- Example: `content/journal/guides/upper-tuscany-guide.mdx`
 - Edit the frontmatter at the top for metadata like title, excerpt, and date.
 - Edit the body below for the article itself.
 - Shared journal-article shell text such as breadcrumbs and the fallback CTA lives in `content/journal/template.ts`.

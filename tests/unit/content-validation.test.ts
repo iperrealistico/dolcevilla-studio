@@ -16,7 +16,8 @@ describe("content system", () => {
   it("returns journal entries sorted by publish date descending", async () => {
     const entries = await getJournalEntries();
 
-    expect(entries.some((entry) => entry.slug === "how-much-does-a-tuscany-wedding-cost")).toBe(true);
+    expect(entries.length).toBeGreaterThan(0);
+    expect(entries.some((entry) => entry.slug === "upper-tuscany-guide")).toBe(true);
 
     for (let index = 1; index < entries.length; index += 1) {
       expect(

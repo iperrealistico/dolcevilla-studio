@@ -318,46 +318,19 @@
     "asset": "oliveGardenCeremony"
   },
   "journal.tuscany-wedding-guide-for-us-couples.cover": {
-    "asset": "homeHeroVilla"
+    "asset": "journalTuscanyWeddingGuideForUsCouplesCover"
   },
-  "journal.tuscany-wedding-guide-for-us-couples.gallery.1": {
-    "asset": "homeUpperTuscany"
+  "journal.tuscany-wedding-guide-for-us-couples.inline.landscape-overview": {
+    "asset": "homeUpperTuscany",
+    "alt": "Layered hills in Upper Tuscany under soft morning light."
   },
-  "journal.tuscany-wedding-guide-for-us-couples.gallery.2": {
-    "asset": "villaCourtyard"
+  "journal.tuscany-wedding-guide-for-us-couples.inline.wedding-weekend-flow": {
+    "asset": "welcomeDinnerLanterns",
+    "alt": "A lantern-lit welcome dinner beneath cypress silhouettes in Tuscany."
   },
-  "journal.tuscany-wedding-guide-for-us-couples.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "journal.tuscany-wedding-guide-for-us-couples.gallery.4": {
-    "asset": "valDorciaCypressVows"
-  },
-  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.cover": {
-    "asset": "journalCover"
-  },
-  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.1": {
-    "asset": "homeUpperTuscany"
-  },
-  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.2": {
-    "asset": "villaPrivateCourtyardWedding"
-  },
-  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.3": {
-    "asset": "chiantiVineyardDinner"
-  },
-  "journal.best-wedding-venues-in-tuscany-for-a-destination-wedding.gallery.4": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "journal.how-much-does-a-tuscany-wedding-cost.cover": {
-    "asset": "journalCover"
-  },
-  "journal.how-much-does-a-tuscany-wedding-cost.gallery.1": {
-    "asset": "homeUpperTuscany"
-  },
-  "journal.how-much-does-a-tuscany-wedding-cost.gallery.2": {
-    "asset": "chiantiVineyardDinner"
-  },
-  "journal.how-much-does-a-tuscany-wedding-cost.gallery.3": {
-    "asset": "villaPrivateCourtyardWedding"
+  "journal.tuscany-wedding-guide-for-us-couples.inline.private-villa-rhythm": {
+    "asset": "villaPrivateCourtyardWedding",
+    "alt": "A private courtyard ceremony in Tuscany with a calmer villa rhythm."
   },
   "journal.why-we-photograph-weddings-on-film-and-digital.cover": {
     "asset": "filmHasselbladGroundGlassOliveCeremony"

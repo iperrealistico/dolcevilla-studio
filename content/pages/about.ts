@@ -110,7 +110,7 @@ export const aboutPage = servicePageContentSchema.parse({
       },
     ],
   },
-  stories: ["inside-our-darkroom", "villa-raffaelli-mornings"],
+  stories: [],
   villa: {
     variant: "editorial",
     title: "Villa Raffaelli is part of the origin, not the total identity.",

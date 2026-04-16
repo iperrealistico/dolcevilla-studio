@@ -16,11 +16,7 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
     subtitle:
       "Villa Raffaelli is part of the studio’s identity, not because it is public, but because it remains private, unseen, and exclusive. In selected circumstances, it can become part of a couple’s portraits or a very intimate wedding day.",
     primaryCta: { label: "Ask about the villa", href: "/contact" },
-    secondaryCta: {
-      label: "Read the story of place",
-      href: "/journal/villa-raffaelli-mornings",
-      variant: "secondary",
-    },
+    secondaryCta: { label: "Explore the journal", href: "/journal", variant: "secondary" },
     imageIds: [
       "page.villa-raffaelli.hero.primary",
       "page.villa-raffaelli.hero.secondary",
@@ -122,17 +118,9 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
       variant: "ghost",
     },
     { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
-    {
-      label: "Journal story",
-      href: "/journal/villa-raffaelli-mornings",
-      variant: "ghost",
-    },
+    { label: "Journal", href: "/journal", variant: "ghost" },
   ],
-  stories: [
-    "villa-raffaelli-mornings",
-    "upper-tuscany-guide",
-    "lucca-garden-weekend",
-  ],
+  stories: [],
   testimonials: testimonials.home,
   investmentNote: {
     eyebrow: "Access and fit",

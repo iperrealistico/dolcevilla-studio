@@ -69,11 +69,7 @@ export const experiencePage = servicePageContentSchema.parse({
     { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
     { label: "Contact", href: "/contact", variant: "ghost" },
   ],
-  stories: [
-    "lucca-garden-weekend",
-    "quarry-elopement",
-    "weekend-timeline-notes",
-  ],
+  stories: [],
   testimonials: [...testimonials.services, ...testimonials.home],
   process: [
     {

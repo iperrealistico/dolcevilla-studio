@@ -90,11 +90,7 @@ export const filmWeddingPhotographyPage = servicePageContentSchema.parse({
       },
     ],
   },
-  stories: [
-    "why-we-photograph-weddings-on-film-and-digital",
-    "35mm-120-large-format-wedding-photography",
-    "inside-our-darkroom",
-  ],
+  stories: [],
   testimonials: testimonials.services,
   investmentNote: {
     eyebrow: "What to expect",

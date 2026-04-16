@@ -107,11 +107,7 @@ export const homePage = servicePageContentSchema.parse({
     { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
     { label: "Journal", href: "/journal", variant: "ghost" },
   ],
-  stories: [
-    "lucca-garden-weekend",
-    "why-we-photograph-weddings-on-film-and-digital",
-    "35mm-120-large-format-wedding-photography",
-  ],
+  stories: [],
   testimonials: testimonials.home,
   process: [
     {

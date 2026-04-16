@@ -171,7 +171,7 @@ export const consentStateSchema = z.object({
 
 export const servicePageContentSchema = z.object({
   slug: z.string().min(1),
-  pageType: z.enum(["home", "service", "experience", "pricing", "about", "contact", "utility"]),
+  pageType: z.enum(["home", "service", "experience", "about", "contact", "utility"]),
   hero: heroSchema.optional(),
   intro: richSectionSchema,
   gallery: z.array(galleryItemSchema).default([]),
@@ -191,36 +191,6 @@ export const servicePageContentSchema = z.object({
   formIntro: richSectionSchema.optional(),
   directEmail: z.string().email().optional(),
   nextSteps: z.array(z.string()).default([]),
-});
-
-export const locationLandingSchema = z.object({
-  slug: z.string().min(1),
-  title: z.string().min(1),
-  hero: heroSchema,
-  intro: richSectionSchema,
-  whyThisPlaceMatters: z.array(pointSchema).min(2),
-  whyWeFit: z.array(pointSchema).min(2),
-  gallery: z.array(galleryItemSchema).min(4),
-  featuredStorySlugs: z.array(z.string()).min(1),
-  testimonial: testimonialSchema,
-  faqItems: z.array(faqItemSchema).min(3),
-  investmentNote: richSectionSchema,
-  seo: seoSchema,
-  villaIdentityVariant: z.enum(["minimal", "editorial", "quote"]).default("minimal"),
-  cta: ctaSectionSchema,
-});
-
-export const adsLandingSchema = z.object({
-  slug: z.string().min(1),
-  channel: z.enum(["google", "meta"]),
-  hero: heroSchema,
-  proof: z.array(pointSchema).min(2),
-  gallery: z.array(galleryItemSchema).min(2),
-  caseStudySlug: z.string().min(1),
-  pricingSignal: z.string().min(1),
-  faqItems: z.array(faqItemSchema).min(2),
-  seo: seoSchema,
-  cta: ctaSectionSchema,
 });
 
 export const journalEntryFrontmatterSchema = z.object({
@@ -274,6 +244,4 @@ export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 export type UIDictionary = z.infer<typeof uiDictionarySchema>;
 export type ConsentState = z.infer<typeof consentStateSchema>;
 export type ServicePageContent = z.infer<typeof servicePageContentSchema>;
-export type LocationLanding = z.infer<typeof locationLandingSchema>;
-export type AdsLanding = z.infer<typeof adsLandingSchema>;
 export type JournalEntryFrontmatter = z.infer<typeof journalEntryFrontmatterSchema>;

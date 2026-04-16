@@ -1,74 +1,178 @@
 {
-  "page.home.hero.primary": { "asset": "homeHeroVilla" },
-  "page.home.hero.secondary": { "asset": "villaCourtyard" },
-  "page.home.hero.tertiary": { "asset": "homeCoupleQuiet" },
-  "page.home.hero.quaternary": { "asset": "villaLibraryPortrait" },
-  "page.home.gallery.1": { "asset": "homeCoupleQuiet" },
-  "page.home.gallery.2": { "asset": "oliveGardenCeremony" },
-  "page.home.gallery.3": { "asset": "villaCourtyard" },
-  "page.home.gallery.4": { "asset": "welcomeDinnerLanterns" },
-  "page.home.gallery.5": { "asset": "florenceLoggiaBlueHour" },
-  "page.home.gallery.6": { "asset": "valDorciaCypressVows" },
-  "page.home.craft.image": { "asset": "filmRolleiflexBridalPrep" },
-  "page.home.villa.image": { "asset": "homeHeroVilla" },
-  "page.about.hero.primary": { "asset": "villaLibraryPortrait" },
-  "page.about.hero.secondary": { "asset": "homeCoupleQuiet" },
-  "page.about.hero.tertiary": { "asset": "villaCourtyard" },
-  "page.about.team.lisa": { "asset": "teamLisaMazzei" },
-  "page.about.team.alberto": { "asset": "teamAlbertoPellegrinetti" },
-  "page.about.team.leonardo": { "asset": "teamLeonardoFiori" },
-  "page.about.team.francesco": { "asset": "teamFrancescoTarantino" },
-  "page.about.team.group": { "asset": "teamWiderStudioVillaRaffaelli" },
-  "page.about.gallery.1": { "asset": "film35mmRollStillLife" },
-  "page.about.gallery.2": { "asset": "film120RollStyling" },
-  "page.about.gallery.3": { "asset": "film4x5SheetHolder" },
-  "page.about.gallery.4": { "asset": "filmCameraCollectionStudioTable" },
-  "page.about.gallery.5": { "asset": "darkroomFilmShelvesTools" },
-  "page.about.gallery.6": { "asset": "darkroomSinkPrintsPortrait" },
-  "page.about.craft.image": { "asset": "filmCameraCollectionStudioTable" },
-  "page.about.villa.image": { "asset": "homeHeroVilla" },
-  "page.weddings.hero.primary": { "asset": "florenceLoggiaBlueHour" },
-  "page.weddings.hero.secondary": { "asset": "welcomeDinnerLanterns" },
-  "page.weddings.hero.tertiary": { "asset": "chiantiVineyardDinner" },
-  "page.weddings.gallery.1": { "asset": "candlelitCourtyardToast" },
-  "page.weddings.gallery.2": { "asset": "florenceLoggiaBlueHour" },
-  "page.weddings.gallery.3": { "asset": "chiantiVineyardDinner" },
-  "page.weddings.gallery.4": { "asset": "luccaEvening" },
-  "page.weddings.gallery.5": { "asset": "homeCoupleQuiet" },
-  "page.weddings.gallery.6": { "asset": "welcomeDinnerLanterns" },
+  "page.home.hero.primary": {
+    "asset": "homeHeroVilla"
+  },
+  "page.home.hero.secondary": {
+    "asset": "villaCourtyard"
+  },
+  "page.home.hero.tertiary": {
+    "asset": "homeCoupleQuiet"
+  },
+  "page.home.hero.quaternary": {
+    "asset": "villaLibraryPortrait"
+  },
+  "page.home.gallery.1": {
+    "asset": "homeCoupleQuiet"
+  },
+  "page.home.gallery.2": {
+    "asset": "oliveGardenCeremony"
+  },
+  "page.home.gallery.3": {
+    "asset": "villaCourtyard"
+  },
+  "page.home.gallery.4": {
+    "asset": "welcomeDinnerLanterns"
+  },
+  "page.home.gallery.5": {
+    "asset": "florenceLoggiaBlueHour"
+  },
+  "page.home.gallery.6": {
+    "asset": "valDorciaCypressVows"
+  },
+  "page.home.craft.image": {
+    "asset": "filmRolleiflexBridalPrep"
+  },
+  "page.home.villa.image": {
+    "asset": "homeHeroVilla"
+  },
+  "page.about.hero.primary": {
+    "asset": "villaLibraryPortrait"
+  },
+  "page.about.hero.secondary": {
+    "asset": "homeCoupleQuiet"
+  },
+  "page.about.hero.tertiary": {
+    "asset": "villaCourtyard"
+  },
+  "page.about.team.lisa": {
+    "asset": "teamLisaMazzei"
+  },
+  "page.about.team.alberto": {
+    "asset": "teamAlbertoPellegrinetti"
+  },
+  "page.about.team.leonardo": {
+    "asset": "teamLeonardoFiori"
+  },
+  "page.about.team.francesco": {
+    "asset": "teamFrancescoTarantino"
+  },
+  "page.about.team.group": {
+    "asset": "teamWiderStudioVillaRaffaelli"
+  },
+  "page.about.gallery.1": {
+    "asset": "film35mmRollStillLife"
+  },
+  "page.about.gallery.2": {
+    "asset": "film120RollStyling"
+  },
+  "page.about.gallery.3": {
+    "asset": "film4x5SheetHolder"
+  },
+  "page.about.gallery.4": {
+    "asset": "filmCameraCollectionStudioTable"
+  },
+  "page.about.gallery.5": {
+    "asset": "darkroomFilmShelvesTools"
+  },
+  "page.about.gallery.6": {
+    "asset": "darkroomSinkPrintsPortrait"
+  },
+  "page.about.craft.image": {
+    "asset": "filmCameraCollectionStudioTable"
+  },
+  "page.about.villa.image": {
+    "asset": "homeHeroVilla"
+  },
+  "page.weddings.hero.primary": {
+    "asset": "florenceLoggiaBlueHour"
+  },
+  "page.weddings.hero.secondary": {
+    "asset": "welcomeDinnerLanterns"
+  },
+  "page.weddings.hero.tertiary": {
+    "asset": "chiantiVineyardDinner"
+  },
+  "page.weddings.gallery.1": {
+    "asset": "candlelitCourtyardToast"
+  },
+  "page.weddings.gallery.2": {
+    "asset": "florenceLoggiaBlueHour"
+  },
+  "page.weddings.gallery.3": {
+    "asset": "chiantiVineyardDinner"
+  },
+  "page.weddings.gallery.4": {
+    "asset": "luccaEvening"
+  },
+  "page.weddings.gallery.5": {
+    "asset": "homeCoupleQuiet"
+  },
+  "page.weddings.gallery.6": {
+    "asset": "welcomeDinnerLanterns"
+  },
   "page.weddings.craft.image": {
     "asset": "filmHasselbladGroundGlassReception"
   },
-  "page.weddings.villa.image": { "asset": "villaCourtyard" },
-  "page.elopements.hero.primary": { "asset": "intimateGesture" },
-  "page.elopements.hero.secondary": { "asset": "valDorciaCypressVows" },
-  "page.elopements.hero.tertiary": { "asset": "versiliaSeasideWalk" },
-  "page.elopements.gallery.1": { "asset": "intimateGesture" },
-  "page.elopements.gallery.2": { "asset": "valDorciaCypressVows" },
-  "page.elopements.gallery.3": { "asset": "versiliaSeasideWalk" },
-  "page.elopements.gallery.4": { "asset": "bridalPrepWindowSilk" },
-  "page.elopements.gallery.5": { "asset": "sienaCourtyardPortrait" },
-  "page.elopements.craft.image": { "asset": "filmHasselblad500cmWindowGarden" },
-  "page.elopements.villa.image": { "asset": "villaCourtyard" },
-  "page.experience.gallery.1": { "asset": "filmNikonF5ReceptionCorner" },
+  "page.weddings.villa.image": {
+    "asset": "villaCourtyard"
+  },
+  "page.elopements.hero.primary": {
+    "asset": "intimateGesture"
+  },
+  "page.elopements.hero.secondary": {
+    "asset": "valDorciaCypressVows"
+  },
+  "page.elopements.hero.tertiary": {
+    "asset": "versiliaSeasideWalk"
+  },
+  "page.elopements.gallery.1": {
+    "asset": "intimateGesture"
+  },
+  "page.elopements.gallery.2": {
+    "asset": "valDorciaCypressVows"
+  },
+  "page.elopements.gallery.3": {
+    "asset": "versiliaSeasideWalk"
+  },
+  "page.elopements.gallery.4": {
+    "asset": "bridalPrepWindowSilk"
+  },
+  "page.elopements.gallery.5": {
+    "asset": "sienaCourtyardPortrait"
+  },
+  "page.elopements.craft.image": {
+    "asset": "filmHasselblad500cmWindowGarden"
+  },
+  "page.elopements.villa.image": {
+    "asset": "villaCourtyard"
+  },
+  "page.experience.gallery.1": {
+    "asset": "filmNikonF5ReceptionCorner"
+  },
   "page.experience.gallery.2": {
     "asset": "filmHasselbladGroundGlassBridalWindow"
   },
   "page.experience.gallery.3": {
     "asset": "filmHasselbladGroundGlassReception"
   },
-  "page.experience.gallery.4": { "asset": "filmSmartflex4x5Courtyard" },
+  "page.experience.gallery.4": {
+    "asset": "filmSmartflex4x5Courtyard"
+  },
   "page.experience.craft.image": {
     "asset": "filmHasselbladGroundGlassBridalWindow"
   },
-  "page.experience.villa.image": { "asset": "homeHeroVilla" },
+  "page.experience.villa.image": {
+    "asset": "homeHeroVilla"
+  },
   "page.film-wedding-photography.hero.primary": {
     "asset": "villaLibraryPortrait"
   },
   "page.film-wedding-photography.hero.secondary": {
     "asset": "homeCoupleQuiet"
   },
-  "page.film-wedding-photography.hero.tertiary": { "asset": "homeHeroVilla" },
+  "page.film-wedding-photography.hero.tertiary": {
+    "asset": "homeHeroVilla"
+  },
   "page.film-wedding-photography.hero.quaternary": {
     "asset": "villaCourtyard"
   },
@@ -81,14 +185,18 @@
   "page.film-wedding-photography.gallery.3": {
     "asset": "filmNikonF5ReceptionCorner"
   },
-  "page.film-wedding-photography.gallery.4": { "asset": "film120RollStyling" },
+  "page.film-wedding-photography.gallery.4": {
+    "asset": "film120RollStyling"
+  },
   "page.film-wedding-photography.gallery.5": {
     "asset": "filmRolleiflexBridalPrep"
   },
   "page.film-wedding-photography.gallery.6": {
     "asset": "filmHasselblad500cmWindowGarden"
   },
-  "page.film-wedding-photography.gallery.7": { "asset": "film4x5SheetHolder" },
+  "page.film-wedding-photography.gallery.7": {
+    "asset": "film4x5SheetHolder"
+  },
   "page.film-wedding-photography.gallery.8": {
     "asset": "film8x10ViewCameraOliveGrove"
   },
@@ -119,223 +227,60 @@
   "page.villa-raffaelli.hero.primary": {
     "asset": "villaPrivateCourtyardWedding"
   },
-  "page.villa-raffaelli.hero.secondary": { "asset": "homeHeroVilla" },
+  "page.villa-raffaelli.hero.secondary": {
+    "asset": "homeHeroVilla"
+  },
   "page.villa-raffaelli.hero.tertiary": {
     "asset": "villaNewlywedsMountainGarden"
   },
-  "page.villa-raffaelli.hero.quaternary": { "asset": "villaLibraryPortrait" },
-  "page.villa-raffaelli.gallery.1": { "asset": "villaPrivateCourtyardWedding" },
-  "page.villa-raffaelli.gallery.2": { "asset": "villaNewlywedsMountainGarden" },
-  "page.villa-raffaelli.gallery.3": { "asset": "homeHeroVilla" },
-  "page.villa-raffaelli.gallery.4": { "asset": "villaCourtyard" },
-  "page.villa-raffaelli.gallery.5": { "asset": "villaLibraryPortrait" },
-  "page.villa-raffaelli.gallery.6": { "asset": "studioInterior" },
-  "page.villa-raffaelli.gallery.7": { "asset": "homeUpperTuscany" },
-  "page.villa-raffaelli.gallery.8": { "asset": "marblePath" },
+  "page.villa-raffaelli.hero.quaternary": {
+    "asset": "villaLibraryPortrait"
+  },
+  "page.villa-raffaelli.gallery.1": {
+    "asset": "villaPrivateCourtyardWedding"
+  },
+  "page.villa-raffaelli.gallery.2": {
+    "asset": "villaNewlywedsMountainGarden"
+  },
+  "page.villa-raffaelli.gallery.3": {
+    "asset": "homeHeroVilla"
+  },
+  "page.villa-raffaelli.gallery.4": {
+    "asset": "villaCourtyard"
+  },
+  "page.villa-raffaelli.gallery.5": {
+    "asset": "villaLibraryPortrait"
+  },
+  "page.villa-raffaelli.gallery.6": {
+    "asset": "studioInterior"
+  },
+  "page.villa-raffaelli.gallery.7": {
+    "asset": "homeUpperTuscany"
+  },
+  "page.villa-raffaelli.gallery.8": {
+    "asset": "marblePath"
+  },
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
-  "landing.tuscany-wedding-photographer.hero.primary": {
+  "journal.quarry-elopement.cover": {
     "asset": "valDorciaCypressVows"
   },
-  "landing.tuscany-wedding-photographer.hero.secondary": {
-    "asset": "florenceLoggiaBlueHour"
+  "journal.quarry-elopement.gallery.1": {
+    "asset": "intimateGesture"
   },
-  "landing.tuscany-wedding-photographer.gallery.1": {
+  "journal.quarry-elopement.gallery.2": {
     "asset": "valDorciaCypressVows"
   },
-  "landing.tuscany-wedding-photographer.gallery.2": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "landing.tuscany-wedding-photographer.gallery.3": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.tuscany-wedding-photographer.gallery.4": {
+  "journal.quarry-elopement.gallery.3": {
     "asset": "versiliaSeasideWalk"
   },
-  "landing.lucca-wedding-photographer.hero.primary": {
-    "asset": "luccaEvening"
-  },
-  "landing.lucca-wedding-photographer.hero.secondary": {
-    "asset": "villaCourtyard"
-  },
-  "landing.lucca-wedding-photographer.gallery.1": { "asset": "luccaEvening" },
-  "landing.lucca-wedding-photographer.gallery.2": { "asset": "villaCourtyard" },
-  "landing.lucca-wedding-photographer.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "landing.lucca-wedding-photographer.gallery.4": {
-    "asset": "homeCoupleQuiet"
-  },
-  "landing.florence-wedding-photographer.hero.primary": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "landing.florence-wedding-photographer.hero.secondary": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.florence-wedding-photographer.gallery.1": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "landing.florence-wedding-photographer.gallery.2": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.florence-wedding-photographer.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "landing.florence-wedding-photographer.gallery.4": {
+  "journal.quarry-elopement.gallery.4": {
     "asset": "bridalPrepWindowSilk"
   },
-  "landing.val-dorcia-wedding-photographer.hero.primary": {
-    "asset": "valDorciaCypressVows"
-  },
-  "landing.val-dorcia-wedding-photographer.hero.secondary": {
+  "journal.quarry-elopement.gallery.5": {
     "asset": "oliveGardenCeremony"
   },
-  "landing.val-dorcia-wedding-photographer.gallery.1": {
-    "asset": "valDorciaCypressVows"
-  },
-  "landing.val-dorcia-wedding-photographer.gallery.2": {
-    "asset": "homeCoupleQuiet"
-  },
-  "landing.val-dorcia-wedding-photographer.gallery.3": {
-    "asset": "oliveGardenCeremony"
-  },
-  "landing.val-dorcia-wedding-photographer.gallery.4": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.chianti-wedding-photographer.hero.primary": {
-    "asset": "chiantiVineyardDinner"
-  },
-  "landing.chianti-wedding-photographer.hero.secondary": {
-    "asset": "oliveGardenCeremony"
-  },
-  "landing.chianti-wedding-photographer.gallery.1": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.chianti-wedding-photographer.gallery.2": {
-    "asset": "chiantiVineyardDinner"
-  },
-  "landing.chianti-wedding-photographer.gallery.3": {
-    "asset": "intimateGesture"
-  },
-  "landing.chianti-wedding-photographer.gallery.4": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "landing.siena-wedding-photographer.hero.primary": {
-    "asset": "sienaCourtyardPortrait"
-  },
-  "landing.siena-wedding-photographer.hero.secondary": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.siena-wedding-photographer.gallery.1": {
-    "asset": "sienaCourtyardPortrait"
-  },
-  "landing.siena-wedding-photographer.gallery.2": {
-    "asset": "villaLibraryPortrait"
-  },
-  "landing.siena-wedding-photographer.gallery.3": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.siena-wedding-photographer.gallery.4": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "landing.tuscany-elopement-photographer.hero.primary": {
-    "asset": "intimateGesture"
-  },
-  "landing.tuscany-elopement-photographer.hero.secondary": {
-    "asset": "valDorciaCypressVows"
-  },
-  "landing.tuscany-elopement-photographer.gallery.1": {
-    "asset": "intimateGesture"
-  },
-  "landing.tuscany-elopement-photographer.gallery.2": {
-    "asset": "valDorciaCypressVows"
-  },
-  "landing.tuscany-elopement-photographer.gallery.3": {
-    "asset": "bridalPrepWindowSilk"
-  },
-  "landing.tuscany-elopement-photographer.gallery.4": {
-    "asset": "versiliaSeasideWalk"
-  },
-  "landing.intimate-wedding-in-tuscany.hero.primary": {
-    "asset": "intimateGesture"
-  },
-  "landing.intimate-wedding-in-tuscany.hero.secondary": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.intimate-wedding-in-tuscany.gallery.1": {
-    "asset": "intimateGesture"
-  },
-  "landing.intimate-wedding-in-tuscany.gallery.2": {
-    "asset": "candlelitCourtyardToast"
-  },
-  "landing.intimate-wedding-in-tuscany.gallery.3": {
-    "asset": "oliveGardenCeremony"
-  },
-  "landing.intimate-wedding-in-tuscany.gallery.4": {
-    "asset": "bridalPrepWindowSilk"
-  },
-  "ads.google.tuscany-wedding-photographer.hero.primary": {
-    "asset": "valDorciaCypressVows"
-  },
-  "ads.google.tuscany-wedding-photographer.hero.secondary": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "ads.google.tuscany-wedding-photographer.gallery.1": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "ads.google.tuscany-wedding-photographer.gallery.2": {
-    "asset": "valDorciaCypressVows"
-  },
-  "ads.google.tuscany-wedding-photographer.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "ads.google.lucca-wedding-photographer.hero.primary": {
-    "asset": "luccaEvening"
-  },
-  "ads.google.lucca-wedding-photographer.hero.secondary": {
-    "asset": "villaCourtyard"
-  },
-  "ads.google.lucca-wedding-photographer.gallery.1": {
-    "asset": "luccaEvening"
-  },
-  "ads.google.lucca-wedding-photographer.gallery.2": {
-    "asset": "villaCourtyard"
-  },
-  "ads.google.lucca-wedding-photographer.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "ads.meta.elopement-tuscany.hero.primary": { "asset": "intimateGesture" },
-  "ads.meta.elopement-tuscany.hero.secondary": {
-    "asset": "valDorciaCypressVows"
-  },
-  "ads.meta.elopement-tuscany.gallery.1": { "asset": "intimateGesture" },
-  "ads.meta.elopement-tuscany.gallery.2": { "asset": "valDorciaCypressVows" },
-  "ads.meta.elopement-tuscany.gallery.3": { "asset": "bridalPrepWindowSilk" },
-  "ads.meta.tuscany-wedding-photographer.hero.primary": {
-    "asset": "homeHeroVilla"
-  },
-  "ads.meta.tuscany-wedding-photographer.hero.secondary": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "ads.meta.tuscany-wedding-photographer.hero.tertiary": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "ads.meta.tuscany-wedding-photographer.gallery.1": {
-    "asset": "homeHeroVilla"
-  },
-  "ads.meta.tuscany-wedding-photographer.gallery.2": {
-    "asset": "florenceLoggiaBlueHour"
-  },
-  "ads.meta.tuscany-wedding-photographer.gallery.3": {
-    "asset": "welcomeDinnerLanterns"
-  },
-  "journal.quarry-elopement.cover": { "asset": "valDorciaCypressVows" },
-  "journal.quarry-elopement.gallery.1": { "asset": "intimateGesture" },
-  "journal.quarry-elopement.gallery.2": { "asset": "valDorciaCypressVows" },
-  "journal.quarry-elopement.gallery.3": { "asset": "versiliaSeasideWalk" },
-  "journal.quarry-elopement.gallery.4": { "asset": "bridalPrepWindowSilk" },
-  "journal.quarry-elopement.gallery.5": { "asset": "oliveGardenCeremony" },
   "journal.35mm-120-large-format-wedding-photography.cover": {
     "asset": "filmCameraCollectionStudioTable"
   },
@@ -357,11 +302,21 @@
   "journal.35mm-120-large-format-wedding-photography.gallery.6": {
     "asset": "filmSmartflex4x5Courtyard"
   },
-  "journal.upper-tuscany-guide.cover": { "asset": "homeUpperTuscany" },
-  "journal.upper-tuscany-guide.gallery.1": { "asset": "homeUpperTuscany" },
-  "journal.upper-tuscany-guide.gallery.2": { "asset": "villaCourtyard" },
-  "journal.upper-tuscany-guide.gallery.3": { "asset": "marblePath" },
-  "journal.upper-tuscany-guide.gallery.4": { "asset": "oliveGardenCeremony" },
+  "journal.upper-tuscany-guide.cover": {
+    "asset": "homeUpperTuscany"
+  },
+  "journal.upper-tuscany-guide.gallery.1": {
+    "asset": "homeUpperTuscany"
+  },
+  "journal.upper-tuscany-guide.gallery.2": {
+    "asset": "villaCourtyard"
+  },
+  "journal.upper-tuscany-guide.gallery.3": {
+    "asset": "marblePath"
+  },
+  "journal.upper-tuscany-guide.gallery.4": {
+    "asset": "oliveGardenCeremony"
+  },
   "journal.tuscany-wedding-guide-for-us-couples.cover": {
     "asset": "homeHeroVilla"
   },
@@ -419,7 +374,9 @@
   "journal.why-we-photograph-weddings-on-film-and-digital.gallery.4": {
     "asset": "filmNikonFVintageVillaLibrary"
   },
-  "journal.weekend-timeline-notes.cover": { "asset": "welcomeDinnerLanterns" },
+  "journal.weekend-timeline-notes.cover": {
+    "asset": "welcomeDinnerLanterns"
+  },
   "journal.weekend-timeline-notes.gallery.1": {
     "asset": "welcomeDinnerLanterns"
   },
@@ -429,16 +386,24 @@
   "journal.weekend-timeline-notes.gallery.3": {
     "asset": "candlelitCourtyardToast"
   },
-  "journal.lucca-garden-weekend.cover": { "asset": "luccaEvening" },
-  "journal.lucca-garden-weekend.gallery.1": { "asset": "homeCoupleQuiet" },
-  "journal.lucca-garden-weekend.gallery.2": { "asset": "luccaEvening" },
+  "journal.lucca-garden-weekend.cover": {
+    "asset": "luccaEvening"
+  },
+  "journal.lucca-garden-weekend.gallery.1": {
+    "asset": "homeCoupleQuiet"
+  },
+  "journal.lucca-garden-weekend.gallery.2": {
+    "asset": "luccaEvening"
+  },
   "journal.lucca-garden-weekend.gallery.3": {
     "asset": "welcomeDinnerLanterns"
   },
   "journal.lucca-garden-weekend.gallery.4": {
     "asset": "candlelitCourtyardToast"
   },
-  "journal.lucca-garden-weekend.gallery.5": { "asset": "villaCourtyard" },
+  "journal.lucca-garden-weekend.gallery.5": {
+    "asset": "villaCourtyard"
+  },
   "journal.inside-our-darkroom.cover": {
     "asset": "darkroomHangingPrintsRedLight"
   },
@@ -457,13 +422,25 @@
   "journal.inside-our-darkroom.gallery.5": {
     "asset": "darkroomSinkPrintsPortrait"
   },
-  "journal.villa-raffaelli-mornings.cover": { "asset": "homeHeroVilla" },
-  "journal.villa-raffaelli-mornings.gallery.1": { "asset": "homeHeroVilla" },
+  "journal.villa-raffaelli-mornings.cover": {
+    "asset": "homeHeroVilla"
+  },
+  "journal.villa-raffaelli-mornings.gallery.1": {
+    "asset": "homeHeroVilla"
+  },
   "journal.villa-raffaelli-mornings.gallery.2": {
     "asset": "villaLibraryPortrait"
   },
-  "journal.villa-raffaelli-mornings.gallery.3": { "asset": "villaCourtyard" },
-  "consent.doorway.image": { "asset": "villaLibraryPortrait" },
-  "shared.team.wider-studio": { "asset": "teamWiderStudioVillaRaffaelli" },
-  "shared.villa.fallback": { "asset": "homeHeroVilla" }
+  "journal.villa-raffaelli-mornings.gallery.3": {
+    "asset": "villaCourtyard"
+  },
+  "consent.doorway.image": {
+    "asset": "villaLibraryPortrait"
+  },
+  "shared.team.wider-studio": {
+    "asset": "teamWiderStudioVillaRaffaelli"
+  },
+  "shared.villa.fallback": {
+    "asset": "homeHeroVilla"
+  }
 }

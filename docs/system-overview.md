@@ -16,19 +16,18 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 
 - a public editorial marketing site;
 - journal content rendered from local MDX files;
-- typed local content for core pages and landing pages;
-- dedicated ads landing pages;
+- typed local content for the core site pages and shared UI;
 - consent-gated analytics and ad tracking;
 - an inquiry form that posts JSON to an external public endpoint.
 
 ## Repository Map
 
 - `app/`
-  - App Router routes for public pages, journal entries, metadata endpoints, and ads pages.
+  - App Router routes for public pages, journal entries, and metadata endpoints.
 - `components/`
   - reusable UI blocks, layout primitives, motion wrappers, galleries, forms, consent surfaces, and templates.
 - `content/`
-  - typed page payloads, landings, ads content, site settings, and MDX journal entries.
+  - typed page payloads, site settings, shared copy, and MDX journal entries.
 - `lib/`
   - content loaders, analytics helpers, form submission utilities, SEO helpers, image manifest, and shared utilities.
 - `public/`
@@ -46,7 +45,7 @@ Dolcevilla Studio is a static-first Next.js marketing site for a premium Tuscany
 
 - Next.js 16.1.6 App Router frontend using React 19 and TypeScript.
 - Tailwind CSS 4 styling plus shared tokens and art-direction-heavy components.
-- Local typed content objects for core pages, landings, settings, FAQs, and ads payloads.
+- Local typed content objects for core pages, settings, FAQs, and shared UI copy.
 - Frontend-only image placement via a local slot map in `content/site/image-slots.json`, resolved against the curated asset library in `lib/images/imageLibrary.ts`.
 - Local MDX journal pipeline for stories, guides, and planning content.
 - Consent-gated analytics integrations for GA4, Google Ads, and Meta Pixel.

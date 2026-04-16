@@ -1,6 +1,7 @@
 import { servicePageContentSchema } from "@/lib/content/schemas";
 import { faqs } from "@/content/site/faqs";
 import { buildGallery } from "@/lib/images/imageManifest";
+import { testimonials } from "@/content/site/testimonials";
 
 export const experiencePage = servicePageContentSchema.parse({
   slug: "experience",
@@ -12,57 +13,103 @@ export const experiencePage = servicePageContentSchema.parse({
     { id: "page.experience.gallery.4", layoutVariant: "portrait" },
   ]),
   intro: {
-    eyebrow: "Experience",
-    heading: "Calm, clear, and technically intentional from the first message to the final gallery.",
+    eyebrow: "Weddings, elopements, and the full experience",
+    heading:
+      "One calm, complete photographic experience for wedding weekends, elopements, and intimate celebrations.",
     body: [
-      "We designed the process for international couples who need confidence, warmth, and a photographer who can translate both logistics and atmosphere into something clear.",
-      "That includes knowing where film genuinely belongs, where digital must take over, and how to combine both without making the day feel like a workshop or performance.",
+      "This is the page that brings the whole offer together: destination wedding weekends, intimate wedding days, and elopements shaped with the same editorial restraint, local sensitivity, and hybrid film-and-digital judgment.",
+      "We work across different scales of celebration, but the underlying experience stays consistent: thoughtful guidance, calm presence, clear planning support, and imagery that lets Tuscany feel lived rather than generic.",
     ],
   },
   highlights: [
     {
-      title: "First reply with substance",
-      description: "We answer thoughtfully, not with a generic sales sequence.",
+      title: "Wedding weekends and full celebrations",
+      description:
+        "We photograph multi-day destination weddings with the emotional range, logistical calm, and full-story coverage they actually require.",
     },
     {
-      title: "Hybrid coverage design",
-      description: "One photographer always carries film, but we map the day so analog craft adds meaning rather than friction.",
+      title: "Elopements and intimate formats",
+      description:
+        "We also work beautifully with quieter celebrations where place, movement, portraits, and emotional freedom need more room to breathe.",
     },
     {
-      title: "Discreet presence",
-      description: "Our approach on the day is attentive, emotionally tuned, and technically calm without becoming performative.",
+      title: "One consistent experience behind both",
+      description:
+        "Whether the day is large or quiet, the way we work stays the same: attentive, technically composed, and designed around atmosphere rather than performance.",
     },
   ],
   craft: {
     variant: "editorial",
-    eyebrow: "How it works",
-    title: "Film for character. Digital for rhythm, speed, and certainty.",
+    eyebrow: "How we work",
+    title: "Film where it adds atmosphere. Digital where the story needs certainty.",
     body:
-      "A wedding day asks for range. Film gives the work a physical signature, but digital protects the moments that move too quickly, the light that shifts too fast, and the parts of the day that need reliability over ideology.",
+      "Wedding weekends and elopements ask for different pacing, but not different seriousness. We use film where tactility, stillness, and atmosphere deepen the work, and digital where pace, movement, changing light, or family rhythm need complete reliability.",
     imageId: "page.experience.craft.image",
     points: [
       {
-        title: "We assign film deliberately",
-        description: "Portraits, transitions, morning preparation, dinners, and select quiet moments often suit film best.",
+        title: "Wedding weekends gain narrative depth",
+        description:
+          "35mm for movement, dinners, and transitions. 120 for portraits, architecture, and slower visual pauses. Digital wherever the weekend needs speed and certainty.",
       },
       {
-        title: "Digital keeps the story whole",
-        description: "Ceremonies, speeches, fast family movement, and low-light coverage stay complete and secure.",
+        title: "Elopements give film room to breathe",
+        description:
+          "Smaller days often create the stillness that medium format and selected large-format frames need to feel emotionally true rather than theatrical.",
       },
       {
-        title: "Nothing feels slowed down",
-        description: "The workflow is designed around your day, not around showing off cameras.",
+        title: "The workflow never takes over the day",
+        description:
+          "The point is not to showcase cameras. The point is to give the celebration the right visual language without turning the experience into a production exercise.",
       },
     ],
   },
-  stories: ["why-we-photograph-weddings-on-film-and-digital", "weekend-timeline-notes"],
-  process: [
-    { title: "Inquiry", description: "You share your date, place, and what the day should feel like." },
-    { title: "Consultation", description: "We refine fit, rhythm, expectations, and whether certain moments deserve more analog weight." },
-    { title: "Pre-wedding support", description: "We guide visual flow, portraits, and the parts of the timeline where film can breathe." },
-    { title: "Coverage", description: "We photograph with calm, direction, emotional awareness, and a hybrid method that stays invisible to you." },
-    { title: "Gallery", description: "Delivery prioritizes narrative pacing, atmosphere, clarity, and the tactile contribution of film." },
+  locationLinks: [
+    { label: "Journal", href: "/journal", variant: "ghost" },
+    { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
+    { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
+    { label: "Contact", href: "/contact", variant: "ghost" },
   ],
+  stories: [
+    "lucca-garden-weekend",
+    "quarry-elopement",
+    "weekend-timeline-notes",
+  ],
+  testimonials: [...testimonials.services, ...testimonials.home],
+  process: [
+    {
+      title: "Inquiry",
+      description:
+        "You tell us whether you are planning a wedding weekend, an intimate celebration, or an elopement, and what the day should feel like.",
+    },
+    {
+      title: "Fit and direction",
+      description:
+        "We clarify pace, expectations, guest rhythm, portrait priorities, and where film should carry more weight inside your format.",
+    },
+    {
+      title: "Planning support",
+      description:
+        "We help shape timing, visual flow, and how Tuscany should live inside the day, whether that means a hosted weekend or a much quieter structure.",
+    },
+    {
+      title: "Coverage",
+      description:
+        "On the day we stay calm, discreet, and visually exacting, moving between film and digital without making the workflow visible to you.",
+    },
+    {
+      title: "Gallery delivery",
+      description:
+        "The final edit is built around atmosphere, emotional clarity, and the right balance between tactile film character and full-story completeness.",
+    },
+  ],
+  investmentNote: {
+    eyebrow: "Investment",
+    heading:
+      "The pricing reflects a premium experience, whether the format is expansive or intimate.",
+    body: [
+      "Wedding weekends, elopements, and smaller celebrations are all quoted with the same seriousness around guidance, atmosphere, hybrid craft, and the level of attention the day deserves.",
+    ],
+  },
   villa: {
     variant: "minimal",
     title: "Our point of view begins in a real place and is protected by real craft.",
@@ -71,14 +118,16 @@ export const experiencePage = servicePageContentSchema.parse({
   },
   faqs: faqs.experience,
   cta: {
-    title: "If you want clarity and atmosphere to coexist, we should talk.",
-    body: "Tell us about your day and whether film, digital, or both feel important to you. We’ll reply with the next right step.",
+    title:
+      "If you want one thoughtful experience behind the whole celebration, start here.",
+    body:
+      "Tell us what format you are planning, what kind of atmosphere matters to you, and whether film should play a visible role. We will reply with the next right step.",
     primaryCta: { label: "Inquire now", href: "/contact" },
   },
   seo: {
-    title: "The Dolcevilla Studio Experience",
+    title: "Tuscany Weddings, Elopements, And The Dolcevilla Studio Experience",
     description:
-      "See how Dolcevilla Studio works with international couples across Tuscany, combining local knowledge with a calm hybrid film-and-digital process from inquiry to gallery delivery.",
+      "Discover the full Dolcevilla Studio experience for Tuscany wedding weekends, elopements, and intimate celebrations, shaped by calm guidance and hybrid film-and-digital craft.",
     path: "/experience",
   },
 });

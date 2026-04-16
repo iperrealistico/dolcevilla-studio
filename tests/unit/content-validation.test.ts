@@ -8,8 +8,7 @@ describe("content system", () => {
     const contentFiles = await listContentFiles();
 
     await expect(validateContent()).resolves.toMatchObject({
-      pageCount: 11,
-      landingCount: 8,
+      pageCount: 6,
       journalCount: contentFiles.length,
     });
   });

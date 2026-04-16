@@ -2,15 +2,12 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowUpRight,
   Camera,
-  Compass,
   Cookie,
-  Heart,
   House,
   Instagram,
   Mail,
   MapPinned,
   NotebookText,
-  ScrollText,
   ShieldCheck,
   Sparkles,
   UsersRound,
@@ -26,14 +23,6 @@ export type LinkIconConfig = {
 export function getNavigationIcon(href: string): LucideIcon {
   if (href === "/") {
     return House;
-  }
-
-  if (href === "/weddings") {
-    return Heart;
-  }
-
-  if (href === "/elopements") {
-    return Compass;
   }
 
   if (href === "/experience") {
@@ -60,20 +49,12 @@ export function getNavigationIcon(href: string): LucideIcon {
     return Mail;
   }
 
-  if (href === "/legal") {
-    return ScrollText;
-  }
-
   return MapPinned;
 }
 
-export function getUtilityIcon(kind: "privacy" | "cookies" | "legal") {
+export function getUtilityIcon(kind: "privacy" | "cookies") {
   if (kind === "privacy") {
     return ShieldCheck;
-  }
-
-  if (kind === "legal") {
-    return ScrollText;
   }
 
   return Cookie;
@@ -124,10 +105,6 @@ export function getLinkIconConfig(
 
   if (normalizedLabel.includes("cookie")) {
     return { Icon: Cookie, placement: "left" };
-  }
-
-  if (normalizedHref === "/legal" || normalizedLabel.includes("legal")) {
-    return { Icon: ScrollText, placement: "left" };
   }
 
   if (

@@ -1,5 +1,4 @@
 export type {
-  AdsLanding,
   CTASection,
   FAQItem,
   GalleryItem,
@@ -7,7 +6,6 @@ export type {
   ImageAsset,
   JournalEntryFrontmatter,
   Link,
-  LocationLanding,
   Point,
   ProcessStep,
   RichSection,

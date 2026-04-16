@@ -5,7 +5,6 @@ export const dictionary = uiDictionarySchema.parse({
     studioLabel: "Dolcevilla Studio",
     readStory: "Read the story",
     exploreJournal: "Explore the journal",
-    viewPricing: "View pricing",
   },
   navigation: {
     home: "Home",
@@ -13,7 +12,6 @@ export const dictionary = uiDictionarySchema.parse({
     elopements: "Elopements",
     experience: "Experience",
     film: "Film",
-    pricing: "Pricing",
     journal: "Journal",
     about: "About",
     contact: "Contact",
@@ -41,7 +39,6 @@ export const dictionary = uiDictionarySchema.parse({
     contact: "Contact",
     instagram: "Instagram",
     privacy: "Privacy",
-    legal: "Legal",
   },
   consent: {
     title: "Choose how the site should accompany you",

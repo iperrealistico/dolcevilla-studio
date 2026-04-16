@@ -17,40 +17,13 @@ If you change the text in the right `content/` file and rebuild or deploy, the l
 Each main site page has its own text file:
 
 - Home: `content/pages/home.ts`
-- Weddings: `content/pages/weddings.ts`
-- Elopements: `content/pages/elopements.ts`
-- Experience: `content/pages/experience.ts`
+- Experience page for weddings, elopements, and the full process: `content/pages/experience.ts`
 - Film page: `content/pages/film-wedding-photography.ts`
 - Villa page: `content/pages/villa-raffaelli.ts`
-- Pricing: `content/pages/pricing.ts`
 - About: `content/pages/about.ts`
 - Contact: `content/pages/contact.ts`
-- Thank-you page: `content/pages/thank-you.ts`
-- Legal page: `content/pages/legal.ts`
 - Journal index page: `content/pages/journal.ts`
 - 404 page: `content/pages/not-found.ts`
-
-### Location landing pages
-
-These pages each have their own text file too:
-
-- `content/landings/tuscany-wedding-photographer.ts`
-- `content/landings/tuscany-elopement-photographer.ts`
-- `content/landings/lucca-wedding-photographer.ts`
-- `content/landings/florence-wedding-photographer.ts`
-- `content/landings/chianti-wedding-photographer.ts`
-- `content/landings/siena-wedding-photographer.ts`
-- `content/landings/val-dorcia-wedding-photographer.ts`
-- `content/landings/intimate-wedding-in-tuscany.ts`
-
-### Ads landing pages
-
-Paid landing pages also live in content files:
-
-- `content/ads/google/lucca-wedding-photographer.ts`
-- `content/ads/google/tuscany-wedding-photographer.ts`
-- `content/ads/meta/elopement-tuscany.ts`
-- `content/ads/meta/tuscany-wedding-photographer.ts`
 
 ### Journal posts
 

@@ -1,5 +1,10 @@
 export const inquiryFormContent = {
   directEmailPrompt: "Prefer email?",
+  success: {
+    eyebrow: "Thank you",
+    title: "Your inquiry is on its way.",
+    body: "We will read it carefully and reply with clear next steps.",
+  },
   fields: {
     names: "Names",
     email: "Email",

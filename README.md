@@ -48,7 +48,7 @@ pnpm test:e2e
 
 - Site copy is meant to be edited from `content/`, not from React components.
 - Each main page has its own content file in `content/pages/`.
-- Landings, ads pages, journal entries, form copy, consent copy, and shared UI labels also live in `content/`.
+- Journal entries, form copy, consent copy, and shared UI labels also live in `content/`.
 - Use `docs/editing-site-text.md` for the full file-by-file map.
 
 ## Current Notes

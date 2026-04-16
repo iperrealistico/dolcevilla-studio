@@ -2,15 +2,12 @@ import { getGoogleAdsConversionDestination } from "@/lib/analytics/googleAds";
 
 export type AnalyticsEvent =
   | "page_view"
-  | "view_pricing"
   | "click_contact_cta"
   | "start_inquiry_form"
   | "submit_inquiry_form"
   | "click_email"
   | "click_instagram"
-  | "click_story"
-  | "click_location_page"
-  | "view_ads_landing";
+  | "click_story";
 
 type EventPayload = Record<string, string | number | boolean | undefined>;
 

@@ -15,14 +15,13 @@ export const siteUi = {
   footer: {
     ariaLabel: "Site footer",
     navigationHeading: "Navigate",
-    locationsHeading: "Locations",
+    locationsHeading: "Studio world",
     instagramLabel: "Instagram",
   },
   footerSocket: {
-    ariaLabel: "Legal and privacy",
+    ariaLabel: "Privacy controls",
     copyrightLabel: "Copyright",
     privacyLabel: "Privacy",
-    legalLabel: "Legal",
     cookieSettingsLabel: "Cookie settings",
   },
   hero: {
@@ -78,9 +77,6 @@ export const siteUi = {
         "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
       previousCardLabel: "Show previous team card",
       nextCardLabel: "Show next team card",
-    },
-    ads: {
-      pricingSignalEyebrow: "Pricing signal",
     },
   },
 } as const;

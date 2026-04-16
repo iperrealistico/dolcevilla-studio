@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { OpenConsentManagerButton } from "@/components/consent/OpenConsentManagerButton";
 import { siteSettings } from "@/content/site/settings";
 import { siteUi } from "@/content/site/ui";
@@ -7,7 +6,6 @@ import { getUtilityIcon } from "@/lib/ui/iconography";
 
 const PrivacyUtilityIcon = getUtilityIcon("privacy");
 const CookieUtilityIcon = getUtilityIcon("cookies");
-const LegalUtilityIcon = getUtilityIcon("legal");
 
 export function FooterSocket() {
   const currentYear = new Date().getFullYear();
@@ -35,13 +33,6 @@ export function FooterSocket() {
               />
             }
           />
-          <Link
-            href="/legal"
-            className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"
-          >
-            <LegalUtilityIcon size={14} strokeWidth={1.8} aria-hidden="true" />
-            {siteUi.footerSocket.legalLabel}
-          </Link>
           <OpenConsentManagerButton
             label={siteUi.footerSocket.cookieSettingsLabel}
             className="inline-flex items-center gap-2 hover:text-[var(--color-ink)]"

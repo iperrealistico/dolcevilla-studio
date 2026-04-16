@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { BudgetSelect } from "@/components/forms/BudgetSelect";
@@ -23,7 +22,7 @@ const inputClassName =
   "min-h-12 w-full rounded-2xl border border-[var(--color-line)] bg-white/85 px-4 py-3 text-[var(--color-ink)]";
 
 export function InquiryForm() {
-  const router = useRouter();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<InquiryFormValues>({
@@ -69,8 +68,24 @@ export function InquiryForm() {
     }
 
     trackEvent("submit_inquiry_form");
-    router.push("/thank-you");
+    setIsSubmitted(true);
   });
+
+  if (isSubmitted) {
+    return (
+      <div className="space-y-4 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)]">
+        <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+          {inquiryFormContent.success.eyebrow}
+        </p>
+        <h2 className="font-display-face text-3xl tracking-[-0.03em] md:text-4xl">
+          {inquiryFormContent.success.title}
+        </h2>
+        <p className="text-sm leading-7 text-[var(--color-mist)]">
+          {inquiryFormContent.success.body}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form

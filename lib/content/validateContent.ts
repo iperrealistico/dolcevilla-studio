@@ -1,7 +1,6 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { cache } from "react";
-import { landings } from "@/content/landings";
 import { pages } from "@/content/pages";
 import { imageManifest } from "@/lib/images/imageManifest";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
@@ -10,10 +9,6 @@ import {
   extractInlineSlotIds,
   journalSourceContainsPath,
 } from "@/lib/content/journalSource";
-import { googleLuccaAdsLanding } from "@/content/ads/google/lucca-wedding-photographer";
-import { googleTuscanyAdsLanding } from "@/content/ads/google/tuscany-wedding-photographer";
-import { metaElopementAdsLanding } from "@/content/ads/meta/elopement-tuscany";
-import { metaTuscanyAdsLanding } from "@/content/ads/meta/tuscany-wedding-photographer";
 
 const imageIds = new Set(Object.keys(imageManifest));
 
@@ -46,23 +41,6 @@ export const validateContent = cache(async () => {
       assert(journalSlugs.has(slug), `Page "${page.slug}" references unknown story slug "${slug}"`),
     );
   });
-
-  Object.values(landings).forEach((landing) => {
-    landing.hero.imageIds.forEach(assertImageId);
-    landing.featuredStorySlugs.forEach((slug) =>
-      assert(journalSlugs.has(slug), `Landing "${landing.slug}" references unknown story slug "${slug}"`),
-    );
-  });
-
-  [googleTuscanyAdsLanding, googleLuccaAdsLanding, metaTuscanyAdsLanding, metaElopementAdsLanding].forEach(
-    (landing) => {
-      landing.hero.imageIds.forEach(assertImageId);
-      assert(
-        journalSlugs.has(landing.caseStudySlug),
-        `Ads landing "${landing.slug}" references unknown case study "${landing.caseStudySlug}"`,
-      );
-    },
-  );
 
   journalEntries.forEach((entry) => {
     assertImageId(entry.coverImage);
@@ -111,7 +89,6 @@ export const validateContent = cache(async () => {
 
   return {
     pageCount: Object.keys(pages).length,
-    landingCount: Object.keys(landings).length,
     journalCount: journalEntries.length,
     imageCount: Object.keys(imageManifest).length,
   };

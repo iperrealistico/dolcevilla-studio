@@ -102,24 +102,10 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   locationLinks: [
-    {
-      label: "Tuscany",
-      href: "/tuscany-wedding-photographer",
-      variant: "ghost",
-    },
-    { label: "Lucca", href: "/lucca-wedding-photographer", variant: "ghost" },
-    {
-      label: "Florence",
-      href: "/florence-wedding-photographer",
-      variant: "ghost",
-    },
+    { label: "Experience", href: "/experience", variant: "ghost" },
     { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
     { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
-    {
-      label: "Elopements",
-      href: "/tuscany-elopement-photographer",
-      variant: "ghost",
-    },
+    { label: "Journal", href: "/journal", variant: "ghost" },
   ],
   stories: [
     "lucca-garden-weekend",

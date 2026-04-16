@@ -2,24 +2,11 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo/canonical";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
 import { pageSlugs } from "@/content/pages";
-import { landingSlugs } from "@/content/landings";
 
 export async function buildSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const journalEntries = await getJournalEntries();
 
-  const staticEntries = [
-    "",
-    "weddings",
-    "elopements",
-    "experience",
-    "pricing",
-    "about",
-    "contact",
-    "journal",
-    "legal",
-    ...pageSlugs.filter((slug) => !["home"].includes(slug)),
-    ...landingSlugs,
-  ]
+  const staticEntries = ["", "journal", ...pageSlugs.filter((slug) => slug !== "home")]
     .filter((value, index, array) => array.indexOf(value) === index)
     .map((path) => ({
       url: absoluteUrl(path ? `/${path}` : "/"),

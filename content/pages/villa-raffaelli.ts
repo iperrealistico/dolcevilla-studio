@@ -117,11 +117,10 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
   },
   locationLinks: [
     {
-      label: "Intimate weddings",
-      href: "/intimate-wedding-in-tuscany",
+      label: "Experience",
+      href: "/experience",
       variant: "ghost",
     },
-    { label: "Lucca", href: "/lucca-wedding-photographer", variant: "ghost" },
     { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
     {
       label: "Journal story",

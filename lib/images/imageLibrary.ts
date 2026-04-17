@@ -66,6 +66,15 @@ export const imageAssetLibrary = {
     1024,
     "ink",
   ),
+  journalChiantiWeddingPhotographerForADestinationWeddingInTuscanyCover:
+    createAsset(
+      "journal-chianti-wedding-photographer-for-a-destination-wedding-in-tuscany-cover",
+      "/images/brand/journal-generated/chianti-wedding-photographer-for-a-destination-wedding-in-tuscany-cover.png",
+      "A couple seated on a stone terrace overlooking Chianti vineyards at sunset.",
+      1536,
+      1024,
+      "olive",
+    ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

@@ -263,6 +263,21 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
+  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.cover": {
+    "asset": "journalChiantiWeddingPhotographerForADestinationWeddingInTuscanyCover"
+  },
+  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.vineyard-dinner": {
+    "asset": "chiantiVineyardDinner",
+    "alt": "A candlelit wedding dinner between Chianti vines at dusk."
+  },
+  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.weekend-toast": {
+    "asset": "candlelitCourtyardToast",
+    "alt": "Guests raising a toast in a Tuscan stone courtyard after sunset."
+  },
+  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.ceremony-light": {
+    "asset": "oliveGardenCeremony",
+    "alt": "An intimate outdoor ceremony beneath olive trees in soft Tuscany light."
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

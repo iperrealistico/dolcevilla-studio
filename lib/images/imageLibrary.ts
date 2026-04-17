@@ -75,6 +75,15 @@ export const imageAssetLibrary = {
       1024,
       "olive",
     ),
+  journalHowToChooseAChiantiWeddingPhotographerForAVillaOrVineyardWeddingCover:
+    createAsset(
+      "journal-how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding-cover",
+      "/images/brand/journal-generated/how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding-cover.png",
+      "A couple pausing on a stone villa terrace with Chianti vineyard rows beyond in late-afternoon light.",
+      1536,
+      1024,
+      "olive",
+    ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

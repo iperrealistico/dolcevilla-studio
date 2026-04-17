@@ -278,6 +278,21 @@
     "asset": "oliveGardenCeremony",
     "alt": "An intimate outdoor ceremony beneath olive trees in soft Tuscany light."
   },
+  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.cover": {
+    "asset": "journalHowToChooseAChiantiWeddingPhotographerForAVillaOrVineyardWeddingCover"
+  },
+  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.villa-flow": {
+    "asset": "candlelitCourtyardToast",
+    "alt": "Guests gathering for a candlelit toast in a Tuscan villa courtyard."
+  },
+  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.vineyard-scale": {
+    "asset": "chiantiVineyardDinner",
+    "alt": "A long wedding dinner set among Chianti vines at dusk."
+  },
+  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.weekend-rhythm": {
+    "asset": "welcomeDinnerLanterns",
+    "alt": "A Tuscan welcome dinner glowing under lanterns as guests settle into the evening."
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

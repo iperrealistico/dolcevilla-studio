@@ -293,6 +293,21 @@
     "asset": "welcomeDinnerLanterns",
     "alt": "A Tuscan welcome dinner glowing under lanterns as guests settle into the evening."
   },
+  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.cover": {
+    "asset": "journalValDorciaWeddingPhotographerForADestinationWeddingInItalyCover"
+  },
+  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.cypress-ceremony": {
+    "asset": "valDorciaCypressVows",
+    "alt": "A ceremony moment above the rolling cypress-lined hills of Val d'Orcia."
+  },
+  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.morning-prep": {
+    "asset": "bridalPrepWindowSilk",
+    "alt": "Morning preparation light falling through a Tuscan stone-room window before the wedding day begins."
+  },
+  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.weekend-dinner": {
+    "asset": "welcomeDinnerLanterns",
+    "alt": "A lantern-lit Tuscan wedding dinner as guests settle into the evening together."
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

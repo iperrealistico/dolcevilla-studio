@@ -84,6 +84,15 @@ export const imageAssetLibrary = {
       1024,
       "olive",
     ),
+  journalValDorciaWeddingPhotographerForADestinationWeddingInItalyCover:
+    createAsset(
+      "journal-val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy-cover",
+      "/images/brand/journal-generated/val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy-cover.png",
+      "A couple standing on a stone terrace overlooking the rolling cypress-lined hills of Val d'Orcia at sunset.",
+      1536,
+      1024,
+      "linen",
+    ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

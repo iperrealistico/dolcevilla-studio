@@ -129,6 +129,21 @@ export async function JournalEntryTemplate({
                 </div>
 
                 <div>
+                  <div className="relative mx-auto mb-8 max-w-4xl px-1 xl:mx-0 xl:mb-10 xl:max-w-none">
+                    <div className="flex items-center gap-3 pb-4 md:pb-5">
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-10 bg-[linear-gradient(90deg,rgba(29,25,22,0.78),rgba(167,139,104,0.16))]"
+                      />
+                      <span className="text-[0.66rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+                        {journalEntryTemplateContent.articleIntro.label}
+                      </span>
+                    </div>
+                    <p className="font-display-face max-w-4xl text-[2rem] leading-[0.96] tracking-[-0.045em] text-[var(--color-ink)] md:text-[2.9rem] xl:max-w-[16ch] 2xl:text-[3.2rem]">
+                      {entry.title}
+                    </p>
+                  </div>
+
                   {introContent ? (
                     <ScrollParallax
                       className="relative mx-auto mb-14 max-w-4xl xl:mx-0 xl:max-w-none"

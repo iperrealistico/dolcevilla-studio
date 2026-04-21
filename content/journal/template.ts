@@ -3,6 +3,9 @@ export const journalEntryTemplateContent = {
     home: "Home",
     journal: "Journal",
   },
+  articleIntro: {
+    label: "Article",
+  },
   fallbackCta: {
     title: "Planning something with place and atmosphere at its center?",
     body: "Tell us about the world you’re building and we’ll take it from there.",

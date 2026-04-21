@@ -1,7 +1,21 @@
-import { JournalInlineImage } from "@/components/journal/JournalInlineImage";
+import {
+  JournalChecklist,
+  JournalCommonMistake,
+  JournalFilmNote,
+  JournalLocalInsight,
+  JournalPlanningNote,
+  JournalPullQuote,
+  JournalQuickAnswer,
+} from "@/components/journal/JournalEditorialBlocks";
 import { JournalPhotographerSegue } from "@/components/journal/JournalPhotographerSegue";
 
 export const journalMdxComponents = {
-  JournalInlineImage,
+  JournalQuickAnswer,
+  JournalPlanningNote,
+  JournalChecklist,
+  JournalCommonMistake,
+  JournalLocalInsight,
+  JournalFilmNote,
+  JournalPullQuote,
   JournalPhotographerSegue,
 };

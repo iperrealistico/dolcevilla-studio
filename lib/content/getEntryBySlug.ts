@@ -13,6 +13,16 @@ export const getEntryBySlug = cache(async (slug: string) => {
         ...parsed.frontmatter,
         source: parsed.source,
         coverAsset: imageManifest[parsed.frontmatter.coverImage as keyof typeof imageManifest],
+        ornamentWashAsset: parsed.frontmatter.ornamentWashImage
+          ? imageManifest[
+              parsed.frontmatter.ornamentWashImage as keyof typeof imageManifest
+            ]
+          : null,
+        ornamentOrbitAsset: parsed.frontmatter.ornamentOrbitImage
+          ? imageManifest[
+              parsed.frontmatter.ornamentOrbitImage as keyof typeof imageManifest
+            ]
+          : null,
       };
     }
   }

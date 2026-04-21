@@ -195,7 +195,7 @@ export const servicePageContentSchema = z.object({
 
 export const journalEntryFrontmatterSchema = z.object({
   slug: z.string().min(1),
-  articleTemplate: z.enum(["legacy", "v2"]).default("legacy"),
+  articleTemplate: z.enum(["legacy", "v3"]).default("legacy"),
   queueId: z.string().min(1).optional(),
   workflowStatus: z.string().min(1).optional(),
   title: z.string().min(1),
@@ -213,8 +213,8 @@ export const journalEntryFrontmatterSchema = z.object({
   primaryKeyword: z.string().min(1).optional(),
   searchIntent: z.string().min(1).optional(),
   coverImage: z.string().min(1),
-  galleryImageIds: z.array(z.string()).default([]),
-  inlineImageSlots: z.array(z.string()).default([]),
+  ornamentWashImage: z.string().min(1).optional(),
+  ornamentOrbitImage: z.string().min(1).optional(),
   publishedAt: z.string().min(1),
   updatedAt: z.string().optional(),
   seoTitle: z.string().min(1),

@@ -15,6 +15,16 @@ export const getJournalEntries = cache(async () => {
         ...frontmatter,
         source,
         heroImage: imageManifest[frontmatter.coverImage as keyof typeof imageManifest],
+        ornamentWashAsset: frontmatter.ornamentWashImage
+          ? imageManifest[
+              frontmatter.ornamentWashImage as keyof typeof imageManifest
+            ]
+          : null,
+        ornamentOrbitAsset: frontmatter.ornamentOrbitImage
+          ? imageManifest[
+              frontmatter.ornamentOrbitImage as keyof typeof imageManifest
+            ]
+          : null,
       };
     }),
   );

@@ -2,13 +2,15 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { cache } from "react";
 import { pages } from "@/content/pages";
-import { imageManifest } from "@/lib/images/imageManifest";
+import type { JournalEntryFrontmatter } from "@/types/content";
 import { getJournalEntries } from "@/lib/content/getJournalEntries";
 import {
   analyzeJournalSource,
-  extractInlineSlotIds,
+  buildJournalSlotIds,
   journalSourceContainsPath,
+  splitJournalSourceIntoSections,
 } from "@/lib/content/journalSource";
+import { imageManifest } from "@/lib/images/imageManifest";
 
 const imageIds = new Set(Object.keys(imageManifest));
 
@@ -27,6 +29,79 @@ function assertImageId(id: string) {
   assert(imageIds.has(id), `Unknown image id: ${id}`);
 }
 
+export function validateJournalV3Contract(
+  entry: Pick<
+    JournalEntryFrontmatter,
+    | "slug"
+    | "articleTemplate"
+    | "coverImage"
+    | "ornamentWashImage"
+    | "ornamentOrbitImage"
+  > & {
+    source: string;
+  },
+) {
+  const sourceAnalysis = analyzeJournalSource(entry.source);
+  const { sections } = splitJournalSourceIntoSections(entry.source);
+  const expectedSlots = buildJournalSlotIds(entry.slug);
+
+  assertImageId(entry.coverImage);
+  assert(
+    Boolean(entry.ornamentWashImage),
+    `Journal entry "${entry.slug}" must define ornamentWashImage for the journal V3 template.`,
+  );
+  assert(
+    Boolean(entry.ornamentOrbitImage),
+    `Journal entry "${entry.slug}" must define ornamentOrbitImage for the journal V3 template.`,
+  );
+
+  assertImageId(entry.ornamentWashImage!);
+  assertImageId(entry.ornamentOrbitImage!);
+
+  assert(
+    entry.coverImage === expectedSlots.coverImage,
+    `Journal entry "${entry.slug}" must use deterministic cover slot "${expectedSlots.coverImage}".`,
+  );
+  assert(
+    entry.ornamentWashImage === expectedSlots.ornamentWashImage,
+    `Journal entry "${entry.slug}" must use deterministic ornament wash slot "${expectedSlots.ornamentWashImage}".`,
+  );
+  assert(
+    entry.ornamentOrbitImage === expectedSlots.ornamentOrbitImage,
+    `Journal entry "${entry.slug}" must use deterministic ornament orbit slot "${expectedSlots.ornamentOrbitImage}".`,
+  );
+  assert(
+    sourceAnalysis.photographerSegueCount === 1,
+    `Journal entry "${entry.slug}" must include exactly one <JournalPhotographerSegue /> block.`,
+  );
+  assert(
+    sourceAnalysis.inlineImageCount === 0,
+    `Journal entry "${entry.slug}" cannot use <JournalInlineImage /> in the journal V3 template.`,
+  );
+  assert(
+    sourceAnalysis.editorialBlockCount >= 2 &&
+      sourceAnalysis.editorialBlockCount <= 4,
+    `Journal entry "${entry.slug}" must include between 2 and 4 approved editorial blocks.`,
+  );
+  assert(
+    sections.length >= 2,
+    `Journal entry "${entry.slug}" must include at least two H2 chapter sections.`,
+  );
+  assert(
+    journalSourceContainsPath(entry.source, "/film-wedding-photography"),
+    `Journal entry "${entry.slug}" must include a natural backlink to /film-wedding-photography.`,
+  );
+  assert(
+    journalSourceContainsPath(entry.source, "/villa-raffaelli"),
+    `Journal entry "${entry.slug}" must include a natural backlink to /villa-raffaelli.`,
+  );
+
+  return {
+    sourceAnalysis,
+    sections,
+  };
+}
+
 export const validateContent = cache(async () => {
   Object.values(imageManifest).forEach((image) => {
     assertPublicAsset(image.src);
@@ -38,52 +113,24 @@ export const validateContent = cache(async () => {
   Object.values(pages).forEach((page) => {
     page.hero?.imageIds.forEach(assertImageId);
     page.stories.forEach((slug) =>
-      assert(journalSlugs.has(slug), `Page "${page.slug}" references unknown story slug "${slug}"`),
+      assert(
+        journalSlugs.has(slug),
+        `Page "${page.slug}" references unknown story slug "${slug}"`,
+      ),
     );
   });
 
   journalEntries.forEach((entry) => {
     assertImageId(entry.coverImage);
-    entry.galleryImageIds.forEach(assertImageId);
-    entry.inlineImageSlots.forEach(assertImageId);
     entry.relatedSlugs?.forEach((slug) =>
-      assert(journalSlugs.has(slug), `Journal entry "${entry.slug}" references missing related slug "${slug}"`),
+      assert(
+        journalSlugs.has(slug),
+        `Journal entry "${entry.slug}" references missing related slug "${slug}"`,
+      ),
     );
 
-    const sourceAnalysis = analyzeJournalSource(entry.source);
-    const sourceInlineSlotIds = extractInlineSlotIds(entry.source);
-
-    sourceInlineSlotIds.forEach((slotId) =>
-      assertImageId(slotId),
-    );
-
-    if (entry.articleTemplate === "v2") {
-      assert(
-        sourceAnalysis.photographerSegueCount === 1,
-        `Journal entry "${entry.slug}" must include exactly one <JournalPhotographerSegue /> block.`,
-      );
-      assert(
-        entry.inlineImageSlots.length > 0,
-        `Journal entry "${entry.slug}" must declare inlineImageSlots for the journal V2 template.`,
-      );
-      assert(
-        sourceAnalysis.explicitInlineImageCount > 0,
-        `Journal entry "${entry.slug}" must include at least one explicit <JournalInlineImage /> block for the journal V2 template.`,
-      );
-      entry.inlineImageSlots.forEach((slotId) =>
-        assert(
-          sourceInlineSlotIds.has(slotId),
-          `Journal entry "${entry.slug}" declares inline slot "${slotId}" but does not use it in the article body.`,
-        ),
-      );
-      assert(
-        journalSourceContainsPath(entry.source, "/film-wedding-photography"),
-        `Journal entry "${entry.slug}" must include a natural backlink to /film-wedding-photography.`,
-      );
-      assert(
-        journalSourceContainsPath(entry.source, "/villa-raffaelli"),
-        `Journal entry "${entry.slug}" must include a natural backlink to /villa-raffaelli.`,
-      );
+    if (entry.articleTemplate === "v3") {
+      validateJournalV3Contract(entry);
     }
   });
 

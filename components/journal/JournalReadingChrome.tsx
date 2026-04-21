@@ -16,11 +16,10 @@ type JournalReadingChromeProps = {
 };
 
 const DESKTOP_BREAKPOINT = 1280;
-const DESKTOP_SCROLL_OFFSET = 136;
-const MOBILE_SCROLL_OFFSET = 120;
 const DESKTOP_VIEWPORT_ANCHOR = 0.38;
 const MOBILE_VIEWPORT_ANCHOR = 0.26;
 const DESKTOP_RAIL_CENTER = 0.44;
+const FALLBACK_HEADER_HEIGHT = 76;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -38,6 +37,19 @@ function distanceToRange(anchor: number, top: number, bottom: number) {
   return 0;
 }
 
+function getSiteHeaderHeight() {
+  if (typeof window === "undefined") {
+    return FALLBACK_HEADER_HEIGHT;
+  }
+
+  const value = window
+    .getComputedStyle(document.documentElement)
+    .getPropertyValue("--site-header-height");
+  const parsed = Number.parseFloat(value);
+
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : FALLBACK_HEADER_HEIGHT;
+}
+
 export function JournalReadingChrome({
   chapters,
 }: JournalReadingChromeProps) {
@@ -52,7 +64,6 @@ export function JournalReadingChrome({
 
   const [activeId, setActiveId] = useState(chapters[0]?.id ?? "");
   const [progress, setProgress] = useState(0);
-  const [mobileTailWidth, setMobileTailWidth] = useState(0);
 
   const chapterMap = useMemo(
     () =>
@@ -140,8 +151,16 @@ export function JournalReadingChrome({
       const trackRect = track.getBoundingClientRect();
       const trackTop = window.scrollY + trackRect.top;
       const maxOffset = Math.max(track.offsetHeight - card.offsetHeight, 0);
+      const headerHeight = getSiteHeaderHeight();
+      const railTopOffset = headerHeight + 24;
+      const safeViewportHeight = Math.max(
+        window.innerHeight - railTopOffset - 20,
+        card.offsetHeight,
+      );
       const desiredTop =
-        window.scrollY + window.innerHeight * DESKTOP_RAIL_CENTER - card.offsetHeight / 2;
+        window.scrollY +
+        railTopOffset +
+        Math.max((safeViewportHeight - card.offsetHeight) * DESKTOP_RAIL_CENTER, 0);
 
       desktopTargetOffsetRef.current = clamp(desiredTop - trackTop, 0, maxOffset);
 
@@ -162,14 +181,18 @@ export function JournalReadingChrome({
       const viewportHeight = window.innerHeight;
       const totalScrollable = articleRect.height - viewportHeight * 0.46;
       const distance = viewportHeight * 0.24 - articleRect.top;
+      const headerHeight = getSiteHeaderHeight();
+      const chromeOffset =
+        headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 28 : 20);
 
       setProgress(clamp(distance / Math.max(totalScrollable, 1), 0, 1));
 
       const anchor =
-        window.innerHeight *
-        (window.innerWidth >= DESKTOP_BREAKPOINT
-          ? DESKTOP_VIEWPORT_ANCHOR
-          : MOBILE_VIEWPORT_ANCHOR);
+        chromeOffset +
+        (window.innerHeight - chromeOffset) *
+          (window.innerWidth >= DESKTOP_BREAKPOINT
+            ? DESKTOP_VIEWPORT_ANCHOR
+            : MOBILE_VIEWPORT_ANCHOR);
 
       const nextActiveId =
         sections.reduce<{ id: string; distance: number } | null>((nearest, section) => {
@@ -229,32 +252,6 @@ export function JournalReadingChrome({
     });
   }, [activeId, reduceMotion]);
 
-  useEffect(() => {
-    if (!chapters.length) {
-      return;
-    }
-
-    const updateMobileTailWidth = () => {
-      const scroller = mobileScrollerRef.current;
-      const referenceChip = chipRefs.current[chapters[0]?.id ?? ""];
-
-      if (!scroller || !referenceChip) {
-        return;
-      }
-
-      setMobileTailWidth(
-        Math.max(scroller.clientWidth - referenceChip.offsetWidth - 12, 0),
-      );
-    };
-
-    updateMobileTailWidth();
-    window.addEventListener("resize", updateMobileTailWidth);
-
-    return () => {
-      window.removeEventListener("resize", updateMobileTailWidth);
-    };
-  }, [chapters]);
-
   const scrollToChapter = (id: string) => {
     const section = document.getElementById(id);
 
@@ -262,10 +259,9 @@ export function JournalReadingChrome({
       return;
     }
 
+    const headerHeight = getSiteHeaderHeight();
     const offset =
-      window.innerWidth >= DESKTOP_BREAKPOINT
-        ? DESKTOP_SCROLL_OFFSET
-        : MOBILE_SCROLL_OFFSET;
+      headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 34 : 22);
     const targetTop =
       window.scrollY + section.getBoundingClientRect().top - offset;
 
@@ -386,48 +382,50 @@ export function JournalReadingChrome({
             </p>
           </div>
 
-          <div
-            ref={mobileScrollerRef}
-            className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            <div className="inline-flex items-center gap-2 pr-2">
-              {chapterMap.map((chapter) => {
-                const isActive = chapter.id === activeId;
+          <div className="flex items-center gap-2">
+            <div
+              ref={mobileScrollerRef}
+              className="min-w-0 flex-1 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              <div className="inline-flex items-center gap-2 pr-2">
+                {chapterMap.map((chapter) => {
+                  const isActive = chapter.id === activeId;
 
-                return (
-                  <button
-                    key={chapter.id}
-                    ref={(node) => {
-                      chipRefs.current[chapter.id] = node;
-                    }}
-                    type="button"
-                    onClick={() => scrollToChapter(chapter.id)}
-                    className={cn(
-                      "inline-flex min-w-[3.2rem] shrink-0 items-center justify-center rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
-                      isActive
-                        ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                        : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
-                    )}
-                    aria-current={isActive ? "true" : undefined}
-                  >
-                    {chapter.label}
-                  </button>
-                );
-              })}
-
-              <Link
-                href="/contact"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] px-4 py-2 text-[0.72rem] font-semibold tracking-[0.14em] text-[var(--color-paper)] uppercase shadow-[0_18px_42px_rgba(25,19,14,0.16)]"
-              >
-                <Send size={14} strokeWidth={1.9} aria-hidden="true" />
-                <span>Contact</span>
-              </Link>
-              <div
-                aria-hidden="true"
-                className="shrink-0"
-                style={{ width: `${mobileTailWidth}px` }}
-              />
+                  return (
+                    <button
+                      key={chapter.id}
+                      ref={(node) => {
+                        chipRefs.current[chapter.id] = node;
+                      }}
+                      type="button"
+                      onClick={() => scrollToChapter(chapter.id)}
+                      className={cn(
+                        "inline-flex min-w-[3.2rem] shrink-0 items-center justify-center rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
+                        isActive
+                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
+                          : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
+                      )}
+                      aria-current={isActive ? "true" : undefined}
+                    >
+                      {chapter.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
+
+            <Link
+              href="/contact"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[rgb(248_240_230_/_0.12)] bg-[linear-gradient(145deg,rgba(21,17,14,0.98),rgba(58,47,38,0.96))] px-4 py-2 text-[0.72rem] font-semibold tracking-[0.14em] text-[rgb(249_243_235)] uppercase shadow-[0_18px_42px_rgba(25,19,14,0.2)] ring-1 ring-[rgb(255_255_255_/_0.04)]"
+            >
+              <Send
+                size={14}
+                strokeWidth={1.9}
+                aria-hidden="true"
+                className="text-[rgb(249_243_235)]"
+              />
+              <span className="text-[rgb(249_243_235)]">Contact</span>
+            </Link>
           </div>
         </div>
       </div>

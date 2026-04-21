@@ -156,7 +156,10 @@ export async function JournalEntryTemplate({
                         <section
                           key={section.id}
                           id={section.id}
-                          className="scroll-mt-32"
+                          style={{
+                            scrollMarginTop:
+                              "calc(var(--site-header-height, 76px) + 2rem)",
+                          }}
                         >
                           <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-6 2xl:grid-cols-[minmax(0,1fr)_19rem] 2xl:gap-8">
                             <ScrollParallax
@@ -197,7 +200,13 @@ export async function JournalEntryTemplate({
                               intensity="sm"
                               className="hidden xl:block"
                             >
-                              <div className="sticky top-28 rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm">
+                              <div
+                                className="sticky rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm"
+                                style={{
+                                  top:
+                                    "calc(var(--site-header-height, 76px) + 1.5rem)",
+                                }}
+                              >
                                 <div className="space-y-4">
                                   <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                                     {section.snippet.label}

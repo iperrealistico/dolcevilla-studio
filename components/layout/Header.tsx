@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { Mail, Menu, X } from "lucide-react";
 import { navigationItems } from "@/content/site/navigation";
 import { siteSettings } from "@/content/site/settings";
@@ -15,9 +16,41 @@ type HeaderProps = {
 
 export function Header({ simplified = false }: HeaderProps) {
   const { isMenuOpen, toggleMenu } = useMobileUI();
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+
+    if (!header) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const updateHeaderHeight = () => {
+      root.style.setProperty("--site-header-height", `${header.offsetHeight}px`);
+    };
+
+    updateHeaderHeight();
+
+    window.addEventListener("resize", updateHeaderHeight);
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(updateHeaderHeight)
+        : null;
+
+    resizeObserver?.observe(header);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", updateHeaderHeight);
+    };
+  }, [simplified]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[rgb(245_241_235_/_0.85)] backdrop-blur">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[rgb(245_241_235_/_0.85)] backdrop-blur"
+    >
       <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between gap-4 px-5 py-4 md:px-8 lg:gap-6 lg:px-10">
         <Link
           href="/"

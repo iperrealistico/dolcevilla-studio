@@ -388,6 +388,30 @@ export const imageAssetLibrary = {
     1536,
     "stone",
   ),
+  journalSanCascianoClassicChiantiCover: createAsset(
+    "journal-san-casciano-classic-chianti-cover",
+    "/images/brand/journal-generated/san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings-cover.png",
+    "Illustrated couple walking a cypress-lined drive toward a classic Chianti villa and formal garden in San Casciano in Val di Pesa.",
+    1536,
+    1024,
+    "olive",
+  ),
+  journalSanCascianoClassicChiantiWash: createAsset(
+    "journal-san-casciano-classic-chianti-wash",
+    "/images/brand/journal-generated/san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings-ornament-wash.png",
+    "Illustrated ambient wash with a San Casciano villa, vineyard rows, cypress trees, fountain, and pergola motifs on a white background.",
+    1536,
+    1024,
+    "linen",
+  ),
+  journalSanCascianoClassicChiantiOrbit: createAsset(
+    "journal-san-casciano-classic-chianti-orbit",
+    "/images/brand/journal-generated/san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings-ornament-orbit.png",
+    "Illustrated orbit ornament with Chianti grapes, an olive branch, cypress trees, and a stone arch on a white background.",
+    1024,
+    1024,
+    "olive",
+  ),
 } as const;
 
 export type ImageAssetLibraryKey = keyof typeof imageAssetLibrary;

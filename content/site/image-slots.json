@@ -271,5 +271,14 @@
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"
+  },
+  "journal.san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings.cover": {
+    "asset": "journalSanCascianoClassicChiantiCover"
+  },
+  "journal.san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings.ornament.wash": {
+    "asset": "journalSanCascianoClassicChiantiWash"
+  },
+  "journal.san-casciano-in-val-di-pesa-wedding-photographer-guide-for-classic-chianti-weddings.ornament.orbit": {
+    "asset": "journalSanCascianoClassicChiantiOrbit"
   }
 }

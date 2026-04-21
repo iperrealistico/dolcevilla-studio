@@ -70,6 +70,10 @@ export async function JournalEntryTemplate({
 }: JournalEntryTemplateProps) {
   const sourceAnalysis = analyzeJournalSource(entry.source);
   const { introSource, sections } = splitJournalSourceIntoSections(entry.source);
+  const chapters = sections.map((section) => ({
+    id: section.id,
+    title: section.title,
+  }));
   const ornamentWashAsset = entry.ornamentWashAsset ?? entry.coverAsset;
   const ornamentOrbitAsset = entry.ornamentOrbitAsset ?? entry.coverAsset;
   const introContent = await renderMdxBlock(introSource);
@@ -84,13 +88,6 @@ export async function JournalEntryTemplate({
 
   return (
     <div id="top" className="relative pb-28 md:pb-20 xl:pb-24">
-      <JournalReadingChrome
-        chapters={sections.map((section) => ({
-          id: section.id,
-          title: section.title,
-        }))}
-      />
-
       <div className="space-y-8 pb-14 md:space-y-12 md:pb-20">
         <Container className="pt-8 md:pt-10">
           <Breadcrumbs
@@ -111,8 +108,6 @@ export async function JournalEntryTemplate({
           location={entry.location}
           publishedAt={entry.publishedAt}
           coverAsset={entry.coverAsset}
-          ornamentWashAsset={ornamentWashAsset}
-          ornamentOrbitAsset={ornamentOrbitAsset}
           chapterCount={sections.length}
           readingTimeLabel={readingTimeLabel}
         />
@@ -129,13 +124,8 @@ export async function JournalEntryTemplate({
 
             <Container className="relative z-10 py-8 md:py-12 xl:px-16 2xl:px-20">
               <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[17rem_minmax(0,1fr)]">
-                <div className="xl:relative">
-                  <JournalReadingChrome
-                    chapters={sections.map((section) => ({
-                      id: section.id,
-                      title: section.title,
-                    }))}
-                  />
+                <div className="relative xl:self-stretch">
+                  <JournalReadingChrome chapters={chapters} />
                 </div>
 
                 <div>

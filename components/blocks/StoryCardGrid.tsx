@@ -62,26 +62,36 @@ export function StoryCardGrid({
           >
             <Link
               href={`/journal/${story.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.78)] shadow-[0_22px_44px_rgba(30,20,12,0.08)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_30px_60px_rgba(30,20,12,0.12)]"
+              className="group relative flex h-full min-h-[25rem] overflow-hidden rounded-[1.85rem] border border-[rgb(255_255_255_/_0.18)] bg-[rgb(34_27_21_/_0.9)] shadow-[0_24px_54px_rgba(30,20,12,0.12)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_34px_72px_rgba(30,20,12,0.18)]"
             >
               <Image
                 src={story.heroImage.src}
                 alt={story.heroImage.alt}
-                width={story.heroImage.width}
-                height={story.heroImage.height}
-                className="aspect-[4/5] w-full shrink-0 object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                placeholder={story.heroImage.blurDataURL ? "blur" : "empty"}
+                blurDataURL={story.heroImage.blurDataURL}
+                className="object-cover blur-[2px] saturate-[0.9] transition duration-700 ease-out group-hover:scale-[1.06]"
               />
-              <div className="flex max-h-[14.5rem] min-h-[14.5rem] flex-1 flex-col gap-3 p-5 md:max-h-[15.5rem] md:min-h-[15.5rem] lg:max-h-[18rem] lg:min-h-[18rem] xl:max-h-[15.5rem] xl:min-h-[15.5rem]">
-                <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
-                  <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
-                  <span>{story.location}</span>
-                </p>
-                <h3 className="font-display-face text-2xl leading-[1.04] tracking-[-0.03em] text-pretty">
-                  {story.title}
-                </h3>
-                <p className="text-sm leading-7 text-pretty text-[var(--color-mist)]">
-                  {story.excerpt}
-                </p>
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,13,10,0.22)_0%,rgba(17,13,10,0.4)_26%,rgba(17,13,10,0.76)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_38%)]" />
+              <div className="relative z-10 flex min-h-[25rem] w-full flex-col justify-end p-5 md:p-6">
+                <div className="overflow-hidden rounded-[1.5rem] border border-[rgb(255_255_255_/_0.16)] bg-[rgb(255_255_255_/_0.11)] p-5 shadow-[0_20px_44px_rgba(10,7,5,0.18)] backdrop-blur-xl">
+                  <div className="space-y-4">
+                    <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.24em] text-[rgb(246_237_227_/_0.8)] uppercase">
+                      <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
+                      <span>{story.location}</span>
+                    </p>
+                    <div className="space-y-3">
+                      <h3 className="font-display-face text-[2rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-paper)] text-pretty">
+                        {story.title}
+                      </h3>
+                      <p className="text-sm leading-7 text-pretty text-[rgb(246_237_227_/_0.82)]">
+                        {story.excerpt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Link>
           </FloatIn>

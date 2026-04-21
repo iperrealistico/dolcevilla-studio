@@ -10,8 +10,6 @@ type JournalEntryHeroProps = {
   location: string;
   publishedAt: string;
   coverAsset: ImageAsset;
-  ornamentWashAsset: ImageAsset;
-  ornamentOrbitAsset: ImageAsset;
   chapterCount: number;
   readingTimeLabel: string;
 };
@@ -22,8 +20,6 @@ export function JournalEntryHero({
   location,
   publishedAt,
   coverAsset,
-  ornamentWashAsset,
-  ornamentOrbitAsset,
   chapterCount,
   readingTimeLabel,
 }: JournalEntryHeroProps) {
@@ -43,30 +39,6 @@ export function JournalEntryHero({
           className="object-cover object-[56%_center] md:object-center"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,13,10,0.24)_0%,rgba(18,13,10,0.16)_18%,rgba(18,13,10,0.32)_42%,rgba(18,13,10,0.84)_100%)] md:bg-[linear-gradient(180deg,rgba(18,13,10,0.12),rgba(18,13,10,0.38)_36%,rgba(18,13,10,0.78))]" />
-        <div
-          aria-hidden="true"
-          className="absolute -top-6 -right-12 h-[17rem] w-[17rem] opacity-60 mix-blend-screen md:top-8 md:right-[7%] md:h-[22rem] md:w-[22rem]"
-        >
-          <Image
-            src={ornamentOrbitAsset.src}
-            alt=""
-            fill
-            sizes="(min-width: 768px) 352px, 272px"
-            className="object-contain"
-          />
-        </div>
-        <div
-          aria-hidden="true"
-          className="absolute bottom-[-4rem] left-[-4rem] h-[17rem] w-[17rem] opacity-40 mix-blend-screen md:bottom-6 md:left-[3%] md:h-[24rem] md:w-[24rem]"
-        >
-          <Image
-            src={ornamentWashAsset.src}
-            alt=""
-            fill
-            sizes="(min-width: 768px) 384px, 272px"
-            className="object-contain"
-          />
-        </div>
         <Container className="relative z-10 flex min-h-[clamp(32rem,134vw,38rem)] flex-col justify-between px-0 py-0 md:min-h-[78svh] md:justify-end md:py-12">
           <div className="flex min-h-[clamp(32rem,134vw,38rem)] flex-col justify-between px-5 pt-5 pb-6 md:min-h-[78svh] md:px-0 md:pt-0 md:pb-0">
             <div className="flex flex-wrap items-center gap-2 md:justify-end">

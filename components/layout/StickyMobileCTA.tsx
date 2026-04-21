@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { StickyBottomBar } from "@/components/mobile/StickyBottomBar";
@@ -12,10 +13,13 @@ type StickyMobileCTAProps = {
 };
 
 export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
+  const pathname = usePathname();
   const { isMenuOpen } = useMobileUI();
   const { consent } = useConsent();
   const [isHeroCtaVisible, setIsHeroCtaVisible] = useState(false);
   const [isHeroSectionVisible, setIsHeroSectionVisible] = useState(false);
+  const isJournalEntryRoute =
+    pathname?.startsWith("/journal/") && pathname !== "/journal";
 
   useEffect(() => {
     const updateVisibility = () => {
@@ -65,6 +69,7 @@ export function StickyMobileCTA({ label, href }: StickyMobileCTAProps) {
   }, []);
 
   if (
+    isJournalEntryRoute ||
     isMenuOpen ||
     !consent.hasInteracted ||
     isHeroCtaVisible ||

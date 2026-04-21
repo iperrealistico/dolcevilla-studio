@@ -15,7 +15,7 @@ export function JournalAmbientOrnaments({
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      <div className="absolute top-[9rem] right-[-3rem] hidden h-[16rem] w-[16rem] opacity-55 mix-blend-multiply md:block lg:top-[12rem] lg:right-[4%] lg:h-[21rem] lg:w-[21rem]">
+      <div className="absolute top-[10rem] right-[-3rem] hidden h-[15rem] w-[15rem] opacity-24 mix-blend-darken md:block lg:top-[13rem] lg:right-[5%] lg:h-[19rem] lg:w-[19rem]">
         <Image
           src={orbitAsset.src}
           alt=""
@@ -24,7 +24,7 @@ export function JournalAmbientOrnaments({
           className="object-contain"
         />
       </div>
-      <div className="absolute top-[34rem] left-[-7rem] h-[18rem] w-[18rem] opacity-35 mix-blend-multiply md:top-[42rem] md:left-[2%] md:h-[28rem] md:w-[28rem]">
+      <div className="absolute top-[35rem] left-[-6rem] h-[15rem] w-[15rem] opacity-18 mix-blend-darken md:top-[42rem] md:left-[3%] md:h-[22rem] md:w-[22rem]">
         <Image
           src={washAsset.src}
           alt=""
@@ -33,7 +33,7 @@ export function JournalAmbientOrnaments({
           className="object-contain"
         />
       </div>
-      <div className="absolute top-[54%] right-[-5rem] h-[14rem] w-[14rem] opacity-40 mix-blend-multiply md:right-[7%] md:h-[18rem] md:w-[18rem] lg:top-[58%]">
+      <div className="absolute top-[54%] right-[-4rem] h-[12rem] w-[12rem] opacity-20 mix-blend-darken md:right-[8%] md:h-[16rem] md:w-[16rem] lg:top-[58%]">
         <Image
           src={orbitAsset.src}
           alt=""
@@ -42,7 +42,7 @@ export function JournalAmbientOrnaments({
           className="object-contain"
         />
       </div>
-      <div className="absolute right-[-6rem] bottom-[7rem] h-[18rem] w-[18rem] opacity-36 mix-blend-multiply md:right-[5%] md:bottom-[4rem] md:h-[26rem] md:w-[26rem]">
+      <div className="absolute right-[-5rem] bottom-[7rem] h-[15rem] w-[15rem] opacity-18 mix-blend-darken md:right-[5%] md:bottom-[5rem] md:h-[22rem] md:w-[22rem]">
         <Image
           src={washAsset.src}
           alt=""

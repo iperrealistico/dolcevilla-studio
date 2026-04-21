@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Compass, Send } from "lucide-react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils/cn";
 
 type JournalChapter = {
@@ -15,18 +16,43 @@ type JournalReadingChromeProps = {
 };
 
 const DESKTOP_BREAKPOINT = 1280;
-const DESKTOP_SCROLL_OFFSET = 132;
+const DESKTOP_SCROLL_OFFSET = 136;
 const MOBILE_SCROLL_OFFSET = 120;
+const DESKTOP_VIEWPORT_ANCHOR = 0.38;
+const MOBILE_VIEWPORT_ANCHOR = 0.26;
+const DESKTOP_RAIL_CENTER = 0.44;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
 
+function distanceToRange(anchor: number, top: number, bottom: number) {
+  if (anchor < top) {
+    return top - anchor;
+  }
+
+  if (anchor > bottom) {
+    return anchor - bottom;
+  }
+
+  return 0;
+}
+
 export function JournalReadingChrome({
   chapters,
 }: JournalReadingChromeProps) {
+  const reduceMotion = useReducedMotion();
+  const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
+  const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const desktopTrackRef = useRef<HTMLDivElement | null>(null);
+  const desktopCardRef = useRef<HTMLDivElement | null>(null);
+  const desktopAnimationFrameRef = useRef<number | null>(null);
+  const desktopCurrentOffsetRef = useRef(0);
+  const desktopTargetOffsetRef = useRef(0);
+
   const [activeId, setActiveId] = useState(chapters[0]?.id ?? "");
   const [progress, setProgress] = useState(0);
+  const [mobileTailWidth, setMobileTailWidth] = useState(0);
 
   const chapterMap = useMemo(
     () =>
@@ -38,56 +64,194 @@ export function JournalReadingChrome({
   );
 
   useEffect(() => {
+    const fallbackId = chapters[0]?.id ?? "";
+
+    setActiveId((currentId) =>
+      chapters.some((chapter) => chapter.id === currentId) ? currentId : fallbackId,
+    );
+  }, [chapters]);
+
+  useEffect(() => {
     if (!chapters.length) {
       return;
     }
 
     const article = document.getElementById("journal-article");
-
-    if (!article) {
-      return;
-    }
-
-    const updateProgress = () => {
-      const rect = article.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const totalScrollable = rect.height - viewportHeight * 0.42;
-      const distance = viewportHeight * 0.22 - rect.top;
-
-      setProgress(clamp(distance / Math.max(totalScrollable, 1), 0, 1));
-    };
-
     const sections = chapters
       .map((chapter) => document.getElementById(chapter.id))
       .filter((section): section is HTMLElement => Boolean(section));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((left, right) => right.intersectionRatio - left.intersectionRatio);
+    if (!article || !sections.length) {
+      return;
+    }
 
-        if (!visibleEntries.length) {
+    const setDesktopTransform = (offset: number) => {
+      const desktopCard = desktopCardRef.current;
+
+      if (!desktopCard) {
+        return;
+      }
+
+      desktopCard.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+
+    let chromeFrameRequested = false;
+
+    const stopDesktopAnimation = () => {
+      if (desktopAnimationFrameRef.current !== null) {
+        cancelAnimationFrame(desktopAnimationFrameRef.current);
+        desktopAnimationFrameRef.current = null;
+      }
+    };
+
+    const animateDesktopRail = () => {
+      stopDesktopAnimation();
+
+      const step = () => {
+        const delta = desktopTargetOffsetRef.current - desktopCurrentOffsetRef.current;
+
+        if (Math.abs(delta) < 0.5) {
+          desktopCurrentOffsetRef.current = desktopTargetOffsetRef.current;
+          setDesktopTransform(desktopCurrentOffsetRef.current);
+          desktopAnimationFrameRef.current = null;
           return;
         }
 
-        setActiveId(visibleEntries[0]?.target.id ?? chapters[0]?.id ?? "");
-      },
-      {
-        rootMargin: "-18% 0px -54% 0px",
-        threshold: [0.16, 0.33, 0.5, 0.66, 0.82],
-      },
-    );
+        desktopCurrentOffsetRef.current += delta * 0.16;
+        setDesktopTransform(desktopCurrentOffsetRef.current);
+        desktopAnimationFrameRef.current = requestAnimationFrame(step);
+      };
 
-    sections.forEach((section) => observer.observe(section));
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+      desktopAnimationFrameRef.current = requestAnimationFrame(step);
+    };
+
+    const updateDesktopRail = () => {
+      const track = desktopTrackRef.current;
+      const card = desktopCardRef.current;
+
+      if (!track || !card || window.innerWidth < DESKTOP_BREAKPOINT) {
+        stopDesktopAnimation();
+        desktopCurrentOffsetRef.current = 0;
+        desktopTargetOffsetRef.current = 0;
+        setDesktopTransform(0);
+        return;
+      }
+
+      const trackRect = track.getBoundingClientRect();
+      const trackTop = window.scrollY + trackRect.top;
+      const maxOffset = Math.max(track.offsetHeight - card.offsetHeight, 0);
+      const desiredTop =
+        window.scrollY + window.innerHeight * DESKTOP_RAIL_CENTER - card.offsetHeight / 2;
+
+      desktopTargetOffsetRef.current = clamp(desiredTop - trackTop, 0, maxOffset);
+
+      if (reduceMotion) {
+        stopDesktopAnimation();
+        desktopCurrentOffsetRef.current = desktopTargetOffsetRef.current;
+        setDesktopTransform(desktopCurrentOffsetRef.current);
+        return;
+      }
+
+      if (desktopAnimationFrameRef.current === null) {
+        animateDesktopRail();
+      }
+    };
+
+    const updateChrome = () => {
+      const articleRect = article.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const totalScrollable = articleRect.height - viewportHeight * 0.46;
+      const distance = viewportHeight * 0.24 - articleRect.top;
+
+      setProgress(clamp(distance / Math.max(totalScrollable, 1), 0, 1));
+
+      const anchor =
+        window.innerHeight *
+        (window.innerWidth >= DESKTOP_BREAKPOINT
+          ? DESKTOP_VIEWPORT_ANCHOR
+          : MOBILE_VIEWPORT_ANCHOR);
+
+      const nextActiveId =
+        sections.reduce<{ id: string; distance: number } | null>((nearest, section) => {
+          const rect = section.getBoundingClientRect();
+          const distanceToSection = distanceToRange(anchor, rect.top, rect.bottom);
+
+          if (!nearest || distanceToSection < nearest.distance) {
+            return {
+              id: section.id,
+              distance: distanceToSection,
+            };
+          }
+
+          return nearest;
+        }, null)?.id ?? chapters[0]?.id ?? "";
+
+      setActiveId((currentId) => (currentId === nextActiveId ? currentId : nextActiveId));
+      updateDesktopRail();
+    };
+
+    const handleScroll = () => {
+      if (chromeFrameRequested) {
+        return;
+      }
+
+      chromeFrameRequested = true;
+      requestAnimationFrame(() => {
+        chromeFrameRequested = false;
+        updateChrome();
+      });
+    };
+
+    updateChrome();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      stopDesktopAnimation();
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [chapters, reduceMotion]);
+
+  useEffect(() => {
+    const scroller = mobileScrollerRef.current;
+    const activeChip = chipRefs.current[activeId];
+
+    if (!scroller || !activeChip) {
+      return;
+    }
+
+    const nextLeft = Math.max(activeChip.offsetLeft - 12, 0);
+
+    scroller.scrollTo({
+      left: nextLeft,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  }, [activeId, reduceMotion]);
+
+  useEffect(() => {
+    if (!chapters.length) {
+      return;
+    }
+
+    const updateMobileTailWidth = () => {
+      const scroller = mobileScrollerRef.current;
+      const referenceChip = chipRefs.current[chapters[0]?.id ?? ""];
+
+      if (!scroller || !referenceChip) {
+        return;
+      }
+
+      setMobileTailWidth(
+        Math.max(scroller.clientWidth - referenceChip.offsetWidth - 12, 0),
+      );
+    };
+
+    updateMobileTailWidth();
+    window.addEventListener("resize", updateMobileTailWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateMobileTailWidth);
     };
   }, [chapters]);
 
@@ -109,7 +273,7 @@ export function JournalReadingChrome({
     window.history.replaceState(null, "", `#${id}`);
     window.scrollTo({
       top: Math.max(targetTop, 0),
-      behavior: "smooth",
+      behavior: reduceMotion ? "auto" : "smooth",
     });
   };
 
@@ -129,74 +293,80 @@ export function JournalReadingChrome({
         />
       </div>
 
-      <div className="hidden xl:block">
-        <div className="sticky top-28 space-y-4 rounded-[2rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.8)] p-4 shadow-[0_28px_70px_rgba(25,19,14,0.12)] backdrop-blur-md">
-          <div className="space-y-2 px-1">
-            <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-              <Compass size={13} strokeWidth={1.8} aria-hidden="true" />
-              <span>Chapter Guide</span>
-            </p>
-            <p className="text-sm leading-6 text-[var(--color-mist)]">
-              Move through the article without losing your place.
-            </p>
-          </div>
+      <div className="relative hidden h-full xl:block" ref={desktopTrackRef}>
+        <div
+          ref={desktopCardRef}
+          className="w-full will-change-transform"
+          style={{ transform: "translate3d(0, 0, 0)" }}
+        >
+          <div className="space-y-4 rounded-[2rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.8)] p-4 shadow-[0_28px_70px_rgba(25,19,14,0.12)] backdrop-blur-md">
+            <div className="space-y-2 px-1">
+              <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+                <Compass size={13} strokeWidth={1.8} aria-hidden="true" />
+                <span>Chapter Guide</span>
+              </p>
+              <p className="text-sm leading-6 text-[var(--color-mist)]">
+                Move through the article without losing your place.
+              </p>
+            </div>
 
-          <div className="relative space-y-2">
-            <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
-            <div
-              className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
-              style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
-            />
+            <div className="relative space-y-2">
+              <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
+              <div
+                className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
+                style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
+              />
 
-            {chapterMap.map((chapter) => {
-              const isActive = chapter.id === activeId;
+              {chapterMap.map((chapter) => {
+                const isActive = chapter.id === activeId;
 
-              return (
-                <button
-                  key={chapter.id}
-                  type="button"
-                  onClick={() => scrollToChapter(chapter.id)}
-                  className={cn(
-                    "group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition",
-                    isActive
-                      ? "bg-[rgb(255_255_255_/_0.9)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
-                      : "hover:bg-white/70",
-                  )}
-                  aria-current={isActive ? "true" : undefined}
-                >
-                  <div
+                return (
+                  <button
+                    key={chapter.id}
+                    type="button"
+                    onClick={() => scrollToChapter(chapter.id)}
                     className={cn(
-                      "relative z-10 flex h-8 w-8 items-center justify-center rounded-full border text-[0.72rem] font-semibold tracking-[0.2em]",
+                      "group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition",
                       isActive
-                        ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                        : "border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.9)] text-[var(--color-mist)]",
+                        ? "bg-[rgb(255_255_255_/_0.9)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
+                        : "hover:bg-white/70",
                     )}
+                    aria-current={isActive ? "true" : undefined}
                   >
-                    {chapter.label}
-                  </div>
-                  <span
-                    className={cn(
-                      "block pt-1 text-sm leading-5",
-                      isActive ? "text-[var(--color-ink)]" : "text-[var(--color-mist)]",
-                    )}
-                  >
-                    {chapter.title}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                    <div
+                      className={cn(
+                        "relative z-10 flex h-8 w-8 items-center justify-center rounded-full border text-[0.72rem] font-semibold tracking-[0.2em]",
+                        isActive
+                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
+                          : "border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.9)] text-[var(--color-mist)]",
+                      )}
+                    >
+                      {chapter.label}
+                    </div>
+                    <span
+                      className={cn(
+                        "block pt-1 text-sm leading-5",
+                        isActive ? "text-[var(--color-ink)]" : "text-[var(--color-mist)]",
+                      )}
+                    >
+                      {chapter.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-between gap-3 rounded-[1.4rem] border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(246,238,231,0.96))] px-4 py-3 text-sm font-semibold text-[var(--color-ink)] shadow-[0_18px_42px_rgba(25,19,14,0.08)] transition hover:-translate-y-0.5"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Send size={15} strokeWidth={1.9} aria-hidden="true" />
-              <span>Start an inquiry</span>
-            </span>
-            <ArrowUpRight size={15} strokeWidth={1.9} aria-hidden="true" />
-          </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-between gap-3 rounded-[1.4rem] border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(246,238,231,0.96))] px-4 py-3 text-sm font-semibold text-[var(--color-ink)] shadow-[0_18px_42px_rgba(25,19,14,0.08)] transition hover:-translate-y-0.5"
+            >
+              <span className="inline-flex items-center gap-2">
+                <Send size={15} strokeWidth={1.9} aria-hidden="true" />
+                <span>Start an inquiry</span>
+              </span>
+              <ArrowUpRight size={15} strokeWidth={1.9} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -216,39 +386,48 @@ export function JournalReadingChrome({
             </p>
           </div>
 
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-            <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-center gap-2 pr-2">
-                {chapterMap.map((chapter) => {
-                  const isActive = chapter.id === activeId;
+          <div
+            ref={mobileScrollerRef}
+            className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div className="inline-flex items-center gap-2 pr-2">
+              {chapterMap.map((chapter) => {
+                const isActive = chapter.id === activeId;
 
-                  return (
-                    <button
-                      key={chapter.id}
-                      type="button"
-                      onClick={() => scrollToChapter(chapter.id)}
-                      className={cn(
-                        "inline-flex min-w-[3.2rem] shrink-0 items-center justify-center rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
-                        isActive
-                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                          : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
-                      )}
-                      aria-current={isActive ? "true" : undefined}
-                    >
-                      {chapter.label}
-                    </button>
-                  );
-                })}
-              </div>
+                return (
+                  <button
+                    key={chapter.id}
+                    ref={(node) => {
+                      chipRefs.current[chapter.id] = node;
+                    }}
+                    type="button"
+                    onClick={() => scrollToChapter(chapter.id)}
+                    className={cn(
+                      "inline-flex min-w-[3.2rem] shrink-0 items-center justify-center rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
+                      isActive
+                        ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
+                        : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
+                    )}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    {chapter.label}
+                  </button>
+                );
+              })}
+
+              <Link
+                href="/contact"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] px-4 py-2 text-[0.72rem] font-semibold tracking-[0.14em] text-[var(--color-paper)] uppercase shadow-[0_18px_42px_rgba(25,19,14,0.16)]"
+              >
+                <Send size={14} strokeWidth={1.9} aria-hidden="true" />
+                <span>Contact</span>
+              </Link>
+              <div
+                aria-hidden="true"
+                className="shrink-0"
+                style={{ width: `${mobileTailWidth}px` }}
+              />
             </div>
-
-            <Link
-              href="/contact"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] text-[var(--color-paper)] shadow-[0_18px_42px_rgba(25,19,14,0.16)]"
-              aria-label="Start an inquiry"
-            >
-              <Send size={16} strokeWidth={1.9} aria-hidden="true" />
-            </Link>
           </div>
         </div>
       </div>

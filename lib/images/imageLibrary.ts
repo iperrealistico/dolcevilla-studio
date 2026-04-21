@@ -388,30 +388,6 @@ export const imageAssetLibrary = {
     1536,
     "stone",
   ),
-  journalBestGardenVenuesTuscanyCover: createAsset(
-    "journal-best-garden-venues-tuscany-cover",
-    "/images/brand/journal-generated/best-garden-wedding-venues-in-tuscany-cover.png",
-    "Illustrated couple walking through a formal Tuscan garden with lemon trees, sculpted hedges, and a dinner setup beyond.",
-    1536,
-    1024,
-    "sage",
-  ),
-  journalBestGardenVenuesTuscanyWash: createAsset(
-    "journal-best-garden-venues-tuscany-wash",
-    "/images/brand/journal-generated/best-garden-wedding-venues-in-tuscany-ornament-wash.png",
-    "Illustrated ambient wash of a Tuscan garden with clipped hedges, lemon foliage, and soft distant hills.",
-    1536,
-    1024,
-    "linen",
-  ),
-  journalBestGardenVenuesTuscanyOrbit: createAsset(
-    "journal-best-garden-venues-tuscany-orbit",
-    "/images/brand/journal-generated/best-garden-wedding-venues-in-tuscany-ornament-orbit.png",
-    "Illustrated orbit ornament with lemon branches, clipped garden forms, and airy Tuscan garden motifs.",
-    1024,
-    1024,
-    "sage",
-  ),
 } as const;
 
 export type ImageAssetLibraryKey = keyof typeof imageAssetLibrary;

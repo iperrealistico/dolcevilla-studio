@@ -308,6 +308,21 @@
     "asset": "welcomeDinnerLanterns",
     "alt": "A lantern-lit Tuscan wedding dinner as guests settle into the evening together."
   },
+  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.cover": {
+    "asset": "journalHowToChooseAValDorciaWeddingPhotographerForAVillaWeddingCover"
+  },
+  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.villa-flow": {
+    "asset": "villaCourtyard",
+    "alt": "A quiet stone villa courtyard in Tuscany before guests move into the wedding day."
+  },
+  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.landscape-balance": {
+    "asset": "valDorciaCypressVows",
+    "alt": "A wedding scene framed by the rolling cypress-lined landscape of Val d'Orcia."
+  },
+  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.evening-rhythm": {
+    "asset": "welcomeDinnerLanterns",
+    "alt": "A lantern-lit Tuscan villa dinner as guests settle into the evening."
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

@@ -93,6 +93,15 @@ export const imageAssetLibrary = {
       1024,
       "linen",
     ),
+  journalHowToChooseAValDorciaWeddingPhotographerForAVillaWeddingCover:
+    createAsset(
+      "journal-how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding-cover",
+      "/images/brand/journal-generated/how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding-cover.png",
+      "A couple pausing on the edge of a stone villa terrace overlooking the rolling hills of Val d'Orcia in late-afternoon light.",
+      1536,
+      1024,
+      "linen",
+    ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

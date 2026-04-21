@@ -263,6 +263,21 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
+  "journal.tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy.cover": {
+    "asset": "journalTuscanyProposalPhotographerSurpriseEngagementItalyCover"
+  },
+  "journal.tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy.inline.location-fit": {
+    "asset": "journalTuscanyProposalPhotographerSurpriseEngagementItalyLocationFit",
+    "alt": "A couple walking toward a quiet Tuscan terrace where a surprise proposal could unfold naturally."
+  },
+  "journal.tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy.inline.light-window": {
+    "asset": "journalTuscanyProposalPhotographerSurpriseEngagementItalyLightWindow",
+    "alt": "A quiet Tuscan proposal setting in warm late-day light with room for privacy and stillness."
+  },
+  "journal.tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy.inline.afterglow": {
+    "asset": "journalTuscanyProposalPhotographerSurpriseEngagementItalyAfterglow",
+    "alt": "A just-engaged couple lingering in a calm Tuscan garden after the surprise proposal."
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

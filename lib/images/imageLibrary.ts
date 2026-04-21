@@ -348,6 +348,41 @@ export const imageAssetLibrary = {
     1536,
     "ink",
   ),
+  journalTuscanyProposalPhotographerSurpriseEngagementItalyCover: createAsset(
+    "journal-tuscany-proposal-photographer-surprise-engagement-italy-cover",
+    "/images/brand/journal-generated/tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy-cover.png",
+    "An illustrated surprise proposal unfolding on a Tuscan terrace at golden hour.",
+    1536,
+    1024,
+    "linen",
+  ),
+  journalTuscanyProposalPhotographerSurpriseEngagementItalyLocationFit:
+    createAsset(
+      "journal-tuscany-proposal-photographer-surprise-engagement-italy-location-fit",
+      "/images/brand/journal-generated/tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy-inline-location-fit.png",
+      "An illustrated couple walking toward a quiet Tuscan terrace before the surprise proposal.",
+      1536,
+      1024,
+      "sage",
+    ),
+  journalTuscanyProposalPhotographerSurpriseEngagementItalyLightWindow:
+    createAsset(
+      "journal-tuscany-proposal-photographer-surprise-engagement-italy-light-window",
+      "/images/brand/journal-generated/tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy-inline-light-window.png",
+      "An illustrated Tuscan terrace in warm late-day light prepared for a private proposal.",
+      1536,
+      1024,
+      "linen",
+    ),
+  journalTuscanyProposalPhotographerSurpriseEngagementItalyAfterglow:
+    createAsset(
+      "journal-tuscany-proposal-photographer-surprise-engagement-italy-afterglow",
+      "/images/brand/journal-generated/tuscany-proposal-photographer-how-to-plan-a-surprise-engagement-in-italy-inline-afterglow.png",
+      "An illustrated just-engaged couple lingering together on a Tuscan terrace after the proposal.",
+      1536,
+      1024,
+      "linen",
+    ),
   teamLisaMazzei: createAsset(
     "team-lisa-mazzei",
     "/images/brand/team/lisa-mazzei-headshot.webp",

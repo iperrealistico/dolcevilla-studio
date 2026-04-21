@@ -73,7 +73,7 @@ export function InquiryForm() {
 
   if (isSubmitted) {
     return (
-      <div className="space-y-4 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)]">
+      <div className="space-y-4 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)] md:p-7">
         <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
           {inquiryFormContent.success.eyebrow}
         </p>
@@ -89,10 +89,10 @@ export function InquiryForm() {
 
   return (
     <form
-      className="grid gap-5 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)]"
+      className="grid gap-5 rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] p-6 shadow-[var(--shadow-soft)] md:p-7"
       onSubmit={onSubmit}
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <FormField
           label={inquiryFormContent.fields.names}
           error={form.formState.errors.names?.message}

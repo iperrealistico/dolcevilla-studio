@@ -161,6 +161,9 @@
   "page.experience.craft.image": {
     "asset": "filmHasselbladGroundGlassBridalWindow"
   },
+  "page.contact.craft.image": {
+    "asset": "filmRolleiflexBridalPrep"
+  },
   "page.experience.villa.image": {
     "asset": "homeHeroVilla"
   },

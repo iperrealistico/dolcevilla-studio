@@ -16,12 +16,25 @@ type JournalReadingChromeProps = {
   chapters: JournalChapter[];
 };
 
+type DesktopRailMetrics = {
+  activeHeight: number;
+  lineLeft: number;
+  trackHeight: number;
+  trackTop: number;
+};
+
 const DESKTOP_BREAKPOINT = 1280;
 const DESKTOP_VIEWPORT_ANCHOR = 0.38;
 const MOBILE_VIEWPORT_ANCHOR = 0.26;
 const DESKTOP_RAIL_CENTER = 0.44;
 const FALLBACK_HEADER_HEIGHT = 76;
 const MANUAL_CHAPTER_LOCK_MS = 1500;
+const INITIAL_DESKTOP_RAIL_METRICS: DesktopRailMetrics = {
+  activeHeight: 0,
+  lineLeft: 24,
+  trackHeight: 0,
+  trackTop: 16,
+};
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -49,17 +62,19 @@ function getSiteHeaderHeight() {
     .getPropertyValue("--site-header-height");
   const parsed = Number.parseFloat(value);
 
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : FALLBACK_HEADER_HEIGHT;
+  return Number.isFinite(parsed) && parsed > 0
+    ? parsed
+    : FALLBACK_HEADER_HEIGHT;
 }
 
-export function JournalReadingChrome({
-  chapters,
-}: JournalReadingChromeProps) {
+export function JournalReadingChrome({ chapters }: JournalReadingChromeProps) {
   const reduceMotion = useReducedMotion();
   const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const desktopTrackRef = useRef<HTMLDivElement | null>(null);
   const desktopCardRef = useRef<HTMLDivElement | null>(null);
+  const desktopRailListRef = useRef<HTMLDivElement | null>(null);
+  const desktopBadgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const desktopAnimationFrameRef = useRef<number | null>(null);
   const desktopCurrentOffsetRef = useRef(0);
   const desktopTargetOffsetRef = useRef(0);
@@ -67,6 +82,9 @@ export function JournalReadingChrome({
   const manualChapterLockUntilRef = useRef(0);
 
   const [activeId, setActiveId] = useState(chapters[0]?.id ?? "");
+  const [desktopRailMetrics, setDesktopRailMetrics] = useState(
+    INITIAL_DESKTOP_RAIL_METRICS,
+  );
   const [progress, setProgress] = useState(0);
 
   const chapterMap = useMemo(
@@ -82,7 +100,9 @@ export function JournalReadingChrome({
     const fallbackId = chapters[0]?.id ?? "";
 
     setActiveId((currentId) =>
-      chapters.some((chapter) => chapter.id === currentId) ? currentId : fallbackId,
+      chapters.some((chapter) => chapter.id === currentId)
+        ? currentId
+        : fallbackId,
     );
   }, [chapters]);
 
@@ -123,7 +143,8 @@ export function JournalReadingChrome({
       stopDesktopAnimation();
 
       const step = () => {
-        const delta = desktopTargetOffsetRef.current - desktopCurrentOffsetRef.current;
+        const delta =
+          desktopTargetOffsetRef.current - desktopCurrentOffsetRef.current;
 
         if (Math.abs(delta) < 0.5) {
           desktopCurrentOffsetRef.current = desktopTargetOffsetRef.current;
@@ -164,9 +185,16 @@ export function JournalReadingChrome({
       const desiredTop =
         window.scrollY +
         railTopOffset +
-        Math.max((safeViewportHeight - card.offsetHeight) * DESKTOP_RAIL_CENTER, 0);
+        Math.max(
+          (safeViewportHeight - card.offsetHeight) * DESKTOP_RAIL_CENTER,
+          0,
+        );
 
-      desktopTargetOffsetRef.current = clamp(desiredTop - trackTop, 0, maxOffset);
+      desktopTargetOffsetRef.current = clamp(
+        desiredTop - trackTop,
+        0,
+        maxOffset,
+      );
 
       if (reduceMotion) {
         stopDesktopAnimation();
@@ -199,19 +227,28 @@ export function JournalReadingChrome({
             : MOBILE_VIEWPORT_ANCHOR);
 
       const nextActiveId =
-        sections.reduce<{ id: string; distance: number } | null>((nearest, section) => {
-          const rect = section.getBoundingClientRect();
-          const distanceToSection = distanceToRange(anchor, rect.top, rect.bottom);
+        sections.reduce<{ id: string; distance: number } | null>(
+          (nearest, section) => {
+            const rect = section.getBoundingClientRect();
+            const distanceToSection = distanceToRange(
+              anchor,
+              rect.top,
+              rect.bottom,
+            );
 
-          if (!nearest || distanceToSection < nearest.distance) {
-            return {
-              id: section.id,
-              distance: distanceToSection,
-            };
-          }
+            if (!nearest || distanceToSection < nearest.distance) {
+              return {
+                id: section.id,
+                distance: distanceToSection,
+              };
+            }
 
-          return nearest;
-        }, null)?.id ?? chapters[0]?.id ?? "";
+            return nearest;
+          },
+          null,
+        )?.id ??
+        chapters[0]?.id ??
+        "";
 
       const manualTargetId = manualChapterTargetRef.current;
 
@@ -233,7 +270,9 @@ export function JournalReadingChrome({
         manualChapterTargetRef.current = null;
       }
 
-      setActiveId((currentId) => (currentId === nextActiveId ? currentId : nextActiveId));
+      setActiveId((currentId) =>
+        currentId === nextActiveId ? currentId : nextActiveId,
+      );
       updateDesktopRail();
     };
 
@@ -276,6 +315,57 @@ export function JournalReadingChrome({
     });
   }, [activeId, reduceMotion]);
 
+  useEffect(() => {
+    if (!chapterMap.length) {
+      setDesktopRailMetrics(INITIAL_DESKTOP_RAIL_METRICS);
+      return;
+    }
+
+    const updateDesktopRailMetrics = () => {
+      const railList = desktopRailListRef.current;
+      const firstBadge = desktopBadgeRefs.current[chapterMap[0]?.id];
+      const lastBadge =
+        desktopBadgeRefs.current[chapterMap[chapterMap.length - 1]?.id];
+      const activeBadge =
+        desktopBadgeRefs.current[activeId] ??
+        desktopBadgeRefs.current[chapterMap[0]?.id];
+
+      if (!railList || !firstBadge || !lastBadge || !activeBadge) {
+        setDesktopRailMetrics(INITIAL_DESKTOP_RAIL_METRICS);
+        return;
+      }
+
+      const railListRect = railList.getBoundingClientRect();
+      const getCenterPoint = (element: HTMLDivElement) => {
+        const rect = element.getBoundingClientRect();
+
+        return {
+          x: rect.left - railListRect.left + rect.width / 2,
+          y: rect.top - railListRect.top + rect.height / 2,
+        };
+      };
+
+      const firstCenter = getCenterPoint(firstBadge);
+      const lastCenter = getCenterPoint(lastBadge);
+      const activeCenter = getCenterPoint(activeBadge);
+
+      setDesktopRailMetrics({
+        activeHeight: Math.max(activeCenter.y - firstCenter.y, 0),
+        lineLeft: firstCenter.x,
+        trackHeight: Math.max(lastCenter.y - firstCenter.y, 0),
+        trackTop: firstCenter.y,
+      });
+    };
+
+    const frame = requestAnimationFrame(updateDesktopRailMetrics);
+    window.addEventListener("resize", updateDesktopRailMetrics);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", updateDesktopRailMetrics);
+    };
+  }, [activeId, chapterMap]);
+
   const scrollToChapter = (id: string) => {
     const section = document.getElementById(id);
 
@@ -290,7 +380,8 @@ export function JournalReadingChrome({
       window.scrollY + section.getBoundingClientRect().top - offset;
 
     manualChapterTargetRef.current = id;
-    manualChapterLockUntilRef.current = performance.now() + MANUAL_CHAPTER_LOCK_MS;
+    manualChapterLockUntilRef.current =
+      performance.now() + MANUAL_CHAPTER_LOCK_MS;
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
     window.scrollTo({
@@ -333,37 +424,43 @@ export function JournalReadingChrome({
             </div>
 
             <LayoutGroup id="desktop-journal-chapter-rail">
-              <div className="relative space-y-2">
-                <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
+              <div ref={desktopRailListRef} className="relative space-y-2">
                 <div
-                  className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
-                  style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
+                  className="pointer-events-none absolute w-px bg-[rgb(92_77_58_/_0.14)]"
+                  style={{
+                    height: `${desktopRailMetrics.trackHeight}px`,
+                    left: `${desktopRailMetrics.lineLeft}px`,
+                    top: `${desktopRailMetrics.trackTop}px`,
+                    transform: "translateX(-50%)",
+                  }}
+                />
+                <div
+                  className="pointer-events-none absolute w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height,left,top] duration-300 ease-out"
+                  style={{
+                    height: `${desktopRailMetrics.activeHeight}px`,
+                    left: `${desktopRailMetrics.lineLeft}px`,
+                    top: `${desktopRailMetrics.trackTop}px`,
+                    transform: "translateX(-50%)",
+                  }}
                 />
 
                 {chapterMap.map((chapter) => {
                   const isActive = chapter.id === activeId;
 
                   return (
-                    <motion.button
+                    <button
                       key={chapter.id}
                       type="button"
                       onClick={() => scrollToChapter(chapter.id)}
-                      className="group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition hover:bg-white/70"
+                      className="group relative grid w-full grid-cols-[2.4rem_minmax(0,1fr)] items-start gap-3 px-1 py-1 text-left"
                       aria-current={isActive ? "true" : undefined}
                     >
-                      {isActive ? (
-                        <motion.div
-                          layoutId="desktop-journal-chapter-active-card"
-                          className="absolute inset-0 rounded-[1.3rem] bg-[rgb(255_255_255_/_0.92)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
-                          transition={
-                            reduceMotion
-                              ? { duration: 0 }
-                              : { type: "spring", stiffness: 380, damping: 34, mass: 0.58 }
-                          }
-                        />
-                      ) : null}
-
-                      <div className="relative z-10 flex h-8 w-8 items-center justify-center">
+                      <div
+                        ref={(node) => {
+                          desktopBadgeRefs.current[chapter.id] = node;
+                        }}
+                        className="relative z-20 flex h-8 w-8 items-center justify-center self-start"
+                      >
                         {isActive ? (
                           <motion.div
                             layoutId="desktop-journal-chapter-active-badge"
@@ -379,7 +476,12 @@ export function JournalReadingChrome({
                                   }
                             }
                           />
-                        ) : null}
+                        ) : (
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.94)] shadow-[0_10px_24px_rgba(25,19,14,0.04)]"
+                          />
+                        )}
                         <span
                           className={cn(
                             "relative z-10 text-[0.72rem] font-semibold tracking-[0.2em]",
@@ -391,15 +493,41 @@ export function JournalReadingChrome({
                           {chapter.label}
                         </span>
                       </div>
-                      <span
-                        className={cn(
-                          "relative z-10 block pt-1 text-sm leading-5",
-                          isActive ? "text-[var(--color-ink)]" : "text-[var(--color-mist)]",
+
+                      <div className="relative min-h-[3.25rem] pt-0.5">
+                        {isActive ? (
+                          <motion.div
+                            layoutId="desktop-journal-chapter-active-card"
+                            className="absolute inset-0 rounded-[1.3rem] bg-[rgb(255_255_255_/_0.92)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
+                            transition={
+                              reduceMotion
+                                ? { duration: 0 }
+                                : {
+                                    type: "spring",
+                                    stiffness: 380,
+                                    damping: 34,
+                                    mass: 0.58,
+                                  }
+                            }
+                          />
+                        ) : (
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0 rounded-[1.3rem] bg-white/0 transition-colors duration-200 group-hover:bg-white/72"
+                          />
                         )}
-                      >
-                        {chapter.title}
-                      </span>
-                    </motion.button>
+                        <span
+                          className={cn(
+                            "relative z-10 block rounded-[1.3rem] px-4 py-2.5 text-sm leading-5 transition-colors duration-200",
+                            isActive
+                              ? "text-[var(--color-ink)]"
+                              : "text-[var(--color-mist)] group-hover:text-[var(--color-ink)]",
+                          )}
+                        >
+                          {chapter.title}
+                        </span>
+                      </div>
+                    </button>
                   );
                 })}
               </div>
@@ -431,7 +559,8 @@ export function JournalReadingChrome({
               </p>
             </div>
             <p className="shrink-0 pt-1 text-[0.68rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
-              {currentChapter?.label}/{String(chapterMap.length).padStart(2, "0")}
+              {currentChapter?.label}/
+              {String(chapterMap.length).padStart(2, "0")}
             </p>
           </div>
 

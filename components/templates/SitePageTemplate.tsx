@@ -17,9 +17,27 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { Container } from "@/components/ui/Container";
-import { inquiryFormContent } from "@/content/site/forms";
-import { Mail } from "lucide-react";
+import { Clock3, Film, PhoneCall, ShieldCheck } from "lucide-react";
 import type { ServicePageContent, StoryCard } from "@/types/content";
+
+const contactNextStepMeta = [
+  {
+    title: "Reply window",
+    icon: Clock3,
+  },
+  {
+    title: "Next conversation",
+    icon: PhoneCall,
+  },
+  {
+    title: "Film priorities",
+    icon: Film,
+  },
+  {
+    title: "Discretion",
+    icon: ShieldCheck,
+  },
+] as const;
 
 type SitePageTemplateProps = {
   page: ServicePageContent;
@@ -110,51 +128,65 @@ export function SitePageTemplate({
       </ScrollParallax>
       {page.pageType === "contact" ? (
         <ScrollParallax from="left" intensity="lg">
-          <Container className="grid gap-8 md:grid-cols-[0.9fr_1.1fr]">
-            <div className="space-y-4">
+          <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start xl:gap-14">
+            <div className="space-y-8 lg:pr-4">
               {page.formIntro ? (
-                <>
+                <div className="space-y-4">
                   <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                     {page.formIntro.eyebrow}
                   </p>
-                  <h2 className="font-display-face text-3xl tracking-[-0.03em] md:text-4xl">
+                  <h2 className="font-display-face max-w-lg text-4xl leading-[0.94] tracking-[-0.05em] md:text-5xl xl:text-[4.25rem]">
                     {page.formIntro.heading}
                   </h2>
-                  <div className="space-y-3 text-sm leading-7 text-[var(--color-mist)]">
+                  <div className="max-w-xl space-y-3 text-base leading-8 text-[var(--color-mist)] md:text-lg">
                     {page.formIntro.body.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
                   </div>
-                </>
-              ) : null}
-              {page.directEmail ? (
-                <div className="flex items-center gap-3 rounded-[1.2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.68)] px-4 py-3 text-sm text-[var(--color-mist)] shadow-[0_18px_38px_rgba(30,20,12,0.08)]">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.1)] text-[var(--color-ink)]">
-                    <Mail size={18} strokeWidth={1.7} />
-                  </div>
-                  <p>
-                    {inquiryFormContent.directEmailPrompt}{" "}
-                    <a href={`mailto:${page.directEmail}`}>
-                      {page.directEmail}
-                    </a>
-                  </p>
                 </div>
               ) : null}
               {page.nextSteps.length ? (
-                <ul className="space-y-2 text-sm leading-7 text-[var(--color-mist)]">
-                  {page.nextSteps.map((step) => (
-                    <li key={step}>{step}</li>
-                  ))}
-                </ul>
+                <div className="rounded-[1.85rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.76)] p-5 shadow-[var(--shadow-soft)] md:p-6">
+                  <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+                    What happens next
+                  </p>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    {page.nextSteps.map((step, index) => {
+                      const item = contactNextStepMeta[index];
+                      const Icon = item?.icon ?? Clock3;
+
+                      return (
+                        <div
+                          key={step}
+                          className="rounded-[1.35rem] border border-[var(--color-line)] bg-[var(--color-shell)] px-4 py-4"
+                        >
+                          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.1)] text-[var(--color-ink)]">
+                            <Icon size={18} strokeWidth={1.75} />
+                          </div>
+                          <p className="mt-4 text-[0.68rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                            {item?.title ?? "Detail"}
+                          </p>
+                          <p className="mt-2 text-sm leading-7 text-[var(--color-mist)]">
+                            {step}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               ) : null}
             </div>
-            <InquiryForm />
+            <div className="lg:pl-4">
+              <InquiryForm />
+            </div>
           </Container>
         </ScrollParallax>
       ) : null}
-      <ScrollParallax from="right" intensity="lg">
-        <CTASection section={page.cta} />
-      </ScrollParallax>
+      {page.pageType !== "contact" ? (
+        <ScrollParallax from="right" intensity="lg">
+          <CTASection section={page.cta} />
+        </ScrollParallax>
+      ) : null}
     </div>
   );
 }

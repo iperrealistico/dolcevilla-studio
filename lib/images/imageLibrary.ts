@@ -66,42 +66,6 @@ export const imageAssetLibrary = {
     1024,
     "ink",
   ),
-  journalChiantiWeddingPhotographerForADestinationWeddingInTuscanyCover:
-    createAsset(
-      "journal-chianti-wedding-photographer-for-a-destination-wedding-in-tuscany-cover",
-      "/images/brand/journal-generated/chianti-wedding-photographer-for-a-destination-wedding-in-tuscany-cover.png",
-      "A couple seated on a stone terrace overlooking Chianti vineyards at sunset.",
-      1536,
-      1024,
-      "olive",
-    ),
-  journalHowToChooseAChiantiWeddingPhotographerForAVillaOrVineyardWeddingCover:
-    createAsset(
-      "journal-how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding-cover",
-      "/images/brand/journal-generated/how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding-cover.png",
-      "A couple pausing on a stone villa terrace with Chianti vineyard rows beyond in late-afternoon light.",
-      1536,
-      1024,
-      "olive",
-    ),
-  journalValDorciaWeddingPhotographerForADestinationWeddingInItalyCover:
-    createAsset(
-      "journal-val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy-cover",
-      "/images/brand/journal-generated/val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy-cover.png",
-      "A couple standing on a stone terrace overlooking the rolling cypress-lined hills of Val d'Orcia at sunset.",
-      1536,
-      1024,
-      "linen",
-    ),
-  journalHowToChooseAValDorciaWeddingPhotographerForAVillaWeddingCover:
-    createAsset(
-      "journal-how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding-cover",
-      "/images/brand/journal-generated/how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding-cover.png",
-      "A couple pausing on the edge of a stone villa terrace overlooking the rolling hills of Val d'Orcia in late-afternoon light.",
-      1536,
-      1024,
-      "linen",
-    ),
   villaCourtyard: createAsset(
     "villa-courtyard",
     "/images/brand/ai-temp/villa-courtyard-morning.webp",

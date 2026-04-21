@@ -263,66 +263,6 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
-  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.cover": {
-    "asset": "journalChiantiWeddingPhotographerForADestinationWeddingInTuscanyCover"
-  },
-  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.vineyard-dinner": {
-    "asset": "chiantiVineyardDinner",
-    "alt": "A candlelit wedding dinner between Chianti vines at dusk."
-  },
-  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.weekend-toast": {
-    "asset": "candlelitCourtyardToast",
-    "alt": "Guests raising a toast in a Tuscan stone courtyard after sunset."
-  },
-  "journal.chianti-wedding-photographer-for-a-destination-wedding-in-tuscany.inline.ceremony-light": {
-    "asset": "oliveGardenCeremony",
-    "alt": "An intimate outdoor ceremony beneath olive trees in soft Tuscany light."
-  },
-  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.cover": {
-    "asset": "journalHowToChooseAChiantiWeddingPhotographerForAVillaOrVineyardWeddingCover"
-  },
-  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.villa-flow": {
-    "asset": "candlelitCourtyardToast",
-    "alt": "Guests gathering for a candlelit toast in a Tuscan villa courtyard."
-  },
-  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.vineyard-scale": {
-    "asset": "chiantiVineyardDinner",
-    "alt": "A long wedding dinner set among Chianti vines at dusk."
-  },
-  "journal.how-to-choose-a-chianti-wedding-photographer-for-a-villa-or-vineyard-wedding.inline.weekend-rhythm": {
-    "asset": "welcomeDinnerLanterns",
-    "alt": "A Tuscan welcome dinner glowing under lanterns as guests settle into the evening."
-  },
-  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.cover": {
-    "asset": "journalValDorciaWeddingPhotographerForADestinationWeddingInItalyCover"
-  },
-  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.cypress-ceremony": {
-    "asset": "valDorciaCypressVows",
-    "alt": "A ceremony moment above the rolling cypress-lined hills of Val d'Orcia."
-  },
-  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.morning-prep": {
-    "asset": "bridalPrepWindowSilk",
-    "alt": "Morning preparation light falling through a Tuscan stone-room window before the wedding day begins."
-  },
-  "journal.val-dorcia-wedding-photographer-for-a-destination-wedding-in-italy.inline.weekend-dinner": {
-    "asset": "welcomeDinnerLanterns",
-    "alt": "A lantern-lit Tuscan wedding dinner as guests settle into the evening together."
-  },
-  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.cover": {
-    "asset": "journalHowToChooseAValDorciaWeddingPhotographerForAVillaWeddingCover"
-  },
-  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.villa-flow": {
-    "asset": "villaCourtyard",
-    "alt": "A quiet stone villa courtyard in Tuscany before guests move into the wedding day."
-  },
-  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.landscape-balance": {
-    "asset": "valDorciaCypressVows",
-    "alt": "A wedding scene framed by the rolling cypress-lined landscape of Val d'Orcia."
-  },
-  "journal.how-to-choose-a-val-dorcia-wedding-photographer-for-a-villa-wedding.inline.evening-rhythm": {
-    "asset": "welcomeDinnerLanterns",
-    "alt": "A lantern-lit Tuscan villa dinner as guests settle into the evening."
-  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   analyzeJournalSource,
+  buildJournalSectionSnippet,
   buildJournalSlotIds,
   splitJournalSourceIntoSections,
 } from "@/lib/content/journalSource";
@@ -59,5 +60,17 @@ describe("journalSource", () => {
       ornamentWashImage: "journal.chianti-wedding-photographer.ornament.wash",
       ornamentOrbitImage: "journal.chianti-wedding-photographer.ornament.orbit",
     });
+  });
+
+  it("builds a usable desktop snippet from each section source", () => {
+    const parsed = splitJournalSourceIntoSections(validSource);
+    const snippet = buildJournalSectionSnippet(parsed.sections[0]!, 0);
+
+    expect(snippet).toMatchObject({
+      label: "TL;DR 01",
+      title: "Quick takeaway 01",
+    });
+    expect(snippet.summary).toContain("Some body copy");
+    expect(snippet.summary).not.toContain("<Journal");
   });
 });

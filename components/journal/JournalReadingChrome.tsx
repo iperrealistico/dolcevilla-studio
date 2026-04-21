@@ -14,6 +14,10 @@ type JournalReadingChromeProps = {
   chapters: JournalChapter[];
 };
 
+const DESKTOP_BREAKPOINT = 1280;
+const DESKTOP_SCROLL_OFFSET = 132;
+const MOBILE_SCROLL_OFFSET = 120;
+
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
@@ -46,9 +50,9 @@ export function JournalReadingChrome({
 
     const updateProgress = () => {
       const rect = article.getBoundingClientRect();
-      const documentHeight = window.innerHeight;
-      const totalScrollable = rect.height - documentHeight * 0.55;
-      const distance = documentHeight * 0.28 - rect.top;
+      const viewportHeight = window.innerHeight;
+      const totalScrollable = rect.height - viewportHeight * 0.42;
+      const distance = viewportHeight * 0.22 - rect.top;
 
       setProgress(clamp(distance / Math.max(totalScrollable, 1), 0, 1));
     };
@@ -70,7 +74,7 @@ export function JournalReadingChrome({
         setActiveId(visibleEntries[0]?.target.id ?? chapters[0]?.id ?? "");
       },
       {
-        rootMargin: "-24% 0px -48% 0px",
+        rootMargin: "-18% 0px -54% 0px",
         threshold: [0.16, 0.33, 0.5, 0.66, 0.82],
       },
     );
@@ -87,6 +91,31 @@ export function JournalReadingChrome({
     };
   }, [chapters]);
 
+  const scrollToChapter = (id: string) => {
+    const section = document.getElementById(id);
+
+    if (!section) {
+      return;
+    }
+
+    const offset =
+      window.innerWidth >= DESKTOP_BREAKPOINT
+        ? DESKTOP_SCROLL_OFFSET
+        : MOBILE_SCROLL_OFFSET;
+    const targetTop =
+      window.scrollY + section.getBoundingClientRect().top - offset;
+
+    setActiveId(id);
+    window.history.replaceState(null, "", `#${id}`);
+    window.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior: "smooth",
+    });
+  };
+
+  const currentChapter =
+    chapterMap.find((chapter) => chapter.id === activeId) ?? chapterMap[0];
+
   if (!chapters.length) {
     return null;
   }
@@ -100,32 +129,40 @@ export function JournalReadingChrome({
         />
       </div>
 
-      <div className="pointer-events-none fixed top-28 left-4 z-40 hidden xl:block">
-        <div className="pointer-events-auto flex w-[16rem] flex-col gap-4 rounded-[2rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.8)] p-4 shadow-[0_28px_70px_rgba(25,19,14,0.12)] backdrop-blur-md">
+      <div className="hidden xl:block">
+        <div className="sticky top-28 space-y-4 rounded-[2rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.8)] p-4 shadow-[0_28px_70px_rgba(25,19,14,0.12)] backdrop-blur-md">
           <div className="space-y-2 px-1">
             <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
               <Compass size={13} strokeWidth={1.8} aria-hidden="true" />
               <span>Chapter Guide</span>
             </p>
             <p className="text-sm leading-6 text-[var(--color-mist)]">
-              Follow the flow of the article and jump where you need to.
+              Move through the article without losing your place.
             </p>
           </div>
+
           <div className="relative space-y-2">
             <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
+            <div
+              className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
+              style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
+            />
+
             {chapterMap.map((chapter) => {
               const isActive = chapter.id === activeId;
 
               return (
-                <a
+                <button
                   key={chapter.id}
-                  href={`#${chapter.id}`}
+                  type="button"
+                  onClick={() => scrollToChapter(chapter.id)}
                   className={cn(
-                    "group relative grid grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 transition",
+                    "group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition",
                     isActive
                       ? "bg-[rgb(255_255_255_/_0.9)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
                       : "hover:bg-white/70",
                   )}
+                  aria-current={isActive ? "true" : undefined}
                 >
                   <div
                     className={cn(
@@ -145,10 +182,11 @@ export function JournalReadingChrome({
                   >
                     {chapter.title}
                   </span>
-                </a>
+                </button>
               );
             })}
           </div>
+
           <Link
             href="/contact"
             className="inline-flex items-center justify-between gap-3 rounded-[1.4rem] border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(246,238,231,0.96))] px-4 py-3 text-sm font-semibold text-[var(--color-ink)] shadow-[0_18px_42px_rgba(25,19,14,0.08)] transition hover:-translate-y-0.5"
@@ -163,34 +201,55 @@ export function JournalReadingChrome({
       </div>
 
       <div className="fixed inset-x-0 bottom-4 z-40 px-4 xl:hidden">
-        <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-[1fr_auto] items-center gap-3 rounded-[1.4rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.86)] px-3 py-3 shadow-[0_22px_56px_rgba(25,19,14,0.12)] backdrop-blur-md">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
-            {chapterMap.map((chapter) => {
-              const isActive = chapter.id === activeId;
-
-              return (
-                <a
-                  key={chapter.id}
-                  href={`#${chapter.id}`}
-                  className={cn(
-                    "inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
-                    isActive
-                      ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                      : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
-                  )}
-                >
-                  <span>{chapter.label}</span>
-                </a>
-              );
-            })}
+        <div className="mx-auto max-w-[var(--container-max)] rounded-[1.7rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.88)] px-3 py-3 shadow-[0_22px_56px_rgba(25,19,14,0.12)] backdrop-blur-md">
+          <div className="mb-3 flex items-start justify-between gap-3 px-1">
+            <div className="min-w-0">
+              <p className="text-[0.62rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                Chapter Guide
+              </p>
+              <p className="truncate pt-1 text-sm leading-5 text-[var(--color-ink)]">
+                {currentChapter?.title}
+              </p>
+            </div>
+            <p className="shrink-0 pt-1 text-[0.68rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+              {currentChapter?.label}/{String(chapterMap.length).padStart(2, "0")}
+            </p>
           </div>
-          <Link
-            href="/contact"
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] text-[var(--color-paper)] shadow-[0_18px_42px_rgba(25,19,14,0.16)]"
-            aria-label="Start an inquiry"
-          >
-            <Send size={16} strokeWidth={1.9} aria-hidden="true" />
-          </Link>
+
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+            <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex items-center gap-2 pr-2">
+                {chapterMap.map((chapter) => {
+                  const isActive = chapter.id === activeId;
+
+                  return (
+                    <button
+                      key={chapter.id}
+                      type="button"
+                      onClick={() => scrollToChapter(chapter.id)}
+                      className={cn(
+                        "inline-flex min-w-[3.2rem] shrink-0 items-center justify-center rounded-full border px-3 py-2 text-[0.72rem] font-semibold tracking-[0.16em] uppercase transition",
+                        isActive
+                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
+                          : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
+                      )}
+                      aria-current={isActive ? "true" : undefined}
+                    >
+                      {chapter.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <Link
+              href="/contact"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] text-[var(--color-paper)] shadow-[0_18px_42px_rgba(25,19,14,0.16)]"
+              aria-label="Start an inquiry"
+            >
+              <Send size={16} strokeWidth={1.9} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </>

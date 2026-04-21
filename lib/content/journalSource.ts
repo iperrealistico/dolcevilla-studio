@@ -23,6 +23,12 @@ export type JournalSourceSection = {
   source: string;
 };
 
+export type JournalSectionSnippet = {
+  label: string;
+  title: string;
+  summary: string;
+};
+
 function countMatches(pattern: RegExp, source: string) {
   return source.match(pattern)?.length ?? 0;
 }
@@ -34,6 +40,69 @@ function slugifyHeading(value: string) {
     .replace(/[^\w\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-");
+}
+
+function toPlainText(source: string) {
+  return source
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/!\[[^\]]*]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/[*_`>]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function takeSentences(text: string, maxCount = 2) {
+  const sentences = text.match(/[^.!?]+[.!?]+/g)?.map((sentence) => sentence.trim()) ?? [];
+
+  if (!sentences.length) {
+    return text;
+  }
+
+  return sentences.slice(0, maxCount).join(" ");
+}
+
+function shortenText(text: string, maxLength = 210) {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  const shortened = text.slice(0, maxLength).trim();
+  const lastSpaceIndex = shortened.lastIndexOf(" ");
+
+  return `${shortened.slice(0, Math.max(lastSpaceIndex, 0)).trim()}…`;
+}
+
+function deriveSnippetTitle(title: string, index: number) {
+  if (/what makes|distinct|setting|place/i.test(title)) {
+    return "Why this place reads differently";
+  }
+
+  if (/what to look for|check|shortlist|book/i.test(title)) {
+    return "What to check first";
+  }
+
+  if (/schedule|timeline|light|movement|pace/i.test(title)) {
+    return "Timing is the real lever";
+  }
+
+  if (/judge|style|postcard|portfolio/i.test(title)) {
+    return "Look past the obvious";
+  }
+
+  if (/choose|studio world|fit/i.test(title)) {
+    return "The real decision";
+  }
+
+  if (/why|reference point|reference/i.test(title)) {
+    return "Why it matters";
+  }
+
+  return `Quick takeaway ${String(index + 1).padStart(2, "0")}`;
 }
 
 export function buildJournalSlotIds(slug: string) {
@@ -110,6 +179,20 @@ export function analyzeJournalSource(source: string) {
     editorialBlockCount: editorialBlockNames.length,
     editorialBlockNames: uniqueEditorialBlockNames,
     sectionCount: sections.length,
+  };
+}
+
+export function buildJournalSectionSnippet(
+  section: JournalSourceSection,
+  index: number,
+): JournalSectionSnippet {
+  const plainText = toPlainText(section.source);
+  const summary = shortenText(takeSentences(plainText));
+
+  return {
+    label: `TL;DR ${String(index + 1).padStart(2, "0")}`,
+    title: deriveSnippetTitle(section.title, index),
+    summary: summary || "A concise read of what this section is covering.",
   };
 }
 

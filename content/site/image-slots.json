@@ -271,14 +271,5 @@
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"
-  },
-  "journal.val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa.cover": {
-    "asset": "journalValDelsaSanGimignanoCover"
-  },
-  "journal.val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa.ornament.wash": {
-    "asset": "journalValDelsaSanGimignanoWash"
-  },
-  "journal.val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa.ornament.orbit": {
-    "asset": "journalValDelsaSanGimignanoOrbit"
   }
 }

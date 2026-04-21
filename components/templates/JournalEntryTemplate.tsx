@@ -1,5 +1,4 @@
 import { compileMDX } from "next-mdx-remote/rsc";
-import { ArrowUpRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RelatedStories } from "@/components/blocks/RelatedStories";
 import { CTASection } from "@/components/blocks/CTASection";
@@ -13,6 +12,7 @@ import { RichText } from "@/components/ui/RichText";
 import { journalEntryTemplateContent } from "@/content/journal/template";
 import {
   analyzeJournalSource,
+  buildJournalSectionSnippet,
   splitJournalSourceIntoSections,
 } from "@/lib/content/journalSource";
 import { cn } from "@/lib/utils/cn";
@@ -74,8 +74,9 @@ export async function JournalEntryTemplate({
   const ornamentOrbitAsset = entry.ornamentOrbitAsset ?? entry.coverAsset;
   const introContent = await renderMdxBlock(introSource);
   const sectionContents = await Promise.all(
-    sections.map(async (section) => ({
+    sections.map(async (section, index) => ({
       ...section,
+      snippet: buildJournalSectionSnippet(section, index),
       content: await renderMdxBlock(section.source),
     })),
   );
@@ -126,107 +127,108 @@ export async function JournalEntryTemplate({
               orbitAsset={ornamentOrbitAsset}
             />
 
-            <Container className="relative z-10 py-8 md:py-12 xl:px-20">
-              {introContent ? (
-                <ScrollParallax
-                  className="relative mx-auto mb-14 max-w-4xl"
-                  from="bottom"
-                  intensity="md"
-                >
-                  <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.78)] px-6 py-7 shadow-[0_24px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-10 md:py-10">
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute -top-10 right-10 h-24 w-24 rounded-full bg-[rgb(212_195_166_/_0.16)] blur-3xl"
-                    />
-                    <RichText className="max-w-none text-[1.02rem] leading-8 md:text-[1.08rem]">
-                      {introContent}
-                    </RichText>
-                  </div>
-                </ScrollParallax>
-              ) : null}
+            <Container className="relative z-10 py-8 md:py-12 xl:px-16 2xl:px-20">
+              <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[17rem_minmax(0,1fr)]">
+                <div className="xl:relative">
+                  <JournalReadingChrome
+                    chapters={sections.map((section) => ({
+                      id: section.id,
+                      title: section.title,
+                    }))}
+                  />
+                </div>
 
-              <div className="space-y-10 md:space-y-14">
-                {sectionContents.map((section, index) => {
-                  const isLeftLead = index % 2 === 0;
-                  const chapterLabel = String(index + 1).padStart(2, "0");
-
-                  return (
-                    <section
-                      key={section.id}
-                      id={section.id}
-                      className="scroll-mt-28"
+                <div>
+                  {introContent ? (
+                    <ScrollParallax
+                      className="relative mx-auto mb-14 max-w-4xl xl:mx-0 xl:max-w-none"
+                      from="bottom"
+                      intensity="md"
                     >
-                      <div className="grid gap-5 lg:grid-cols-12 lg:gap-8">
-                        <ScrollParallax
-                          from={isLeftLead ? "left" : "right"}
-                          intensity="md"
-                          className={cn(
-                            "lg:col-span-8",
-                            isLeftLead ? "lg:col-start-1" : "lg:col-start-5",
-                          )}
-                        >
-                          <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.82)] px-6 py-7 shadow-[0_26px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-8 md:py-9">
-                            <div
-                              aria-hidden="true"
-                              className={cn(
-                                "pointer-events-none absolute -top-14 h-32 w-32 rounded-full blur-3xl",
-                                isLeftLead
-                                  ? "right-8 bg-[rgb(212_195_166_/_0.2)]"
-                                  : "left-8 bg-[rgb(167_139_104_/_0.16)]",
-                              )}
-                            />
-                            <div className="relative space-y-6">
-                              <div className="space-y-3">
-                                <p className="text-[0.68rem] font-semibold tracking-[0.3em] text-[var(--color-mist)] uppercase">
-                                  Chapter {chapterLabel}
-                                </p>
-                                <h2 className="font-display-face max-w-[14ch] text-[2.2rem] leading-[0.94] tracking-[-0.048em] text-[var(--color-ink)] md:text-[3.2rem]">
-                                  {section.title}
-                                </h2>
-                              </div>
-                              <RichText className="max-w-none text-[1rem] leading-8 md:text-[1.04rem]">
-                                {section.content}
-                              </RichText>
-                            </div>
-                          </div>
-                        </ScrollParallax>
-
-                        <ScrollParallax
-                          from={isLeftLead ? "right" : "left"}
-                          intensity="sm"
-                          className={cn(
-                            "hidden lg:col-span-4 lg:block",
-                            isLeftLead ? "lg:col-start-9" : "lg:col-start-1",
-                          )}
-                        >
-                          <div className="sticky top-28 space-y-4 rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.58)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm">
-                            <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-                              Section Rhythm
-                            </p>
-                            <p className="font-display-face text-[1.8rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
-                              {section.title}
-                            </p>
-                            <p className="text-sm leading-7 text-[var(--color-mist)]">
-                              Move through this chapter, then continue the story
-                              with the next marker in the reading rail.
-                            </p>
-                            <a
-                              href="#top"
-                              className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.22em] text-[var(--color-mist)] uppercase"
-                            >
-                              <span>Back to top</span>
-                              <ArrowUpRight
-                                size={14}
-                                strokeWidth={1.85}
-                                aria-hidden="true"
-                              />
-                            </a>
-                          </div>
-                        </ScrollParallax>
+                      <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.78)] px-6 py-7 shadow-[0_24px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-10 md:py-10">
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -top-10 right-10 h-24 w-24 rounded-full bg-[rgb(212_195_166_/_0.16)] blur-3xl"
+                        />
+                        <RichText className="max-w-none text-[1.02rem] leading-8 md:text-[1.08rem]">
+                          {introContent}
+                        </RichText>
                       </div>
-                    </section>
-                  );
-                })}
+                    </ScrollParallax>
+                  ) : null}
+
+                  <div className="space-y-10 md:space-y-14">
+                    {sectionContents.map((section, index) => {
+                      const hasEvenIndex = index % 2 === 0;
+                      const chapterLabel = String(index + 1).padStart(2, "0");
+
+                      return (
+                        <section
+                          key={section.id}
+                          id={section.id}
+                          className="scroll-mt-32"
+                        >
+                          <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-6 2xl:grid-cols-[minmax(0,1fr)_19rem] 2xl:gap-8">
+                            <ScrollParallax
+                              from={hasEvenIndex ? "left" : "right"}
+                              intensity="md"
+                              className={cn(
+                                hasEvenIndex ? "2xl:mr-4" : "2xl:ml-4",
+                              )}
+                            >
+                              <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.82)] px-6 py-7 shadow-[0_26px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-8 md:py-9">
+                                <div
+                                  aria-hidden="true"
+                                  className={cn(
+                                    "pointer-events-none absolute -top-14 h-32 w-32 rounded-full blur-3xl",
+                                    hasEvenIndex
+                                      ? "right-8 bg-[rgb(212_195_166_/_0.2)]"
+                                      : "left-8 bg-[rgb(167_139_104_/_0.16)]",
+                                  )}
+                                />
+                                <div className="relative space-y-6">
+                                  <div className="space-y-3">
+                                    <p className="text-[0.68rem] font-semibold tracking-[0.3em] text-[var(--color-mist)] uppercase">
+                                      Chapter {chapterLabel}
+                                    </p>
+                                    <h2 className="font-display-face max-w-[14ch] text-[2.2rem] leading-[0.94] tracking-[-0.048em] text-[var(--color-ink)] md:text-[3.2rem]">
+                                      {section.title}
+                                    </h2>
+                                  </div>
+                                  <RichText className="max-w-none text-[1rem] leading-8 md:text-[1.04rem]">
+                                    {section.content}
+                                  </RichText>
+                                </div>
+                              </div>
+                            </ScrollParallax>
+
+                            <ScrollParallax
+                              from={hasEvenIndex ? "right" : "left"}
+                              intensity="sm"
+                              className="hidden xl:block"
+                            >
+                              <div className="sticky top-28 rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm">
+                                <div className="space-y-4">
+                                  <p className="text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+                                    {section.snippet.label}
+                                  </p>
+                                  <div className="space-y-3">
+                                    <p className="font-display-face text-[1.75rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
+                                      {section.snippet.title}
+                                    </p>
+                                    <p className="text-sm leading-7 text-[var(--color-mist)]">
+                                      {section.snippet.summary}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </ScrollParallax>
+                          </div>
+                        </section>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </Container>
           </div>

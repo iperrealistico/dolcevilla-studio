@@ -388,6 +388,30 @@ export const imageAssetLibrary = {
     1536,
     "stone",
   ),
+  journalValDelsaSanGimignanoCover: createAsset(
+    "journal-val-delsa-san-gimignano-cover",
+    "/images/brand/journal-generated/val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa-cover.png",
+    "Illustrated couple in Val d’Elsa with the towers of San Gimignano in the distance.",
+    1536,
+    1024,
+    "linen",
+  ),
+  journalValDelsaSanGimignanoWash: createAsset(
+    "journal-val-delsa-san-gimignano-wash",
+    "/images/brand/journal-generated/val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa-ornament-wash.png",
+    "Illustrated ambient wash of Val d’Elsa towers, rolling hills, and olive leaves.",
+    1536,
+    1024,
+    "sage",
+  ),
+  journalValDelsaSanGimignanoOrbit: createAsset(
+    "journal-val-delsa-san-gimignano-orbit",
+    "/images/brand/journal-generated/val-delsa-wedding-photographer-for-weddings-near-san-gimignano-and-colle-di-val-delsa-ornament-orbit.png",
+    "Illustrated orbit ornament with Val d’Elsa tower shapes, hills, and olive leaves.",
+    1024,
+    1024,
+    "sage",
+  ),
 } as const;
 
 export type ImageAssetLibraryKey = keyof typeof imageAssetLibrary;

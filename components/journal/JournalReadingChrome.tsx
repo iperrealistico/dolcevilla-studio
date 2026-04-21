@@ -1,5 +1,6 @@
 "use client";
 
+import { LayoutGroup, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Compass, Send } from "lucide-react";
@@ -20,6 +21,7 @@ const DESKTOP_VIEWPORT_ANCHOR = 0.38;
 const MOBILE_VIEWPORT_ANCHOR = 0.26;
 const DESKTOP_RAIL_CENTER = 0.44;
 const FALLBACK_HEADER_HEIGHT = 76;
+const MANUAL_CHAPTER_LOCK_MS = 1500;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -61,6 +63,8 @@ export function JournalReadingChrome({
   const desktopAnimationFrameRef = useRef<number | null>(null);
   const desktopCurrentOffsetRef = useRef(0);
   const desktopTargetOffsetRef = useRef(0);
+  const manualChapterTargetRef = useRef<string | null>(null);
+  const manualChapterLockUntilRef = useRef(0);
 
   const [activeId, setActiveId] = useState(chapters[0]?.id ?? "");
   const [progress, setProgress] = useState(0);
@@ -209,6 +213,26 @@ export function JournalReadingChrome({
           return nearest;
         }, null)?.id ?? chapters[0]?.id ?? "";
 
+      const manualTargetId = manualChapterTargetRef.current;
+
+      if (manualTargetId) {
+        const targetSection = document.getElementById(manualTargetId);
+        const targetRect = targetSection?.getBoundingClientRect();
+        const targetDistance = targetRect
+          ? distanceToRange(anchor, targetRect.top, targetRect.bottom)
+          : Number.POSITIVE_INFINITY;
+        const targetReached = targetDistance <= 10;
+        const lockExpired =
+          reduceMotion || performance.now() > manualChapterLockUntilRef.current;
+
+        if (!targetReached && !lockExpired) {
+          updateDesktopRail();
+          return;
+        }
+
+        manualChapterTargetRef.current = null;
+      }
+
       setActiveId((currentId) => (currentId === nextActiveId ? currentId : nextActiveId));
       updateDesktopRail();
     };
@@ -265,6 +289,8 @@ export function JournalReadingChrome({
     const targetTop =
       window.scrollY + section.getBoundingClientRect().top - offset;
 
+    manualChapterTargetRef.current = id;
+    manualChapterLockUntilRef.current = performance.now() + MANUAL_CHAPTER_LOCK_MS;
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
     window.scrollTo({
@@ -306,51 +332,78 @@ export function JournalReadingChrome({
               </p>
             </div>
 
-            <div className="relative space-y-2">
-              <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
-              <div
-                className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
-                style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
-              />
+            <LayoutGroup id="desktop-journal-chapter-rail">
+              <div className="relative space-y-2">
+                <div className="absolute top-2 bottom-2 left-[1.2rem] w-px bg-[rgb(92_77_58_/_0.14)]" />
+                <div
+                  className="absolute top-2 left-[1.2rem] w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height] duration-300 ease-out"
+                  style={{ height: `calc(${Math.max(progress, 0.06) * 100}% - 1rem)` }}
+                />
 
-              {chapterMap.map((chapter) => {
-                const isActive = chapter.id === activeId;
+                {chapterMap.map((chapter) => {
+                  const isActive = chapter.id === activeId;
 
-                return (
-                  <button
-                    key={chapter.id}
-                    type="button"
-                    onClick={() => scrollToChapter(chapter.id)}
-                    className={cn(
-                      "group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition",
-                      isActive
-                        ? "bg-[rgb(255_255_255_/_0.9)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
-                        : "hover:bg-white/70",
-                    )}
-                    aria-current={isActive ? "true" : undefined}
-                  >
-                    <div
-                      className={cn(
-                        "relative z-10 flex h-8 w-8 items-center justify-center rounded-full border text-[0.72rem] font-semibold tracking-[0.2em]",
-                        isActive
-                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                          : "border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.9)] text-[var(--color-mist)]",
-                      )}
+                  return (
+                    <motion.button
+                      key={chapter.id}
+                      type="button"
+                      onClick={() => scrollToChapter(chapter.id)}
+                      className="group relative grid w-full grid-cols-[2.4rem_1fr] items-start gap-3 rounded-[1.3rem] px-2 py-2.5 text-left transition hover:bg-white/70"
+                      aria-current={isActive ? "true" : undefined}
                     >
-                      {chapter.label}
-                    </div>
-                    <span
-                      className={cn(
-                        "block pt-1 text-sm leading-5",
-                        isActive ? "text-[var(--color-ink)]" : "text-[var(--color-mist)]",
-                      )}
-                    >
-                      {chapter.title}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                      {isActive ? (
+                        <motion.div
+                          layoutId="desktop-journal-chapter-active-card"
+                          className="absolute inset-0 rounded-[1.3rem] bg-[rgb(255_255_255_/_0.92)] shadow-[0_16px_36px_rgba(25,19,14,0.08)]"
+                          transition={
+                            reduceMotion
+                              ? { duration: 0 }
+                              : { type: "spring", stiffness: 380, damping: 34, mass: 0.58 }
+                          }
+                        />
+                      ) : null}
+
+                      <div className="relative z-10 flex h-8 w-8 items-center justify-center">
+                        {isActive ? (
+                          <motion.div
+                            layoutId="desktop-journal-chapter-active-badge"
+                            className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)]"
+                            transition={
+                              reduceMotion
+                                ? { duration: 0 }
+                                : {
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 32,
+                                    mass: 0.52,
+                                  }
+                            }
+                          />
+                        ) : null}
+                        <span
+                          className={cn(
+                            "relative z-10 text-[0.72rem] font-semibold tracking-[0.2em]",
+                            isActive
+                              ? "text-[var(--color-paper)]"
+                              : "text-[var(--color-mist)]",
+                          )}
+                        >
+                          {chapter.label}
+                        </span>
+                      </div>
+                      <span
+                        className={cn(
+                          "relative z-10 block pt-1 text-sm leading-5",
+                          isActive ? "text-[var(--color-ink)]" : "text-[var(--color-mist)]",
+                        )}
+                      >
+                        {chapter.title}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </LayoutGroup>
 
             <Link
               href="/contact"

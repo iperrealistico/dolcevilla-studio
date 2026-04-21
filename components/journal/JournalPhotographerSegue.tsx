@@ -41,7 +41,7 @@ export function JournalPhotographerSegue() {
               Discover Dolcevilla Studio
             </LinkButton>
             <p className="max-w-[22rem] text-xs font-semibold tracking-[0.22em] text-[var(--color-mist)] uppercase xl:text-right">
-              Quietly continue the conversation from there
+              Then explore the wider studio approach
             </p>
           </div>
         </div>

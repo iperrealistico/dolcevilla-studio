@@ -271,5 +271,14 @@
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"
+  },
+  "journal.best-garden-wedding-venues-in-tuscany.cover": {
+    "asset": "journalBestGardenVenuesTuscanyCover"
+  },
+  "journal.best-garden-wedding-venues-in-tuscany.ornament.wash": {
+    "asset": "journalBestGardenVenuesTuscanyWash"
+  },
+  "journal.best-garden-wedding-venues-in-tuscany.ornament.orbit": {
+    "asset": "journalBestGardenVenuesTuscanyOrbit"
   }
 }

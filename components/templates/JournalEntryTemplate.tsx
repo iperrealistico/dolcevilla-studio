@@ -210,8 +210,6 @@ export async function JournalEntryTemplate({
                           style={{
                             scrollMarginTop:
                               "calc(var(--site-header-height, 76px) + 2rem)",
-                            contentVisibility: "auto",
-                            containIntrinsicSize: "980px",
                           }}
                         >
                           <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_16.5rem] xl:gap-5 2xl:grid-cols-[minmax(0,1fr)_17rem] 2xl:gap-6">

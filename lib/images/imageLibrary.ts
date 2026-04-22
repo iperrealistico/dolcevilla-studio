@@ -388,6 +388,30 @@ export const imageAssetLibrary = {
     1536,
     "stone",
   ),
+  journalLegalMarriageItalyBeforeSymbolicTuscanyCover: createAsset(
+    "journal-legal-marriage-italy-before-symbolic-tuscany-cover",
+    "/images/brand/journal-generated/how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding-cover.png",
+    "A newly married couple outside an Italian civic doorway with Tuscan hills beyond.",
+    1693,
+    929,
+    "linen",
+  ),
+  journalLegalMarriageItalyBeforeSymbolicTuscanyWash: createAsset(
+    "journal-legal-marriage-italy-before-symbolic-tuscany-wash",
+    "/images/brand/journal-generated/how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding-ornament-wash.png",
+    "An abstract ribbon, olive, wax-seal, and Tuscan-hills ornament on a white field.",
+    1692,
+    929,
+    "linen",
+  ),
+  journalLegalMarriageItalyBeforeSymbolicTuscanyOrbit: createAsset(
+    "journal-legal-marriage-italy-before-symbolic-tuscany-orbit",
+    "/images/brand/journal-generated/how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding-ornament-orbit.png",
+    "A graphic orbit ornament of rings, ribbon, olive sprigs, and cypress forms on white.",
+    1254,
+    1254,
+    "sage",
+  ),
 } as const;
 
 export type ImageAssetLibraryKey = keyof typeof imageAssetLibrary;

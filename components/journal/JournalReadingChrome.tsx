@@ -43,6 +43,7 @@ type DesktopRailPointerState = {
 const DESKTOP_BREAKPOINT = 1280;
 const DESKTOP_VIEWPORT_ANCHOR = 0.38;
 const MOBILE_VIEWPORT_ANCHOR = 0.26;
+const DESKTOP_RAIL_CENTER = 0.44;
 const FALLBACK_HEADER_HEIGHT = 76;
 const MANUAL_CHAPTER_LOCK_MS = 1500;
 const INITIAL_DESKTOP_RAIL_METRICS: DesktopRailMetrics = {
@@ -97,10 +98,15 @@ export function JournalReadingChrome({
   const reduceMotion = useReducedMotion();
   const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const desktopTrackRef = useRef<HTMLDivElement | null>(null);
+  const desktopCardRef = useRef<HTMLDivElement | null>(null);
   const desktopRailScrollerRef = useRef<HTMLDivElement | null>(null);
   const desktopRailListRef = useRef<HTMLDivElement | null>(null);
   const desktopItemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const desktopBadgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const desktopAnimationFrameRef = useRef<number | null>(null);
+  const desktopCurrentOffsetRef = useRef(0);
+  const desktopTargetOffsetRef = useRef(0);
   const manualChapterTargetRef = useRef<string | null>(null);
   const manualChapterLockUntilRef = useRef(0);
   const desktopRailPointerStateRef = useRef({ ...INITIAL_POINTER_STATE });
@@ -144,7 +150,93 @@ export function JournalReadingChrome({
       return;
     }
 
+    const setDesktopTransform = (offset: number) => {
+      const desktopCard = desktopCardRef.current;
+
+      if (!desktopCard) {
+        return;
+      }
+
+      desktopCard.style.transform = `translate3d(0, ${offset}px, 0)`;
+    };
+
     let chromeFrameRequested = false;
+
+    const stopDesktopAnimation = () => {
+      if (desktopAnimationFrameRef.current !== null) {
+        cancelAnimationFrame(desktopAnimationFrameRef.current);
+        desktopAnimationFrameRef.current = null;
+      }
+    };
+
+    const animateDesktopRail = () => {
+      stopDesktopAnimation();
+
+      const step = () => {
+        const delta =
+          desktopTargetOffsetRef.current - desktopCurrentOffsetRef.current;
+
+        if (Math.abs(delta) < 0.5) {
+          desktopCurrentOffsetRef.current = desktopTargetOffsetRef.current;
+          setDesktopTransform(desktopCurrentOffsetRef.current);
+          desktopAnimationFrameRef.current = null;
+          return;
+        }
+
+        desktopCurrentOffsetRef.current += delta * 0.16;
+        setDesktopTransform(desktopCurrentOffsetRef.current);
+        desktopAnimationFrameRef.current = requestAnimationFrame(step);
+      };
+
+      desktopAnimationFrameRef.current = requestAnimationFrame(step);
+    };
+
+    const updateDesktopRail = () => {
+      const track = desktopTrackRef.current;
+      const card = desktopCardRef.current;
+
+      if (!track || !card || window.innerWidth < DESKTOP_BREAKPOINT) {
+        stopDesktopAnimation();
+        desktopCurrentOffsetRef.current = 0;
+        desktopTargetOffsetRef.current = 0;
+        setDesktopTransform(0);
+        return;
+      }
+
+      const trackRect = track.getBoundingClientRect();
+      const trackTop = window.scrollY + trackRect.top;
+      const maxOffset = Math.max(track.offsetHeight - card.offsetHeight, 0);
+      const headerHeight = getSiteHeaderHeight();
+      const railTopOffset = headerHeight + 24;
+      const safeViewportHeight = Math.max(
+        window.innerHeight - railTopOffset - 20,
+        card.offsetHeight,
+      );
+      const desiredTop =
+        window.scrollY +
+        railTopOffset +
+        Math.max(
+          (safeViewportHeight - card.offsetHeight) * DESKTOP_RAIL_CENTER,
+          0,
+        );
+
+      desktopTargetOffsetRef.current = clamp(
+        desiredTop - trackTop,
+        0,
+        maxOffset,
+      );
+
+      if (reduceMotion) {
+        stopDesktopAnimation();
+        desktopCurrentOffsetRef.current = desktopTargetOffsetRef.current;
+        setDesktopTransform(desktopCurrentOffsetRef.current);
+        return;
+      }
+
+      if (desktopAnimationFrameRef.current === null) {
+        animateDesktopRail();
+      }
+    };
 
     const updateChrome = () => {
       const articleRect = article.getBoundingClientRect();
@@ -201,6 +293,7 @@ export function JournalReadingChrome({
           reduceMotion || performance.now() > manualChapterLockUntilRef.current;
 
         if (!targetReached && !lockExpired) {
+          updateDesktopRail();
           return;
         }
 
@@ -210,6 +303,7 @@ export function JournalReadingChrome({
       setActiveId((currentId) =>
         currentId === nextActiveId ? currentId : nextActiveId,
       );
+      updateDesktopRail();
     };
 
     const handleScroll = () => {
@@ -229,6 +323,7 @@ export function JournalReadingChrome({
     window.addEventListener("resize", handleScroll);
 
     return () => {
+      stopDesktopAnimation();
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
@@ -435,10 +530,11 @@ export function JournalReadingChrome({
         />
       </div>
 
-      <div className="relative hidden xl:block">
+      <div className="relative hidden h-full xl:block" ref={desktopTrackRef}>
         <div
-          className="sticky"
-          style={{ top: "calc(var(--site-header-height, 76px) + 1rem)" }}
+          ref={desktopCardRef}
+          className="w-full will-change-transform"
+          style={{ transform: "translate3d(0, 0, 0)" }}
         >
           <div className="flex max-h-[calc(100dvh-var(--site-header-height,76px)-2rem)] flex-col gap-3 rounded-[1.8rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.82)] p-3.5 shadow-[0_26px_70px_rgba(25,19,14,0.1)] backdrop-blur-md">
             <div className="space-y-2 px-1">

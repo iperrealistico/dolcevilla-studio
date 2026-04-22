@@ -59,9 +59,21 @@ export function JournalStickyBannerCTA({
     const updateBounds = () => {
       const rect = target.getBoundingClientRect();
 
-      setDesktopBounds({
-        left: rect.left,
-        width: rect.width,
+      setDesktopBounds((currentBounds) => {
+        const nextBounds = {
+          left: rect.left,
+          width: rect.width,
+        };
+
+        if (
+          currentBounds &&
+          currentBounds.left === nextBounds.left &&
+          currentBounds.width === nextBounds.width
+        ) {
+          return currentBounds;
+        }
+
+        return nextBounds;
       });
     };
 
@@ -88,31 +100,54 @@ export function JournalStickyBannerCTA({
     }
 
     const article = document.getElementById("journal-article");
+    let frame: number | null = null;
 
     const updateVisibility = () => {
       const headerHeight = getSiteHeaderHeight();
       const hasScrolledEnough =
         window.scrollY > SHOW_AFTER_SCROLL_PX ||
         window.pageYOffset > SHOW_AFTER_SCROLL_PX;
+      let nextVisible = hasScrolledEnough;
 
       if (!article) {
-        setIsVisible(hasScrolledEnough);
+        setIsVisible((currentVisible) =>
+          currentVisible === nextVisible ? currentVisible : nextVisible,
+        );
         return;
       }
 
       const articleRect = article.getBoundingClientRect();
       const hasEnteredArticle = articleRect.top <= headerHeight + 96;
       const stillInsideArticle = articleRect.bottom > headerHeight + 240;
+      nextVisible =
+        hasScrolledEnough && hasEnteredArticle && stillInsideArticle;
 
-      setIsVisible(hasScrolledEnough && hasEnteredArticle && stillInsideArticle);
+      setIsVisible((currentVisible) =>
+        currentVisible === nextVisible ? currentVisible : nextVisible,
+      );
+    };
+
+    const handleScroll = () => {
+      if (frame !== null) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        updateVisibility();
+      });
     };
 
     updateVisibility();
-    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", updateVisibility);
 
     return () => {
-      window.removeEventListener("scroll", updateVisibility);
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateVisibility);
     };
   }, [deferUntilScroll]);

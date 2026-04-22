@@ -2,7 +2,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RelatedStories } from "@/components/blocks/RelatedStories";
 import { CTASection } from "@/components/blocks/CTASection";
-import { ScrollParallax } from "@/components/motion/ScrollParallax";
+import { FloatIn } from "@/components/motion/FloatIn";
 import { JournalAmbientOrnaments } from "@/components/journal/JournalAmbientOrnaments";
 import { JournalEntryHero } from "@/components/journal/JournalEntryHero";
 import { JournalReadingChrome } from "@/components/journal/JournalReadingChrome";
@@ -180,10 +180,11 @@ export async function JournalEntryTemplate({
                   </div>
 
                   {introContent ? (
-                    <ScrollParallax
+                    <FloatIn
                       className="relative mx-auto mb-14 max-w-4xl xl:mx-0 xl:max-w-none"
                       from="bottom"
-                      intensity="md"
+                      distance={30}
+                      amount={0.08}
                     >
                       <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.78)] px-6 py-7 shadow-[0_24px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-10 md:py-10">
                         <div
@@ -194,7 +195,7 @@ export async function JournalEntryTemplate({
                           {introContent}
                         </RichText>
                       </div>
-                    </ScrollParallax>
+                    </FloatIn>
                   ) : null}
 
                   <div className="space-y-10 md:space-y-14">
@@ -209,12 +210,15 @@ export async function JournalEntryTemplate({
                           style={{
                             scrollMarginTop:
                               "calc(var(--site-header-height, 76px) + 2rem)",
+                            contentVisibility: "auto",
+                            containIntrinsicSize: "980px",
                           }}
                         >
                           <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_16.5rem] xl:gap-5 2xl:grid-cols-[minmax(0,1fr)_17rem] 2xl:gap-6">
-                            <ScrollParallax
+                            <FloatIn
                               from={hasEvenIndex ? "left" : "right"}
-                              intensity="md"
+                              distance={30}
+                              amount={0.08}
                               className={cn(
                                 hasEvenIndex ? "2xl:mr-4" : "2xl:ml-4",
                               )}
@@ -243,11 +247,12 @@ export async function JournalEntryTemplate({
                                   </RichText>
                                 </div>
                               </div>
-                            </ScrollParallax>
+                            </FloatIn>
 
-                            <ScrollParallax
+                            <FloatIn
                               from={hasEvenIndex ? "right" : "left"}
-                              intensity="sm"
+                              distance={20}
+                              amount={0.1}
                               className="hidden xl:block"
                             >
                               <div
@@ -270,7 +275,7 @@ export async function JournalEntryTemplate({
                                   </div>
                                 </div>
                               </div>
-                            </ScrollParallax>
+                            </FloatIn>
                           </div>
                         </section>
                       );

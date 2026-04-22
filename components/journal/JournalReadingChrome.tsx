@@ -98,6 +98,7 @@ export function JournalReadingChrome({
   const reduceMotion = useReducedMotion();
   const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
   const desktopTrackRef = useRef<HTMLDivElement | null>(null);
   const desktopCardRef = useRef<HTMLDivElement | null>(null);
   const desktopRailScrollerRef = useRef<HTMLDivElement | null>(null);
@@ -115,7 +116,6 @@ export function JournalReadingChrome({
   const [desktopRailMetrics, setDesktopRailMetrics] = useState(
     INITIAL_DESKTOP_RAIL_METRICS,
   );
-  const [progress, setProgress] = useState(0);
 
   const chapterMap = useMemo(
     () =>
@@ -247,7 +247,12 @@ export function JournalReadingChrome({
       const chromeOffset =
         headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 28 : 20);
 
-      setProgress(clamp(distance / Math.max(totalScrollable, 1), 0, 1));
+      const nextProgress = clamp(distance / Math.max(totalScrollable, 1), 0, 1);
+      const progressBar = progressBarRef.current;
+
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${nextProgress})`;
+      }
 
       const anchor =
         chromeOffset +
@@ -525,8 +530,9 @@ export function JournalReadingChrome({
     <>
       <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-[rgb(29_25_22_/_0.08)]">
         <div
+          ref={progressBarRef}
           className="h-full origin-left bg-[linear-gradient(90deg,#1d1916,#a78b68)] transition-transform duration-300 ease-out"
-          style={{ transform: `scaleX(${progress})` }}
+          style={{ transform: "scaleX(0)" }}
         />
       </div>
 

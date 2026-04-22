@@ -2,13 +2,7 @@
 
 import { LayoutGroup, motion } from "framer-motion";
 import { Compass } from "lucide-react";
-import {
-  type PointerEvent as ReactPointerEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { JournalCTAButton } from "@/components/journal/JournalCTAButton";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { CTASection as CTASectionContent } from "@/types/content";
@@ -32,32 +26,20 @@ type DesktopRailMetrics = {
   trackTop: number;
 };
 
-type DesktopRailPointerState = {
-  pointerId: number | null;
-  startY: number;
-  startScrollTop: number;
-  dragging: boolean;
-  moved: boolean;
-};
-
 const DESKTOP_BREAKPOINT = 1280;
-const DESKTOP_VIEWPORT_ANCHOR = 0.38;
+const DESKTOP_VIEWPORT_ANCHOR = 0.34;
 const MOBILE_VIEWPORT_ANCHOR = 0.26;
 const DESKTOP_RAIL_CENTER = 0.44;
+const DESKTOP_RAIL_FOCUS_PADDING = 18;
+const DESKTOP_RAIL_SCROLL_DURATION_MS = 220;
 const FALLBACK_HEADER_HEIGHT = 76;
-const MANUAL_CHAPTER_LOCK_MS = 1500;
+const MANUAL_CHAPTER_LOCK_BASE_MS = 900;
+const MANUAL_CHAPTER_LOCK_MAX_MS = 2200;
 const INITIAL_DESKTOP_RAIL_METRICS: DesktopRailMetrics = {
   activeHeight: 0,
   lineLeft: 20,
   trackHeight: 0,
   trackTop: 14,
-};
-const INITIAL_POINTER_STATE: DesktopRailPointerState = {
-  pointerId: null,
-  startY: 0,
-  startScrollTop: 0,
-  dragging: false,
-  moved: false,
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -76,6 +58,10 @@ function distanceToRange(anchor: number, top: number, bottom: number) {
   return 0;
 }
 
+function easeOutCubic(value: number) {
+  return 1 - (1 - value) ** 3;
+}
+
 function getSiteHeaderHeight() {
   if (typeof window === "undefined") {
     return FALLBACK_HEADER_HEIGHT;
@@ -89,6 +75,18 @@ function getSiteHeaderHeight() {
   return Number.isFinite(parsed) && parsed > 0
     ? parsed
     : FALLBACK_HEADER_HEIGHT;
+}
+
+function getChromeAnchorOffset() {
+  const headerHeight = getSiteHeaderHeight();
+  const chromeOffset =
+    headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 28 : 20);
+  const viewportAnchor =
+    window.innerWidth >= DESKTOP_BREAKPOINT
+      ? DESKTOP_VIEWPORT_ANCHOR
+      : MOBILE_VIEWPORT_ANCHOR;
+
+  return chromeOffset + (window.innerHeight - chromeOffset) * viewportAnchor;
 }
 
 export function JournalReadingChrome({
@@ -106,13 +104,13 @@ export function JournalReadingChrome({
   const desktopItemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const desktopBadgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const desktopAnimationFrameRef = useRef<number | null>(null);
+  const desktopRailScrollFrameRef = useRef<number | null>(null);
   const desktopCurrentOffsetRef = useRef(0);
   const desktopTargetOffsetRef = useRef(0);
   const manualChapterTargetRef = useRef<string | null>(null);
-  const manualChapterLockUntilRef = useRef(0);
-  const desktopRailPointerStateRef = useRef({ ...INITIAL_POINTER_STATE });
+  const manualChapterLockTimeoutRef = useRef<number | null>(null);
 
-  const [activeId, setActiveId] = useState(chapters[0]?.id ?? "");
+  const [activeIdState, setActiveId] = useState(chapters[0]?.id ?? "");
   const [desktopRailMetrics, setDesktopRailMetrics] = useState(
     INITIAL_DESKTOP_RAIL_METRICS,
   );
@@ -125,16 +123,9 @@ export function JournalReadingChrome({
       })),
     [chapters],
   );
-
-  useEffect(() => {
-    const fallbackId = chapters[0]?.id ?? "";
-
-    setActiveId((currentId) =>
-      chapters.some((chapter) => chapter.id === currentId)
-        ? currentId
-        : fallbackId,
-    );
-  }, [chapters]);
+  const activeId = chapters.some((chapter) => chapter.id === activeIdState)
+    ? activeIdState
+    : (chapters[0]?.id ?? "");
 
   useEffect(() => {
     if (!chapters.length) {
@@ -243,9 +234,7 @@ export function JournalReadingChrome({
       const viewportHeight = window.innerHeight;
       const totalScrollable = articleRect.height - viewportHeight * 0.46;
       const distance = viewportHeight * 0.24 - articleRect.top;
-      const headerHeight = getSiteHeaderHeight();
-      const chromeOffset =
-        headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 28 : 20);
+      const anchor = getChromeAnchorOffset();
 
       const nextProgress = clamp(distance / Math.max(totalScrollable, 1), 0, 1);
       const progressBar = progressBarRef.current;
@@ -253,13 +242,6 @@ export function JournalReadingChrome({
       if (progressBar) {
         progressBar.style.transform = `scaleX(${nextProgress})`;
       }
-
-      const anchor =
-        chromeOffset +
-        (window.innerHeight - chromeOffset) *
-          (window.innerWidth >= DESKTOP_BREAKPOINT
-            ? DESKTOP_VIEWPORT_ANCHOR
-            : MOBILE_VIEWPORT_ANCHOR);
 
       const nextActiveId =
         sections.reduce<{ id: string; distance: number } | null>(
@@ -294,15 +276,17 @@ export function JournalReadingChrome({
           ? distanceToRange(anchor, targetRect.top, targetRect.bottom)
           : Number.POSITIVE_INFINITY;
         const targetReached = targetDistance <= 10;
-        const lockExpired =
-          reduceMotion || performance.now() > manualChapterLockUntilRef.current;
 
-        if (!targetReached && !lockExpired) {
+        if (!targetReached && !reduceMotion) {
           updateDesktopRail();
           return;
         }
 
         manualChapterTargetRef.current = null;
+        if (manualChapterLockTimeoutRef.current !== null) {
+          window.clearTimeout(manualChapterLockTimeoutRef.current);
+          manualChapterLockTimeoutRef.current = null;
+        }
       }
 
       setActiveId((currentId) =>
@@ -329,6 +313,10 @@ export function JournalReadingChrome({
 
     return () => {
       stopDesktopAnimation();
+      if (manualChapterLockTimeoutRef.current !== null) {
+        window.clearTimeout(manualChapterLockTimeoutRef.current);
+        manualChapterLockTimeoutRef.current = null;
+      }
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
@@ -343,7 +331,8 @@ export function JournalReadingChrome({
     }
 
     const targetLeft = clamp(
-      activeChip.offsetLeft - (scroller.clientWidth - activeChip.offsetWidth) / 2,
+      activeChip.offsetLeft -
+        (scroller.clientWidth - activeChip.offsetWidth) / 2,
       0,
       Math.max(scroller.scrollWidth - scroller.clientWidth, 0),
     );
@@ -359,24 +348,100 @@ export function JournalReadingChrome({
     const activeItem = desktopItemRefs.current[activeId];
 
     if (!scroller || !activeItem || window.innerWidth < DESKTOP_BREAKPOINT) {
+      if (desktopRailScrollFrameRef.current !== null) {
+        cancelAnimationFrame(desktopRailScrollFrameRef.current);
+        desktopRailScrollFrameRef.current = null;
+      }
       return;
     }
 
-    const targetTop = clamp(
-      activeItem.offsetTop - (scroller.clientHeight - activeItem.offsetHeight) / 2,
+    const maxScrollTop = Math.max(
+      scroller.scrollHeight - scroller.clientHeight,
       0,
-      Math.max(scroller.scrollHeight - scroller.clientHeight, 0),
     );
+    const currentScrollTop = scroller.scrollTop;
+    const itemTop = activeItem.offsetTop;
+    const itemBottom = itemTop + activeItem.offsetHeight;
+    const centerTargetTop = clamp(
+      itemTop - (scroller.clientHeight - activeItem.offsetHeight) / 2,
+      0,
+      maxScrollTop,
+    );
+    const shouldCenterActiveItem = manualChapterTargetRef.current === activeId;
+    let targetTop = currentScrollTop;
 
-    scroller.scrollTo({
-      top: targetTop,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
+    if (shouldCenterActiveItem) {
+      targetTop = centerTargetTop;
+    } else {
+      const visibleTop = currentScrollTop + DESKTOP_RAIL_FOCUS_PADDING;
+      const visibleBottom =
+        currentScrollTop + scroller.clientHeight - DESKTOP_RAIL_FOCUS_PADDING;
+
+      if (itemTop < visibleTop) {
+        targetTop = clamp(
+          itemTop - DESKTOP_RAIL_FOCUS_PADDING,
+          0,
+          maxScrollTop,
+        );
+      } else if (itemBottom > visibleBottom) {
+        targetTop = clamp(
+          itemBottom - scroller.clientHeight + DESKTOP_RAIL_FOCUS_PADDING,
+          0,
+          maxScrollTop,
+        );
+      } else {
+        return;
+      }
+    }
+
+    if (Math.abs(targetTop - currentScrollTop) < 1) {
+      scroller.scrollTop = targetTop;
+      return;
+    }
+
+    if (desktopRailScrollFrameRef.current !== null) {
+      cancelAnimationFrame(desktopRailScrollFrameRef.current);
+      desktopRailScrollFrameRef.current = null;
+    }
+
+    if (reduceMotion) {
+      scroller.scrollTop = targetTop;
+      return;
+    }
+
+    const startTop = currentScrollTop;
+    const delta = targetTop - startTop;
+    const duration = shouldCenterActiveItem
+      ? DESKTOP_RAIL_SCROLL_DURATION_MS
+      : 170;
+    const startTime = performance.now();
+
+    const animateRailScroll = (timestamp: number) => {
+      const progress = clamp((timestamp - startTime) / duration, 0, 1);
+      scroller.scrollTop = startTop + delta * easeOutCubic(progress);
+
+      if (progress < 1) {
+        desktopRailScrollFrameRef.current =
+          requestAnimationFrame(animateRailScroll);
+        return;
+      }
+
+      desktopRailScrollFrameRef.current = null;
+    };
+
+    desktopRailScrollFrameRef.current =
+      requestAnimationFrame(animateRailScroll);
+
+    return () => {
+      if (desktopRailScrollFrameRef.current !== null) {
+        cancelAnimationFrame(desktopRailScrollFrameRef.current);
+        desktopRailScrollFrameRef.current = null;
+      }
+    };
   }, [activeId, reduceMotion]);
 
   useEffect(() => {
     if (!chapterMap.length) {
-      setDesktopRailMetrics(INITIAL_DESKTOP_RAIL_METRICS);
       return;
     }
 
@@ -427,96 +492,33 @@ export function JournalReadingChrome({
       return;
     }
 
-    const headerHeight = getSiteHeaderHeight();
-    const offset =
-      headerHeight + (window.innerWidth >= DESKTOP_BREAKPOINT ? 34 : 22);
     const targetTop =
-      window.scrollY + section.getBoundingClientRect().top - offset;
+      window.scrollY +
+      section.getBoundingClientRect().top -
+      getChromeAnchorOffset();
+    const lockDuration = reduceMotion
+      ? 0
+      : clamp(
+          650 + Math.abs(targetTop - window.scrollY) * 0.18,
+          MANUAL_CHAPTER_LOCK_BASE_MS,
+          MANUAL_CHAPTER_LOCK_MAX_MS,
+        );
+
+    if (manualChapterLockTimeoutRef.current !== null) {
+      window.clearTimeout(manualChapterLockTimeoutRef.current);
+    }
 
     manualChapterTargetRef.current = id;
-    manualChapterLockUntilRef.current =
-      performance.now() + MANUAL_CHAPTER_LOCK_MS;
+    manualChapterLockTimeoutRef.current = window.setTimeout(() => {
+      manualChapterTargetRef.current = null;
+      manualChapterLockTimeoutRef.current = null;
+    }, lockDuration);
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
     window.scrollTo({
       top: Math.max(targetTop, 0),
       behavior: reduceMotion ? "auto" : "smooth",
     });
-  };
-
-  const handleDesktopRailPointerDown = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const scroller = desktopRailScrollerRef.current;
-
-    if (!scroller) {
-      return;
-    }
-
-    desktopRailPointerStateRef.current = {
-      pointerId: event.pointerId,
-      startY: event.clientY,
-      startScrollTop: scroller.scrollTop,
-      dragging: true,
-      moved: false,
-    };
-
-    scroller.setPointerCapture(event.pointerId);
-  };
-
-  const handleDesktopRailPointerMove = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const scroller = desktopRailScrollerRef.current;
-    const pointerState = desktopRailPointerStateRef.current;
-
-    if (
-      !scroller ||
-      !pointerState.dragging ||
-      pointerState.pointerId !== event.pointerId
-    ) {
-      return;
-    }
-
-    const delta = event.clientY - pointerState.startY;
-
-    if (Math.abs(delta) > 4) {
-      pointerState.moved = true;
-    }
-
-    scroller.scrollTop = clamp(
-      pointerState.startScrollTop - delta,
-      0,
-      Math.max(scroller.scrollHeight - scroller.clientHeight, 0),
-    );
-  };
-
-  const finishDesktopRailPointerDrag = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const scroller = desktopRailScrollerRef.current;
-    const pointerState = desktopRailPointerStateRef.current;
-
-    if (
-      !scroller ||
-      !pointerState.dragging ||
-      pointerState.pointerId !== event.pointerId
-    ) {
-      return;
-    }
-
-    pointerState.dragging = false;
-    pointerState.pointerId = null;
-    scroller.releasePointerCapture(event.pointerId);
-  };
-
-  const handleDesktopChapterClick = (id: string) => {
-    if (desktopRailPointerStateRef.current.moved) {
-      desktopRailPointerStateRef.current.moved = false;
-      return;
-    }
-
-    scrollToChapter(id);
   };
 
   const currentChapter =
@@ -531,7 +533,7 @@ export function JournalReadingChrome({
       <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-[rgb(29_25_22_/_0.08)]">
         <div
           ref={progressBarRef}
-          className="h-full origin-left bg-[linear-gradient(90deg,#1d1916,#a78b68)] transition-transform duration-300 ease-out"
+          className="h-full origin-left bg-[linear-gradient(90deg,#1d1916,#a78b68)] transition-transform duration-200 ease-out"
           style={{ transform: "scaleX(0)" }}
         />
       </div>
@@ -553,129 +555,6 @@ export function JournalReadingChrome({
               </p>
             </div>
 
-            <LayoutGroup id="desktop-journal-chapter-rail">
-              <div
-                ref={desktopRailScrollerRef}
-                className="journal-chapter-rail-mask -mx-1 min-h-0 flex-1 overflow-y-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                onPointerDown={handleDesktopRailPointerDown}
-                onPointerMove={handleDesktopRailPointerMove}
-                onPointerUp={finishDesktopRailPointerDrag}
-                onPointerCancel={finishDesktopRailPointerDrag}
-              >
-                <div ref={desktopRailListRef} className="relative space-y-1.5 pb-1">
-                  <div
-                    className="pointer-events-none absolute w-px bg-[rgb(92_77_58_/_0.14)]"
-                    style={{
-                      height: `${desktopRailMetrics.trackHeight}px`,
-                      left: `${desktopRailMetrics.lineLeft}px`,
-                      top: `${desktopRailMetrics.trackTop}px`,
-                      transform: "translateX(-50%)",
-                    }}
-                  />
-                  <div
-                    className="pointer-events-none absolute w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height,left,top] duration-300 ease-out"
-                    style={{
-                      height: `${desktopRailMetrics.activeHeight}px`,
-                      left: `${desktopRailMetrics.lineLeft}px`,
-                      top: `${desktopRailMetrics.trackTop}px`,
-                      transform: "translateX(-50%)",
-                    }}
-                  />
-
-                  {chapterMap.map((chapter) => {
-                    const isActive = chapter.id === activeId;
-                    const chapterTitle = chapter.shortTitle ?? chapter.title;
-
-                    return (
-                      <button
-                        key={chapter.id}
-                        ref={(node) => {
-                          desktopItemRefs.current[chapter.id] = node;
-                        }}
-                        type="button"
-                        onClick={() => handleDesktopChapterClick(chapter.id)}
-                        className="group relative grid w-full grid-cols-[2.15rem_minmax(0,1fr)] items-start gap-2.5 py-0.5 text-left"
-                        aria-current={isActive ? "true" : undefined}
-                      >
-                        <div
-                          ref={(node) => {
-                            desktopBadgeRefs.current[chapter.id] = node;
-                          }}
-                          className="relative z-20 flex h-7 w-7 items-center justify-center self-start"
-                        >
-                          {isActive ? (
-                            <motion.div
-                              layoutId="desktop-journal-chapter-active-badge"
-                              className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)]"
-                              transition={
-                                reduceMotion
-                                  ? { duration: 0 }
-                                  : {
-                                      type: "spring",
-                                      stiffness: 420,
-                                      damping: 34,
-                                      mass: 0.52,
-                                    }
-                              }
-                            />
-                          ) : (
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.94)] shadow-[0_8px_20px_rgba(25,19,14,0.04)]"
-                            />
-                          )}
-                          <span
-                            className={cn(
-                              "relative z-10 text-[0.62rem] font-semibold tracking-[0.18em]",
-                              isActive
-                                ? "text-[var(--color-paper)]"
-                                : "text-[var(--color-mist)]",
-                            )}
-                          >
-                            {chapter.label}
-                          </span>
-                        </div>
-
-                        <div className="relative min-h-[2.85rem] pt-0.5">
-                          {isActive ? (
-                            <motion.div
-                              layoutId="desktop-journal-chapter-active-card"
-                              className="absolute inset-0 rounded-[1.2rem] bg-[rgb(255_255_255_/_0.94)] shadow-[0_14px_30px_rgba(25,19,14,0.08)]"
-                              transition={
-                                reduceMotion
-                                  ? { duration: 0 }
-                                  : {
-                                      type: "spring",
-                                      stiffness: 400,
-                                      damping: 34,
-                                      mass: 0.58,
-                                    }
-                              }
-                            />
-                          ) : (
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0 rounded-[1.2rem] bg-white/0 transition-colors duration-200 group-hover:bg-white/72"
-                            />
-                          )}
-                          <span
-                            className={cn(
-                              "relative z-10 block rounded-[1.2rem] px-3.5 py-2.5 text-[0.9rem] leading-[1.18rem] transition-colors duration-200",
-                              isActive
-                                ? "text-[var(--color-ink)]"
-                                : "text-[var(--color-mist)] group-hover:text-[var(--color-ink)]",
-                            )}
-                          >
-                            {chapterTitle}
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </LayoutGroup>
-
             <div className="rounded-[1.5rem] border border-[rgb(196_154_92_/_0.14)] bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(246,239,230,0.92))] p-3.5">
               {stickyCta.eyebrow ? (
                 <p className="pb-2 text-[0.6rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
@@ -693,6 +572,140 @@ export function JournalReadingChrome({
               >
                 {stickyCta.primaryCta.label}
               </JournalCTAButton>
+            </div>
+
+            <div className="min-h-0 flex-1 rounded-[1.5rem] border border-[rgb(92_77_58_/_0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,242,236,0.9))] p-2.5">
+              <div className="flex items-center justify-between gap-3 px-1 pb-2.5">
+                <p className="text-[0.6rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                  Jump to chapter
+                </p>
+                <p className="text-[0.64rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                  {currentChapter?.label}/
+                  {String(chapterMap.length).padStart(2, "0")}
+                </p>
+              </div>
+
+              <LayoutGroup id="desktop-journal-chapter-rail">
+                <div
+                  ref={desktopRailScrollerRef}
+                  className="journal-chapter-rail-mask max-h-full min-h-0 overflow-y-auto pr-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                >
+                  <div
+                    ref={desktopRailListRef}
+                    className="relative space-y-1.5 pr-1 pb-1"
+                  >
+                    <div
+                      className="pointer-events-none absolute w-px bg-[rgb(92_77_58_/_0.14)]"
+                      style={{
+                        height: `${desktopRailMetrics.trackHeight}px`,
+                        left: `${desktopRailMetrics.lineLeft}px`,
+                        top: `${desktopRailMetrics.trackTop}px`,
+                        transform: "translateX(-50%)",
+                      }}
+                    />
+                    <div
+                      className="pointer-events-none absolute w-px bg-[linear-gradient(180deg,#1d1916,#a78b68)] transition-[height,left,top] duration-200 ease-out"
+                      style={{
+                        height: `${desktopRailMetrics.activeHeight}px`,
+                        left: `${desktopRailMetrics.lineLeft}px`,
+                        top: `${desktopRailMetrics.trackTop}px`,
+                        transform: "translateX(-50%)",
+                      }}
+                    />
+
+                    {chapterMap.map((chapter) => {
+                      const isActive = chapter.id === activeId;
+                      const chapterTitle = chapter.shortTitle ?? chapter.title;
+
+                      return (
+                        <button
+                          key={chapter.id}
+                          ref={(node) => {
+                            desktopItemRefs.current[chapter.id] = node;
+                          }}
+                          type="button"
+                          onClick={() => scrollToChapter(chapter.id)}
+                          className="group relative grid w-full grid-cols-[2.15rem_minmax(0,1fr)] items-start gap-2.5 py-0.5 text-left"
+                          aria-current={isActive ? "true" : undefined}
+                        >
+                          <div
+                            ref={(node) => {
+                              desktopBadgeRefs.current[chapter.id] = node;
+                            }}
+                            className="relative z-20 flex h-7 w-7 items-center justify-center self-start"
+                          >
+                            {isActive ? (
+                              <motion.div
+                                layoutId="desktop-journal-chapter-active-badge"
+                                className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)]"
+                                transition={
+                                  reduceMotion
+                                    ? { duration: 0 }
+                                    : {
+                                        type: "spring",
+                                        stiffness: 520,
+                                        damping: 38,
+                                        mass: 0.48,
+                                      }
+                                }
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.94)] shadow-[0_8px_20px_rgba(25,19,14,0.04)]"
+                              />
+                            )}
+                            <span
+                              className={cn(
+                                "relative z-10 text-[0.62rem] font-semibold tracking-[0.18em]",
+                                isActive
+                                  ? "text-[var(--color-paper)]"
+                                  : "text-[var(--color-mist)]",
+                              )}
+                            >
+                              {chapter.label}
+                            </span>
+                          </div>
+
+                          <div className="relative min-h-[2.85rem] pt-0.5">
+                            {isActive ? (
+                              <motion.div
+                                layoutId="desktop-journal-chapter-active-card"
+                                className="absolute inset-0 rounded-[1.2rem] bg-[rgb(255_255_255_/_0.94)] shadow-[0_14px_30px_rgba(25,19,14,0.08)]"
+                                transition={
+                                  reduceMotion
+                                    ? { duration: 0 }
+                                    : {
+                                        type: "spring",
+                                        stiffness: 480,
+                                        damping: 38,
+                                        mass: 0.54,
+                                      }
+                                }
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="absolute inset-0 rounded-[1.2rem] bg-white/0 transition-colors duration-150 group-hover:bg-white/72"
+                              />
+                            )}
+                            <span
+                              className={cn(
+                                "relative z-10 block rounded-[1.2rem] px-3.5 py-2.5 text-[0.9rem] leading-[1.18rem] transition-colors duration-150",
+                                isActive
+                                  ? "text-[var(--color-ink)]"
+                                  : "text-[var(--color-mist)] group-hover:text-[var(--color-ink)]",
+                              )}
+                            >
+                              {chapterTitle}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </LayoutGroup>
             </div>
           </div>
         </div>
@@ -715,7 +728,8 @@ export function JournalReadingChrome({
               </p>
             </div>
             <p className="shrink-0 pt-1 text-[0.68rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
-              {currentChapter?.label}/{String(chapterMap.length).padStart(2, "0")}
+              {currentChapter?.label}/
+              {String(chapterMap.length).padStart(2, "0")}
             </p>
           </div>
 

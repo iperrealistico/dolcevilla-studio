@@ -27,14 +27,14 @@ const toneClasses = {
 
 function resolveIcon(href: string, tone: JournalCTAButtonProps["tone"]) {
   if (href === "/contact" || tone === "contact") {
-    return Send;
+    return "contact";
   }
 
   if (href === "/" || tone === "home") {
-    return House;
+    return "home";
   }
 
-  return ArrowUpRight;
+  return "external";
 }
 
 export function JournalCTAButton({
@@ -45,7 +45,13 @@ export function JournalCTAButton({
   size = "regular",
   tone = "contact",
 }: JournalCTAButtonProps) {
-  const Icon = resolveIcon(href, tone);
+  const iconSize = size === "compact" ? 15 : 16;
+  const iconProps = {
+    size: iconSize,
+    strokeWidth: 1.85,
+    "aria-hidden": true as const,
+  };
+  const iconKey = resolveIcon(href, tone);
 
   return (
     <div
@@ -64,11 +70,9 @@ export function JournalCTAButton({
           className,
         )}
       >
-        <Icon
-          size={size === "compact" ? 15 : 16}
-          strokeWidth={1.85}
-          aria-hidden="true"
-        />
+        {iconKey === "contact" ? <Send {...iconProps} /> : null}
+        {iconKey === "home" ? <House {...iconProps} /> : null}
+        {iconKey === "external" ? <ArrowUpRight {...iconProps} /> : null}
         <span className="whitespace-nowrap">{children}</span>
       </Link>
     </div>

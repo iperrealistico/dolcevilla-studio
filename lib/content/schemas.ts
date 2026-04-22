@@ -1,5 +1,25 @@
 import { z } from "zod";
 
+function countWords(value: string) {
+  return value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function createWordCountSchema(minWords: number, maxWords: number, label: string) {
+  return z.string().trim().min(1).superRefine((value, ctx) => {
+    const wordCount = countWords(value);
+
+    if (wordCount < minWords || wordCount > maxWords) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `${label} must use ${minWords}-${maxWords} words.`,
+      });
+    }
+  });
+}
+
 export const linkSchema = z.object({
   label: z.string().min(1),
   href: z.string().min(1),
@@ -76,9 +96,27 @@ export const ctaSectionSchema = z.object({
   secondaryCta: linkSchema.optional(),
 });
 
+const journalPrimaryCtaSchema = linkSchema.extend({
+  label: createWordCountSchema(2, 3, "Journal CTA button labels"),
+});
+
+const journalChapterShortTitleSchema = createWordCountSchema(
+  2,
+  3,
+  "Journal chapter short titles",
+);
+
+export const journalCtaSectionSchema = z.object({
+  eyebrow: z.string().optional(),
+  title: z.string().min(1),
+  body: z.string().min(1),
+  primaryCta: journalPrimaryCtaSchema,
+  secondaryCta: linkSchema.optional(),
+});
+
 export const journalArticleCtasSchema = z.object({
-  sticky: ctaSectionSchema,
-  segue: ctaSectionSchema,
+  sticky: journalCtaSectionSchema,
+  segue: journalCtaSectionSchema,
 });
 
 export const heroSchema = z.object({
@@ -237,6 +275,7 @@ export const journalEntryFrontmatterSchema = z
     seoTitle: z.string().min(1),
     seoDescription: z.string().min(1),
     noindex: z.boolean().optional(),
+    chapterShortTitles: z.array(journalChapterShortTitleSchema).min(2).optional(),
     articleCtas: journalArticleCtasSchema.optional(),
     relatedSlugs: z.array(z.string()).optional(),
     featured: z.boolean().default(false),
@@ -254,10 +293,21 @@ export const journalEntryFrontmatterSchema = z
           'Journal V3 entries must define "articleCtas" with "sticky" and "segue" CTA content.',
         path: ["articleCtas"],
       });
-      return;
     }
 
-    if (data.articleCtas.sticky.primaryCta.href !== "/contact") {
+    if (!data.chapterShortTitles) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Journal V3 entries must define "chapterShortTitles" for the chapter rail and quick takeaways.',
+        path: ["chapterShortTitles"],
+      });
+    }
+
+    if (
+      data.articleCtas &&
+      data.articleCtas.sticky.primaryCta.href !== "/contact"
+    ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
@@ -266,7 +316,7 @@ export const journalEntryFrontmatterSchema = z
       });
     }
 
-    if (data.articleCtas.segue.primaryCta.href !== "/") {
+    if (data.articleCtas && data.articleCtas.segue.primaryCta.href !== "/") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: 'Journal V3 "articleCtas.segue.primaryCta.href" must be "/".',

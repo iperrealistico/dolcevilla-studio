@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { createElement } from "react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { JournalStickyBannerCTA } from "@/components/journal/JournalStickyBannerCTA";
 import { createJournalMdxComponents } from "@/components/journal/journalMdxComponents";
 import {
@@ -14,7 +14,7 @@ const stickySection: CTASection = {
   title: "Planning a San Casciano wedding and need the right photographer?",
   body: "Tell us how your Chianti villa day should feel and we will tell you how we would photograph it.",
   primaryCta: {
-    label: "Ask about your San Casciano wedding",
+    label: "Ask about it",
     href: "/contact",
     variant: "primary",
   },
@@ -25,7 +25,7 @@ const segueSection: CTASection = {
   title: "See how Dolcevilla approaches classic Chianti weddings.",
   body: "If San Casciano feels close to your world, start with the studio approach behind the photographs.",
   primaryCta: {
-    label: "Explore the Dolcevilla approach",
+    label: "See the studio",
     href: "/",
     variant: "secondary",
   },
@@ -54,6 +54,33 @@ function buildConsentValue(isConsentDialogOpen: boolean): ConsentContextValue {
 }
 
 describe("journal CTA rendering", () => {
+  beforeEach(() => {
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe() {}
+        disconnect() {}
+      },
+    );
+
+    document.body.innerHTML = "";
+    const bodyColumn = document.createElement("div");
+    bodyColumn.id = "journal-body-column-fixture";
+    bodyColumn.getBoundingClientRect = () =>
+      ({
+        left: 120,
+        width: 760,
+        top: 0,
+        bottom: 0,
+        right: 880,
+        height: 0,
+        x: 120,
+        y: 0,
+        toJSON: () => ({}),
+      }) as DOMRect;
+    document.body.appendChild(bodyColumn);
+  });
+
   it("renders the photographer segue with article-specific frontmatter copy", () => {
     const components = createJournalMdxComponents({
       photographerSegue: segueSection,
@@ -80,7 +107,11 @@ describe("journal CTA rendering", () => {
       createElement(
         ConsentContext.Provider,
         { value: buildConsentValue(false) },
-        createElement(JournalStickyBannerCTA, { section: stickySection }),
+        createElement(JournalStickyBannerCTA, {
+          section: stickySection,
+          bodyColumnId: "journal-body-column-fixture",
+          deferUntilScroll: false,
+        }),
       ),
     );
 
@@ -97,7 +128,10 @@ describe("journal CTA rendering", () => {
       createElement(
         ConsentContext.Provider,
         { value: buildConsentValue(true) },
-        createElement(JournalStickyBannerCTA, { section: stickySection }),
+        createElement(JournalStickyBannerCTA, {
+          section: stickySection,
+          deferUntilScroll: false,
+        }),
       ),
     );
 

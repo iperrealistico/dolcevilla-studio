@@ -64,11 +64,15 @@ describe("journalSource", () => {
 
   it("builds a usable desktop snippet from each section source", () => {
     const parsed = splitJournalSourceIntoSections(validSource);
-    const snippet = buildJournalSectionSnippet(parsed.sections[0]!, 0);
+    const snippet = buildJournalSectionSnippet(
+      parsed.sections[0]!,
+      0,
+      "Legal first",
+    );
 
     expect(snippet).toMatchObject({
-      label: "TL;DR 01",
-      title: "Quick takeaway 01",
+      label: "Quick takeaway",
+      title: "Legal first",
     });
     expect(snippet.summary).toContain("Some body copy");
     expect(snippet.summary).not.toContain("<Journal");

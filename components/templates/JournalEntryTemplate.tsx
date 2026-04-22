@@ -30,6 +30,7 @@ type JournalEntryTemplateProps = {
     excerpt: string;
     publishedAt: string;
     source: string;
+    chapterShortTitles?: string[];
     articleCtas?: {
       sticky: CTASectionContent;
       segue: CTASectionContent;
@@ -79,13 +80,15 @@ export async function JournalEntryTemplate({
   entry,
   relatedStories,
 }: JournalEntryTemplateProps) {
+  const bodyColumnId = `journal-body-column-${entry.slug}`;
   const sourceAnalysis = analyzeJournalSource(entry.source);
   const { introSource, sections } = splitJournalSourceIntoSections(
     entry.source,
   );
-  const chapters = sections.map((section) => ({
+  const chapters = sections.map((section, index) => ({
     id: section.id,
     title: section.title,
+    shortTitle: entry.chapterShortTitles?.[index] ?? section.title,
   }));
   const articleCtas =
     entry.articleCtas ?? journalEntryTemplateContent.fallbackArticleCtas;
@@ -98,14 +101,22 @@ export async function JournalEntryTemplate({
   const sectionContents = await Promise.all(
     sections.map(async (section, index) => ({
       ...section,
-      snippet: buildJournalSectionSnippet(section, index),
+      snippet: buildJournalSectionSnippet(
+        section,
+        index,
+        entry.chapterShortTitles?.[index],
+      ),
+      shortTitle: entry.chapterShortTitles?.[index] ?? section.title,
       content: await renderMdxBlock(section.source, mdxComponents),
     })),
   );
   const readingTimeLabel = formatReadingTimeLabel(countWords(entry.source));
 
   return (
-    <div id="top" className="relative pb-[14rem] md:pb-[14.5rem] xl:pb-[10rem]">
+    <div
+      id="top"
+      className="relative pb-[14.75rem] md:pb-[15.25rem] xl:pb-[11.5rem]"
+    >
       <div className="space-y-8 pb-14 md:space-y-12 md:pb-20">
         <Container className="pt-8 md:pt-10">
           <Breadcrumbs
@@ -144,7 +155,7 @@ export async function JournalEntryTemplate({
             />
 
             <Container className="relative z-10 py-8 md:py-12 xl:px-16 2xl:px-20">
-              <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[17rem_minmax(0,1fr)]">
+              <div className="xl:grid xl:grid-cols-[14.2rem_minmax(0,1fr)] xl:gap-6 2xl:grid-cols-[15rem_minmax(0,1fr)] 2xl:gap-7">
                 <div className="relative xl:self-stretch">
                   <JournalReadingChrome
                     chapters={chapters}
@@ -152,7 +163,7 @@ export async function JournalEntryTemplate({
                   />
                 </div>
 
-                <div>
+                <div id={bodyColumnId}>
                   <div className="relative mx-auto mb-8 max-w-4xl px-1 xl:mx-0 xl:mb-10 xl:max-w-none">
                     <div className="flex items-center gap-3 pb-4 md:pb-5">
                       <span
@@ -200,7 +211,7 @@ export async function JournalEntryTemplate({
                               "calc(var(--site-header-height, 76px) + 2rem)",
                           }}
                         >
-                          <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-6 2xl:grid-cols-[minmax(0,1fr)_19rem] 2xl:gap-8">
+                          <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_16.5rem] xl:gap-5 2xl:grid-cols-[minmax(0,1fr)_17rem] 2xl:gap-6">
                             <ScrollParallax
                               from={hasEvenIndex ? "left" : "right"}
                               intensity="md"
@@ -240,7 +251,7 @@ export async function JournalEntryTemplate({
                               className="hidden xl:block"
                             >
                               <div
-                                className="sticky rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm"
+                                className="sticky rounded-[1.75rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-4.5 py-4.5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm"
                                 style={{
                                   top: "calc(var(--site-header-height, 76px) + 1.5rem)",
                                 }}
@@ -250,7 +261,7 @@ export async function JournalEntryTemplate({
                                     {section.snippet.label}
                                   </p>
                                   <div className="space-y-3">
-                                    <p className="font-display-face text-[1.75rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
+                                    <p className="font-display-face text-[1.52rem] leading-[0.97] tracking-[-0.04em] text-[var(--color-ink)]">
                                       {section.snippet.title}
                                     </p>
                                     <p className="text-sm leading-7 text-[var(--color-mist)]">
@@ -276,7 +287,10 @@ export async function JournalEntryTemplate({
           <CTASection section={journalEntryTemplateContent.fallbackCta} />
         ) : null}
       </div>
-      <JournalStickyBannerCTA section={articleCtas.sticky} />
+      <JournalStickyBannerCTA
+        section={articleCtas.sticky}
+        bodyColumnId={bodyColumnId}
+      />
     </div>
   );
 }

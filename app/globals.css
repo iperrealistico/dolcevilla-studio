@@ -233,36 +233,60 @@ html[data-custom-cursor="enabled"] * {
 
 .journal-cta-highlight {
   box-shadow:
-    0 18px 46px rgb(120 85 34 / 0.12),
+    0 16px 38px rgb(120 85 34 / 0.1),
     0 0 0 1px rgb(255 255 255 / 0.34) inset;
+}
+
+.journal-chapter-rail-mask {
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 7%,
+    black 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 7%,
+    black 93%,
+    transparent 100%
+  );
+}
+
+.journal-chapter-rail-mask:active {
+  cursor: grabbing;
 }
 
 .journal-cta-pulse-ring {
   position: absolute;
-  inset: -0.18rem;
+  inset: -0.12rem;
   z-index: 0;
   border-radius: inherit;
   background: radial-gradient(
     circle,
-    rgb(214 180 126 / 0.24) 0%,
-    rgb(214 180 126 / 0.12) 45%,
+    rgb(214 180 126 / 0.2) 0%,
+    rgb(214 180 126 / 0.1) 46%,
     transparent 72%
   );
-  opacity: 0.42;
+  opacity: 0.34;
   pointer-events: none;
-  animation: journal-cta-pulse 2.8s ease-in-out infinite;
+  animation: journal-cta-pulse 3.2s ease-in-out infinite;
 }
 
 @keyframes journal-cta-pulse {
   0%,
   100% {
-    opacity: 0.28;
-    transform: scale(0.96);
+    opacity: 0.22;
+    transform: scale(0.98);
   }
 
   50% {
-    opacity: 0.54;
-    transform: scale(1.08);
+    opacity: 0.42;
+    transform: scale(1.04);
   }
 }
 

@@ -274,14 +274,5 @@
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"
-  },
-  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.cover": {
-    "asset": "journalLegalMarriageItalyBeforeSymbolicTuscanyCover"
-  },
-  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.ornament.wash": {
-    "asset": "journalLegalMarriageItalyBeforeSymbolicTuscanyWash"
-  },
-  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.ornament.orbit": {
-    "asset": "journalLegalMarriageItalyBeforeSymbolicTuscanyOrbit"
   }
 }

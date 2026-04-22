@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Children, isValidElement, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Camera,
@@ -29,6 +29,16 @@ function JournalEditorialBlock({
   theme = "light",
 }: JournalEditorialBlockProps) {
   const isDark = theme === "dark";
+  const contentChildren = Children.map(children, (child) => {
+    if (
+      isValidElement<{ children?: ReactNode }>(child) &&
+      child.type === "p"
+    ) {
+      return child.props.children;
+    }
+
+    return child;
+  });
 
   return (
     <aside
@@ -85,7 +95,7 @@ function JournalEditorialBlock({
               : "text-[var(--color-mist)]",
           )}
         >
-          {children}
+          {contentChildren}
         </div>
       </div>
     </aside>

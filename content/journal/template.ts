@@ -12,7 +12,7 @@ export const journalEntryTemplateContent = {
       title: "Planning something with place and atmosphere at its center?",
       body: "Tell us the world you are building and we will tell you how we would photograph it.",
       primaryCta: {
-        label: "Start your inquiry",
+        label: "Start here",
         href: "/contact",
         variant: "primary",
       },
@@ -22,7 +22,7 @@ export const journalEntryTemplateContent = {
       title: "Start with the studio world behind the photographs.",
       body: "If place, pacing, and film matter to you, begin with the wider Dolcevilla Studio approach before you decide how you want the day photographed.",
       primaryCta: {
-        label: "Discover Dolcevilla Studio",
+        label: "See the studio",
         href: "/",
         variant: "secondary",
       },

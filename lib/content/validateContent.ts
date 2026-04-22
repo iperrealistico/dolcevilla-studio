@@ -37,6 +37,7 @@ export function validateJournalV3Contract(
     | "coverImage"
     | "ornamentWashImage"
     | "ornamentOrbitImage"
+    | "chapterShortTitles"
     | "articleCtas"
   > & {
     source: string;
@@ -76,6 +77,10 @@ export function validateJournalV3Contract(
     `Journal entry "${entry.slug}" must define articleCtas for the journal V3 template.`,
   );
   assert(
+    Boolean(entry.chapterShortTitles),
+    `Journal entry "${entry.slug}" must define chapterShortTitles for the journal V3 template.`,
+  );
+  assert(
     entry.articleCtas?.sticky.primaryCta.href === "/contact",
     `Journal entry "${entry.slug}" must point articleCtas.sticky.primaryCta.href to "/contact".`,
   );
@@ -100,6 +105,10 @@ export function validateJournalV3Contract(
   assert(
     sections.length >= 2,
     `Journal entry "${entry.slug}" must include at least two H2 chapter sections.`,
+  );
+  assert(
+    entry.chapterShortTitles?.length === sections.length,
+    `Journal entry "${entry.slug}" must provide one chapterShortTitle for each H2 section.`,
   );
   assert(
     journalSourceContainsPath(entry.source, "/film-wedding-photography"),

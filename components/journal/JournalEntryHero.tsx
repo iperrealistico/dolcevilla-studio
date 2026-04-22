@@ -38,7 +38,12 @@ export function JournalEntryHero({
           sizes="100vw"
           placeholder="blur"
           blurDataURL={coverAsset.blurDataURL}
-          className="object-cover object-[56%_center] md:object-center"
+          className="object-cover object-center"
+          style={
+            coverAsset.focalPoint
+              ? { objectPosition: coverAsset.focalPoint }
+              : undefined
+          }
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,11,8,0.58)_0%,rgba(14,11,8,0.4)_18%,rgba(14,11,8,0.18)_34%,rgba(18,13,10,0.34)_54%,rgba(18,13,10,0.84)_100%)] md:bg-[linear-gradient(180deg,rgba(14,11,8,0.46)_0%,rgba(14,11,8,0.34)_16%,rgba(14,11,8,0.12)_32%,rgba(18,13,10,0.3)_56%,rgba(18,13,10,0.78)_100%)]" />
         <div className="absolute inset-x-0 top-0 h-[34%] bg-[linear-gradient(180deg,rgba(10,7,5,0.24),rgba(10,7,5,0.12),transparent)] md:h-[28%]" />

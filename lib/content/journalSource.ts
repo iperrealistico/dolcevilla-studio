@@ -185,13 +185,14 @@ export function analyzeJournalSource(source: string) {
 export function buildJournalSectionSnippet(
   section: JournalSourceSection,
   index: number,
+  shortTitle?: string,
 ): JournalSectionSnippet {
   const plainText = toPlainText(section.source);
   const summary = shortenText(takeSentences(plainText));
 
   return {
-    label: `TL;DR ${String(index + 1).padStart(2, "0")}`,
-    title: deriveSnippetTitle(section.title, index),
+    label: "Quick takeaway",
+    title: shortTitle ?? deriveSnippetTitle(section.title, index),
     summary: summary || "A concise read of what this section is covering.",
   };
 }

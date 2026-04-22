@@ -118,7 +118,7 @@ export async function JournalEntryTemplate({
       className="relative pb-[14.75rem] md:pb-[15.25rem] xl:pb-[11.5rem]"
     >
       <div className="space-y-8 pb-14 md:space-y-12 md:pb-20">
-        <Container className="pt-8 md:pt-10">
+        <Container className="pt-6 md:pt-8">
           <Breadcrumbs
             items={[
               {

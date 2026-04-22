@@ -231,6 +231,41 @@ html[data-custom-cursor="enabled"] * {
   }
 }
 
+.journal-cta-highlight {
+  box-shadow:
+    0 18px 46px rgb(120 85 34 / 0.12),
+    0 0 0 1px rgb(255 255 255 / 0.34) inset;
+}
+
+.journal-cta-pulse-ring {
+  position: absolute;
+  inset: -0.18rem;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgb(214 180 126 / 0.24) 0%,
+    rgb(214 180 126 / 0.12) 45%,
+    transparent 72%
+  );
+  opacity: 0.42;
+  pointer-events: none;
+  animation: journal-cta-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes journal-cta-pulse {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.54;
+    transform: scale(1.08);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

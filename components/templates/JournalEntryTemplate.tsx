@@ -6,7 +6,8 @@ import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { JournalAmbientOrnaments } from "@/components/journal/JournalAmbientOrnaments";
 import { JournalEntryHero } from "@/components/journal/JournalEntryHero";
 import { JournalReadingChrome } from "@/components/journal/JournalReadingChrome";
-import { journalMdxComponents } from "@/components/journal/journalMdxComponents";
+import { JournalStickyBannerCTA } from "@/components/journal/JournalStickyBannerCTA";
+import { createJournalMdxComponents } from "@/components/journal/journalMdxComponents";
 import { Container } from "@/components/ui/Container";
 import { RichText } from "@/components/ui/RichText";
 import { journalEntryTemplateContent } from "@/content/journal/template";
@@ -17,6 +18,7 @@ import {
 } from "@/lib/content/journalSource";
 import { cn } from "@/lib/utils/cn";
 import type { StoryCard } from "@/types/content";
+import type { CTASection as CTASectionContent } from "@/types/content";
 import type { ImageAsset } from "@/types/gallery";
 
 type JournalEntryTemplateProps = {
@@ -28,6 +30,10 @@ type JournalEntryTemplateProps = {
     excerpt: string;
     publishedAt: string;
     source: string;
+    articleCtas?: {
+      sticky: CTASectionContent;
+      segue: CTASectionContent;
+    };
     coverAsset: ImageAsset;
     ornamentWashAsset: ImageAsset | null;
     ornamentOrbitAsset: ImageAsset | null;
@@ -48,14 +54,19 @@ function formatReadingTimeLabel(wordCount: number) {
   return `${Math.max(4, Math.ceil(wordCount / 220))} min read`;
 }
 
-async function renderMdxBlock(source: string) {
+async function renderMdxBlock(
+  source: string,
+  components = createJournalMdxComponents({
+    photographerSegue: journalEntryTemplateContent.fallbackArticleCtas.segue,
+  }),
+) {
   if (!source.trim()) {
     return null;
   }
 
   const { content } = await compileMDX({
     source,
-    components: journalMdxComponents,
+    components,
     options: {
       parseFrontmatter: false,
     },
@@ -69,30 +80,40 @@ export async function JournalEntryTemplate({
   relatedStories,
 }: JournalEntryTemplateProps) {
   const sourceAnalysis = analyzeJournalSource(entry.source);
-  const { introSource, sections } = splitJournalSourceIntoSections(entry.source);
+  const { introSource, sections } = splitJournalSourceIntoSections(
+    entry.source,
+  );
   const chapters = sections.map((section) => ({
     id: section.id,
     title: section.title,
   }));
+  const articleCtas =
+    entry.articleCtas ?? journalEntryTemplateContent.fallbackArticleCtas;
+  const mdxComponents = createJournalMdxComponents({
+    photographerSegue: articleCtas.segue,
+  });
   const ornamentWashAsset = entry.ornamentWashAsset ?? entry.coverAsset;
   const ornamentOrbitAsset = entry.ornamentOrbitAsset ?? entry.coverAsset;
-  const introContent = await renderMdxBlock(introSource);
+  const introContent = await renderMdxBlock(introSource, mdxComponents);
   const sectionContents = await Promise.all(
     sections.map(async (section, index) => ({
       ...section,
       snippet: buildJournalSectionSnippet(section, index),
-      content: await renderMdxBlock(section.source),
+      content: await renderMdxBlock(section.source, mdxComponents),
     })),
   );
   const readingTimeLabel = formatReadingTimeLabel(countWords(entry.source));
 
   return (
-    <div id="top" className="relative pb-28 md:pb-20 xl:pb-24">
+    <div id="top" className="relative pb-[14rem] md:pb-[14.5rem] xl:pb-[10rem]">
       <div className="space-y-8 pb-14 md:space-y-12 md:pb-20">
         <Container className="pt-8 md:pt-10">
           <Breadcrumbs
             items={[
-              { label: journalEntryTemplateContent.breadcrumbs.home, href: "/" },
+              {
+                label: journalEntryTemplateContent.breadcrumbs.home,
+                href: "/",
+              },
               {
                 label: journalEntryTemplateContent.breadcrumbs.journal,
                 href: "/journal",
@@ -125,7 +146,10 @@ export async function JournalEntryTemplate({
             <Container className="relative z-10 py-8 md:py-12 xl:px-16 2xl:px-20">
               <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[17rem_minmax(0,1fr)]">
                 <div className="relative xl:self-stretch">
-                  <JournalReadingChrome chapters={chapters} />
+                  <JournalReadingChrome
+                    chapters={chapters}
+                    stickyCta={articleCtas.sticky}
+                  />
                 </div>
 
                 <div>
@@ -218,8 +242,7 @@ export async function JournalEntryTemplate({
                               <div
                                 className="sticky rounded-[1.9rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-5 py-5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm"
                                 style={{
-                                  top:
-                                    "calc(var(--site-header-height, 76px) + 1.5rem)",
+                                  top: "calc(var(--site-header-height, 76px) + 1.5rem)",
                                 }}
                               >
                                 <div className="space-y-4">
@@ -253,6 +276,7 @@ export async function JournalEntryTemplate({
           <CTASection section={journalEntryTemplateContent.fallbackCta} />
         ) : null}
       </div>
+      <JournalStickyBannerCTA section={articleCtas.sticky} />
     </div>
   );
 }

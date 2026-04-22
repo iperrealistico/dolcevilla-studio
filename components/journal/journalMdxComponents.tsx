@@ -1,3 +1,4 @@
+import type { CTASection as CTASectionContent } from "@/types/content";
 import {
   JournalChecklist,
   JournalCommonMistake,
@@ -9,13 +10,21 @@ import {
 } from "@/components/journal/JournalEditorialBlocks";
 import { JournalPhotographerSegue } from "@/components/journal/JournalPhotographerSegue";
 
-export const journalMdxComponents = {
-  JournalQuickAnswer,
-  JournalPlanningNote,
-  JournalChecklist,
-  JournalCommonMistake,
-  JournalLocalInsight,
-  JournalFilmNote,
-  JournalPullQuote,
-  JournalPhotographerSegue,
-};
+export function createJournalMdxComponents({
+  photographerSegue,
+}: {
+  photographerSegue: CTASectionContent;
+}) {
+  return {
+    JournalQuickAnswer,
+    JournalPlanningNote,
+    JournalChecklist,
+    JournalCommonMistake,
+    JournalLocalInsight,
+    JournalFilmNote,
+    JournalPullQuote,
+    JournalPhotographerSegue: () => (
+      <JournalPhotographerSegue section={photographerSegue} />
+    ),
+  };
+}

@@ -4,6 +4,7 @@ export type {
   GalleryItem,
   HeroContent,
   ImageAsset,
+  JournalArticleCtas,
   JournalEntryFrontmatter,
   Link,
   Point,

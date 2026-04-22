@@ -3,7 +3,9 @@ import { z } from "zod";
 export const linkSchema = z.object({
   label: z.string().min(1),
   href: z.string().min(1),
-  variant: z.enum(["primary", "secondary", "ghost", "inline"]).default("primary"),
+  variant: z
+    .enum(["primary", "secondary", "ghost", "inline"])
+    .default("primary"),
 });
 
 export const seoSchema = z.object({
@@ -74,6 +76,11 @@ export const ctaSectionSchema = z.object({
   secondaryCta: linkSchema.optional(),
 });
 
+export const journalArticleCtasSchema = z.object({
+  sticky: ctaSectionSchema,
+  segue: ctaSectionSchema,
+});
+
 export const heroSchema = z.object({
   eyebrow: z.string().optional(),
   title: z.string().min(1),
@@ -82,7 +89,9 @@ export const heroSchema = z.object({
   primaryCta: linkSchema,
   secondaryCta: linkSchema.optional(),
   imageIds: z.array(z.string().min(1)).min(1),
-  variant: z.enum(["home", "service", "editorial", "landing", "ads"]).default("service"),
+  variant: z
+    .enum(["home", "service", "editorial", "landing", "ads"])
+    .default("service"),
 });
 
 export const geographySchema = z.object({
@@ -171,7 +180,14 @@ export const consentStateSchema = z.object({
 
 export const servicePageContentSchema = z.object({
   slug: z.string().min(1),
-  pageType: z.enum(["home", "service", "experience", "about", "contact", "utility"]),
+  pageType: z.enum([
+    "home",
+    "service",
+    "experience",
+    "about",
+    "contact",
+    "utility",
+  ]),
   hero: heroSchema.optional(),
   intro: richSectionSchema,
   gallery: z.array(galleryItemSchema).default([]),
@@ -193,37 +209,71 @@ export const servicePageContentSchema = z.object({
   nextSteps: z.array(z.string()).default([]),
 });
 
-export const journalEntryFrontmatterSchema = z.object({
-  slug: z.string().min(1),
-  articleTemplate: z.enum(["legacy", "v3"]).default("legacy"),
-  queueId: z.string().min(1).optional(),
-  workflowStatus: z.string().min(1).optional(),
-  title: z.string().min(1),
-  excerpt: z.string().min(1),
-  category: z.enum([
-    "real-weddings",
-    "elopements",
-    "guides",
-    "planning-notes",
-    "stories-of-place",
-  ]),
-  location: z.string().min(1),
-  celebrationType: z.string().optional(),
-  serviceType: z.string().optional(),
-  primaryKeyword: z.string().min(1).optional(),
-  searchIntent: z.string().min(1).optional(),
-  coverImage: z.string().min(1),
-  ornamentWashImage: z.string().min(1).optional(),
-  ornamentOrbitImage: z.string().min(1).optional(),
-  publishedAt: z.string().min(1),
-  updatedAt: z.string().optional(),
-  seoTitle: z.string().min(1),
-  seoDescription: z.string().min(1),
-  noindex: z.boolean().optional(),
-  relatedSlugs: z.array(z.string()).optional(),
-  featured: z.boolean().default(false),
-  tags: z.array(z.string()).default([]),
-});
+export const journalEntryFrontmatterSchema = z
+  .object({
+    slug: z.string().min(1),
+    articleTemplate: z.enum(["legacy", "v3"]).default("legacy"),
+    queueId: z.string().min(1).optional(),
+    workflowStatus: z.string().min(1).optional(),
+    title: z.string().min(1),
+    excerpt: z.string().min(1),
+    category: z.enum([
+      "real-weddings",
+      "elopements",
+      "guides",
+      "planning-notes",
+      "stories-of-place",
+    ]),
+    location: z.string().min(1),
+    celebrationType: z.string().optional(),
+    serviceType: z.string().optional(),
+    primaryKeyword: z.string().min(1).optional(),
+    searchIntent: z.string().min(1).optional(),
+    coverImage: z.string().min(1),
+    ornamentWashImage: z.string().min(1).optional(),
+    ornamentOrbitImage: z.string().min(1).optional(),
+    publishedAt: z.string().min(1),
+    updatedAt: z.string().optional(),
+    seoTitle: z.string().min(1),
+    seoDescription: z.string().min(1),
+    noindex: z.boolean().optional(),
+    articleCtas: journalArticleCtasSchema.optional(),
+    relatedSlugs: z.array(z.string()).optional(),
+    featured: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  })
+  .superRefine((data, ctx) => {
+    if (data.articleTemplate !== "v3") {
+      return;
+    }
+
+    if (!data.articleCtas) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Journal V3 entries must define "articleCtas" with "sticky" and "segue" CTA content.',
+        path: ["articleCtas"],
+      });
+      return;
+    }
+
+    if (data.articleCtas.sticky.primaryCta.href !== "/contact") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          'Journal V3 "articleCtas.sticky.primaryCta.href" must be "/contact".',
+        path: ["articleCtas", "sticky", "primaryCta", "href"],
+      });
+    }
+
+    if (data.articleCtas.segue.primaryCta.href !== "/") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Journal V3 "articleCtas.segue.primaryCta.href" must be "/".',
+        path: ["articleCtas", "segue", "primaryCta", "href"],
+      });
+    }
+  });
 
 export type Link = z.infer<typeof linkSchema>;
 export type SEOFields = z.infer<typeof seoSchema>;
@@ -235,6 +285,7 @@ export type ProcessStep = z.infer<typeof processStepSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 export type FAQItem = z.infer<typeof faqItemSchema>;
 export type CTASection = z.infer<typeof ctaSectionSchema>;
+export type JournalArticleCtas = z.infer<typeof journalArticleCtasSchema>;
 export type HeroContent = z.infer<typeof heroSchema>;
 export type CraftIdentity = z.infer<typeof craftIdentitySchema>;
 export type TeamMember = z.infer<typeof teamMemberSchema>;
@@ -244,4 +295,6 @@ export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 export type UIDictionary = z.infer<typeof uiDictionarySchema>;
 export type ConsentState = z.infer<typeof consentStateSchema>;
 export type ServicePageContent = z.infer<typeof servicePageContentSchema>;
-export type JournalEntryFrontmatter = z.infer<typeof journalEntryFrontmatterSchema>;
+export type JournalEntryFrontmatter = z.infer<
+  typeof journalEntryFrontmatterSchema
+>;

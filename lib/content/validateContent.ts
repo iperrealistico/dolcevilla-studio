@@ -37,6 +37,7 @@ export function validateJournalV3Contract(
     | "coverImage"
     | "ornamentWashImage"
     | "ornamentOrbitImage"
+    | "articleCtas"
   > & {
     source: string;
   },
@@ -70,6 +71,19 @@ export function validateJournalV3Contract(
     entry.ornamentOrbitImage === expectedSlots.ornamentOrbitImage,
     `Journal entry "${entry.slug}" must use deterministic ornament orbit slot "${expectedSlots.ornamentOrbitImage}".`,
   );
+  assert(
+    Boolean(entry.articleCtas),
+    `Journal entry "${entry.slug}" must define articleCtas for the journal V3 template.`,
+  );
+  assert(
+    entry.articleCtas?.sticky.primaryCta.href === "/contact",
+    `Journal entry "${entry.slug}" must point articleCtas.sticky.primaryCta.href to "/contact".`,
+  );
+  assert(
+    entry.articleCtas?.segue.primaryCta.href === "/",
+    `Journal entry "${entry.slug}" must point articleCtas.segue.primaryCta.href to "/".`,
+  );
+
   assert(
     sourceAnalysis.photographerSegueCount === 1,
     `Journal entry "${entry.slug}" must include exactly one <JournalPhotographerSegue /> block.`,

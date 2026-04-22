@@ -1,10 +1,11 @@
 "use client";
 
 import { LayoutGroup, motion } from "framer-motion";
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUpRight, Compass, Send } from "lucide-react";
+import { Compass } from "lucide-react";
+import { JournalCTAButton } from "@/components/journal/JournalCTAButton";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import type { CTASection as CTASectionContent } from "@/types/content";
 import { cn } from "@/lib/utils/cn";
 
 type JournalChapter = {
@@ -14,6 +15,7 @@ type JournalChapter = {
 
 type JournalReadingChromeProps = {
   chapters: JournalChapter[];
+  stickyCta: CTASectionContent;
 };
 
 type DesktopRailMetrics = {
@@ -67,7 +69,10 @@ function getSiteHeaderHeight() {
     : FALLBACK_HEADER_HEIGHT;
 }
 
-export function JournalReadingChrome({ chapters }: JournalReadingChromeProps) {
+export function JournalReadingChrome({
+  chapters,
+  stickyCta,
+}: JournalReadingChromeProps) {
   const reduceMotion = useReducedMotion();
   const mobileScrollerRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -533,21 +538,34 @@ export function JournalReadingChrome({ chapters }: JournalReadingChromeProps) {
               </div>
             </LayoutGroup>
 
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-between gap-3 rounded-[1.4rem] border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(246,238,231,0.96))] px-4 py-3 text-sm font-semibold text-[var(--color-ink)] shadow-[0_18px_42px_rgba(25,19,14,0.08)] transition hover:-translate-y-0.5"
-            >
-              <span className="inline-flex items-center gap-2">
-                <Send size={15} strokeWidth={1.9} aria-hidden="true" />
-                <span>Start an inquiry</span>
-              </span>
-              <ArrowUpRight size={15} strokeWidth={1.9} aria-hidden="true" />
-            </Link>
+            <div className="rounded-[1.6rem] border border-[rgb(196_154_92_/_0.16)] bg-[rgb(255_255_255_/_0.66)] p-3">
+              {stickyCta.eyebrow ? (
+                <p className="pb-2 text-[0.62rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
+                  {stickyCta.eyebrow}
+                </p>
+              ) : null}
+              <p className="pb-3 text-sm leading-5 text-[var(--color-ink)]">
+                {stickyCta.title}
+              </p>
+              <JournalCTAButton
+                href={stickyCta.primaryCta.href}
+                tone="contact"
+                size="compact"
+                className="w-full justify-between"
+              >
+                {stickyCta.primaryCta.label}
+              </JournalCTAButton>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="fixed inset-x-0 bottom-4 z-40 px-4 xl:hidden">
+      <div
+        className="fixed inset-x-0 z-40 px-4 xl:hidden"
+        style={{
+          bottom: "calc(env(safe-area-inset-bottom, 0px) + 5.5rem)",
+        }}
+      >
         <div className="mx-auto max-w-[var(--container-max)] rounded-[1.7rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.88)] px-3 py-3 shadow-[0_22px_56px_rgba(25,19,14,0.12)] backdrop-blur-md">
           <div className="mb-3 flex items-start justify-between gap-3 px-1">
             <div className="min-w-0">
@@ -596,18 +614,14 @@ export function JournalReadingChrome({ chapters }: JournalReadingChromeProps) {
               </div>
             </div>
 
-            <Link
-              href="/contact"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[rgb(248_240_230_/_0.12)] bg-[linear-gradient(145deg,rgba(21,17,14,0.98),rgba(58,47,38,0.96))] px-4 py-2 text-[0.72rem] font-semibold tracking-[0.14em] text-[rgb(249_243_235)] uppercase shadow-[0_18px_42px_rgba(25,19,14,0.2)] ring-1 ring-[rgb(255_255_255_/_0.04)]"
+            <JournalCTAButton
+              href={stickyCta.primaryCta.href}
+              tone="contact"
+              size="compact"
+              className="max-w-[11.25rem] shrink-0 px-3.5 py-2 text-[0.72rem] leading-tight"
             >
-              <Send
-                size={14}
-                strokeWidth={1.9}
-                aria-hidden="true"
-                className="text-[rgb(249_243_235)]"
-              />
-              <span className="text-[rgb(249_243_235)]">Contact</span>
-            </Link>
+              {stickyCta.primaryCta.label}
+            </JournalCTAButton>
           </div>
         </div>
       </div>

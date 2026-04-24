@@ -275,6 +275,15 @@
   "journal.castello-di-vincigliata-wedding-guide-venue-logistics-and-guest-experience.ornament.orbit": {
     "asset": "journalCastelloVincigliataGuideOrnamentOrbit"
   },
+  "journal.villa-grabau-wedding-guide-why-lucca-couples-keep-shortlisting-it.cover": {
+    "asset": "journalVillaGrabauGuideCover"
+  },
+  "journal.villa-grabau-wedding-guide-why-lucca-couples-keep-shortlisting-it.ornament.wash": {
+    "asset": "journalVillaGrabauGuideOrnamentWash"
+  },
+  "journal.villa-grabau-wedding-guide-why-lucca-couples-keep-shortlisting-it.ornament.orbit": {
+    "asset": "journalVillaGrabauGuideOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

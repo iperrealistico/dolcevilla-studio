@@ -266,6 +266,15 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
+  "journal.castello-di-vincigliata-wedding-guide-venue-logistics-and-guest-experience.cover": {
+    "asset": "journalCastelloVincigliataGuideCover"
+  },
+  "journal.castello-di-vincigliata-wedding-guide-venue-logistics-and-guest-experience.ornament.wash": {
+    "asset": "journalCastelloVincigliataGuideOrnamentWash"
+  },
+  "journal.castello-di-vincigliata-wedding-guide-venue-logistics-and-guest-experience.ornament.orbit": {
+    "asset": "journalCastelloVincigliataGuideOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

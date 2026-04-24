@@ -22,7 +22,7 @@ export const journalEntryTemplateContent = {
       title: "Start with the studio world behind the photographs.",
       body: "If place, pacing, and film matter to you, begin with the wider Dolcevilla Studio approach before you decide how you want the day photographed.",
       primaryCta: {
-        label: "See the studio",
+        label: "Explore the studio",
         href: "/",
         variant: "secondary",
       },

@@ -7,17 +7,27 @@ const fallbackSegueSection: CTASectionContent = {
   title: "Start with the studio world behind the photographs.",
   body: "If atmosphere, pacing, film craft, and a strong sense of place matter to you, the best next step is to see the wider Dolcevilla Studio approach before you decide how you want the day to be photographed.",
   primaryCta: {
-    label: "See the studio",
+    label: "Explore the studio",
     href: "/",
     variant: "secondary",
   },
 };
+
+function normalizeSegueLabel(label: string) {
+  if (label.trim().toLowerCase() === "see studio") {
+    return "Explore the studio";
+  }
+
+  return label;
+}
 
 export function JournalPhotographerSegue({
   section = fallbackSegueSection,
 }: {
   section?: CTASectionContent;
 }) {
+  const primaryLabel = normalizeSegueLabel(section.primaryCta.label);
+
   return (
     <aside className="journal-cta-highlight not-prose relative my-12 overflow-hidden rounded-[2rem] border border-[rgb(196_154_92_/_0.16)] bg-[linear-gradient(145deg,rgba(255,255,255,0.96),rgba(246,239,229,0.98))] p-6 shadow-[0_26px_66px_rgba(22,15,11,0.12)] md:p-7">
       <div
@@ -48,9 +58,9 @@ export function JournalPhotographerSegue({
               href={section.primaryCta.href}
               tone="home"
               size="banner"
-              className="w-full justify-between sm:w-auto sm:min-w-[15.75rem]"
+              className="w-full justify-center sm:w-auto"
             >
-              {section.primaryCta.label}
+              {primaryLabel}
             </JournalCTAButton>
 
             {section.secondaryCta ? (

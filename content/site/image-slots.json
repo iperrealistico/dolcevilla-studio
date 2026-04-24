@@ -284,6 +284,15 @@
   "journal.villa-grabau-wedding-guide-why-lucca-couples-keep-shortlisting-it.ornament.orbit": {
     "asset": "journalVillaGrabauGuideOrnamentOrbit"
   },
+  "journal.villa-catignano-wedding-photographer-in-castelnuovo-berardenga.cover": {
+    "asset": "journalVillaCatignanoPhotographerCover"
+  },
+  "journal.villa-catignano-wedding-photographer-in-castelnuovo-berardenga.ornament.wash": {
+    "asset": "journalVillaCatignanoPhotographerOrnamentWash"
+  },
+  "journal.villa-catignano-wedding-photographer-in-castelnuovo-berardenga.ornament.orbit": {
+    "asset": "journalVillaCatignanoPhotographerOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

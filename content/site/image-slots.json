@@ -274,14 +274,5 @@
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"
-  },
-  "journal.quiet-luxury-weddings-in-tuscany-venue-style-fashion-and-photography-tips.cover": {
-    "asset": "journalQuietLuxuryTuscanyCover"
-  },
-  "journal.quiet-luxury-weddings-in-tuscany-venue-style-fashion-and-photography-tips.ornament.wash": {
-    "asset": "journalQuietLuxuryTuscanyWash"
-  },
-  "journal.quiet-luxury-weddings-in-tuscany-venue-style-fashion-and-photography-tips.ornament.orbit": {
-    "asset": "journalQuietLuxuryTuscanyOrbit"
   }
 }

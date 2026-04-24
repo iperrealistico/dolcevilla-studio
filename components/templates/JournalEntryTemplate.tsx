@@ -117,7 +117,7 @@ export async function JournalEntryTemplate({
       id="top"
       className="relative pb-[14.75rem] md:pb-[15.25rem] xl:pb-[11.5rem]"
     >
-      <div className="space-y-8 pb-14 md:space-y-12 md:pb-20">
+      <div className="pb-14 md:pb-20">
         <Container className="pt-6 md:pt-8">
           <Breadcrumbs
             items={[
@@ -134,19 +134,21 @@ export async function JournalEntryTemplate({
           />
         </Container>
 
-        <JournalEntryHero
-          title={entry.title}
-          excerpt={entry.excerpt}
-          location={entry.location}
-          publishedAt={entry.publishedAt}
-          coverAsset={entry.coverAsset}
-          chapterCount={sections.length}
-          readingTimeLabel={readingTimeLabel}
-        />
+        <div className="mt-3 md:mt-4">
+          <JournalEntryHero
+            title={entry.title}
+            excerpt={entry.excerpt}
+            location={entry.location}
+            publishedAt={entry.publishedAt}
+            coverAsset={entry.coverAsset}
+            chapterCount={sections.length}
+            readingTimeLabel={readingTimeLabel}
+          />
+        </div>
 
         <section
           id="journal-article"
-          className="relative overflow-hidden px-4 md:px-8 lg:px-10"
+          className="relative mt-8 overflow-hidden px-4 md:mt-12 md:px-8 lg:px-10"
         >
           <div className="relative rounded-[2.2rem] border border-[rgb(92_77_58_/_0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(246,241,235,0.92))] shadow-[0_30px_80px_rgba(25,19,14,0.08)]">
             <JournalAmbientOrnaments

@@ -266,6 +266,15 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
+  "journal.how-to-choose-a-tuscany-wedding-photographer-if-you-want-more-candids-than-poses.cover": {
+    "asset": "journalHowToChooseTuscanyWeddingPhotographerCandidsCover"
+  },
+  "journal.how-to-choose-a-tuscany-wedding-photographer-if-you-want-more-candids-than-poses.ornament.wash": {
+    "asset": "journalHowToChooseTuscanyWeddingPhotographerCandidsOrnamentWash"
+  },
+  "journal.how-to-choose-a-tuscany-wedding-photographer-if-you-want-more-candids-than-poses.ornament.orbit": {
+    "asset": "journalHowToChooseTuscanyWeddingPhotographerCandidsOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

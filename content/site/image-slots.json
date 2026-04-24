@@ -266,6 +266,15 @@
   "page.villa-raffaelli.craft.image": {
     "asset": "villaNewlywedsMountainGarden"
   },
+  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.cover": {
+    "asset": "journalHowToGetLegallyMarriedItalySymbolicTuscanyCover"
+  },
+  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.ornament.wash": {
+    "asset": "journalHowToGetLegallyMarriedItalySymbolicTuscanyOrnamentWash"
+  },
+  "journal.how-to-get-legally-married-in-italy-before-a-symbolic-tuscany-wedding.ornament.orbit": {
+    "asset": "journalHowToGetLegallyMarriedItalySymbolicTuscanyOrnamentOrbit"
+  },
   "journal.how-to-choose-a-tuscany-wedding-photographer-if-you-want-more-candids-than-poses.cover": {
     "asset": "journalHowToChooseTuscanyWeddingPhotographerCandidsCover"
   },

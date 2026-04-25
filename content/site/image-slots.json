@@ -311,6 +311,15 @@
   "journal.questions-to-ask-a-tuscany-wedding-photographer-about-film-flash-and-backup-gear.ornament.orbit": {
     "asset": "journalTuscanyPhotographerFilmFlashBackupOrnamentOrbit"
   },
+  "journal.how-much-does-a-wedding-weekend-in-tuscany-cost.cover": {
+    "asset": "journalTuscanyWeddingWeekendCostCover"
+  },
+  "journal.how-much-does-a-wedding-weekend-in-tuscany-cost.ornament.wash": {
+    "asset": "journalTuscanyWeddingWeekendCostOrnamentWash"
+  },
+  "journal.how-much-does-a-wedding-weekend-in-tuscany-cost.ornament.orbit": {
+    "asset": "journalTuscanyWeddingWeekendCostOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

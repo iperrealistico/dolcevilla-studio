@@ -320,6 +320,15 @@
   "journal.how-much-does-a-wedding-weekend-in-tuscany-cost.ornament.orbit": {
     "asset": "journalTuscanyWeddingWeekendCostOrnamentOrbit"
   },
+  "journal.pienza-wedding-photographer-for-a-val-dorcia-wedding.cover": {
+    "asset": "journalPienzaWeddingPhotographerValDOrciaWeddingCover"
+  },
+  "journal.pienza-wedding-photographer-for-a-val-dorcia-wedding.ornament.wash": {
+    "asset": "journalPienzaWeddingPhotographerValDOrciaWeddingOrnamentWash"
+  },
+  "journal.pienza-wedding-photographer-for-a-val-dorcia-wedding.ornament.orbit": {
+    "asset": "journalPienzaWeddingPhotographerValDOrciaWeddingOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

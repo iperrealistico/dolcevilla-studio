@@ -293,6 +293,15 @@
   "journal.villa-catignano-wedding-photographer-in-castelnuovo-berardenga.ornament.orbit": {
     "asset": "journalVillaCatignanoPhotographerOrnamentOrbit"
   },
+  "journal.villa-vs-castle-wedding-in-tuscany-style-budget-and-guest-experience.cover": {
+    "asset": "journalVillaVsCastleWeddingCover"
+  },
+  "journal.villa-vs-castle-wedding-in-tuscany-style-budget-and-guest-experience.ornament.wash": {
+    "asset": "journalVillaVsCastleWeddingOrnamentWash"
+  },
+  "journal.villa-vs-castle-wedding-in-tuscany-style-budget-and-guest-experience.ornament.orbit": {
+    "asset": "journalVillaVsCastleWeddingOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

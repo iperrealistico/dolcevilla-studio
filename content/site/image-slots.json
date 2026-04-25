@@ -302,6 +302,15 @@
   "journal.villa-vs-castle-wedding-in-tuscany-style-budget-and-guest-experience.ornament.orbit": {
     "asset": "journalVillaVsCastleWeddingOrnamentOrbit"
   },
+  "journal.questions-to-ask-a-tuscany-wedding-photographer-about-film-flash-and-backup-gear.cover": {
+    "asset": "journalTuscanyPhotographerFilmFlashBackupCover"
+  },
+  "journal.questions-to-ask-a-tuscany-wedding-photographer-about-film-flash-and-backup-gear.ornament.wash": {
+    "asset": "journalTuscanyPhotographerFilmFlashBackupOrnamentWash"
+  },
+  "journal.questions-to-ask-a-tuscany-wedding-photographer-about-film-flash-and-backup-gear.ornament.orbit": {
+    "asset": "journalTuscanyPhotographerFilmFlashBackupOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

@@ -329,6 +329,15 @@
   "journal.pienza-wedding-photographer-for-a-val-dorcia-wedding.ornament.orbit": {
     "asset": "journalPienzaWeddingPhotographerValDOrciaWeddingOrnamentOrbit"
   },
+  "journal.montepulciano-wedding-photographer-for-a-destination-wedding-in-tuscany.cover": {
+    "asset": "journalMontepulcianoWeddingPhotographerDestinationWeddingTuscanyCover"
+  },
+  "journal.montepulciano-wedding-photographer-for-a-destination-wedding-in-tuscany.ornament.wash": {
+    "asset": "journalMontepulcianoWeddingPhotographerDestinationWeddingTuscanyOrnamentWash"
+  },
+  "journal.montepulciano-wedding-photographer-for-a-destination-wedding-in-tuscany.ornament.orbit": {
+    "asset": "journalMontepulcianoWeddingPhotographerDestinationWeddingTuscanyOrnamentOrbit"
+  },
   "journal.super-8-for-the-welcome-party-digital-for-the-wedding-day-a-smart-tuscany-coverage-mix.cover": {
     "asset": "journalSuper8WelcomePartyDigitalWeddingDayCover"
   },

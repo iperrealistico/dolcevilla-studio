@@ -347,6 +347,15 @@
   "journal.super-8-for-the-welcome-party-digital-for-the-wedding-day-a-smart-tuscany-coverage-mix.ornament.orbit": {
     "asset": "journalSuper8WelcomePartyDigitalWeddingDayOrnamentOrbit"
   },
+  "journal.indoor-engagement-sessions-in-tuscany-bars-hotels-and-historic-interiors.cover": {
+    "asset": "journalIndoorEngagementSessionsTuscanyCover"
+  },
+  "journal.indoor-engagement-sessions-in-tuscany-bars-hotels-and-historic-interiors.ornament.wash": {
+    "asset": "journalIndoorEngagementSessionsTuscanyOrnamentWash"
+  },
+  "journal.indoor-engagement-sessions-in-tuscany-bars-hotels-and-historic-interiors.ornament.orbit": {
+    "asset": "journalIndoorEngagementSessionsTuscanyOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

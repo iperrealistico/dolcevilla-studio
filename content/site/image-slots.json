@@ -356,6 +356,15 @@
   "journal.indoor-engagement-sessions-in-tuscany-bars-hotels-and-historic-interiors.ornament.orbit": {
     "asset": "journalIndoorEngagementSessionsTuscanyOrnamentOrbit"
   },
+  "journal.why-after-party-coverage-matters-at-a-tuscany-destination-wedding.cover": {
+    "asset": "journalWhyAfterPartyCoverageMattersTuscanyCover"
+  },
+  "journal.why-after-party-coverage-matters-at-a-tuscany-destination-wedding.ornament.wash": {
+    "asset": "journalWhyAfterPartyCoverageMattersTuscanyOrnamentWash"
+  },
+  "journal.why-after-party-coverage-matters-at-a-tuscany-destination-wedding.ornament.orbit": {
+    "asset": "journalWhyAfterPartyCoverageMattersTuscanyOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

@@ -365,6 +365,15 @@
   "journal.why-after-party-coverage-matters-at-a-tuscany-destination-wedding.ornament.orbit": {
     "asset": "journalWhyAfterPartyCoverageMattersTuscanyOrnamentOrbit"
   },
+  "journal.civil-weddings-in-tuscany-where-you-can-legally-get-married.cover": {
+    "asset": "journalCivilWeddingsTuscanyLegalCover"
+  },
+  "journal.civil-weddings-in-tuscany-where-you-can-legally-get-married.ornament.wash": {
+    "asset": "journalCivilWeddingsTuscanyLegalOrnamentWash"
+  },
+  "journal.civil-weddings-in-tuscany-where-you-can-legally-get-married.ornament.orbit": {
+    "asset": "journalCivilWeddingsTuscanyLegalOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "villaLibraryPortrait"
   },

@@ -15,6 +15,8 @@ This directory contains tracked repository documentation only.
   - repo-oriented technical overview of the current workspace.
 - `editing-site-text.md`
   - file-by-file guide for non-technical copy edits across the site.
+- `journal-article-system-report.md`
+  - detailed map of the AI article-generation workflow, Journal rendering stack, and replication architecture.
 - `reference/`
   - archived, historical, and source reference material.
 

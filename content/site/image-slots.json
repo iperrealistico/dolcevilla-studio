@@ -1,87 +1,87 @@
 {
   "page.home.hero.primary": {
-    "asset": "homeHeroVilla"
+    "asset": "homeHeroPrimaryGenerated"
   },
   "page.home.hero.secondary": {
-    "asset": "villaCourtyard"
+    "asset": "homeHeroSecondaryGenerated"
   },
   "page.home.hero.tertiary": {
-    "asset": "homeCoupleQuiet"
+    "asset": "homeHeroTertiaryGenerated"
   },
   "page.home.hero.quaternary": {
-    "asset": "villaLibraryPortrait"
+    "asset": "homeHeroQuaternaryGenerated"
   },
   "page.home.gallery.1": {
-    "asset": "homeCoupleQuiet"
+    "asset": "homeGallery1Generated"
   },
   "page.home.gallery.2": {
-    "asset": "oliveGardenCeremony"
+    "asset": "homeGallery2Generated"
   },
   "page.home.gallery.3": {
-    "asset": "villaCourtyard"
+    "asset": "homeGallery3Generated"
   },
   "page.home.gallery.4": {
-    "asset": "welcomeDinnerLanterns"
+    "asset": "homeGallery4Generated"
   },
   "page.home.gallery.5": {
-    "asset": "florenceLoggiaBlueHour"
+    "asset": "homeGallery5Generated"
   },
   "page.home.gallery.6": {
-    "asset": "valDorciaCypressVows"
+    "asset": "homeGallery6Generated"
   },
   "page.home.craft.image": {
-    "asset": "filmRolleiflexBridalPrep"
+    "asset": "homeCraftImageGenerated"
   },
   "page.home.villa.image": {
-    "asset": "homeHeroVilla"
+    "asset": "homeVillaImageGenerated"
   },
   "page.about.hero.primary": {
-    "asset": "villaLibraryPortrait"
+    "asset": "aboutHeroPrimaryGenerated"
   },
   "page.about.hero.secondary": {
-    "asset": "homeCoupleQuiet"
+    "asset": "aboutHeroSecondaryGenerated"
   },
   "page.about.hero.tertiary": {
-    "asset": "villaCourtyard"
+    "asset": "aboutHeroTertiaryGenerated"
   },
   "page.about.team.lisa": {
-    "asset": "teamLisaMazzei"
+    "asset": "aboutTeamLisaGenerated"
   },
   "page.about.team.alberto": {
-    "asset": "teamAlbertoPellegrinetti"
+    "asset": "aboutTeamAlbertoGenerated"
   },
   "page.about.team.leonardo": {
-    "asset": "teamLeonardoFiori"
+    "asset": "aboutTeamLeonardoGenerated"
   },
   "page.about.team.francesco": {
-    "asset": "teamFrancescoTarantino"
+    "asset": "aboutTeamFrancescoGenerated"
   },
   "page.about.team.group": {
     "asset": "teamWiderStudioVillaRaffaelli"
   },
   "page.about.gallery.1": {
-    "asset": "film35mmRollStillLife"
+    "asset": "aboutGallery1Generated"
   },
   "page.about.gallery.2": {
-    "asset": "film120RollStyling"
+    "asset": "aboutGallery2Generated"
   },
   "page.about.gallery.3": {
-    "asset": "film4x5SheetHolder"
+    "asset": "aboutGallery3Generated"
   },
   "page.about.gallery.4": {
-    "asset": "filmCameraCollectionStudioTable"
+    "asset": "aboutGallery4Generated"
   },
   "page.about.gallery.5": {
-    "asset": "darkroomFilmShelvesTools"
+    "asset": "aboutGallery5Generated"
   },
   "page.about.gallery.6": {
-    "asset": "darkroomSinkPrintsPortrait"
+    "asset": "aboutGallery6Generated"
   },
   "page.about.craft.image": {
-    "asset": "filmCameraCollectionStudioTable"
+    "asset": "aboutCraftImageGenerated"
   },
   "page.about.villa.image": {
-    "asset": "homeHeroVilla"
+    "asset": "aboutVillaImageGenerated"
   },
   "page.weddings.hero.primary": {
     "asset": "florenceLoggiaBlueHour"
@@ -147,55 +147,55 @@
     "asset": "villaCourtyard"
   },
   "page.experience.gallery.1": {
-    "asset": "filmNikonF5ReceptionCorner"
+    "asset": "experienceGallery1Generated"
   },
   "page.experience.gallery.2": {
-    "asset": "filmHasselbladGroundGlassBridalWindow"
+    "asset": "experienceGallery2Generated"
   },
   "page.experience.gallery.3": {
-    "asset": "filmHasselbladGroundGlassReception"
+    "asset": "experienceGallery3Generated"
   },
   "page.experience.gallery.4": {
-    "asset": "filmSmartflex4x5Courtyard"
+    "asset": "experienceGallery4Generated"
   },
   "page.experience.craft.image": {
-    "asset": "filmHasselbladGroundGlassBridalWindow"
+    "asset": "experienceCraftImageGenerated"
   },
   "page.contact.craft.image": {
-    "asset": "filmRolleiflexBridalPrep"
+    "asset": "contactCraftImageGenerated"
   },
   "page.experience.villa.image": {
-    "asset": "homeHeroVilla"
+    "asset": "experienceVillaImageGenerated"
   },
   "page.film-wedding-photography.hero.primary": {
-    "asset": "villaLibraryPortrait"
+    "asset": "filmWeddingPhotographyHeroPrimaryGenerated"
   },
   "page.film-wedding-photography.hero.secondary": {
-    "asset": "homeCoupleQuiet"
+    "asset": "filmWeddingPhotographyHeroSecondaryGenerated"
   },
   "page.film-wedding-photography.hero.tertiary": {
-    "asset": "homeHeroVilla"
+    "asset": "filmWeddingPhotographyHeroTertiaryGenerated"
   },
   "page.film-wedding-photography.hero.quaternary": {
-    "asset": "villaCourtyard"
+    "asset": "filmWeddingPhotographyHeroQuaternaryGenerated"
   },
   "page.film-wedding-photography.gallery.1": {
-    "asset": "film35mmRollStillLife"
+    "asset": "filmWeddingPhotographyGallery1Generated"
   },
   "page.film-wedding-photography.gallery.2": {
-    "asset": "filmNikonFVintageVillaLibrary"
+    "asset": "filmWeddingPhotographyGallery2Generated"
   },
   "page.film-wedding-photography.gallery.3": {
-    "asset": "filmNikonF5ReceptionCorner"
+    "asset": "filmWeddingPhotographyGallery3Generated"
   },
   "page.film-wedding-photography.gallery.4": {
-    "asset": "film120RollStyling"
+    "asset": "filmWeddingPhotographyGallery4Generated"
   },
   "page.film-wedding-photography.gallery.5": {
-    "asset": "filmRolleiflexBridalPrep"
+    "asset": "filmWeddingPhotographyGallery5Generated"
   },
   "page.film-wedding-photography.gallery.6": {
-    "asset": "filmHasselblad500cmWindowGarden"
+    "asset": "filmWeddingPhotographyGallery6Generated"
   },
   "page.film-wedding-photography.gallery.7": {
     "asset": "film4x5SheetHolder"
@@ -228,25 +228,25 @@
     "asset": "filmCameraCollectionStudioTable"
   },
   "page.villa-raffaelli.hero.primary": {
-    "asset": "villaPrivateCourtyardWedding"
+    "asset": "villaRaffaelliHeroPrimaryGenerated"
   },
   "page.villa-raffaelli.hero.secondary": {
-    "asset": "homeHeroVilla"
+    "asset": "villaRaffaelliHeroSecondaryGenerated"
   },
   "page.villa-raffaelli.hero.tertiary": {
-    "asset": "villaNewlywedsMountainGarden"
+    "asset": "villaRaffaelliHeroTertiaryGenerated"
   },
   "page.villa-raffaelli.hero.quaternary": {
-    "asset": "villaLibraryPortrait"
+    "asset": "villaRaffaelliHeroQuaternaryGenerated"
   },
   "page.villa-raffaelli.gallery.1": {
-    "asset": "villaPrivateCourtyardWedding"
+    "asset": "villaRaffaelliGallery1Generated"
   },
   "page.villa-raffaelli.gallery.2": {
-    "asset": "villaNewlywedsMountainGarden"
+    "asset": "villaRaffaelliGallery2Generated"
   },
   "page.villa-raffaelli.gallery.3": {
-    "asset": "homeHeroVilla"
+    "asset": "villaRaffaelliGallery3Generated"
   },
   "page.villa-raffaelli.gallery.4": {
     "asset": "villaCourtyard"
@@ -378,7 +378,7 @@
     "asset": "villaLibraryPortrait"
   },
   "shared.team.wider-studio": {
-    "asset": "teamWiderStudioVillaRaffaelli"
+    "asset": "sharedTeamWiderStudioGenerated"
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"

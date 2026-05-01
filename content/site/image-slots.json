@@ -374,6 +374,15 @@
   "journal.civil-weddings-in-tuscany-where-you-can-legally-get-married.ornament.orbit": {
     "asset": "journalCivilWeddingsTuscanyLegalOrnamentOrbit"
   },
+  "journal.tuscany-wedding-photography-packages-with-rehearsal-dinner-and-brunch-coverage.cover": {
+    "asset": "journalTuscanyPhotographyPackagesRehearsalDinnerBrunchCover"
+  },
+  "journal.tuscany-wedding-photography-packages-with-rehearsal-dinner-and-brunch-coverage.ornament.wash": {
+    "asset": "journalTuscanyPhotographyPackagesRehearsalDinnerBrunchOrnamentWash"
+  },
+  "journal.tuscany-wedding-photography-packages-with-rehearsal-dinner-and-brunch-coverage.ornament.orbit": {
+    "asset": "journalTuscanyPhotographyPackagesRehearsalDinnerBrunchOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "homeHeroQuaternaryGenerated"
   },

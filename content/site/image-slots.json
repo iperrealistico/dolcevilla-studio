@@ -383,6 +383,15 @@
   "journal.tuscany-wedding-photography-packages-with-rehearsal-dinner-and-brunch-coverage.ornament.orbit": {
     "asset": "journalTuscanyPhotographyPackagesRehearsalDinnerBrunchOrnamentOrbit"
   },
+  "journal.certaldo-wedding-photographer-guide-a-less-expected-tuscany-wedding-setting.cover": {
+    "asset": "journalCertaldoWeddingPhotographerGuideLessExpectedTuscanySettingCover"
+  },
+  "journal.certaldo-wedding-photographer-guide-a-less-expected-tuscany-wedding-setting.ornament.wash": {
+    "asset": "journalCertaldoWeddingPhotographerGuideLessExpectedTuscanySettingOrnamentWash"
+  },
+  "journal.certaldo-wedding-photographer-guide-a-less-expected-tuscany-wedding-setting.ornament.orbit": {
+    "asset": "journalCertaldoWeddingPhotographerGuideLessExpectedTuscanySettingOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "homeHeroQuaternaryGenerated"
   },

@@ -8,7 +8,7 @@ export function BudgetSelect({ props }: BudgetSelectProps) {
   return (
     <select
       {...props}
-      className="min-h-12 w-full rounded-2xl border border-[var(--color-line)] bg-white/85 px-4 py-3 text-[var(--color-ink)]"
+      className="min-h-12 w-full rounded-2xl border border-[var(--color-line)] bg-[var(--surface-input)] px-4 py-3 text-[var(--color-ink)]"
     >
       {inquiryFormContent.budgetOptions.map((option) => (
         <option key={option.value || "empty"} value={option.value}>

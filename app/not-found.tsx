@@ -16,7 +16,7 @@ export default function NotFound() {
       </p>
       <Link
         href={notFoundPageContent.primaryCta.href}
-        className="rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-semibold text-[var(--color-paper)]"
+        className="rounded-full bg-[var(--button-primary-bg)] px-5 py-3 text-sm font-semibold text-[var(--button-primary-fg)] transition hover:bg-[var(--button-primary-hover)]"
       >
         {notFoundPageContent.primaryCta.label}
       </Link>

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { MobileUIProvider } from "@/contexts/MobileUIContext";
 import { LightboxProvider } from "@/contexts/LightboxContext";
 import { StudioCursor } from "@/components/cursor/StudioCursor";
@@ -18,14 +19,16 @@ function ViewportSync() {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <ConsentProvider>
-      <MobileUIProvider>
-        <LightboxProvider>
-          <ViewportSync />
-          {children}
-          <StudioCursor />
-        </LightboxProvider>
-      </MobileUIProvider>
-    </ConsentProvider>
+    <ThemeProvider>
+      <ConsentProvider>
+        <MobileUIProvider>
+          <LightboxProvider>
+            <ViewportSync />
+            {children}
+            <StudioCursor />
+          </LightboxProvider>
+        </MobileUIProvider>
+      </ConsentProvider>
+    </ThemeProvider>
   );
 }

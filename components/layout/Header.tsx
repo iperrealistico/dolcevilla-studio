@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Mail, Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { navigationItems } from "@/content/site/navigation";
 import { siteSettings } from "@/content/site/settings";
 import { siteUi } from "@/content/site/ui";
@@ -27,7 +28,10 @@ export function Header({ simplified = false }: HeaderProps) {
 
     const root = document.documentElement;
     const updateHeaderHeight = () => {
-      root.style.setProperty("--site-header-height", `${header.offsetHeight}px`);
+      root.style.setProperty(
+        "--site-header-height",
+        `${header.offsetHeight}px`,
+      );
     };
 
     updateHeaderHeight();
@@ -49,7 +53,7 @@ export function Header({ simplified = false }: HeaderProps) {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[rgb(245_241_235_/_0.85)] backdrop-blur"
+      className="sticky top-0 z-40 border-b border-[var(--color-line)] bg-[var(--surface-header)] backdrop-blur"
     >
       <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between gap-4 px-5 py-4 md:px-8 lg:gap-6 lg:px-10">
         <Link
@@ -81,6 +85,7 @@ export function Header({ simplified = false }: HeaderProps) {
                 );
               })}
             </nav>
+            <ThemeToggle className="hidden" />
             <button
               type="button"
               aria-expanded={isMenuOpen}
@@ -90,7 +95,7 @@ export function Header({ simplified = false }: HeaderProps) {
                   : siteUi.header.openNavigationLabel
               }
               className={cn(
-                "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] lg:hidden",
+                "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-panel)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] lg:hidden",
               )}
               onClick={toggleMenu}
             >

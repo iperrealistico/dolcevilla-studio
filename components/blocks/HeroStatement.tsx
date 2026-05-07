@@ -120,7 +120,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
     >
       <div
         className={cn(
-          "relative flex flex-col overflow-hidden rounded-[2rem] border border-[rgb(25_22_18_/_0.08)] bg-[linear-gradient(180deg,rgba(250,247,242,0.98),rgba(242,236,228,0.98))] shadow-[0_24px_60px_rgba(28,22,18,0.08)]",
+          "relative flex flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-hero-frame)] shadow-[var(--shadow-card)]",
           styles.desktopFrameClassName,
         )}
       >
@@ -181,7 +181,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
             <span className="text-[0.58rem] font-medium tracking-[0.34em] text-[rgb(250_247_242_/_0.86)] uppercase drop-shadow-[0_2px_10px_rgba(28,22,18,0.28)]">
               {siteUi.hero.scrollLabel}
             </span>
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[rgb(223_206_182_/_0.78)] bg-[rgb(250_247_242_/_0.92)] text-[var(--color-ink)] shadow-[0_16px_30px_rgba(28,22,18,0.16)] backdrop-blur-md">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md">
               <ArrowDown size={18} strokeWidth={1.7} aria-hidden="true" />
             </span>
           </a>
@@ -194,7 +194,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
         >
           <div
             id={mobileContentId}
-            className="scroll-mt-20 border-t border-[rgb(25_22_18_/_0.06)] px-6 pt-14 pb-7 md:border-t-0 md:px-0 md:pt-0 md:pb-0"
+            className="scroll-mt-20 border-t border-[var(--color-line)] px-6 pt-14 pb-7 md:border-t-0 md:px-0 md:pt-0 md:pb-0"
           >
             <div
               className={cn(
@@ -205,7 +205,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               <div className="pointer-events-none absolute inset-y-[-2.25rem] right-[-4rem] left-[-2rem] hidden rounded-[2.8rem] bg-[linear-gradient(135deg,rgba(15,12,10,0.42)_0%,rgba(15,12,10,0.18)_48%,rgba(15,12,10,0.04)_76%,rgba(15,12,10,0)_100%)] backdrop-blur-[2px] md:block" />
               {hero.eyebrow ? (
                 <FloatIn from="left">
-                  <Eyebrow className="relative mb-0 inline-flex rounded-full border border-[rgb(25_22_18_/_0.08)] bg-white/58 px-4 py-2 text-[var(--color-mist)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:backdrop-blur-sm">
+                  <Eyebrow className="relative mb-0 inline-flex rounded-full border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
                     {hero.eyebrow}
                   </Eyebrow>
                 </FloatIn>
@@ -247,7 +247,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
                     <LinkButton
                       href={hero.secondaryCta.href}
                       variant="secondary"
-                      className="min-h-[3.5rem] w-full border-white/0 bg-white/72 px-6 text-[0.95rem] md:min-h-11 md:w-auto md:border-white/14 md:bg-[rgb(255_255_255_/_0.12)] md:px-5 md:text-sm md:text-[var(--color-paper)] md:backdrop-blur-sm"
+                      className="min-h-[3.5rem] w-full border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-6 text-[0.95rem] md:min-h-11 md:w-auto md:border-white/14 md:bg-[rgb(255_255_255_/_0.12)] md:px-5 md:text-sm md:text-[var(--color-paper)] md:backdrop-blur-sm"
                     >
                       {hero.secondaryCta.label}
                     </LinkButton>

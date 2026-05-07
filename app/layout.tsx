@@ -4,6 +4,7 @@ import { Bodoni_Moda, Manrope } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import { AnalyticsPageTracker } from "@/components/consent/AnalyticsPageTracker";
+import { ThemeScript } from "@/components/theme/ThemeProvider";
 import { buildDefaultMetadata } from "@/lib/seo/metadata";
 import { ConsentScriptGate } from "@/components/consent/ConsentScriptGate";
 
@@ -31,8 +32,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      data-theme="dark"
+    >
+      <head>
+        <ThemeScript />
+      </head>
+      <body
+        className={`${displayFont.variable} ${bodyFont.variable} antialiased`}
+      >
         <Providers>
           {children}
           <ConsentScriptGate />

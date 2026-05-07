@@ -4,7 +4,7 @@
 @import "../styles/mobile.css";
 
 :root {
-  --background: var(--color-paper);
+  --background: var(--color-bg);
   --foreground: var(--color-ink);
 }
 
@@ -47,13 +47,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
   min-height: 100dvh;
-  background-image:
-    radial-gradient(
-      circle at top left,
-      rgb(212 195 166 / 0.22),
-      transparent 36%
-    ),
-    linear-gradient(180deg, rgb(247 243 237 / 0.98), rgb(243 240 234 / 0.98));
+  background-image: var(--page-gradient);
 }
 
 .font-display-face {
@@ -88,7 +82,11 @@ summary:focus-visible {
 }
 
 ::selection {
-  background: rgb(95 113 103 / 0.22);
+  background: var(--color-accent-soft);
+}
+
+::placeholder {
+  color: color-mix(in srgb, var(--color-mist) 78%, transparent);
 }
 
 html[data-custom-cursor="enabled"],

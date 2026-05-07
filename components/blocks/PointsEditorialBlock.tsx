@@ -27,7 +27,9 @@ export function PointsEditorialBlock({
         <FloatIn from="left">
           <div>
             {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
-            <Heading className="text-3xl md:text-5xl">{section.heading}</Heading>
+            <Heading className="text-3xl md:text-5xl">
+              {section.heading}
+            </Heading>
           </div>
         </FloatIn>
         <FloatIn delay={0.08}>
@@ -41,8 +43,14 @@ export function PointsEditorialBlock({
         )}
       >
         {items.map((item, index) => (
-          <FloatIn key={item.title} from={index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "bottom"} delay={index * 0.05}>
-            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-white/60 p-5">
+          <FloatIn
+            key={item.title}
+            from={
+              index % 3 === 0 ? "left" : index % 3 === 2 ? "right" : "bottom"
+            }
+            delay={index * 0.05}
+          >
+            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
               <h3 className="font-display-face text-2xl tracking-[-0.03em]">
                 {item.title}
               </h3>

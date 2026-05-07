@@ -530,7 +530,7 @@ export function JournalReadingChrome({
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-[rgb(29_25_22_/_0.08)]">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-[var(--color-line)]">
         <div
           ref={progressBarRef}
           className="h-full origin-left bg-[linear-gradient(90deg,#1d1916,#a78b68)] transition-transform duration-200 ease-out"
@@ -544,7 +544,7 @@ export function JournalReadingChrome({
           className="w-full will-change-transform"
           style={{ transform: "translate3d(0, 0, 0)" }}
         >
-          <div className="flex max-h-[calc(100dvh-var(--site-header-height,76px)-2rem)] flex-col gap-3 rounded-[1.8rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.82)] p-3.5 shadow-[0_26px_70px_rgba(25,19,14,0.1)] backdrop-blur-md">
+          <div className="flex max-h-[calc(100dvh-var(--site-header-height,76px)-2rem)] flex-col gap-3 rounded-[1.8rem] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] p-3.5 shadow-[var(--shadow-card)] backdrop-blur-md">
             <div className="space-y-2 px-1">
               <p className="inline-flex items-center gap-2 text-[0.65rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                 <Compass size={12} strokeWidth={1.85} aria-hidden="true" />
@@ -555,7 +555,7 @@ export function JournalReadingChrome({
               </p>
             </div>
 
-            <div className="rounded-[1.5rem] border border-[rgb(196_154_92_/_0.14)] bg-[linear-gradient(180deg,rgba(255,255,255,0.86),rgba(246,239,230,0.92))] p-3.5">
+            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-banner)] p-3.5">
               {stickyCta.eyebrow ? (
                 <p className="pb-2 text-[0.6rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
                   {stickyCta.eyebrow}
@@ -574,7 +574,7 @@ export function JournalReadingChrome({
               </JournalCTAButton>
             </div>
 
-            <div className="min-h-0 flex-1 rounded-[1.5rem] border border-[rgb(92_77_58_/_0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(247,242,236,0.9))] p-2.5">
+            <div className="min-h-0 flex-1 rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel)] p-2.5">
               <div className="flex items-center justify-between gap-3 px-1 pb-2.5">
                 <p className="text-[0.6rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
                   Jump to chapter
@@ -595,7 +595,7 @@ export function JournalReadingChrome({
                     className="relative space-y-1.5 pr-1 pb-1"
                   >
                     <div
-                      className="pointer-events-none absolute w-px bg-[rgb(92_77_58_/_0.14)]"
+                      className="pointer-events-none absolute w-px bg-[var(--color-line)]"
                       style={{
                         height: `${desktopRailMetrics.trackHeight}px`,
                         left: `${desktopRailMetrics.lineLeft}px`,
@@ -637,7 +637,7 @@ export function JournalReadingChrome({
                             {isActive ? (
                               <motion.div
                                 layoutId="desktop-journal-chapter-active-badge"
-                                className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)]"
+                                className="absolute inset-0 rounded-full border border-[var(--button-secondary-border)] bg-[var(--button-primary-bg)]"
                                 transition={
                                   reduceMotion
                                     ? { duration: 0 }
@@ -652,14 +652,14 @@ export function JournalReadingChrome({
                             ) : (
                               <span
                                 aria-hidden="true"
-                                className="absolute inset-0 rounded-full border border-[rgb(92_77_58_/_0.14)] bg-[rgb(255_255_255_/_0.94)] shadow-[0_8px_20px_rgba(25,19,14,0.04)]"
+                                className="absolute inset-0 rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] shadow-[var(--shadow-soft)]"
                               />
                             )}
                             <span
                               className={cn(
                                 "relative z-10 text-[0.62rem] font-semibold tracking-[0.18em]",
                                 isActive
-                                  ? "text-[var(--color-paper)]"
+                                  ? "text-[var(--button-primary-fg)]"
                                   : "text-[var(--color-mist)]",
                               )}
                             >
@@ -671,7 +671,7 @@ export function JournalReadingChrome({
                             {isActive ? (
                               <motion.div
                                 layoutId="desktop-journal-chapter-active-card"
-                                className="absolute inset-0 rounded-[1.2rem] bg-[rgb(255_255_255_/_0.94)] shadow-[0_14px_30px_rgba(25,19,14,0.08)]"
+                                className="absolute inset-0 rounded-[1.2rem] bg-[var(--surface-badge)] shadow-[var(--shadow-soft)]"
                                 transition={
                                   reduceMotion
                                     ? { duration: 0 }
@@ -686,7 +686,7 @@ export function JournalReadingChrome({
                             ) : (
                               <span
                                 aria-hidden="true"
-                                className="absolute inset-0 rounded-[1.2rem] bg-white/0 transition-colors duration-150 group-hover:bg-white/72"
+                                className="absolute inset-0 rounded-[1.2rem] bg-transparent transition-colors duration-150 group-hover:bg-[var(--surface-chip-hover)]"
                               />
                             )}
                             <span
@@ -717,7 +717,7 @@ export function JournalReadingChrome({
           bottom: "calc(env(safe-area-inset-bottom, 0px) + 7.75rem)",
         }}
       >
-        <div className="mx-auto max-w-[var(--container-max)] rounded-[1.6rem] border border-[rgb(92_77_58_/_0.12)] bg-[rgb(255_255_255_/_0.88)] px-3 py-3 shadow-[0_22px_56px_rgba(25,19,14,0.12)] backdrop-blur-md">
+        <div className="mx-auto max-w-[var(--container-max)] rounded-[1.6rem] border border-[var(--color-line)] bg-[var(--surface-floating)] px-3 py-3 shadow-[var(--shadow-floating)] backdrop-blur-md">
           <div className="mb-3 flex items-start justify-between gap-3 px-1">
             <div className="min-w-0">
               <p className="text-[0.62rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
@@ -753,8 +753,8 @@ export function JournalReadingChrome({
                       className={cn(
                         "inline-flex shrink-0 items-center justify-center rounded-[999px] border px-3 py-2 text-[0.75rem] font-semibold transition",
                         isActive
-                          ? "border-[rgb(92_77_58_/_0.18)] bg-[var(--color-ink)] text-[var(--color-paper)]"
-                          : "border-[rgb(92_77_58_/_0.12)] bg-white/80 text-[var(--color-mist)]",
+                          ? "border-[var(--button-secondary-border)] bg-[var(--button-primary-bg)] text-[var(--button-primary-fg)]"
+                          : "border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-mist)]",
                       )}
                       aria-current={isActive ? "true" : undefined}
                     >

@@ -196,7 +196,7 @@ export function JournalStickyBannerCTA({
             transition={bannerTransition}
             className="pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 pt-2 xl:hidden"
           >
-            <div className="safe-bottom pointer-events-auto rounded-t-[2rem] border border-[rgb(92_77_58_/_0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,236,225,0.97))] px-4 py-3 shadow-[0_-18px_48px_rgba(25,19,14,0.12)] backdrop-blur-md">
+            <div className="safe-bottom pointer-events-auto rounded-t-[2rem] border border-[var(--color-line)] bg-[var(--surface-banner)] px-4 py-3 shadow-[var(--shadow-floating)] backdrop-blur-md">
               <div className="flex items-center gap-3">
                 <div className="min-w-0 flex-1">
                   {section.eyebrow ? (
@@ -237,7 +237,7 @@ export function JournalStickyBannerCTA({
             }}
           >
             <div className="pointer-events-auto px-1">
-              <div className="rounded-[2.1rem] border border-[rgb(196_154_92_/_0.16)] bg-[linear-gradient(145deg,rgba(255,255,255,0.96),rgba(245,237,226,0.97))] px-5 py-4 shadow-[0_24px_60px_rgba(25,19,14,0.14)] backdrop-blur-md md:px-6 md:py-5">
+              <div className="rounded-[2.1rem] border border-[var(--color-line)] bg-[var(--surface-banner)] px-5 py-4 shadow-[var(--shadow-floating)] backdrop-blur-md md:px-6 md:py-5">
                 <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-6">
                   <div className="min-w-0">
                     {section.eyebrow ? (

@@ -18,7 +18,7 @@ export function CraftIdentityBlock({
 
   return (
     <Container>
-      <div className="rounded-[2rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.72)] px-6 py-8 shadow-[var(--shadow-soft)] md:px-10">
+      <div className="rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-panel)] px-6 py-8 shadow-[var(--shadow-card)] md:px-10">
         <div className="grid gap-8 md:grid-cols-[0.95fr_1.05fr]">
           <FloatIn from="left">
             <div className="space-y-6">
@@ -29,7 +29,7 @@ export function CraftIdentityBlock({
                 {craft.title}
               </h3>
               {image ? (
-                <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-shell)] shadow-[0_24px_56px_rgba(30,20,12,0.12)]">
+                <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-shell)] shadow-[var(--shadow-card)]">
                   <Image
                     src={image.src}
                     alt={image.alt}
@@ -53,7 +53,7 @@ export function CraftIdentityBlock({
                 <div className="grid gap-4 sm:grid-cols-2">
                   {craft.points.map((point, index) => (
                     <FloatIn key={point.title} delay={index * 0.05}>
-                      <div className="rounded-[1.25rem] border border-[var(--color-line)] bg-[var(--color-shell)] px-4 py-4">
+                      <div className="rounded-[1.25rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4">
                         <h4 className="font-display-face text-xl tracking-[-0.02em]">
                           {point.title}
                         </h4>

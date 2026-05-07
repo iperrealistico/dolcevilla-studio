@@ -29,13 +29,13 @@ export function JournalPhotographerSegue({
   const primaryLabel = normalizeSegueLabel(section.primaryCta.label);
 
   return (
-    <aside className="journal-cta-highlight not-prose relative my-12 overflow-hidden rounded-[2rem] border border-[rgb(196_154_92_/_0.16)] bg-[linear-gradient(145deg,rgba(255,255,255,0.96),rgba(246,239,229,0.98))] p-6 shadow-[0_26px_66px_rgba(22,15,11,0.12)] md:p-7">
+    <aside className="journal-cta-highlight not-prose relative my-12 overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-banner)] p-6 shadow-[var(--shadow-card)] md:p-7">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-[rgb(214_180_126_/_0.18)] blur-3xl"
       />
       <div className="relative grid gap-5 md:grid-cols-[auto_minmax(0,1fr)] md:gap-6">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[1rem] border border-[rgb(196_154_92_/_0.18)] bg-[rgb(255_255_255_/_0.94)] text-[var(--color-ink)] shadow-[0_14px_30px_rgba(120,85,34,0.08)]">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[1rem] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]">
           <Camera size={18} strokeWidth={1.9} aria-hidden="true" />
         </div>
 

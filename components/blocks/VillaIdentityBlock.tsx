@@ -19,7 +19,7 @@ export function VillaIdentityBlock({
 
   return (
     <Container>
-      <div className="rounded-[2rem] border border-[var(--color-line)] bg-[var(--color-shell)] px-6 py-8 shadow-[var(--shadow-soft)] md:px-10">
+      <div className="rounded-[2rem] border border-[var(--color-line)] bg-[var(--color-shell)] px-6 py-8 shadow-[var(--shadow-card)] md:px-10">
         <div className="grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-center">
           <div>
             <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
@@ -32,7 +32,7 @@ export function VillaIdentityBlock({
               {villa.body}
             </p>
           </div>
-          <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.62)] shadow-[0_28px_56px_rgba(29,25,22,0.12)]">
+          <div className="overflow-hidden rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] shadow-[var(--shadow-card)]">
             <Image
               src={image.src}
               alt={image.alt}

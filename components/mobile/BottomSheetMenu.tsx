@@ -28,7 +28,7 @@ export function BottomSheetMenu() {
           <motion.button
             type="button"
             aria-label={siteUi.mobileMenu.closeLabel}
-            className="fixed inset-0 z-40 bg-black/35 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/60 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -36,19 +36,19 @@ export function BottomSheetMenu() {
           />
           <div className="pointer-events-none fixed inset-0 z-50 flex items-end px-3 pt-3 sm:px-4 lg:hidden">
             <motion.div
-              className="safe-bottom pointer-events-auto flex max-h-[calc(var(--app-height,100dvh)-0.75rem)] w-full flex-col overflow-hidden rounded-t-[1.85rem] border border-[var(--color-line)] bg-[var(--color-paper)] shadow-[0_-20px_48px_rgba(30,20,12,0.18)]"
+              className="safe-bottom pointer-events-auto flex max-h-[calc(var(--app-height,100dvh)-0.75rem)] w-full flex-col overflow-hidden rounded-t-[1.85rem] border border-[var(--color-line)] bg-[var(--surface-floating)] shadow-[var(--shadow-floating)]"
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 44 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 28 }}
             >
-              <div className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[rgb(245_241_235_/_0.92)] px-[clamp(1rem,4vw,1.25rem)] pt-[clamp(1rem,4vw,1.25rem)] pb-3 backdrop-blur-sm">
+              <div className="flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[var(--surface-header)] px-[clamp(1rem,4vw,1.25rem)] pt-[clamp(1rem,4vw,1.25rem)] pb-3 backdrop-blur-sm">
                 <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
                   {siteUi.mobileMenu.title}
                 </p>
                 <button
                   type="button"
                   aria-label={siteUi.mobileMenu.closeLabel}
-                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-line)] bg-white/88 text-[var(--color-ink)] shadow-[0_12px_26px_rgba(30,20,12,0.08)]"
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]"
                   onClick={closeMenu}
                 >
                   <X size={18} strokeWidth={1.8} aria-hidden="true" />
@@ -63,11 +63,11 @@ export function BottomSheetMenu() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="font-display-face flex items-center justify-between rounded-[1.35rem] border border-[var(--color-line)] bg-white/82 px-[clamp(0.875rem,3.8vw,1rem)] py-[clamp(0.8rem,3.3vw,0.95rem)] text-[clamp(1.15rem,5.4vw,1.5rem)] leading-none tracking-[-0.03em] shadow-[0_16px_34px_rgba(30,20,12,0.06)]"
+                        className="font-display-face flex items-center justify-between rounded-[1.35rem] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] px-[clamp(0.875rem,3.8vw,1rem)] py-[clamp(0.8rem,3.3vw,0.95rem)] text-[clamp(1.15rem,5.4vw,1.5rem)] leading-none tracking-[-0.03em] shadow-[var(--shadow-soft)]"
                         onClick={closeMenu}
                       >
                         <span className="inline-flex min-w-0 items-center gap-[clamp(0.75rem,3vw,0.95rem)]">
-                          <span className="flex h-[clamp(2.25rem,11vw,2.6rem)] w-[clamp(2.25rem,11vw,2.6rem)] shrink-0 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.08)] text-[var(--color-ink)]">
+                          <span className="flex h-[clamp(2.25rem,11vw,2.6rem)] w-[clamp(2.25rem,11vw,2.6rem)] shrink-0 items-center justify-center rounded-full bg-[var(--surface-subtle)] text-[var(--color-ink)]">
                             <Icon
                               size={18}
                               strokeWidth={1.85}

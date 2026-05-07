@@ -22,7 +22,7 @@ const sizeClasses = {
 const toneClasses = {
   contact:
     "border-[rgb(196_154_92_/_0.3)] bg-[linear-gradient(135deg,rgba(248,233,205,0.98),rgba(222,186,126,0.98))] text-[var(--color-ink)] shadow-[0_22px_48px_rgba(120,85,34,0.16)]",
-  home: "border-[rgb(196_154_92_/_0.2)] bg-[rgb(255_255_255_/_0.96)] text-[var(--color-ink)] shadow-[0_18px_42px_rgba(120,85,34,0.1)]",
+  home: "border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]",
 } as const;
 
 function resolveIcon(href: string, tone: JournalCTAButtonProps["tone"]) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { getCursorMode, type CursorMode } from "@/lib/cursor/getCursorMode";
@@ -11,8 +11,17 @@ const INTERACTIVE_EASE = 0.4;
 const PRESSED_EASE = 0.56;
 const SNAP_DISTANCE_PX = 96;
 
+function subscribe() {
+  return () => {};
+}
+
 export function StudioCursor() {
   const reduceMotion = useReducedMotion();
+  const isMounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
   const cursorRef = useRef<HTMLDivElement>(null);
   const burstRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
@@ -174,18 +183,25 @@ export function StudioCursor() {
       const cursor = cursorRef.current;
 
       if (cursor) {
-        const ease =
-          pressedRef.current
-            ? PRESSED_EASE
-            : modeRef.current === "interactive"
-              ? INTERACTIVE_EASE
-              : IDLE_EASE;
+        const ease = pressedRef.current
+          ? PRESSED_EASE
+          : modeRef.current === "interactive"
+            ? INTERACTIVE_EASE
+            : IDLE_EASE;
 
-        currentRef.current.x += (targetRef.current.x - currentRef.current.x) * ease;
-        currentRef.current.y += (targetRef.current.y - currentRef.current.y) * ease;
+        currentRef.current.x +=
+          (targetRef.current.x - currentRef.current.x) * ease;
+        currentRef.current.y +=
+          (targetRef.current.y - currentRef.current.y) * ease;
 
-        cursor.style.setProperty("--cursor-x", `${currentRef.current.x.toFixed(2)}px`);
-        cursor.style.setProperty("--cursor-y", `${currentRef.current.y.toFixed(2)}px`);
+        cursor.style.setProperty(
+          "--cursor-x",
+          `${currentRef.current.x.toFixed(2)}px`,
+        );
+        cursor.style.setProperty(
+          "--cursor-y",
+          `${currentRef.current.y.toFixed(2)}px`,
+        );
       }
 
       frameRef.current = window.requestAnimationFrame(step);
@@ -237,8 +253,12 @@ export function StudioCursor() {
     frameRef.current = window.requestAnimationFrame(step);
     syncDataAttributes();
 
-    document.addEventListener("pointermove", handlePointerMove, { passive: true });
-    document.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    document.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
+    document.addEventListener("pointerdown", handlePointerDown, {
+      passive: true,
+    });
     document.addEventListener("pointerup", handlePointerUp, { passive: true });
     document.addEventListener("pointercancel", deactivateCustomCursor);
     document.addEventListener("mouseout", handleMouseOut);
@@ -262,7 +282,7 @@ export function StudioCursor() {
     };
   }, [enabled]);
 
-  if (!enabled || typeof document === "undefined") {
+  if (!enabled || !isMounted || typeof document === "undefined") {
     return null;
   }
 

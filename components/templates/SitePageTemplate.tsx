@@ -146,7 +146,7 @@ export function SitePageTemplate({
                 </div>
               ) : null}
               {page.nextSteps.length ? (
-                <div className="rounded-[1.85rem] border border-[var(--color-line)] bg-[rgb(255_255_255_/_0.76)] p-5 shadow-[var(--shadow-soft)] md:p-6">
+                <div className="rounded-[1.85rem] border border-[var(--color-line)] bg-[var(--surface-panel)] p-5 shadow-[var(--shadow-card)] md:p-6">
                   <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                     What happens next
                   </p>
@@ -158,9 +158,9 @@ export function SitePageTemplate({
                       return (
                         <div
                           key={step}
-                          className="rounded-[1.35rem] border border-[var(--color-line)] bg-[var(--color-shell)] px-4 py-4"
+                          className="rounded-[1.35rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4"
                         >
-                          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgb(95_113_103_/_0.1)] text-[var(--color-ink)]">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--surface-subtle)] text-[var(--color-ink)]">
                             <Icon size={18} strokeWidth={1.75} />
                           </div>
                           <p className="mt-4 text-[0.68rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">

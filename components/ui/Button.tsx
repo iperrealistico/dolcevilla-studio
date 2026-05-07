@@ -2,9 +2,9 @@ import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils/cn";
 
 export const buttonVariants = {
-  primary: "hover:bg-[color:rgb(25_22_18_/_0.88)]",
-  secondary: "border hover:bg-white",
-  ghost: "bg-transparent hover:bg-white/60",
+  primary: "hover:bg-[var(--button-primary-hover)]",
+  secondary: "border hover:bg-[var(--button-secondary-hover)]",
+  ghost: "bg-transparent hover:bg-[var(--button-ghost-hover)]",
   inline: "bg-transparent p-0 underline underline-offset-4",
 } as const;
 
@@ -13,13 +13,13 @@ export const buttonVariantStyles: Record<
   CSSProperties
 > = {
   primary: {
-    backgroundColor: "var(--color-ink)",
-    color: "var(--color-paper)",
+    backgroundColor: "var(--button-primary-bg)",
+    color: "var(--button-primary-fg)",
   },
   secondary: {
-    backgroundColor: "rgb(255 255 255 / 0.72)",
-    borderColor: "var(--color-line)",
-    color: "var(--color-ink)",
+    backgroundColor: "var(--button-secondary-bg)",
+    borderColor: "var(--button-secondary-border)",
+    color: "var(--button-secondary-fg)",
   },
   ghost: {
     color: "var(--color-ink)",

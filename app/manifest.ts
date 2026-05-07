@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: siteSettings.siteName.replace(/\s+Studio$/, ""),
     start_url: "/",
     display: "standalone",
-    background_color: "#f5f1eb",
-    theme_color: "#191612",
+    background_color: "#0d1115",
+    theme_color: "#0d1115",
     icons: [
       {
         src: "/android-chrome-192x192.png",

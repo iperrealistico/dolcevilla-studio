@@ -150,7 +150,7 @@ export async function JournalEntryTemplate({
           id="journal-article"
           className="relative mt-8 overflow-hidden px-4 md:mt-12 md:px-8 lg:px-10"
         >
-          <div className="relative rounded-[2.2rem] border border-[rgb(92_77_58_/_0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(246,241,235,0.92))] shadow-[0_30px_80px_rgba(25,19,14,0.08)]">
+          <div className="relative rounded-[2.2rem] border border-[var(--color-line)] bg-[var(--surface-article-frame)] shadow-[var(--shadow-card)]">
             <JournalAmbientOrnaments
               washAsset={ornamentWashAsset}
               orbitAsset={ornamentOrbitAsset}
@@ -188,7 +188,7 @@ export async function JournalEntryTemplate({
                       distance={30}
                       amount={0.08}
                     >
-                      <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.78)] px-6 py-7 shadow-[0_24px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-10 md:py-10">
+                      <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-article-panel)] px-6 py-7 shadow-[var(--shadow-card)] backdrop-blur-sm md:px-10 md:py-10">
                         <div
                           aria-hidden="true"
                           className="pointer-events-none absolute -top-10 right-10 h-24 w-24 rounded-full bg-[rgb(212_195_166_/_0.16)] blur-3xl"
@@ -223,7 +223,7 @@ export async function JournalEntryTemplate({
                                 hasEvenIndex ? "2xl:mr-4" : "2xl:ml-4",
                               )}
                             >
-                              <div className="relative overflow-hidden rounded-[2rem] border border-[rgb(92_77_58_/_0.1)] bg-[rgb(255_255_255_/_0.82)] px-6 py-7 shadow-[0_26px_64px_rgba(25,19,14,0.08)] backdrop-blur-sm md:px-8 md:py-9">
+                              <div className="relative overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-article-panel-strong)] px-6 py-7 shadow-[var(--shadow-card)] backdrop-blur-sm md:px-8 md:py-9">
                                 <div
                                   aria-hidden="true"
                                   className={cn(
@@ -256,7 +256,7 @@ export async function JournalEntryTemplate({
                               className="hidden xl:block"
                             >
                               <div
-                                className="sticky rounded-[1.75rem] border border-[rgb(92_77_58_/_0.08)] bg-[rgb(255_255_255_/_0.62)] px-4.5 py-4.5 shadow-[0_22px_54px_rgba(25,19,14,0.06)] backdrop-blur-sm"
+                                className="sticky rounded-[1.75rem] border border-[var(--color-line)] bg-[var(--surface-article-aside)] px-4.5 py-4.5 shadow-[var(--shadow-soft)] backdrop-blur-sm"
                                 style={{
                                   top: "calc(var(--site-header-height, 76px) + 1.5rem)",
                                 }}

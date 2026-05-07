@@ -1,87 +1,114 @@
 {
   "page.home.hero.primary": {
-    "asset": "homeHeroPrimaryGenerated"
+    "asset": "homeHeroPrimaryGenerated",
+    "alt": "A wide portrait of a couple in the courtyard with the villa behind them."
   },
   "page.home.hero.secondary": {
-    "asset": "homeHeroSecondaryGenerated"
+    "asset": "homeHeroSecondaryGenerated",
+    "alt": "A couple framed by a stone loggia at the villa."
   },
   "page.home.hero.tertiary": {
-    "asset": "homeHeroTertiaryGenerated"
+    "asset": "homeHeroTertiaryGenerated",
+    "alt": "A couple walking through the rose garden in late light."
   },
   "page.home.hero.quaternary": {
-    "asset": "homeHeroQuaternaryGenerated"
+    "asset": "homeHeroQuaternaryGenerated",
+    "alt": "A bride beside a tall window in a dark wood-paneled room."
   },
   "page.home.gallery.1": {
-    "asset": "homeGallery1Generated"
+    "asset": "homeGallery1Generated",
+    "alt": "A couple standing beneath a rose-covered garden arch."
   },
   "page.home.gallery.2": {
-    "asset": "homeGallery2Generated"
+    "asset": "homeGallery2Generated",
+    "alt": "A couple sharing a dip kiss before the outdoor dinner tables."
   },
   "page.home.gallery.3": {
-    "asset": "homeGallery3Generated"
+    "asset": "homeGallery3Generated",
+    "alt": "A close courtyard portrait of a couple with Garfagnana mountains beyond."
   },
   "page.home.gallery.4": {
-    "asset": "homeGallery4Generated"
+    "asset": "homeGallery4Generated",
+    "alt": "Guests waving napkins as the couple enters the dinner reception."
   },
   "page.home.gallery.5": {
-    "asset": "homeGallery5Generated"
+    "asset": "homeGallery5Generated",
+    "alt": "A full-length portrait of the couple with mountain peaks rising behind them."
   },
   "page.home.gallery.6": {
-    "asset": "homeGallery6Generated"
+    "asset": "homeGallery6Generated",
+    "alt": "A distant portrait of the couple among stone huts and green mountain slopes."
   },
   "page.home.craft.image": {
-    "asset": "homeCraftImageGenerated"
+    "asset": "homeCraftImageGenerated",
+    "alt": "A film-frame detail of the bride smiling during an outdoor aperitivo."
   },
   "page.home.villa.image": {
-    "asset": "homeVillaImageGenerated"
+    "asset": "homeVillaImageGenerated",
+    "alt": "A couple standing together in a frescoed salon at Villa Raffaelli."
   },
   "page.about.hero.primary": {
-    "asset": "aboutHeroPrimaryGenerated"
+    "asset": "aboutHeroPrimaryGenerated",
+    "alt": "A couple standing together in a wood-paneled room at the villa."
   },
   "page.about.hero.secondary": {
-    "asset": "aboutHeroSecondaryGenerated"
+    "asset": "aboutHeroSecondaryGenerated",
+    "alt": "A couple embracing on a stone terrace overlooking the Tuscan hills."
   },
   "page.about.hero.tertiary": {
-    "asset": "aboutHeroTertiaryGenerated"
+    "asset": "aboutHeroTertiaryGenerated",
+    "alt": "A couple standing in a rustic loggia framed by stone columns."
   },
   "page.about.team.lisa": {
-    "asset": "aboutTeamLisaGenerated"
+    "asset": "teamLisaMazzei",
+    "alt": "Editorial headshot of Lisa Mazzei against a warm textured studio backdrop."
   },
   "page.about.team.alberto": {
-    "asset": "aboutTeamAlbertoGenerated"
+    "asset": "teamAlbertoPellegrinetti",
+    "alt": "Editorial headshot of Alberto Pellegrinetti against a warm textured studio backdrop."
   },
   "page.about.team.leonardo": {
-    "asset": "aboutTeamLeonardoGenerated"
+    "asset": "teamLeonardoFiori",
+    "alt": "Editorial headshot of Leonardo Fiori against a warm textured studio backdrop."
   },
   "page.about.team.francesco": {
-    "asset": "aboutTeamFrancescoGenerated"
+    "asset": "teamFrancescoTarantino",
+    "alt": "Editorial headshot of Francesco Tarantino against a warm textured studio backdrop."
   },
   "page.about.team.group": {
     "asset": "teamWiderStudioVillaRaffaelli"
   },
   "page.about.gallery.1": {
-    "asset": "aboutGallery1Generated"
+    "asset": "aboutGallery1Generated",
+    "alt": "A close detail of hands, lace sleeves, and the folds of a bridal dress."
   },
   "page.about.gallery.2": {
-    "asset": "aboutGallery2Generated"
+    "asset": "aboutGallery2Generated",
+    "alt": "A film-frame detail of the bride clinking glasses with a guest."
   },
   "page.about.gallery.3": {
-    "asset": "aboutGallery3Generated"
+    "asset": "aboutGallery3Generated",
+    "alt": "A hairstylist finishing a bridal hairstyle inside a rustic room."
   },
   "page.about.gallery.4": {
-    "asset": "aboutGallery4Generated"
+    "asset": "aboutGallery4Generated",
+    "alt": "Wedding rings in an open box resting on a wooden dresser."
   },
   "page.about.gallery.5": {
-    "asset": "aboutGallery5Generated"
+    "asset": "aboutGallery5Generated",
+    "alt": "Bridal shoes and a bouquet arranged on a weathered terrace ledge."
   },
   "page.about.gallery.6": {
-    "asset": "aboutGallery6Generated"
+    "asset": "aboutGallery6Generated",
+    "alt": "A close bridal portrait framed by soft window light."
   },
   "page.about.craft.image": {
-    "asset": "aboutCraftImageGenerated"
+    "asset": "aboutCraftImageGenerated",
+    "alt": "A close profile portrait of a bride beneath a sheer veil."
   },
   "page.about.villa.image": {
-    "asset": "aboutVillaImageGenerated"
+    "asset": "aboutVillaImageGenerated",
+    "alt": "A close courtyard portrait of a couple with Garfagnana mountains beyond."
   },
   "page.weddings.hero.primary": {
     "asset": "florenceLoggiaBlueHour"
@@ -147,124 +174,164 @@
     "asset": "villaCourtyard"
   },
   "page.experience.gallery.1": {
-    "asset": "experienceGallery1Generated"
+    "asset": "experienceGallery1Generated",
+    "alt": "A newly married couple stepping out through a shower of confetti."
   },
   "page.experience.gallery.2": {
-    "asset": "experienceGallery2Generated"
+    "asset": "experienceGallery2Generated",
+    "alt": "An outdoor wedding ceremony viewed through a shaded archway."
   },
   "page.experience.gallery.3": {
-    "asset": "experienceGallery3Generated"
+    "asset": "experienceGallery3Generated",
+    "alt": "A couple walking between candlelit dinner tables on the lawn."
   },
   "page.experience.gallery.4": {
-    "asset": "experienceGallery4Generated"
+    "asset": "experienceGallery4Generated",
+    "alt": "A couple holding hands beneath fruit trees in golden light."
   },
   "page.experience.craft.image": {
-    "asset": "experienceCraftImageGenerated"
+    "asset": "experienceCraftImageGenerated",
+    "alt": "A bride seated for hair styling while attendants gather around her."
   },
   "page.contact.craft.image": {
-    "asset": "contactCraftImageGenerated"
+    "asset": "contactCraftImageGenerated",
+    "alt": "A bride having her makeup finished during morning preparation."
   },
   "page.experience.villa.image": {
-    "asset": "experienceVillaImageGenerated"
+    "asset": "experienceVillaImageGenerated",
+    "alt": "A distant portrait of the couple among stone huts and green mountain slopes."
   },
   "page.film-wedding-photography.hero.primary": {
-    "asset": "filmWeddingPhotographyHeroPrimaryGenerated"
+    "asset": "filmWeddingPhotographyHeroPrimaryGenerated",
+    "alt": "A film-frame detail of the bride smiling during an outdoor aperitivo."
   },
   "page.film-wedding-photography.hero.secondary": {
-    "asset": "filmWeddingPhotographyHeroSecondaryGenerated"
+    "asset": "filmWeddingPhotographyHeroSecondaryGenerated",
+    "alt": "A hairstylist finishing a bridal hairstyle inside a rustic room."
   },
   "page.film-wedding-photography.hero.tertiary": {
-    "asset": "filmWeddingPhotographyHeroTertiaryGenerated"
+    "asset": "filmWeddingPhotographyHeroTertiaryGenerated",
+    "alt": "A couple riding in a vintage car along an olive-lined road."
   },
   "page.film-wedding-photography.hero.quaternary": {
-    "asset": "filmWeddingPhotographyHeroQuaternaryGenerated"
+    "asset": "filmWeddingPhotographyHeroQuaternaryGenerated",
+    "alt": "A couple standing in a rustic loggia framed by stone columns."
   },
   "page.film-wedding-photography.gallery.1": {
-    "asset": "filmWeddingPhotographyGallery1Generated"
+    "asset": "filmWeddingPhotographyGallery1Generated",
+    "alt": "A film-frame detail of the bride clinking glasses with a guest."
   },
   "page.film-wedding-photography.gallery.2": {
-    "asset": "filmWeddingPhotographyGallery2Generated"
+    "asset": "filmWeddingPhotographyGallery2Generated",
+    "alt": "A bride holding her bouquet inside a softly lit room."
   },
   "page.film-wedding-photography.gallery.3": {
-    "asset": "filmWeddingPhotographyGallery3Generated"
+    "asset": "filmWeddingPhotographyGallery3Generated",
+    "alt": "A bride silhouetted before a tall arched window."
   },
   "page.film-wedding-photography.gallery.4": {
-    "asset": "filmWeddingPhotographyGallery4Generated"
+    "asset": "filmWeddingPhotographyGallery4Generated",
+    "alt": "A black-and-white portrait of a bride holding her bouquet by a doorway."
   },
   "page.film-wedding-photography.gallery.5": {
-    "asset": "filmWeddingPhotographyGallery5Generated"
+    "asset": "filmWeddingPhotographyGallery5Generated",
+    "alt": "A bride reflected in a large mirror while holding her bouquet."
   },
   "page.film-wedding-photography.gallery.6": {
-    "asset": "filmWeddingPhotographyGallery6Generated"
+    "asset": "filmWeddingPhotographyGallery6Generated",
+    "alt": "A bride framed in a doorway with bridesmaids in the background."
   },
   "page.film-wedding-photography.gallery.7": {
-    "asset": "filmWeddingPhotographyGallery7Generated"
+    "asset": "filmWeddingPhotographyGallery7Generated",
+    "alt": "Wedding rings in an open box resting on a wooden dresser."
   },
   "page.film-wedding-photography.gallery.8": {
-    "asset": "filmWeddingPhotographyGallery8Generated"
+    "asset": "filmWeddingPhotographyGallery8Generated",
+    "alt": "A bride raising her bouquet from a vintage car as guests celebrate."
   },
   "page.film-wedding-photography.gallery.9": {
-    "asset": "filmWeddingPhotographyGallery9Generated"
+    "asset": "filmWeddingPhotographyGallery9Generated",
+    "alt": "A black-and-white moment of the groom seen through a doorway during preparation."
   },
   "page.film-wedding-photography.gallery.10": {
-    "asset": "filmWeddingPhotographyGallery10Generated"
+    "asset": "filmWeddingPhotographyGallery10Generated",
+    "alt": "A black-and-white close view of the ceremony with guests and officiant."
   },
   "page.film-wedding-photography.gallery.11": {
-    "asset": "filmWeddingPhotographyGallery11Generated"
+    "asset": "filmWeddingPhotographyGallery11Generated",
+    "alt": "A close detail of the couple's hands joined during the ceremony."
   },
   "page.film-wedding-photography.gallery.12": {
-    "asset": "filmWeddingPhotographyGallery12Generated"
+    "asset": "filmWeddingPhotographyGallery12Generated",
+    "alt": "A black-and-white detail of the bride's hands and rings during preparation."
   },
   "page.film-wedding-photography.gallery.13": {
-    "asset": "filmWeddingPhotographyGallery13Generated"
+    "asset": "filmWeddingPhotographyGallery13Generated",
+    "alt": "A black-and-white view of the couple dancing beneath the reception tent."
   },
   "page.film-wedding-photography.gallery.14": {
-    "asset": "filmWeddingPhotographyGallery14Generated"
+    "asset": "filmWeddingPhotographyGallery14Generated",
+    "alt": "A black-and-white dance floor scene with the couple moving beneath string lights."
   },
   "page.film-wedding-photography.gallery.15": {
-    "asset": "filmWeddingPhotographyGallery15Generated"
+    "asset": "filmWeddingPhotographyGallery15Generated",
+    "alt": "A bride dancing at night as a saxophonist performs before the guests."
   },
   "page.film-wedding-photography.craft.image": {
-    "asset": "filmWeddingPhotographyCraftImageGenerated"
+    "asset": "filmWeddingPhotographyCraftImageGenerated",
+    "alt": "A black-and-white beauty portrait during bridal hair styling."
   },
   "page.villa-raffaelli.hero.primary": {
-    "asset": "villaRaffaelliHeroPrimaryGenerated"
+    "asset": "villaRaffaelliHeroPrimaryGenerated",
+    "alt": "A wide portrait of a couple in the courtyard with the villa behind them."
   },
   "page.villa-raffaelli.hero.secondary": {
-    "asset": "villaRaffaelliHeroSecondaryGenerated"
+    "asset": "villaRaffaelliHeroSecondaryGenerated",
+    "alt": "A couple framed by a stone loggia at the villa."
   },
   "page.villa-raffaelli.hero.tertiary": {
-    "asset": "villaRaffaelliHeroTertiaryGenerated"
+    "asset": "villaRaffaelliHeroTertiaryGenerated",
+    "alt": "A couple holding hands in a meadow as the bride's veil lifts in the breeze."
   },
   "page.villa-raffaelli.hero.quaternary": {
-    "asset": "villaRaffaelliHeroQuaternaryGenerated"
+    "asset": "villaRaffaelliHeroQuaternaryGenerated",
+    "alt": "A couple standing together in a frescoed salon at Villa Raffaelli."
   },
   "page.villa-raffaelli.gallery.1": {
-    "asset": "villaRaffaelliGallery1Generated"
+    "asset": "villaRaffaelliGallery1Generated",
+    "alt": "A couple exchanging vows on the lawn with guests gathered behind them."
   },
   "page.villa-raffaelli.gallery.2": {
-    "asset": "villaRaffaelliGallery2Generated"
+    "asset": "villaRaffaelliGallery2Generated",
+    "alt": "A full-length portrait of the couple with mountain peaks rising behind them."
   },
   "page.villa-raffaelli.gallery.3": {
-    "asset": "villaRaffaelliGallery3Generated"
+    "asset": "villaRaffaelliGallery3Generated",
+    "alt": "A close courtyard portrait of a couple with Garfagnana mountains beyond."
   },
   "page.villa-raffaelli.gallery.4": {
-    "asset": "villaCourtyard"
+    "asset": "villaRaffaelliGallery4Generated",
+    "alt": "A couple standing in a rustic loggia framed by stone columns."
   },
   "page.villa-raffaelli.gallery.5": {
-    "asset": "villaLibraryPortrait"
+    "asset": "villaRaffaelliGallery5Generated",
+    "alt": "A close bridal portrait beside a marble fireplace."
   },
   "page.villa-raffaelli.gallery.6": {
-    "asset": "studioInterior"
+    "asset": "villaRaffaelliGallery6Generated",
+    "alt": "A bride turning with her bouquet in the salon light."
   },
   "page.villa-raffaelli.gallery.7": {
-    "asset": "homeUpperTuscany"
+    "asset": "villaRaffaelliGallery7Generated",
+    "alt": "A drone view of a mountain church with the wedding guests gathered outside."
   },
   "page.villa-raffaelli.gallery.8": {
-    "asset": "marblePath"
+    "asset": "villaRaffaelliGallery8Generated",
+    "alt": "A couple standing on a stone overlook with mountains and clouds behind them."
   },
   "page.villa-raffaelli.craft.image": {
-    "asset": "villaNewlywedsMountainGarden"
+    "asset": "villaRaffaelliCraftImageGenerated",
+    "alt": "A full-length bridal portrait inside the villa salon."
   },
   "journal.castello-di-vincigliata-wedding-guide-venue-logistics-and-guest-experience.cover": {
     "asset": "journalCastelloVincigliataGuideCover"
@@ -393,10 +460,12 @@
     "asset": "journalCertaldoWeddingPhotographerGuideLessExpectedTuscanySettingOrnamentOrbit"
   },
   "consent.doorway.image": {
-    "asset": "homeHeroQuaternaryGenerated"
+    "asset": "consentDoorwayImageGenerated",
+    "alt": "A couple standing in a doorway with the sky framed behind them."
   },
   "shared.team.wider-studio": {
-    "asset": "sharedTeamWiderStudioGenerated"
+    "asset": "sharedTeamWiderStudioGenerated",
+    "alt": "A high view of the courtyard with the couple standing below the bell tower."
   },
   "shared.villa.fallback": {
     "asset": "homeHeroVilla"

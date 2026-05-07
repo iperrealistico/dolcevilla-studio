@@ -95,7 +95,7 @@ export function Header({ simplified = false }: HeaderProps) {
                   : siteUi.header.openNavigationLabel
               }
               className={cn(
-                "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-panel)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] lg:hidden",
+                "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-panel)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] lg:hidden",
               )}
               onClick={toggleMenu}
             >

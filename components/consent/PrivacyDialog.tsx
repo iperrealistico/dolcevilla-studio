@@ -25,7 +25,7 @@ export function PrivacyDialog() {
           animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: 22, scale: 0.95, filter: "blur(16px)" }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-2xl rounded-[1.8rem] border border-white/14 bg-[linear-gradient(145deg,rgba(28,22,18,0.96),rgba(44,34,28,0.94))] p-6 text-[var(--color-paper)] shadow-[0_30px_90px_rgba(7,5,4,0.4)] md:p-8"
+          className="w-full max-w-2xl rounded-[var(--radius-frame)] border border-white/14 bg-[linear-gradient(145deg,rgba(20,16,13,0.98),rgba(32,25,21,0.96))] p-6 text-[var(--color-paper)] shadow-[0_30px_90px_rgba(7,5,4,0.4)] md:p-8"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -46,7 +46,7 @@ export function PrivacyDialog() {
               onClick={
                 consent.hasInteracted ? closeConsentManager : showConsentChoices
               }
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/14 bg-[rgb(255_255_255_/_0.05)] transition hover:bg-[rgb(255_255_255_/_0.08)]"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-white/14 bg-[rgb(255_255_255_/_0.05)] transition hover:bg-[rgb(255_255_255_/_0.08)]"
             >
               <X size={18} />
             </button>
@@ -60,7 +60,7 @@ export function PrivacyDialog() {
             {privacyDetails.points.map((point) => (
               <div
                 key={point.title}
-                className="rounded-[1.3rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4"
+                className="rounded-[var(--radius-panel)] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4"
               >
                 <p className="text-sm font-semibold text-[var(--color-paper)]">
                   {point.title}

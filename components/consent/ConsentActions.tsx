@@ -33,7 +33,7 @@ function PreferenceToggle({
       role="switch"
       aria-checked={checked}
       onClick={onClick}
-      className="flex w-full items-start justify-between gap-4 rounded-[1.5rem] border border-white/12 bg-white/8 px-4 py-4 text-left transition hover:bg-white/12"
+      className="flex w-full items-start justify-between gap-4 rounded-[var(--radius-panel)] border border-white/12 bg-white/8 px-4 py-4 text-left transition hover:bg-white/12"
     >
       <div className="space-y-1">
         <p className="text-sm font-semibold text-[var(--color-paper)]">
@@ -45,10 +45,10 @@ function PreferenceToggle({
       </div>
       <span
         aria-hidden="true"
-        className="relative mt-1 inline-flex h-7 w-12 shrink-0 rounded-full border border-white/18 bg-white/10 p-1 transition"
+        className="relative mt-1 inline-flex h-7 w-12 shrink-0 rounded-[var(--radius-control)] border border-white/18 bg-white/10 p-1 transition"
       >
         <span
-          className="h-5 w-5 rounded-full bg-[var(--color-paper)] shadow-[0_8px_20px_rgba(10,8,6,0.25)] transition"
+          className="h-5 w-5 rounded-[calc(var(--radius-control)-0.12rem)] bg-[var(--color-paper)] shadow-[0_8px_20px_rgba(10,8,6,0.25)] transition"
           style={{
             transform: checked ? "translateX(20px)" : "translateX(0px)",
             backgroundColor: checked ? "rgb(236 215 181)" : "rgb(244 235 224)",
@@ -75,7 +75,7 @@ export function ConsentActions() {
   });
 
   return (
-    <div className="relative grid min-h-[min(82dvh,780px)] overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(140deg,#171311,#2d241e_42%,#43362d)] shadow-[0_40px_120px_rgba(17,12,8,0.48)] lg:grid-cols-[1.08fr_0.92fr]">
+    <div className="relative grid min-h-[min(82dvh,780px)] overflow-hidden rounded-[var(--radius-frame)] border border-white/12 bg-[linear-gradient(140deg,#120f0d,#221b17_42%,#342a22)] shadow-[0_40px_120px_rgba(17,12,8,0.48)] lg:grid-cols-[1.08fr_0.92fr]">
       <div className="relative min-h-[18rem] overflow-hidden">
         <Image
           src={doorwayImage.src}
@@ -111,7 +111,7 @@ export function ConsentActions() {
                 type="button"
                 aria-label={consentDoorwayContent.closeSettingsLabel}
                 onClick={closeConsentManager}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/14 bg-[rgb(18_15_12_/_0.32)] text-[var(--color-paper)] transition hover:bg-[rgb(18_15_12_/_0.5)]"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-white/14 bg-[rgb(18_15_12_/_0.32)] text-[var(--color-paper)] transition hover:bg-[rgb(18_15_12_/_0.5)]"
               >
                 <X size={18} />
               </button>
@@ -135,7 +135,7 @@ export function ConsentActions() {
             <button
               type="button"
               onClick={acceptAll}
-              className="w-full rounded-[1.6rem] border border-[rgb(248_236_211_/_0.9)] bg-[linear-gradient(135deg,rgb(246_233_205),rgb(232_214_179))] px-5 py-5 text-left text-[var(--color-ink)] shadow-[0_26px_60px_rgba(12,8,4,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_70px_rgba(12,8,4,0.28)]"
+              className="w-full rounded-[var(--radius-frame)] border border-[rgb(248_236_211_/_0.9)] bg-[linear-gradient(135deg,rgb(246_233_205),rgb(232_214_179))] px-5 py-5 text-left text-[var(--color-ink)] shadow-[0_26px_60px_rgba(12,8,4,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_70px_rgba(12,8,4,0.28)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -156,7 +156,7 @@ export function ConsentActions() {
             <button
               type="button"
               onClick={essentialOnly}
-              className="w-full rounded-[1.5rem] border border-white/12 bg-[rgb(255_255_255_/_0.05)] px-5 py-5 text-left transition hover:bg-[rgb(255_255_255_/_0.08)]"
+              className="w-full rounded-[var(--radius-panel)] border border-white/12 bg-[rgb(255_255_255_/_0.05)] px-5 py-5 text-left transition hover:bg-[rgb(255_255_255_/_0.08)]"
             >
               <p className="text-base font-semibold text-[var(--color-paper)]">
                 {consentDoorwayContent.essentialOnly.title}
@@ -207,7 +207,7 @@ export function ConsentActions() {
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-5 overflow-hidden"
               >
-                <div className="space-y-3 rounded-[1.5rem] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4">
+                <div className="space-y-3 rounded-[var(--radius-panel)] border border-white/10 bg-[rgb(255_255_255_/_0.05)] p-4">
                   <PreferenceToggle
                     title={consentDoorwayContent.preferences.analytics.title}
                     description={

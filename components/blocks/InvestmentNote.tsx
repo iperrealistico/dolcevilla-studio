@@ -10,7 +10,7 @@ export function InvestmentNote({ section }: { section?: RichSection }) {
   }
 
   return (
-    <Container className="rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-panel)] px-6 py-8 shadow-[var(--shadow-card)] md:px-10">
+    <Container className="rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel)] px-6 py-8 shadow-[var(--shadow-card)] md:px-10">
       {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
       <Heading className="text-3xl md:text-5xl">{section.heading}</Heading>
       <RichText body={section.body} className="mt-4" />

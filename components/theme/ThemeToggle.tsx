@@ -18,7 +18,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       aria-label={`Switch to ${nextTheme} theme`}
       title={`Switch to ${nextTheme} theme`}
       className={cn(
-        "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-floating)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--surface-chip-hover)]",
+        "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-floating)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--surface-chip-hover)]",
         className,
       )}
       onClick={toggleTheme}

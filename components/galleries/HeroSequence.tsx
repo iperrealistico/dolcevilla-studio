@@ -1,122 +1,308 @@
 "use client";
 
-import { startTransition, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
-import { cn } from "../../lib/utils/cn";
-import type { ImageAsset } from "../../types/gallery";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+  type WheelEvent as ReactWheelEvent,
+} from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { cn } from "@/lib/utils/cn";
+import type { ImageAsset } from "@/types/gallery";
 
-const DEFAULT_HERO_SLIDE_INTERVAL_MS = 5600;
+const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 18;
+const LOOP_RESET_BUFFER_PX = 2;
+const SEGMENT_COPIES = 3;
+const DEFAULT_HERO_SLIDE_SIZES =
+  "(min-width: 1536px) 28vw, (min-width: 1280px) 30vw, (min-width: 1024px) 36vw, (min-width: 640px) 62vw, 80vw";
+
+export type HeroSequenceSlide = ImageAsset & {
+  objectPosition?: string;
+};
 
 type HeroSequenceProps = {
-  images: ImageAsset[];
+  images: HeroSequenceSlide[];
   className?: string;
   imageClassName?: string;
   overlayClassName?: string;
-  slideIntervalMs?: number;
+  slideClassName?: string;
+  sizes?: string;
+  autoScrollSpeedPxPerSecond?: number;
 };
+
+function createLoopableSlides(images: HeroSequenceSlide[]) {
+  if (images.length !== 1) {
+    return images;
+  }
+
+  const [image] = images;
+  const basePosition = image.objectPosition ?? image.focalPoint ?? "50% 50%";
+
+  return [
+    { ...image, id: `${image.id}-origin`, objectPosition: basePosition },
+    { ...image, id: `${image.id}-left`, objectPosition: "28% 50%" },
+    { ...image, id: `${image.id}-center`, objectPosition: "50% 50%" },
+    { ...image, id: `${image.id}-right`, objectPosition: "72% 50%" },
+  ];
+}
+
+function normalizeLoopPosition(
+  target: HTMLDivElement | null,
+  segmentWidth: number,
+) {
+  if (!target || !segmentWidth) {
+    return;
+  }
+
+  if (target.scrollLeft <= LOOP_RESET_BUFFER_PX) {
+    target.scrollLeft += segmentWidth;
+    return;
+  }
+
+  if (target.scrollLeft >= segmentWidth * 2 - LOOP_RESET_BUFFER_PX) {
+    target.scrollLeft -= segmentWidth;
+  }
+}
 
 export function HeroSequence({
   images,
   className,
   imageClassName,
   overlayClassName,
-  slideIntervalMs = DEFAULT_HERO_SLIDE_INTERVAL_MS,
+  slideClassName,
+  sizes = DEFAULT_HERO_SLIDE_SIZES,
+  autoScrollSpeedPxPerSecond = DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND,
 }: HeroSequenceProps) {
-  const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
-  const slideIntervalSeconds = slideIntervalMs / 1000;
-  const opacityDurationSeconds = Math.min(
-    1.8,
-    Math.max(0.8, slideIntervalSeconds * 0.32),
-  );
-  const scaleDurationSeconds = slideIntervalSeconds + 1.2;
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const segmentRef = useRef<HTMLDivElement | null>(null);
+  const segmentWidthRef = useRef(0);
+  const hasInitializedRef = useRef(false);
+  const hasInteractedRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragOriginXRef = useRef(0);
+  const dragOriginScrollLeftRef = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const loopableSlides = useMemo(() => createLoopableSlides(images), [images]);
+
+  const markInteracted = () => {
+    if (hasInteractedRef.current) {
+      return;
+    }
+
+    hasInteractedRef.current = true;
+    setHasInteracted(true);
+  };
 
   useEffect(() => {
-    if (reduceMotion || images.length < 2) {
+    const syncMeasurements = () => {
+      const viewport = viewportRef.current;
+      const segment = segmentRef.current;
+
+      if (!viewport || !segment) {
+        return;
+      }
+
+      const segmentWidth = segment.scrollWidth;
+
+      if (!segmentWidth) {
+        return;
+      }
+
+      segmentWidthRef.current = segmentWidth;
+
+      if (!hasInitializedRef.current) {
+        viewport.scrollLeft = segmentWidth;
+        hasInitializedRef.current = true;
+        return;
+      }
+
+      normalizeLoopPosition(viewport, segmentWidth);
+    };
+
+    syncMeasurements();
+
+    const segment = segmentRef.current;
+
+    if (!segment || typeof ResizeObserver === "undefined") {
       return undefined;
     }
 
-    const interval = window.setInterval(() => {
-      startTransition(() => {
-        setIndex((current) => (current + 1) % images.length);
-      });
-    }, slideIntervalMs);
+    const resizeObserver = new ResizeObserver(() => {
+      syncMeasurements();
+    });
 
-    return () => window.clearInterval(interval);
-  }, [images.length, reduceMotion, slideIntervalMs]);
+    resizeObserver.observe(segment);
+    window.addEventListener("resize", syncMeasurements);
 
-  if (!images.length) {
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", syncMeasurements);
+    };
+  }, [loopableSlides.length]);
+
+  useEffect(() => {
+    if (reduceMotion || hasInteracted || !loopableSlides.length) {
+      return undefined;
+    }
+
+    let animationFrame = 0;
+    let previousTimestamp = 0;
+
+    const step = (timestamp: number) => {
+      if (!previousTimestamp) {
+        previousTimestamp = timestamp;
+      }
+
+      const viewport = viewportRef.current;
+      const segmentWidth = segmentWidthRef.current;
+
+      if (viewport && segmentWidth && !isDraggingRef.current) {
+        viewport.scrollLeft +=
+          ((timestamp - previousTimestamp) / 1000) *
+          autoScrollSpeedPxPerSecond;
+        normalizeLoopPosition(viewport, segmentWidth);
+      }
+
+      previousTimestamp = timestamp;
+      animationFrame = window.requestAnimationFrame(step);
+    };
+
+    animationFrame = window.requestAnimationFrame(step);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [
+    autoScrollSpeedPxPerSecond,
+    hasInteracted,
+    loopableSlides.length,
+    reduceMotion,
+  ]);
+
+  if (!loopableSlides.length) {
     return null;
   }
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) {
+      return;
+    }
+
+    const viewport = viewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    markInteracted();
+    isDraggingRef.current = true;
+    dragOriginXRef.current = event.clientX;
+    dragOriginScrollLeftRef.current = viewport.scrollLeft;
+    setIsDragging(true);
+    viewport.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current || !viewportRef.current) {
+      return;
+    }
+
+    viewportRef.current.scrollLeft =
+      dragOriginScrollLeftRef.current - (event.clientX - dragOriginXRef.current);
+    normalizeLoopPosition(viewportRef.current, segmentWidthRef.current);
+  };
+
+  const handlePointerRelease = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!viewportRef.current) {
+      return;
+    }
+
+    isDraggingRef.current = false;
+    setIsDragging(false);
+
+    if (viewportRef.current.hasPointerCapture(event.pointerId)) {
+      viewportRef.current.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) {
+      markInteracted();
+    }
+  };
+
+  const handleScroll = () => {
+    normalizeLoopPosition(viewportRef.current, segmentWidthRef.current);
+  };
 
   return (
     <div
       className={cn(
-        "absolute inset-0 overflow-hidden rounded-[2rem] bg-[var(--color-shell)]",
+        "absolute inset-0 overflow-hidden bg-[var(--color-shell)]",
         className,
       )}
     >
-      {images.map((image, imageIndex) => {
-        const isActive = imageIndex === index;
-
-        return (
-          <motion.div
-            key={image.id}
-            className="will-change-opacity absolute inset-0 will-change-transform"
-            initial={false}
-            animate={
-              reduceMotion
-                ? { opacity: isActive ? 1 : 0 }
-                : {
-                    opacity: isActive ? 1 : 0,
-                    scale: isActive ? 1.035 : 1,
-                  }
-            }
-            transition={
-              reduceMotion
-                ? { duration: 0.2 }
-                : {
-                    opacity: {
-                      duration: opacityDurationSeconds,
-                      ease: [0.22, 1, 0.36, 1],
-                    },
-                    scale: { duration: scaleDurationSeconds, ease: "linear" },
-                  }
-            }
-            style={{ zIndex: isActive ? 2 : 1 }}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              priority={imageIndex === 0}
-              loading="eager"
-              sizes="100vw"
-              placeholder="blur"
-              blurDataURL={image.blurDataURL}
-              className={cn("h-full w-full object-cover", imageClassName)}
-            />
-          </motion.div>
-        );
-      })}
-      <motion.div
+      <div
+        ref={viewportRef}
         className={cn(
-          "absolute inset-0 bg-[linear-gradient(180deg,rgba(14,12,10,0.12),rgba(14,12,10,0.56))]",
+          "absolute inset-0 overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          isDragging ? "cursor-grabbing" : "cursor-grab",
+        )}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerRelease}
+        onPointerCancel={handlePointerRelease}
+        onPointerLeave={handlePointerRelease}
+        onScroll={handleScroll}
+        onTouchStart={markInteracted}
+        onWheel={handleWheel}
+      >
+        <div className="flex h-full items-stretch">
+          {Array.from({ length: SEGMENT_COPIES }, (_, segmentIndex) => (
+            <div
+              key={`hero-segment-${segmentIndex}`}
+              ref={segmentIndex === 0 ? segmentRef : null}
+              className="flex h-full shrink-0 gap-2 pr-2 sm:gap-3 sm:pr-3"
+            >
+              {loopableSlides.map((image, imageIndex) => (
+                <div
+                  key={`${image.id}-${segmentIndex}`}
+                  className={cn(
+                    "relative h-full min-w-[80vw] overflow-hidden rounded-[var(--radius-frame)] border border-white/12 bg-[var(--surface-panel-strong)] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw] 2xl:min-w-[28vw]",
+                    slideClassName,
+                  )}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    priority={segmentIndex === 1 && imageIndex < 2}
+                    loading={segmentIndex === 1 && imageIndex < 3 ? "eager" : "lazy"}
+                    sizes={sizes}
+                    placeholder="blur"
+                    blurDataURL={image.blurDataURL}
+                    draggable={false}
+                    className={cn("select-none object-cover", imageClassName)}
+                    style={{
+                      objectPosition: image.objectPosition ?? image.focalPoint,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,9,8,0.08),rgba(10,9,8,0.56))]",
           overlayClassName,
         )}
-        animate={
-          reduceMotion
-            ? undefined
-            : { opacity: [0.9, 1, 0.94], scale: [1, 1.015, 1] }
-        }
-        transition={{
-          duration: 8,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
       />
     </div>
   );

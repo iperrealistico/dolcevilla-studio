@@ -10,7 +10,7 @@ export function GeographyBlock({ geography }: { geography: ServicePageContent["g
   }
 
   return (
-    <Container className="grid gap-8 rounded-[2rem] bg-[var(--color-shell)] px-6 py-8 md:grid-cols-[1fr_1fr] md:px-10">
+    <Container className="grid gap-8 rounded-[var(--radius-frame)] bg-[var(--color-shell)] px-6 py-8 shadow-[var(--shadow-card)] md:grid-cols-[1fr_1fr] md:px-10">
       <div>
         {geography.eyebrow ? <Eyebrow>{geography.eyebrow}</Eyebrow> : null}
         <Heading className="text-3xl md:text-5xl">{geography.heading}</Heading>
@@ -19,7 +19,7 @@ export function GeographyBlock({ geography }: { geography: ServicePageContent["g
         <RichText body={geography.body} />
         <div className="flex flex-wrap gap-2">
           {geography.places.map((place) => (
-            <span key={place} className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-mist)]">
+            <span key={place} className="rounded-[var(--radius-pill)] border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-mist)]">
               {place}
             </span>
           ))}

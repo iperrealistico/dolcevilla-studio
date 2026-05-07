@@ -29,7 +29,7 @@ export function JournalPhotographerSegue({
   const primaryLabel = normalizeSegueLabel(section.primaryCta.label);
 
   return (
-    <aside className="journal-cta-highlight not-prose relative my-12 overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-banner)] p-6 shadow-[var(--shadow-card)] md:p-7">
+    <aside className="journal-cta-highlight not-prose relative my-12 overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-banner)] p-6 shadow-[var(--shadow-card)] md:p-7">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-[rgb(214_180_126_/_0.18)] blur-3xl"

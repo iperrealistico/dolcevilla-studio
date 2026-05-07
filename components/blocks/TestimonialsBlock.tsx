@@ -17,7 +17,7 @@ export function TestimonialsBlock({ items }: { items: Testimonial[] }) {
           from={index % 2 === 0 ? "left" : "right"}
           delay={index * 0.08}
         >
-          <figure className="rounded-[1.75rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-6 shadow-[var(--shadow-soft)]">
+          <figure className="rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-6 shadow-[var(--shadow-soft)]">
             <Eyebrow>{siteUi.sections.testimonials.eyebrow}</Eyebrow>
             <blockquote className="font-display-face text-2xl leading-[1.1] tracking-[-0.03em]">
               “{item.quote}”

@@ -50,7 +50,7 @@ export function PointsEditorialBlock({
             }
             delay={index * 0.05}
           >
-            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
+            <div className="rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
               <h3 className="font-display-face text-2xl tracking-[-0.03em]">
                 {item.title}
               </h3>

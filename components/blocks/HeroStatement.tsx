@@ -1,14 +1,16 @@
 import { ArrowDown } from "lucide-react";
-import Image from "next/image";
-import { HeroSequence } from "../galleries/HeroSequence";
-import { FloatIn } from "../motion/FloatIn";
-import { Container } from "../ui/Container";
-import { Eyebrow } from "../ui/Eyebrow";
-import { LinkButton } from "../ui/LinkButton";
-import { getImageAsset } from "../../lib/images/imageManifest";
-import { cn } from "../../lib/utils/cn";
-import { siteUi } from "../../content/site/ui";
-import type { HeroContent } from "../../types/content";
+import { FloatIn } from "@/components/motion/FloatIn";
+import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { LinkButton } from "@/components/ui/LinkButton";
+import {
+  HeroSequence,
+  type HeroSequenceSlide,
+} from "@/components/galleries/HeroSequence";
+import { getImageAsset } from "@/lib/images/imageManifest";
+import { cn } from "@/lib/utils/cn";
+import { siteUi } from "@/content/site/ui";
+import type { HeroContent } from "@/types/content";
 
 type HeroVariantStyle = {
   desktopFrameClassName: string;
@@ -17,6 +19,7 @@ type HeroVariantStyle = {
   desktopCopyClassName: string;
   desktopOverlayClassName: string;
   imageClassName: string;
+  slideClassName: string;
   mobileTitleClassName: string;
   mobileCopyClassName: string;
   mobileImageHeightClassName: string;
@@ -32,146 +35,118 @@ function getMobileHeroContentId(hero: HeroContent) {
   return `hero-intro-${hero.variant}-${slug || "content"}`;
 }
 
-const MOBILE_HERO_OVERLAY_CLASS_NAME =
-  "bg-[radial-gradient(circle_at_50%_16%,rgba(255,255,255,0.2),transparent_24%),linear-gradient(180deg,rgba(29,22,18,0.04),rgba(29,22,18,0.14)_58%,rgba(29,22,18,0.42)_100%)]";
-
 const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   home: {
-    desktopFrameClassName: "md:min-h-[min(80dvh,58rem)]",
-    desktopContentClassName: "md:max-w-[44rem] xl:max-w-[48rem]",
+    desktopFrameClassName: "md:min-h-[min(78dvh,47rem)]",
+    desktopContentClassName: "md:max-w-[41rem] xl:max-w-[44rem]",
     desktopTitleClassName:
-      "md:max-w-[13ch] md:text-[4.15rem] xl:text-[5.05rem]",
-    desktopCopyClassName: "md:max-w-[31rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(29,22,18,0.12),rgba(29,22,18,0.32))] md:bg-[radial-gradient(circle_at_80%_18%,rgba(244,235,224,0.18),transparent_18%),linear-gradient(90deg,rgba(10,8,7,0.84)_0%,rgba(10,8,7,0.58)_38%,rgba(10,8,7,0.22)_70%,rgba(10,8,7,0.04)_100%),linear-gradient(180deg,rgba(10,8,7,0.12)_0%,rgba(10,8,7,0.62)_100%)]",
-    imageClassName: "object-[58%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.55rem] sm:text-[2.95rem]",
-    mobileCopyClassName: "max-w-[35ch]",
-    mobileImageHeightClassName: "min-h-[clamp(22.5rem,56svh,31rem)]",
-  },
-  service: {
-    desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
-    desktopContentClassName: "md:max-w-[40rem] xl:max-w-[44rem]",
-    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.85rem] xl:text-[4.6rem]",
+      "md:max-w-[12ch] md:text-[4rem] xl:text-[4.7rem]",
     desktopCopyClassName: "md:max-w-[29rem]",
     desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(29,22,18,0.1),rgba(29,22,18,0.3))] md:bg-[radial-gradient(circle_at_78%_20%,rgba(244,235,224,0.16),transparent_18%),linear-gradient(90deg,rgba(11,10,8,0.82)_0%,rgba(11,10,8,0.56)_40%,rgba(11,10,8,0.18)_72%,rgba(11,10,8,0.04)_100%),linear-gradient(180deg,rgba(11,10,8,0.12)_0%,rgba(11,10,8,0.58)_100%)]",
-    imageClassName: "object-[60%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.4rem] sm:text-[2.75rem]",
-    mobileCopyClassName: "max-w-[35ch]",
-    mobileImageHeightClassName: "min-h-[clamp(18rem,42svh,24rem)]",
+      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.58))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.82)_0%,rgba(3,3,4,0.58)_28%,rgba(3,3,4,0.18)_58%,rgba(3,3,4,0.06)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.72)_100%)]",
+    imageClassName: "object-[58%_center] md:object-center",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[38vw] xl:min-w-[32vw]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.5rem] sm:text-[2.9rem]",
+    mobileCopyClassName: "max-w-[34ch]",
+    mobileImageHeightClassName: "min-h-[clamp(24rem,58svh,31rem)]",
   },
-  editorial: {
-    desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
+  service: {
+    desktopFrameClassName: "md:min-h-[min(72dvh,42rem)]",
     desktopContentClassName: "md:max-w-[38rem] xl:max-w-[42rem]",
-    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.35rem]",
+    desktopTitleClassName:
+      "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.25rem]",
     desktopCopyClassName: "md:max-w-[28rem]",
     desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(29,22,18,0.1),rgba(29,22,18,0.28))] md:bg-[radial-gradient(circle_at_82%_16%,rgba(244,235,224,0.14),transparent_16%),linear-gradient(90deg,rgba(12,10,9,0.8)_0%,rgba(12,10,9,0.52)_40%,rgba(12,10,9,0.16)_74%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.14)_0%,rgba(12,10,9,0.56)_100%)]",
+      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.56))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.8)_0%,rgba(3,3,4,0.54)_30%,rgba(3,3,4,0.16)_60%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.68)_100%)]",
     imageClassName: "object-[60%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.3rem] sm:text-[2.65rem]",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[37vw] xl:min-w-[31vw]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.35rem] sm:text-[2.7rem]",
     mobileCopyClassName: "max-w-[34ch]",
-    mobileImageHeightClassName: "min-h-[clamp(17rem,40svh,23rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(20rem,46svh,25rem)]",
   },
-  landing: {
-    desktopFrameClassName: "md:min-h-[min(76dvh,53rem)]",
-    desktopContentClassName: "md:max-w-[37rem] xl:max-w-[41rem]",
-    desktopTitleClassName: "md:max-w-[13ch] md:text-[3.55rem] xl:text-[4.1rem]",
+  editorial: {
+    desktopFrameClassName: "md:min-h-[min(70dvh,41rem)]",
+    desktopContentClassName: "md:max-w-[37rem] xl:max-w-[40rem]",
+    desktopTitleClassName:
+      "md:max-w-[12ch] md:text-[3.55rem] xl:text-[4.1rem]",
     desktopCopyClassName: "md:max-w-[27rem]",
     desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(29,22,18,0.08),rgba(29,22,18,0.26))] md:bg-[radial-gradient(circle_at_82%_18%,rgba(244,235,224,0.14),transparent_18%),linear-gradient(90deg,rgba(12,10,9,0.78)_0%,rgba(12,10,9,0.5)_42%,rgba(12,10,9,0.16)_74%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.12)_0%,rgba(12,10,9,0.52)_100%)]",
-    imageClassName: "object-[62%_center] md:object-center",
-    mobileTitleClassName: "max-w-[12ch] text-[2.2rem] sm:text-[2.5rem]",
+      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.54))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.78)_0%,rgba(3,3,4,0.5)_32%,rgba(3,3,4,0.14)_62%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.66)_100%)]",
+    imageClassName: "object-[60%_center] md:object-center",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.2rem] sm:text-[2.55rem]",
     mobileCopyClassName: "max-w-[33ch]",
-    mobileImageHeightClassName: "min-h-[clamp(16.5rem,38svh,22rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(19rem,44svh,24rem)]",
+  },
+  landing: {
+    desktopFrameClassName: "md:min-h-[min(68dvh,39rem)]",
+    desktopContentClassName: "md:max-w-[36rem] xl:max-w-[39rem]",
+    desktopTitleClassName:
+      "md:max-w-[13ch] md:text-[3.35rem] xl:text-[3.95rem]",
+    desktopCopyClassName: "md:max-w-[26rem]",
+    desktopOverlayClassName:
+      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.52))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.76)_0%,rgba(3,3,4,0.48)_32%,rgba(3,3,4,0.14)_62%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.62)_100%)]",
+    imageClassName: "object-[62%_center] md:object-center",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw]",
+    mobileTitleClassName: "max-w-[12ch] text-[2.1rem] sm:text-[2.45rem]",
+    mobileCopyClassName: "max-w-[33ch]",
+    mobileImageHeightClassName: "min-h-[clamp(18rem,42svh,23rem)]",
   },
   ads: {
-    desktopFrameClassName: "md:min-h-[min(74dvh,50rem)]",
-    desktopContentClassName: "md:max-w-[35rem] xl:max-w-[38rem]",
+    desktopFrameClassName: "md:min-h-[min(64dvh,37rem)]",
+    desktopContentClassName: "md:max-w-[34rem] xl:max-w-[37rem]",
     desktopTitleClassName:
-      "md:max-w-[13ch] md:text-[3.25rem] xl:text-[3.85rem]",
-    desktopCopyClassName: "md:max-w-[25rem]",
+      "md:max-w-[13ch] md:text-[3.05rem] xl:text-[3.55rem]",
+    desktopCopyClassName: "md:max-w-[24rem]",
     desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(29,22,18,0.08),rgba(29,22,18,0.24))] md:bg-[radial-gradient(circle_at_80%_18%,rgba(244,235,224,0.12),transparent_16%),linear-gradient(90deg,rgba(12,10,9,0.76)_0%,rgba(12,10,9,0.48)_44%,rgba(12,10,9,0.14)_76%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.1)_0%,rgba(12,10,9,0.5)_100%)]",
+      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.5))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.74)_0%,rgba(3,3,4,0.46)_34%,rgba(3,3,4,0.14)_64%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.58)_100%)]",
     imageClassName: "object-[64%_center] md:object-center",
-    mobileTitleClassName: "max-w-[12ch] text-[2.05rem] sm:text-[2.35rem]",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[35vw] xl:min-w-[29vw]",
+    mobileTitleClassName: "max-w-[12ch] text-[2rem] sm:text-[2.3rem]",
     mobileCopyClassName: "max-w-[32ch]",
-    mobileImageHeightClassName: "min-h-[clamp(16rem,37svh,21rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(17rem,40svh,22rem)]",
   },
 };
 
 export function HeroStatement({ hero }: { hero: HeroContent }) {
-  const images = hero.imageIds.map((id) => getImageAsset(id as never));
-  const primaryImage = images[0];
+  const heroSlides = hero.imageIds.map((id) => {
+    const image = getImageAsset(id as never);
+
+    return {
+      ...image,
+      objectPosition: image.focalPoint,
+    } satisfies HeroSequenceSlide;
+  });
   const styles = HERO_VARIANT_STYLES[hero.variant];
   const mobileContentId = getMobileHeroContentId(hero);
-  const isHomeResponsiveSlideshow =
-    hero.variant === "home" && images.length > 1;
-  const slideIntervalMs = hero.variant === "home" ? 3000 : undefined;
-  const responsiveOverlayClassName = cn(
-    styles.desktopOverlayClassName,
-    MOBILE_HERO_OVERLAY_CLASS_NAME,
-  );
 
   return (
-    <section
-      className="relative px-3 pt-3 pb-6 md:px-8 md:pt-6 md:pb-10 lg:px-10"
-      data-hero-section="true"
-    >
+    <section className="relative pb-6 md:pb-10" data-hero-section="true">
       <div
         className={cn(
-          "relative flex flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-hero-frame)] shadow-[var(--shadow-card)]",
+          "relative flex flex-col overflow-hidden border-y border-[var(--color-line)] bg-[var(--surface-hero-frame)] shadow-[var(--shadow-card)]",
           styles.desktopFrameClassName,
         )}
       >
         <div className="relative md:absolute md:inset-0">
           <div
             className={cn(
-              "relative overflow-hidden rounded-t-[2rem] rounded-b-[1.65rem] md:h-full md:min-h-full md:rounded-[2rem]",
+              "relative overflow-hidden md:h-full md:min-h-full",
               styles.mobileImageHeightClassName,
             )}
           >
-            {isHomeResponsiveSlideshow ? (
-              <HeroSequence
-                images={images}
-                imageClassName={styles.imageClassName}
-                overlayClassName={responsiveOverlayClassName}
-                slideIntervalMs={slideIntervalMs}
-              />
-            ) : (
-              <>
-                {primaryImage ? (
-                  <Image
-                    src={primaryImage.src}
-                    alt={primaryImage.alt}
-                    width={primaryImage.width}
-                    height={primaryImage.height}
-                    priority
-                    loading="eager"
-                    sizes="(max-width: 767px) 100vw, 0px"
-                    placeholder="blur"
-                    blurDataURL={primaryImage.blurDataURL}
-                    className={cn(
-                      "h-full w-full object-cover md:hidden",
-                      styles.imageClassName,
-                    )}
-                  />
-                ) : null}
-                <HeroSequence
-                  images={images}
-                  className="hidden md:block"
-                  imageClassName={styles.imageClassName}
-                  overlayClassName={styles.desktopOverlayClassName}
-                  slideIntervalMs={slideIntervalMs}
-                />
-                <div
-                  className={cn(
-                    "absolute inset-0 md:hidden",
-                    MOBILE_HERO_OVERLAY_CLASS_NAME,
-                  )}
-                />
-              </>
-            )}
+            <HeroSequence
+              images={heroSlides}
+              imageClassName={styles.imageClassName}
+              overlayClassName={styles.desktopOverlayClassName}
+              slideClassName={styles.slideClassName}
+              autoScrollSpeedPxPerSecond={hero.variant === "home" ? 18 : 16}
+            />
           </div>
           <a
             href={`#${mobileContentId}`}
@@ -181,31 +156,30 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
             <span className="text-[0.58rem] font-medium tracking-[0.34em] text-[rgb(250_247_242_/_0.86)] uppercase drop-shadow-[0_2px_10px_rgba(28,22,18,0.28)]">
               {siteUi.hero.scrollLabel}
             </span>
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md">
+            <span className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md">
               <ArrowDown size={18} strokeWidth={1.7} aria-hidden="true" />
             </span>
           </a>
         </div>
         <Container
           className={cn(
-            "relative z-10 w-full px-0 md:flex md:items-end md:py-12 lg:py-14",
+            "relative z-10 w-full md:flex md:min-h-full md:items-end md:py-10 lg:py-12",
             styles.desktopFrameClassName,
           )}
         >
           <div
             id={mobileContentId}
-            className="scroll-mt-20 border-t border-[var(--color-line)] px-6 pt-14 pb-7 md:border-t-0 md:px-0 md:pt-0 md:pb-0"
+            className="scroll-mt-20 pt-12 pb-7 md:pt-0 md:pb-0"
           >
             <div
               className={cn(
-                "relative space-y-5 md:space-y-6",
+                "relative space-y-5 border border-[var(--color-line)] bg-[var(--surface-panel-strong)] px-5 py-6 shadow-[var(--shadow-soft)] md:space-y-6 md:rounded-[var(--radius-frame)] md:border-white/12 md:bg-[rgb(10_9_8_/_0.42)] md:px-7 md:py-7 md:shadow-[0_30px_70px_rgba(0,0,0,0.24)] md:backdrop-blur-md",
                 styles.desktopContentClassName,
               )}
             >
-              <div className="pointer-events-none absolute inset-y-[-2.25rem] right-[-4rem] left-[-2rem] hidden rounded-[2.8rem] bg-[linear-gradient(135deg,rgba(15,12,10,0.42)_0%,rgba(15,12,10,0.18)_48%,rgba(15,12,10,0.04)_76%,rgba(15,12,10,0)_100%)] backdrop-blur-[2px] md:block" />
               {hero.eyebrow ? (
                 <FloatIn from="left">
-                  <Eyebrow className="relative mb-0 inline-flex rounded-full border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
+                  <Eyebrow className="relative mb-0 inline-flex rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
                     {hero.eyebrow}
                   </Eyebrow>
                 </FloatIn>
@@ -247,7 +221,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
                     <LinkButton
                       href={hero.secondaryCta.href}
                       variant="secondary"
-                      className="min-h-[3.5rem] w-full border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-6 text-[0.95rem] md:min-h-11 md:w-auto md:border-white/14 md:bg-[rgb(255_255_255_/_0.12)] md:px-5 md:text-sm md:text-[var(--color-paper)] md:backdrop-blur-sm"
+                      className="min-h-[3.5rem] w-full border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-6 text-[0.95rem] md:min-h-11 md:w-auto md:border-white/16 md:bg-[rgb(255_255_255_/_0.1)] md:px-5 md:text-sm md:text-[var(--color-paper)] md:backdrop-blur-sm"
                     >
                       {hero.secondaryCta.label}
                     </LinkButton>

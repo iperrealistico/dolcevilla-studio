@@ -21,7 +21,7 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
   const initialX = index % 3 === 0 ? -28 : index % 3 === 2 ? 28 : 0;
   const initialY = 52;
   const buttonClassName =
-    "group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-[1.75rem] border border-white/20 bg-[var(--color-shell)] text-left shadow-[0_28px_60px_rgba(26,20,15,0.14)]";
+    "group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-[var(--radius-frame)] border border-white/20 bg-[var(--color-shell)] text-left shadow-[0_28px_60px_rgba(26,20,15,0.14)]";
 
   if (reduceMotion || simplifyMotion) {
     return (

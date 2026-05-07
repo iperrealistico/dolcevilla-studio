@@ -30,7 +30,7 @@ type TeamSlide = {
 };
 
 const cardBaseClass =
-  "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] select-none shadow-[var(--shadow-card)] md:min-h-[39rem]";
+  "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] select-none shadow-[var(--shadow-card)] md:min-h-[39rem]";
 
 function getMemberTitleLines(title: string): string[] {
   const words = title.trim().split(/\s+/).filter(Boolean);
@@ -413,7 +413,7 @@ export function StudioTeamBlock({
 
   return (
     <Container>
-      <section className="relative overflow-visible rounded-[2.75rem] border border-[var(--color-line)] bg-[var(--surface-article-frame)] px-6 py-8 shadow-[var(--shadow-card)] md:px-8 md:py-10 lg:px-10">
+      <section className="relative overflow-visible rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-article-frame)] px-6 py-8 shadow-[var(--shadow-card)] md:px-8 md:py-10 lg:px-10">
         <div className="max-w-4xl space-y-4">
           <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
             {team.eyebrow ?? siteUi.sections.team.defaultEyebrow}
@@ -443,7 +443,7 @@ export function StudioTeamBlock({
                 type="button"
                 aria-label={siteUi.sections.team.previousCardLabel}
                 onClick={() => handleArrowClick(-1)}
-                className="absolute top-[38%] left-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:left-4"
+                className="absolute top-[38%] left-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:left-4"
               >
                 <ArrowLeft size={18} strokeWidth={1.75} />
               </button>
@@ -451,7 +451,7 @@ export function StudioTeamBlock({
                 type="button"
                 aria-label={siteUi.sections.team.nextCardLabel}
                 onClick={() => handleArrowClick(1)}
-                className="absolute top-[38%] right-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:right-4"
+                className="absolute top-[38%] right-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:right-4"
               >
                 <ArrowRight size={18} strokeWidth={1.75} />
               </button>

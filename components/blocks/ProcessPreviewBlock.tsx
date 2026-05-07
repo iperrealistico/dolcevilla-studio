@@ -27,7 +27,7 @@ export function ProcessPreviewBlock({ steps }: { steps: ProcessStep[] }) {
             from={index % 2 === 0 ? "bottom" : "right"}
             delay={index * 0.06}
           >
-            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
+            <div className="rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
               <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
                 {String(index + 1).padStart(2, "0")}
               </p>

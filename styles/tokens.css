@@ -1,7 +1,7 @@
 :root {
   --color-bg: #f5f1eb;
   --color-paper: #f6efe6;
-  --color-shell: #ece5da;
+  --color-shell: #ece4d8;
   --color-ink: #191612;
   --color-mist: #776d64;
   --color-stone: #a59787;
@@ -19,8 +19,8 @@
   --surface-overlay: rgb(245 241 235 / 0.92);
   --surface-hero-frame: linear-gradient(
     180deg,
-    rgba(250, 247, 242, 0.98),
-    rgba(242, 236, 228, 0.98)
+    rgba(248, 244, 238, 0.98),
+    rgba(239, 233, 224, 0.98)
   );
   --surface-article-frame: linear-gradient(
     180deg,
@@ -48,8 +48,12 @@
   --button-secondary-fg: var(--color-ink);
   --button-ghost-hover: rgb(255 255 255 / 0.6);
   --color-danger: #9b3a2c;
-  --radius-soft: 1.25rem;
-  --radius-pill: 999px;
+  --radius-soft: 0.35rem;
+  --radius-card: 0.4rem;
+  --radius-panel: 0.45rem;
+  --radius-frame: 0.55rem;
+  --radius-control: 0.6rem;
+  --radius-pill: 0.6rem;
   --space-section: clamp(4rem, 7vw, 8rem);
   --space-content: clamp(1.25rem, 2vw, 2rem);
   --container-max: 88rem;
@@ -67,60 +71,60 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #0d1115;
+  --color-bg: #050608;
   --color-paper: #f3ebe0;
-  --color-shell: rgb(22 28 34 / 0.96);
-  --color-ink: #f3ece2;
-  --color-mist: #ada69c;
-  --color-stone: #857a70;
-  --color-accent: #96b1a4;
-  --color-accent-soft: rgb(150 177 164 / 0.18);
-  --color-line: rgb(243 235 224 / 0.12);
-  --surface-panel: rgb(19 25 31 / 0.82);
-  --surface-panel-soft: rgb(23 29 35 / 0.72);
-  --surface-panel-strong: rgb(23 30 37 / 0.92);
-  --surface-floating: rgb(15 20 25 / 0.92);
-  --surface-header: rgb(11 15 19 / 0.82);
-  --surface-input: rgb(16 22 27 / 0.92);
+  --color-shell: rgb(9 11 13 / 0.98);
+  --color-ink: #f4ede4;
+  --color-mist: #b2aba2;
+  --color-stone: #81776e;
+  --color-accent: #a0b8aa;
+  --color-accent-soft: rgb(160 184 170 / 0.16);
+  --color-line: rgb(243 235 224 / 0.1);
+  --surface-panel: rgb(11 13 15 / 0.84);
+  --surface-panel-soft: rgb(14 16 19 / 0.74);
+  --surface-panel-strong: rgb(12 14 17 / 0.92);
+  --surface-floating: rgb(7 9 11 / 0.96);
+  --surface-header: rgb(5 6 8 / 0.88);
+  --surface-input: rgb(12 14 16 / 0.94);
   --surface-subtle: rgb(150 177 164 / 0.11);
   --surface-subtle-strong: rgb(150 177 164 / 0.18);
-  --surface-overlay: rgb(12 16 20 / 0.92);
+  --surface-overlay: rgb(6 8 10 / 0.94);
   --surface-hero-frame: linear-gradient(
     180deg,
-    rgba(15, 19, 24, 0.98),
-    rgba(9, 12, 16, 0.98)
+    rgba(7, 8, 10, 0.98),
+    rgba(2, 3, 5, 1)
   );
   --surface-article-frame: linear-gradient(
     180deg,
-    rgba(15, 19, 24, 0.94),
-    rgba(10, 13, 17, 0.98)
+    rgba(7, 8, 10, 0.95),
+    rgba(3, 4, 6, 1)
   );
-  --surface-article-panel: rgb(16 22 27 / 0.86);
-  --surface-article-panel-strong: rgb(19 25 31 / 0.92);
-  --surface-article-aside: rgb(15 21 26 / 0.78);
+  --surface-article-panel: rgb(10 12 14 / 0.88);
+  --surface-article-panel-strong: rgb(12 14 16 / 0.94);
+  --surface-article-aside: rgb(10 12 14 / 0.82);
   --surface-banner: linear-gradient(
     145deg,
-    rgba(17, 22, 28, 0.96),
-    rgba(11, 15, 19, 0.98)
+    rgba(10, 12, 14, 0.96),
+    rgba(4, 5, 7, 1)
   );
-  --surface-badge: rgb(22 29 35 / 0.96);
-  --surface-toggle: rgb(20 26 31 / 0.94);
-  --surface-chip: rgb(20 27 33 / 0.88);
-  --surface-chip-hover: rgb(29 36 42 / 0.92);
+  --surface-badge: rgb(15 17 20 / 0.96);
+  --surface-toggle: rgb(12 15 18 / 0.96);
+  --surface-chip: rgb(14 17 20 / 0.9);
+  --surface-chip-hover: rgb(22 25 29 / 0.94);
   --button-primary-bg: #f3ebe0;
-  --button-primary-fg: #11161b;
+  --button-primary-fg: #090b0d;
   --button-primary-hover: #ffffff;
-  --button-secondary-bg: rgb(22 28 34 / 0.82);
-  --button-secondary-hover: rgb(29 36 43 / 0.92);
+  --button-secondary-bg: rgb(13 15 18 / 0.86);
+  --button-secondary-hover: rgb(18 21 25 / 0.94);
   --button-secondary-border: rgb(243 235 224 / 0.14);
   --button-secondary-fg: var(--color-ink);
   --button-ghost-hover: rgb(243 235 224 / 0.08);
   --color-danger: #ef8d7c;
-  --shadow-soft: 0 24px 58px rgb(0 0 0 / 0.34);
-  --shadow-card: 0 28px 72px rgb(0 0 0 / 0.38);
-  --shadow-floating: 0 26px 80px rgb(0 0 0 / 0.42);
+  --shadow-soft: 0 26px 64px rgb(0 0 0 / 0.42);
+  --shadow-card: 0 30px 84px rgb(0 0 0 / 0.48);
+  --shadow-floating: 0 28px 88px rgb(0 0 0 / 0.54);
   --page-gradient:
-    radial-gradient(circle at 18% 0%, rgb(150 177 164 / 0.12), transparent 30%),
-    radial-gradient(circle at 82% 14%, rgb(177 149 110 / 0.1), transparent 24%),
-    linear-gradient(180deg, #0d1115 0%, #090c10 100%);
+    radial-gradient(circle at 16% 0%, rgb(160 184 170 / 0.08), transparent 28%),
+    radial-gradient(circle at 84% 14%, rgb(177 149 110 / 0.06), transparent 22%),
+    linear-gradient(180deg, #050608 0%, #020305 100%);
 }

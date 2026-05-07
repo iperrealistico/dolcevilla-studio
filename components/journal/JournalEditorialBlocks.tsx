@@ -40,7 +40,7 @@ function JournalEditorialBlock({
   return (
     <aside
       className={cn(
-        "not-prose relative my-10 overflow-hidden rounded-[1.8rem] border p-6 shadow-[0_24px_64px_rgba(22,15,11,0.11)] md:p-7",
+        "not-prose relative my-10 overflow-hidden rounded-[var(--radius-frame)] border p-6 shadow-[0_24px_64px_rgba(22,15,11,0.11)] md:p-7",
         isDark
           ? "border-white/10 bg-[linear-gradient(145deg,rgba(29,25,22,0.96),rgba(56,48,40,0.92))] text-[var(--color-paper)]"
           : "border-[var(--color-line)] bg-[var(--surface-article-panel)] text-[var(--color-ink)]",
@@ -211,7 +211,7 @@ export function JournalPullQuote({
   children,
 }: JournalPullQuoteProps) {
   return (
-    <aside className="not-prose my-12 rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-article-aside)] px-6 py-7 shadow-[var(--shadow-soft)] backdrop-blur-sm md:px-8 md:py-8">
+    <aside className="not-prose my-12 rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-article-aside)] px-6 py-7 shadow-[var(--shadow-soft)] backdrop-blur-sm md:px-8 md:py-8">
       <div className="space-y-5">
         <div className="flex h-11 w-11 items-center justify-center rounded-[1rem] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]">
           <Quote size={18} strokeWidth={1.9} aria-hidden="true" />

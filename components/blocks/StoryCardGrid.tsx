@@ -62,7 +62,7 @@ export function StoryCardGrid({
           >
             <Link
               href={`/journal/${story.slug}`}
-              className="group relative flex h-full min-h-[25rem] overflow-hidden rounded-[1.85rem] border border-[rgb(255_255_255_/_0.18)] bg-[rgb(34_27_21_/_0.9)] shadow-[0_24px_54px_rgba(30,20,12,0.12)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_34px_72px_rgba(30,20,12,0.18)]"
+              className="group relative flex h-full min-h-[25rem] overflow-hidden rounded-[var(--radius-frame)] border border-[rgb(255_255_255_/_0.14)] bg-[rgb(18_14_11_/_0.94)] shadow-[0_24px_54px_rgba(30,20,12,0.12)] transition duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_34px_72px_rgba(30,20,12,0.18)]"
             >
               <Image
                 src={story.heroImage.src}
@@ -76,7 +76,7 @@ export function StoryCardGrid({
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,13,10,0.22)_0%,rgba(17,13,10,0.4)_26%,rgba(17,13,10,0.76)_100%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_38%)]" />
               <div className="relative z-10 grid min-h-[25rem] w-full place-items-center p-5 md:p-6">
-                <div className="w-full overflow-hidden rounded-[1.5rem] border border-[rgb(255_255_255_/_0.16)] bg-[rgb(255_255_255_/_0.11)] p-5 shadow-[0_20px_44px_rgba(10,7,5,0.18)] backdrop-blur-xl">
+                <div className="w-full overflow-hidden rounded-[var(--radius-panel)] border border-[rgb(255_255_255_/_0.14)] bg-[rgb(255_255_255_/_0.09)] p-5 shadow-[0_20px_44px_rgba(10,7,5,0.18)] backdrop-blur-xl">
                   <div className="space-y-4">
                     <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.24em] text-[rgb(246_237_227_/_0.8)] uppercase">
                       <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />

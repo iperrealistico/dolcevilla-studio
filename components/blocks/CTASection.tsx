@@ -10,7 +10,7 @@ export function CTASection({ section }: { section: CTASectionContent }) {
     section.primaryCta.href.startsWith("/contact") || section.primaryCta.href.startsWith("mailto:");
 
   return (
-    <Container className="rounded-[2rem] bg-[linear-gradient(135deg,#1D1916,#4B4034)] px-6 py-10 text-[var(--color-paper)] md:px-10">
+    <Container className="rounded-[var(--radius-frame)] bg-[linear-gradient(135deg,#14100d,#3a3027)] px-6 py-10 text-[var(--color-paper)] shadow-[var(--shadow-card)] md:px-10">
       <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           {section.eyebrow ? (
@@ -29,7 +29,7 @@ export function CTASection({ section }: { section: CTASectionContent }) {
         </div>
         {showMailAccent ? (
           <div className="hidden md:flex md:justify-end">
-            <div className="flex h-24 w-24 items-center justify-center rounded-[1.75rem] border border-white/12 bg-[rgb(255_255_255_/_0.07)] text-[rgb(244_235_224_/_0.88)] shadow-[0_18px_36px_rgba(0,0,0,0.2)]">
+            <div className="flex h-24 w-24 items-center justify-center rounded-[var(--radius-frame)] border border-white/12 bg-[rgb(255_255_255_/_0.07)] text-[rgb(244_235_224_/_0.88)] shadow-[0_18px_36px_rgba(0,0,0,0.2)]">
               <Mail size={34} strokeWidth={1.7} />
             </div>
           </div>

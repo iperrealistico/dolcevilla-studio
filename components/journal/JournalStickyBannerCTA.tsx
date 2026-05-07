@@ -237,7 +237,7 @@ export function JournalStickyBannerCTA({
             }}
           >
             <div className="pointer-events-auto px-1">
-              <div className="rounded-[2.1rem] border border-[var(--color-line)] bg-[var(--surface-banner)] px-5 py-4 shadow-[var(--shadow-floating)] backdrop-blur-md md:px-6 md:py-5">
+              <div className="rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-banner)] px-5 py-4 shadow-[var(--shadow-floating)] backdrop-blur-md md:px-6 md:py-5">
                 <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-6">
                   <div className="min-w-0">
                     {section.eyebrow ? (

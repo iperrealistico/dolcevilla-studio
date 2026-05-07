@@ -19,7 +19,7 @@ import { trackEvent } from "@/lib/analytics/tracking";
 import type { InquiryFormValues } from "@/types/forms";
 
 const inputClassName =
-  "min-h-12 w-full rounded-2xl border border-[var(--color-line)] bg-[var(--surface-input)] px-4 py-3 text-[var(--color-ink)]";
+  "min-h-12 w-full rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-input)] px-4 py-3 text-[var(--color-ink)]";
 
 export function InquiryForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -73,7 +73,7 @@ export function InquiryForm() {
 
   if (isSubmitted) {
     return (
-      <div className="space-y-4 rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-panel)] p-6 shadow-[var(--shadow-card)] md:p-7">
+      <div className="space-y-4 rounded-[var(--radius-card)] border border-[var(--color-line)] bg-[var(--surface-panel)] p-6 shadow-[var(--shadow-card)] md:p-7">
         <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
           {inquiryFormContent.success.eyebrow}
         </p>
@@ -89,7 +89,7 @@ export function InquiryForm() {
 
   return (
     <form
-      className="grid gap-5 rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-panel)] p-6 shadow-[var(--shadow-card)] md:p-7"
+      className="grid gap-5 rounded-[var(--radius-card)] border border-[var(--color-line)] bg-[var(--surface-panel)] p-6 shadow-[var(--shadow-card)] md:p-7"
       onSubmit={onSubmit}
     >
       <div className="grid gap-5 lg:grid-cols-2">
@@ -162,7 +162,7 @@ export function InquiryForm() {
           {...form.register("message")}
         />
       </FormField>
-      <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4 text-sm text-[var(--color-mist)]">
+      <label className="flex items-start gap-3 rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4 text-sm text-[var(--color-mist)]">
         <input
           className="mt-1 size-4"
           type="checkbox"
@@ -170,7 +170,7 @@ export function InquiryForm() {
         />
         {inquiryFormContent.checkboxes.filmInterest}
       </label>
-      <label className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4 text-sm text-[var(--color-mist)]">
+      <label className="flex items-start gap-3 rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-4 text-sm text-[var(--color-mist)]">
         <input
           className="mt-1 size-4"
           type="checkbox"

@@ -54,7 +54,7 @@ export function HeroSequence({
   return (
     <div
       className={cn(
-        "absolute inset-0 overflow-hidden rounded-[2rem] bg-[var(--color-shell)]",
+        "absolute inset-0 overflow-hidden rounded-[var(--radius-frame)] bg-[var(--color-shell)]",
         className,
       )}
     >
@@ -71,7 +71,7 @@ export function HeroSequence({
                 ? { opacity: isActive ? 1 : 0 }
                 : {
                     opacity: isActive ? 1 : 0,
-                    scale: isActive ? 1.035 : 1,
+                    scale: isActive ? 1.02 : 1,
                   }
             }
             transition={

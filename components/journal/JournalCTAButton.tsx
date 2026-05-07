@@ -56,7 +56,7 @@ export function JournalCTAButton({
   return (
     <div
       className={cn(
-        "relative isolate inline-flex max-w-full rounded-[1.45rem]",
+        "relative isolate inline-flex max-w-full rounded-[var(--radius-card)]",
         pulseClassName,
       )}
     >
@@ -64,7 +64,7 @@ export function JournalCTAButton({
       <Link
         href={href}
         className={cn(
-          "journal-cta-highlight relative inline-flex max-w-full items-center justify-center rounded-[1.35rem] border font-semibold no-underline transition duration-300 hover:-translate-y-0.5 hover:no-underline",
+          "journal-cta-highlight relative inline-flex max-w-full items-center justify-center rounded-[var(--radius-panel)] border font-semibold no-underline transition duration-300 hover:-translate-y-0.5 hover:no-underline",
           sizeClasses[size],
           toneClasses[tone],
           className,

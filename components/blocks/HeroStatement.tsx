@@ -37,66 +37,69 @@ const MOBILE_HERO_OVERLAY_CLASS_NAME =
 
 const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   home: {
-    desktopFrameClassName: "md:min-h-[min(80dvh,58rem)]",
-    desktopContentClassName: "md:max-w-[44rem] xl:max-w-[48rem]",
+    desktopFrameClassName: "md:min-h-[min(58dvh,40rem)]",
+    desktopContentClassName: "md:max-w-[40rem] xl:max-w-[43rem]",
     desktopTitleClassName:
-      "md:max-w-[13ch] md:text-[4.15rem] xl:text-[5.05rem]",
-    desktopCopyClassName: "md:max-w-[31rem]",
+      "md:max-w-[13ch] md:text-[3.65rem] xl:text-[4.45rem]",
+    desktopCopyClassName: "md:max-w-[29rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.12),rgba(29,22,18,0.32))] md:bg-[radial-gradient(circle_at_80%_18%,rgba(244,235,224,0.18),transparent_18%),linear-gradient(90deg,rgba(10,8,7,0.84)_0%,rgba(10,8,7,0.58)_38%,rgba(10,8,7,0.22)_70%,rgba(10,8,7,0.04)_100%),linear-gradient(180deg,rgba(10,8,7,0.12)_0%,rgba(10,8,7,0.62)_100%)]",
     imageClassName: "object-[58%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.55rem] sm:text-[2.95rem]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.35rem] sm:text-[2.7rem]",
     mobileCopyClassName: "max-w-[35ch]",
-    mobileImageHeightClassName: "min-h-[clamp(22.5rem,56svh,31rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(19rem,48svh,26rem)]",
   },
   service: {
-    desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
-    desktopContentClassName: "md:max-w-[40rem] xl:max-w-[44rem]",
-    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.85rem] xl:text-[4.6rem]",
-    desktopCopyClassName: "md:max-w-[29rem]",
+    desktopFrameClassName: "md:min-h-[min(54dvh,35rem)]",
+    desktopContentClassName: "md:max-w-[37rem] xl:max-w-[40rem]",
+    desktopTitleClassName:
+      "md:max-w-[12ch] md:text-[3.35rem] xl:text-[4.05rem]",
+    desktopCopyClassName: "md:max-w-[27rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.1),rgba(29,22,18,0.3))] md:bg-[radial-gradient(circle_at_78%_20%,rgba(244,235,224,0.16),transparent_18%),linear-gradient(90deg,rgba(11,10,8,0.82)_0%,rgba(11,10,8,0.56)_40%,rgba(11,10,8,0.18)_72%,rgba(11,10,8,0.04)_100%),linear-gradient(180deg,rgba(11,10,8,0.12)_0%,rgba(11,10,8,0.58)_100%)]",
     imageClassName: "object-[60%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.4rem] sm:text-[2.75rem]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.2rem] sm:text-[2.5rem]",
     mobileCopyClassName: "max-w-[35ch]",
-    mobileImageHeightClassName: "min-h-[clamp(18rem,42svh,24rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(16.5rem,38svh,21rem)]",
   },
   editorial: {
-    desktopFrameClassName: "md:min-h-[min(78dvh,55rem)]",
-    desktopContentClassName: "md:max-w-[38rem] xl:max-w-[42rem]",
-    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.35rem]",
-    desktopCopyClassName: "md:max-w-[28rem]",
+    desktopFrameClassName: "md:min-h-[min(54dvh,35rem)]",
+    desktopContentClassName: "md:max-w-[36rem] xl:max-w-[39rem]",
+    desktopTitleClassName:
+      "md:max-w-[12ch] md:text-[3.25rem] xl:text-[3.95rem]",
+    desktopCopyClassName: "md:max-w-[26rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.1),rgba(29,22,18,0.28))] md:bg-[radial-gradient(circle_at_82%_16%,rgba(244,235,224,0.14),transparent_16%),linear-gradient(90deg,rgba(12,10,9,0.8)_0%,rgba(12,10,9,0.52)_40%,rgba(12,10,9,0.16)_74%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.14)_0%,rgba(12,10,9,0.56)_100%)]",
     imageClassName: "object-[60%_center] md:object-center",
-    mobileTitleClassName: "max-w-[11ch] text-[2.3rem] sm:text-[2.65rem]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.15rem] sm:text-[2.45rem]",
     mobileCopyClassName: "max-w-[34ch]",
-    mobileImageHeightClassName: "min-h-[clamp(17rem,40svh,23rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(16rem,37svh,20rem)]",
   },
   landing: {
-    desktopFrameClassName: "md:min-h-[min(76dvh,53rem)]",
-    desktopContentClassName: "md:max-w-[37rem] xl:max-w-[41rem]",
-    desktopTitleClassName: "md:max-w-[13ch] md:text-[3.55rem] xl:text-[4.1rem]",
-    desktopCopyClassName: "md:max-w-[27rem]",
+    desktopFrameClassName: "md:min-h-[min(52dvh,32rem)]",
+    desktopContentClassName: "md:max-w-[35rem] xl:max-w-[38rem]",
+    desktopTitleClassName:
+      "md:max-w-[13ch] md:text-[3.05rem] xl:text-[3.65rem]",
+    desktopCopyClassName: "md:max-w-[25rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.08),rgba(29,22,18,0.26))] md:bg-[radial-gradient(circle_at_82%_18%,rgba(244,235,224,0.14),transparent_18%),linear-gradient(90deg,rgba(12,10,9,0.78)_0%,rgba(12,10,9,0.5)_42%,rgba(12,10,9,0.16)_74%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.12)_0%,rgba(12,10,9,0.52)_100%)]",
     imageClassName: "object-[62%_center] md:object-center",
-    mobileTitleClassName: "max-w-[12ch] text-[2.2rem] sm:text-[2.5rem]",
+    mobileTitleClassName: "max-w-[12ch] text-[2rem] sm:text-[2.3rem]",
     mobileCopyClassName: "max-w-[33ch]",
-    mobileImageHeightClassName: "min-h-[clamp(16.5rem,38svh,22rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(15.5rem,36svh,19.5rem)]",
   },
   ads: {
-    desktopFrameClassName: "md:min-h-[min(74dvh,50rem)]",
-    desktopContentClassName: "md:max-w-[35rem] xl:max-w-[38rem]",
+    desktopFrameClassName: "md:min-h-[min(50dvh,30rem)]",
+    desktopContentClassName: "md:max-w-[33rem] xl:max-w-[36rem]",
     desktopTitleClassName:
-      "md:max-w-[13ch] md:text-[3.25rem] xl:text-[3.85rem]",
-    desktopCopyClassName: "md:max-w-[25rem]",
+      "md:max-w-[13ch] md:text-[2.85rem] xl:text-[3.35rem]",
+    desktopCopyClassName: "md:max-w-[23rem]",
     desktopOverlayClassName:
       "bg-[linear-gradient(180deg,rgba(29,22,18,0.08),rgba(29,22,18,0.24))] md:bg-[radial-gradient(circle_at_80%_18%,rgba(244,235,224,0.12),transparent_16%),linear-gradient(90deg,rgba(12,10,9,0.76)_0%,rgba(12,10,9,0.48)_44%,rgba(12,10,9,0.14)_76%,rgba(12,10,9,0.04)_100%),linear-gradient(180deg,rgba(12,10,9,0.1)_0%,rgba(12,10,9,0.5)_100%)]",
     imageClassName: "object-[64%_center] md:object-center",
-    mobileTitleClassName: "max-w-[12ch] text-[2.05rem] sm:text-[2.35rem]",
+    mobileTitleClassName: "max-w-[12ch] text-[1.92rem] sm:text-[2.18rem]",
     mobileCopyClassName: "max-w-[32ch]",
-    mobileImageHeightClassName: "min-h-[clamp(16rem,37svh,21rem)]",
+    mobileImageHeightClassName: "min-h-[clamp(15rem,35svh,18.5rem)]",
   },
 };
 
@@ -115,19 +118,19 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
 
   return (
     <section
-      className="relative px-3 pt-3 pb-6 md:px-8 md:pt-6 md:pb-10 lg:px-10"
+      className="relative px-4 pt-4 pb-6 md:px-8 md:pt-5 md:pb-10 lg:px-10"
       data-hero-section="true"
     >
       <div
         className={cn(
-          "relative flex flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-[var(--surface-hero-frame)] shadow-[var(--shadow-card)]",
+          "relative mx-auto flex max-w-[var(--hero-frame-max)] flex-col overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-hero-frame)] shadow-[var(--shadow-card)]",
           styles.desktopFrameClassName,
         )}
       >
         <div className="relative md:absolute md:inset-0">
           <div
             className={cn(
-              "relative overflow-hidden rounded-t-[2rem] rounded-b-[1.65rem] md:h-full md:min-h-full md:rounded-[2rem]",
+              "relative overflow-hidden rounded-t-[var(--radius-frame)] rounded-b-[calc(var(--radius-frame)-0.2rem)] md:h-full md:min-h-full md:rounded-[var(--radius-frame)]",
               styles.mobileImageHeightClassName,
             )}
           >
@@ -181,7 +184,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
             <span className="text-[0.58rem] font-medium tracking-[0.34em] text-[rgb(250_247_242_/_0.86)] uppercase drop-shadow-[0_2px_10px_rgba(28,22,18,0.28)]">
               {siteUi.hero.scrollLabel}
             </span>
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md">
+            <span className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md">
               <ArrowDown size={18} strokeWidth={1.7} aria-hidden="true" />
             </span>
           </a>
@@ -202,10 +205,10 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
                 styles.desktopContentClassName,
               )}
             >
-              <div className="pointer-events-none absolute inset-y-[-2.25rem] right-[-4rem] left-[-2rem] hidden rounded-[2.8rem] bg-[linear-gradient(135deg,rgba(15,12,10,0.42)_0%,rgba(15,12,10,0.18)_48%,rgba(15,12,10,0.04)_76%,rgba(15,12,10,0)_100%)] backdrop-blur-[2px] md:block" />
+              <div className="pointer-events-none absolute inset-y-[-2.25rem] right-[-4rem] left-[-2rem] hidden rounded-[calc(var(--radius-frame)+0.35rem)] bg-[linear-gradient(135deg,rgba(15,12,10,0.42)_0%,rgba(15,12,10,0.18)_48%,rgba(15,12,10,0.04)_76%,rgba(15,12,10,0)_100%)] backdrop-blur-[2px] md:block" />
               {hero.eyebrow ? (
                 <FloatIn from="left">
-                  <Eyebrow className="relative mb-0 inline-flex rounded-full border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
+                  <Eyebrow className="relative mb-0 inline-flex rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
                     {hero.eyebrow}
                   </Eyebrow>
                 </FloatIn>

@@ -80,7 +80,7 @@ export function GalleryLightbox() {
                 <button
                   type="button"
                   aria-label={siteUi.galleryLightbox.closeLabel}
-                  className="absolute top-4 right-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/16 bg-white/10 text-white transition hover:bg-white/16 sm:top-6 sm:right-6"
+                  className="absolute top-4 right-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-pill)] border border-white/16 bg-white/10 text-white transition hover:bg-white/16 sm:top-6 sm:right-6"
                   onClick={(event) => {
                     event.stopPropagation();
                     closeLightbox();
@@ -93,7 +93,7 @@ export function GalleryLightbox() {
                   <button
                     type="button"
                     aria-label={siteUi.galleryLightbox.previousLabel}
-                    className="absolute top-1/2 left-4 hidden min-h-12 min-w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/16 bg-white/10 text-white transition hover:bg-white/16 md:inline-flex"
+                    className="absolute top-1/2 left-4 hidden min-h-12 min-w-12 -translate-y-1/2 items-center justify-center rounded-[var(--radius-pill)] border border-white/16 bg-white/10 text-white transition hover:bg-white/16 md:inline-flex"
                     onClick={(event) => {
                       event.stopPropagation();
                       goToPrevious();
@@ -105,7 +105,7 @@ export function GalleryLightbox() {
 
                 <motion.figure
                   key={currentImage.id}
-                  className="flex w-auto max-w-[min(94vw,1600px)] flex-col gap-4 rounded-[2rem] border border-white/10 bg-[rgb(18_15_12_/_0.72)] p-3 shadow-[0_40px_120px_rgba(0,0,0,0.38)] sm:p-5"
+                  className="flex w-auto max-w-[min(90vw,1280px)] flex-col gap-4 rounded-[var(--radius-frame)] border border-white/10 bg-[rgb(18_15_12_/_0.72)] p-3 shadow-[0_40px_120px_rgba(0,0,0,0.38)] sm:p-5"
                   initial={
                     reduceMotion
                       ? { opacity: 0 }
@@ -120,18 +120,18 @@ export function GalleryLightbox() {
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   onClick={(event) => event.stopPropagation()}
                 >
-                  <div className="relative flex items-center justify-center overflow-hidden rounded-[1.5rem] bg-[rgb(31_25_21_/_0.42)] px-2 py-2 sm:px-3 sm:py-3">
+                  <div className="relative flex items-center justify-center overflow-hidden rounded-[var(--radius-image)] bg-[rgb(31_25_21_/_0.42)] px-2 py-2 sm:px-3 sm:py-3">
                     <Image
                       key={currentImage.id}
                       src={currentImage.src}
                       alt={currentImage.alt}
                       width={currentImage.width}
                       height={currentImage.height}
-                      sizes="(min-width: 1280px) 1280px, 94vw"
+                      sizes="(min-width: 1280px) 1120px, 90vw"
                       placeholder="blur"
                       blurDataURL={currentImage.blurDataURL}
                       priority
-                      className="h-auto max-h-[74vh] w-auto max-w-[min(90vw,1400px)] object-contain"
+                      className="h-auto max-h-[70vh] w-auto max-w-[min(86vw,1120px)] object-contain"
                     />
                   </div>
 
@@ -149,7 +149,7 @@ export function GalleryLightbox() {
                   <button
                     type="button"
                     aria-label={siteUi.galleryLightbox.nextLabel}
-                    className="absolute top-1/2 right-4 hidden min-h-12 min-w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/16 bg-white/10 text-white transition hover:bg-white/16 md:inline-flex"
+                    className="absolute top-1/2 right-4 hidden min-h-12 min-w-12 -translate-y-1/2 items-center justify-center rounded-[var(--radius-pill)] border border-white/16 bg-white/10 text-white transition hover:bg-white/16 md:inline-flex"
                     onClick={(event) => {
                       event.stopPropagation();
                       goToNext();

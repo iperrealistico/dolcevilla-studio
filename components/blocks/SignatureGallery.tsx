@@ -6,7 +6,7 @@ import { ImageGallery } from "@/components/galleries/ImageGallery";
 export function SignatureGallery({ items }: { items: GalleryItem[] }) {
   return (
     <Section className="pt-0">
-      <Container className="max-w-[var(--gallery-max)]">
+      <Container>
         <ImageGallery items={items} variant="editorial" />
       </Container>
     </Section>

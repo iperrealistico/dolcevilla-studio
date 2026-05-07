@@ -27,7 +27,7 @@ export function WhyChooseUs({ items }: { items: Point[] }) {
             from={index % 2 === 0 ? "bottom" : "right"}
             delay={index * 0.06}
           >
-            <div className="rounded-[var(--radius-card)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
+            <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] p-5 shadow-[var(--shadow-soft)]">
               <h3 className="font-display-face text-2xl tracking-[-0.03em]">
                 {item.title}
               </h3>

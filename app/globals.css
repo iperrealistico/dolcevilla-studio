@@ -235,22 +235,6 @@ html[data-custom-cursor="enabled"] * {
     0 0 0 1px rgb(255 255 255 / 0.34) inset;
 }
 
-.journal-ornament {
-  mix-blend-mode: darken;
-}
-
-.journal-ornament-image {
-  transition: filter 180ms ease;
-}
-
-:root[data-theme="dark"] .journal-ornament {
-  mix-blend-mode: screen;
-}
-
-:root[data-theme="dark"] .journal-ornament-image {
-  filter: invert(1) grayscale(1) contrast(1.06);
-}
-
 .journal-chapter-rail-mask {
   overscroll-behavior: contain;
   scroll-padding-block: 0.9rem;

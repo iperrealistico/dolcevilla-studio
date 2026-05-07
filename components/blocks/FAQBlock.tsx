@@ -21,7 +21,7 @@ export function FAQBlock({ items }: { items: FAQItem[] }) {
         {items.map((item) => (
           <details
             key={item.question}
-            className="rounded-[var(--radius-card)] border border-[var(--color-line)] bg-[var(--surface-panel)] px-5 py-4 shadow-[var(--shadow-soft)]"
+            className="rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--surface-panel)] px-5 py-4 shadow-[var(--shadow-soft)]"
           >
             <summary className="cursor-pointer list-none text-lg font-semibold text-[var(--color-ink)]">
               {item.question}

@@ -25,37 +25,36 @@ export function JournalEntryHero({
 }: JournalEntryHeroProps) {
   const publishedLabel = formatDate(publishedAt);
   const heroMetaChipClassName =
-    "inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--surface-badge)] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.18em] text-[var(--color-ink)] uppercase shadow-[var(--shadow-soft)]";
+    "inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[rgb(255_255_255_/_0.18)] bg-[linear-gradient(145deg,rgba(16,12,9,0.42),rgba(16,12,9,0.24))] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.18em] text-[rgb(250_244_236)] uppercase shadow-[0_18px_42px_rgba(10,7,5,0.24)] ring-1 ring-[rgb(255_255_255_/_0.06)] backdrop-blur-md";
 
   return (
     <section className="px-4 pt-4 pb-4 md:px-8 md:pt-5 lg:px-10">
-      <div className="relative mx-auto max-w-[var(--journal-frame-max)] overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-article-frame)] shadow-[var(--shadow-card)]">
-        <div className="relative min-h-[clamp(14rem,52vw,20rem)] overflow-hidden border-b border-[var(--color-line)] md:min-h-[clamp(17rem,34vw,24rem)]">
-          <Image
-            src={coverAsset.src}
-            alt={coverAsset.alt}
-            fill
-            priority
-            sizes="(min-width: 1280px) 84rem, 100vw"
-            placeholder="blur"
-            blurDataURL={coverAsset.blurDataURL}
-            className="object-cover object-center"
-            style={
-              coverAsset.focalPoint
-                ? { objectPosition: coverAsset.focalPoint }
-                : undefined
-            }
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,7,0.08)_0%,rgba(10,8,7,0.18)_52%,rgba(10,8,7,0.34)_100%)]" />
-          <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent)] md:h-28" />
-        </div>
-        <Container className="px-0">
-          <div className="space-y-5 px-5 py-6 md:px-8 md:py-8 lg:px-10 lg:py-9">
+      <div className="relative mx-auto min-h-[clamp(23rem,88vw,28rem)] max-w-[var(--journal-frame-max)] overflow-hidden rounded-[var(--radius-frame)] border border-white/16 bg-[var(--color-shell)] shadow-[0_32px_88px_rgba(18,12,9,0.22)] md:min-h-[56svh]">
+        <Image
+          src={coverAsset.src}
+          alt={coverAsset.alt}
+          fill
+          priority
+          sizes="(min-width: 1280px) 80rem, 100vw"
+          placeholder="blur"
+          blurDataURL={coverAsset.blurDataURL}
+          className="object-cover object-center"
+          style={
+            coverAsset.focalPoint
+              ? { objectPosition: coverAsset.focalPoint }
+              : undefined
+          }
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,11,8,0.58)_0%,rgba(14,11,8,0.4)_18%,rgba(14,11,8,0.18)_34%,rgba(18,13,10,0.34)_54%,rgba(18,13,10,0.84)_100%)] md:bg-[linear-gradient(180deg,rgba(14,11,8,0.46)_0%,rgba(14,11,8,0.34)_16%,rgba(14,11,8,0.12)_32%,rgba(18,13,10,0.3)_56%,rgba(18,13,10,0.78)_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-[34%] bg-[linear-gradient(180deg,rgba(10,7,5,0.24),rgba(10,7,5,0.12),transparent)] md:h-[28%]" />
+        <div className="absolute inset-y-0 left-0 w-[68%] bg-[radial-gradient(circle_at_20%_56%,rgba(10,7,5,0.22),transparent_62%)] md:w-[58%]" />
+        <Container className="relative z-10 flex min-h-[clamp(23rem,88vw,28rem)] flex-col justify-between px-0 py-0 md:min-h-[56svh] md:justify-end md:py-9">
+          <div className="flex min-h-[clamp(23rem,88vw,28rem)] flex-col justify-between px-5 pt-5 pb-6 md:min-h-[56svh] md:px-0 md:pt-0 md:pb-0">
             <div className="flex flex-wrap items-start justify-between gap-3 md:gap-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <div className={heroMetaChipClassName}>
-                  <span>{publishedLabel}</span>
-                </div>
+              <div className={heroMetaChipClassName}>
+                <span>{publishedLabel}</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 md:justify-end">
                 <div className={heroMetaChipClassName}>
                   <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
                   <span>{location}</span>
@@ -70,11 +69,11 @@ export function JournalEntryHero({
                 </div>
               </div>
             </div>
-            <div className="max-w-4xl space-y-4 md:space-y-5">
-              <h1 className="font-display-face max-w-[9.5ch] text-[2.45rem] leading-[0.92] tracking-[-0.06em] text-[var(--color-ink)] sm:text-[2.9rem] md:max-w-5xl md:text-[4.45rem] md:leading-[0.9]">
+            <div className="max-w-4xl space-y-5 drop-shadow-[0_18px_38px_rgba(10,7,5,0.36)] md:space-y-6">
+              <h1 className="font-display-face max-w-[9.4ch] text-[2.55rem] leading-[0.91] tracking-[-0.06em] text-[var(--color-paper)] [text-shadow:0_2px_6px_rgba(9,6,5,0.36),0_18px_42px_rgba(9,6,5,0.76)] sm:text-[3rem] md:max-w-4xl md:text-[5.35rem] md:leading-[0.9] md:tracking-[-0.062em]">
                 {title}
               </h1>
-              <p className="max-w-[24rem] text-[1rem] leading-7 text-[var(--color-mist)] md:max-w-2xl md:text-lg md:leading-8">
+              <p className="max-w-[21rem] text-[1rem] leading-7 text-[rgb(244_235_224_/_0.88)] [text-shadow:0_2px_4px_rgba(9,6,5,0.34),0_10px_28px_rgba(9,6,5,0.58)] md:max-w-2xl md:text-lg md:leading-8 md:text-[rgb(244_235_224_/_0.84)]">
                 {excerpt}
               </p>
             </div>

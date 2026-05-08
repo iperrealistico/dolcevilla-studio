@@ -51,8 +51,8 @@ export function JournalEntryHero({
           sizes="(min-width: 1536px) 28vw, (min-width: 1280px) 29vw, (min-width: 1024px) 35vw, (min-width: 640px) 64vw, 84vw"
         />
         <div className="absolute inset-x-0 top-0 h-[26%] bg-[linear-gradient(180deg,rgba(10,7,5,0.22),rgba(10,7,5,0.06),transparent)] md:h-[22%]" />
-        <Container className="relative z-10 flex min-h-[clamp(31rem,118vw,37rem)] flex-col justify-end py-5 md:min-h-[min(76svh,45rem)] md:py-10">
-          <div className="space-y-6 rounded-[var(--radius-frame)] border border-white/12 bg-[rgb(8_7_7_/_0.38)] px-5 py-5 shadow-[0_28px_76px_rgba(0,0,0,0.26)] backdrop-blur-md md:px-7 md:py-7">
+        <Container className="pointer-events-none relative z-10 flex min-h-[clamp(31rem,118vw,37rem)] flex-col justify-end py-5 md:min-h-[min(76svh,45rem)] md:py-10">
+          <div className="pointer-events-none space-y-6 rounded-[var(--radius-frame)] border border-white/12 bg-[rgb(8_7_7_/_0.38)] px-5 py-5 shadow-[0_28px_76px_rgba(0,0,0,0.26)] backdrop-blur-md md:px-7 md:py-7">
             <div className="flex flex-wrap items-start justify-between gap-3 md:gap-4">
               <div className={heroMetaChipClassName}>
                 <span>{publishedLabel}</span>

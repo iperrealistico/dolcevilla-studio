@@ -163,7 +163,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
         </div>
         <Container
           className={cn(
-            "relative z-10 w-full md:flex md:min-h-full md:items-end md:py-10 lg:py-12",
+            "pointer-events-none relative z-10 w-full md:flex md:min-h-full md:items-end md:py-10 lg:py-12",
             styles.desktopFrameClassName,
           )}
         >
@@ -173,7 +173,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
           >
             <div
               className={cn(
-                "relative space-y-5 border border-[var(--color-line)] bg-[var(--surface-panel-strong)] px-5 py-6 shadow-[var(--shadow-soft)] md:space-y-6 md:rounded-[var(--radius-frame)] md:border-white/12 md:bg-[rgb(10_9_8_/_0.42)] md:px-7 md:py-7 md:shadow-[0_30px_70px_rgba(0,0,0,0.24)] md:backdrop-blur-md",
+                "pointer-events-none relative space-y-5 border border-[var(--color-line)] bg-[var(--surface-panel-strong)] px-5 py-6 shadow-[var(--shadow-soft)] md:space-y-6 md:rounded-[var(--radius-frame)] md:border-white/12 md:bg-[rgb(10_9_8_/_0.42)] md:px-7 md:py-7 md:shadow-[0_30px_70px_rgba(0,0,0,0.24)] md:backdrop-blur-md",
                 styles.desktopContentClassName,
               )}
             >
@@ -208,7 +208,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               </FloatIn>
               <FloatIn from="right" delay={0.22}>
                 <div
-                  className="relative flex flex-col gap-3 pt-1 md:flex-row md:flex-wrap md:items-center"
+                  className="pointer-events-auto relative flex flex-col gap-3 pt-1 md:flex-row md:flex-wrap md:items-center"
                   data-hero-cta-region="true"
                 >
                   <LinkButton

@@ -459,6 +459,15 @@
   "journal.certaldo-wedding-photographer-guide-a-less-expected-tuscany-wedding-setting.ornament.orbit": {
     "asset": "journalCertaldoWeddingPhotographerGuideLessExpectedTuscanySettingOrnamentOrbit"
   },
+  "journal.super-8-vs-digital-wedding-video-in-tuscany-what-each-format-captures-best.cover": {
+    "asset": "journalSuper8VsDigitalWeddingVideoTuscanyCover"
+  },
+  "journal.super-8-vs-digital-wedding-video-in-tuscany-what-each-format-captures-best.ornament.wash": {
+    "asset": "journalSuper8VsDigitalWeddingVideoTuscanyOrnamentWash"
+  },
+  "journal.super-8-vs-digital-wedding-video-in-tuscany-what-each-format-captures-best.ornament.orbit": {
+    "asset": "journalSuper8VsDigitalWeddingVideoTuscanyOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

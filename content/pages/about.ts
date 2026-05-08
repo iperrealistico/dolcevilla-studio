@@ -1,15 +1,22 @@
 import { servicePageContentSchema } from "@/lib/content/schemas";
 import { buildGallery } from "@/lib/images/imageManifest";
+import { testimonials } from "@/content/site/testimonials";
 
 export const aboutPage = servicePageContentSchema.parse({
   slug: "about",
   pageType: "about",
   hero: {
-    eyebrow: "About",
-    title: "A Tuscany-rooted studio shaped by art, place, film craft, and emotional restraint.",
+    eyebrow: "About Dolcevilla Studio",
+    title:
+      "A Tuscany wedding studio built on real film craft, dependable digital coverage, and clearly defined roles.",
     subtitle:
-      "Dolcevilla Studio was formed around Villa Raffaelli, Upper Tuscany, and a belief that traditional photographic tools still tell the truth differently when they are used with real skill.",
-    primaryCta: { label: "Get in touch", href: "/contact" },
+      "Dolcevilla Studio works from Villa Raffaelli in Garfagnana, near Lucca, with separate leads for creative direction, production, film handling, archive, postproduction, and final delivery. That structure is part of why the work feels calm to the couple and precise behind the scenes.",
+    primaryCta: { label: "Start your inquiry", href: "/contact" },
+    secondaryCta: {
+      label: "See the experience",
+      href: "/experience",
+      variant: "secondary",
+    },
     imageIds: [
       "page.about.hero.primary",
       "page.about.hero.secondary",
@@ -19,45 +26,51 @@ export const aboutPage = servicePageContentSchema.parse({
   },
   intro: {
     eyebrow: "Who we are",
-    heading: "We believe weddings are best photographed with taste, clarity, and a real relationship to both place and process.",
+    heading:
+      "A real studio in Tuscany, with different hands responsible for different parts of the work.",
     body: [
-      "This is not a long biography page. It is a compact portrait of the visual world, the geography, and the hybrid craft behind the work.",
-      "We care deeply about Tuscany, but also about the authenticity of traditional tools. One photographer always works with film during a wedding, and the studio’s analog practice continues through proofing, darkroom thinking, and a slower relationship to the image.",
+      "This page matters because many studios talk about film, craft, and direction as if one person does everything equally well. Dolcevilla Studio is built differently. The photography, the planning, the film side, the archive, and the finishing all have clear ownership.",
+      "That structure helps couples in practical ways. It means film is handled by people who actually work with negatives and scans, digital coverage stays reliable when the day speeds up, and the final gallery is shaped with continuity from the first conversation to the last exported file.",
     ],
   },
   team: {
     eyebrow: "The studio",
-    heading: "Four principal leads, with a wider studio behind the work.",
+    heading:
+      "Four principal leads, each responsible for a different part of the studio.",
     body: [
-      "The visible direction of the studio sits with four people, but the work is carried by a wider circle of producers, photographers, film hands, and finishers shaped by the same taste.",
-      "That shared culture keeps the experience calm for the couple while the execution stays exacting from the first call to the final delivery.",
+      "The visible core of Dolcevilla Studio sits with four people. Around them is a wider working circle of photographers, assistants, production support, and finishing hands who move to the same standard.",
+      "For couples, that means the work stays personal without being fragile. There is a clear voice behind the studio, but also enough real structure to support destination weddings, film coverage, travel logistics, and careful delivery.",
     ],
     groupNote:
-      "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
+      "Beyond the four principal leads is a wider studio handling production, second coverage, film processing support, archive discipline, and finishing to one shared standard.",
     supportingRoles: [],
     members: [
       {
         name: "Lisa Mazzei",
-        role: "Creative Director + Lead Photographer",
-        quote: "A wedding should feel observed from the inside, not styled from the outside.",
+        role: "Creative Director and Lead Photographer",
+        quote:
+          "The photographs should feel close to the day itself, not inflated by direction that never belonged there.",
         imageId: "page.about.team.lisa",
       },
       {
         name: "Alberto Pellegrinetti",
-        role: "Managing Director / Executive Producer & Photographer",
-        quote: "The most luxurious production is the one the couple barely notices.",
+        role: "Executive Producer, Client Lead, and Photographer",
+        quote:
+          "The best production is the one that keeps the day clear, calm, and easy for the couple from the beginning.",
         imageId: "page.about.team.alberto",
       },
       {
         name: "Leonardo Fiori",
-        role: "Head of Film Lab + Archive Curator & Photographer",
-        quote: "Film matters because it is physical judgment, not an effect added later.",
+        role: "Head of Film Lab, Archive, and Photographer",
+        quote:
+          "Film matters because it passes through real judgment at every stage, from exposure to scan to archive.",
         imageId: "page.about.team.leonardo",
       },
       {
         name: "Francesco Tarantino",
-        role: "Head of Postproduction + Digital Imaging Director & Photographer",
-        quote: "Finishing should preserve atmosphere and skin, not polish the life out of it.",
+        role: "Head of Postproduction, Color, and Photographer",
+        quote:
+          "Finishing should protect skin, light, and texture, not smooth the life out of the pictures.",
         imageId: "page.about.team.francesco",
       },
     ],
@@ -72,60 +85,119 @@ export const aboutPage = servicePageContentSchema.parse({
   ]),
   highlights: [
     {
-      title: "Visual philosophy",
-      description: "Emotion matters most when it is held inside strong composition, rhythm, and lived atmosphere.",
+      title: "Clear responsibilities",
+      description:
+        "Creative direction, production, film handling, archive, and finishing are not blurred into one vague promise. Different people carry different parts of the work.",
     },
     {
-      title: "Analog craft matters",
-      description: "Film is not there to cosplay the past. It is there because grain, pace, and the physical negative still create something digital cannot honestly imitate.",
+      title: "Real analog practice",
+      description:
+        "Film is part of the studio because there is real lab knowledge behind it: rolls, negatives, proofing, scans, archive discipline, and decisions made by people who know the material.",
     },
     {
-      title: "Upper Tuscany still matters",
-      description: "This quieter geography gives the brand its texture and distinction without becoming the whole identity.",
+      title: "A real Tuscany base",
+      description:
+        "Villa Raffaelli in Garfagnana is not just a visual backdrop. It is where the studio works, meets, plans, and builds its sense of place.",
     },
   ],
   craft: {
     variant: "editorial",
     eyebrow: "The craft",
-    title: "35mm, 120, large format, and the judgment to know when each belongs.",
+    title:
+      "The film side is real, and the digital side is treated with the same seriousness.",
     body:
-      "Not everybody can work this way well. Each format asks for a different pace, different exposure judgment, and different discipline under real wedding pressure. That is exactly why it matters to us.",
+      "35mm, medium format, selected large-format frames, and digital coverage all ask for different decisions. The point is not to mention formats for prestige. The point is to know what each one does well and who in the studio is responsible for carrying that standard through capture, scanning, color, and delivery.",
     imageId: "page.about.craft.image",
     points: [
       {
-        title: "35mm",
-        description: "Fast, instinctive, and alive. It belongs to gesture, documentary movement, and the electricity of a real wedding day.",
+        title: "35mm for movement and energy",
+        description:
+          "Fast enough for arrivals, dinners, dance floors, flash, and the parts of a wedding that should still feel immediate.",
       },
       {
-        title: "120 medium format",
-        description: "Slower and more dimensional. It gives portraits, details, and architectural space a richer sense of weight.",
+        title: "120 for portraits and detail",
+        description:
+          "Slower, richer, and better suited to faces, interiors, architecture, florals, and the frames that need more shape and depth.",
       },
       {
-        title: "Large format",
-        description: "Rare, deliberate, and demanding. It is for very selected frames where time, stillness, and craft all line up.",
+        title: "Large format for selected heirloom frames",
+        description:
+          "Used rarely and deliberately, when time, stillness, and collaboration line up for a few frames that deserve more ceremony.",
       },
       {
-        title: "Darkroom literacy",
-        description: "The analog side of the studio is real. We work with proof sheets, negatives, and darkroom thinking rather than treating film as surface decoration.",
+        title: "Darkroom literacy and finishing discipline",
+        description:
+          "The analog side does not stop at shooting. Proof sheets, negatives, scans, archive care, and final finishing all shape the way the studio works.",
       },
     ],
   },
+  geography: {
+    eyebrow: "Where the studio lives",
+    heading:
+      "Based at Villa Raffaelli in Garfagnana, near Lucca, with the rest of Tuscany within reach.",
+    body: [
+      "The studio works from the quieter mountain side of north Tuscany, not from a placeless office and not from a city borrowed only for marketing. That location shapes the pace of the work and gives the team a real relationship with the region.",
+      "It also helps in practical terms. Couples planning from abroad often need advice on movement, weather, light, and which parts of Tuscany genuinely fit the celebration. Local knowledge matters more when it can actually guide decisions.",
+    ],
+    places: [
+      "Villa Raffaelli",
+      "Garfagnana",
+      "Near Lucca",
+      "North Tuscany",
+      "Pisa",
+      "Florence",
+      "Versilia",
+    ],
+  },
+  locationLinks: [
+    { label: "See the experience", href: "/experience", variant: "ghost" },
+    {
+      label: "Explore film coverage",
+      href: "/film-wedding-photography",
+      variant: "ghost",
+    },
+    { label: "See Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
+    { label: "Start your inquiry", href: "/contact", variant: "ghost" },
+  ],
   stories: [],
+  testimonials: [...testimonials.home, ...testimonials.services],
+  investmentNote: {
+    eyebrow: "Why this structure matters",
+    heading:
+      "Good wedding photography depends on more than one person knowing how to use a camera.",
+    body: [
+      "When the planning, capture, film handling, archive, and finishing are all taken seriously, the result feels more coherent for the couple and more dependable under pressure. That is the standard the studio is built around.",
+    ],
+  },
   villa: {
     variant: "editorial",
-    title: "Villa Raffaelli is part of the origin, not the total identity.",
-    body: "It is where the brand’s taste, stillness, and point of view were formed, but the studio is equally defined by how it photographs: hybrid, tactile, and technically intentional.",
+    eyebrow: "Villa Raffaelli",
+    title: "Villa Raffaelli matters because it is the studio's real base, not a brand prop.",
+    body: "The villa is where the studio works and where its relationship with north Tuscany became concrete. It shaped the visual language, but it also houses the day-to-day discipline behind the work, from planning and hospitality to the film side of the practice.",
     imageId: "page.about.villa.image",
   },
   cta: {
-    title: "If this world feels close to yours, let’s talk.",
-    body: "We’d love to hear about the place, the feeling, and the photographic language you want the day to hold.",
+    eyebrow: "Get in touch",
+    title: "If you want to know who will actually shape the work, start here.",
+    body: "Tell us your date, your venue, and what matters most to you in the photography. We will answer clearly about fit, approach, and how the studio would handle your celebration.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
+    secondaryCta: {
+      label: "Read the journal",
+      href: "/journal",
+      variant: "secondary",
+    },
   },
   seo: {
-    title: "About Dolcevilla Studio",
+    title: "About Dolcevilla Studio | Tuscany Wedding Photography Team",
     description:
-      "Learn more about Dolcevilla Studio, a Tuscany wedding photography brand shaped by art, place, Villa Raffaelli, and a hybrid film-plus-digital craft.",
+      "Learn about Dolcevilla Studio, a Tuscany wedding photography team based at Villa Raffaelli near Lucca, with dedicated leads for direction, film lab, archive, postproduction, and hybrid coverage.",
     path: "/about",
+    keywords: [
+      "Dolcevilla Studio",
+      "tuscany wedding photography team",
+      "film and digital wedding photographers in tuscany",
+      "lucca wedding photography studio",
+      "villa raffaelli studio",
+    ],
   },
 });

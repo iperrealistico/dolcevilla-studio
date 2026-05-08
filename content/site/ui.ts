@@ -49,9 +49,9 @@ export const siteUi = {
       heading: "How the experience unfolds.",
     },
     storyGrid: {
-      eyebrow: "Selected stories",
-      heading: "Proof with atmosphere, not filler.",
-      showMoreLabel: "See more stories",
+      eyebrow: "From the journal",
+      heading: "Venue guides, planning notes, and real wedding stories.",
+      showMoreLabel: "Browse the journal",
     },
     testimonials: {
       eyebrow: "Testimonial",

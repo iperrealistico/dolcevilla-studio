@@ -4,59 +4,87 @@ export const contactPage = servicePageContentSchema.parse({
   slug: "contact",
   pageType: "contact",
   intro: {
-    eyebrow: "Contact",
+    eyebrow: "Contact Dolcevilla Studio",
     heading:
-      "Tell us your date, your place, and the kind of atmosphere and photographic language you want the images to hold.",
+      "Tell us your date, your locations, and what kind of celebration you are planning.",
     body: [
-      "We reply with care, clarity, and the next best step. Availability is intentionally limited so every project remains personal.",
+      "The most useful first message includes the date, the venue or area, the approximate guest count, and whether you are planning a wedding weekend, a one-day wedding, an intimate celebration, or an elopement.",
+      "If film matters to you, say so. If Villa Raffaelli is part of the conversation, say that too. We read every inquiry carefully and reply clearly about fit, availability, and next steps.",
     ],
   },
   craft: {
     variant: "minimal",
-    eyebrow: "What to tell us",
-    title: "If film matters to you, say so early.",
+    eyebrow: "What helps us reply well",
+    title: "A specific inquiry helps us give you a much better first answer.",
     imageId: "page.contact.craft.image",
-    body: "Some couples know immediately that 35mm, medium format, or selected large-format portraits belong in the story. Others simply know they want something tactile and authentic. Either is useful context for the first conversation.",
+    body: "You do not need a finished schedule before writing. But the clearer the starting details are, the more useful we can be from the first reply. We can help shape the day after that.",
     points: [
       {
-        title: "Tell us the mood",
+        title: "Date and locations",
         description:
-          "We want to know how the day should feel, not just where it takes place.",
+          "Tell us the date, the venue if you have it, and the part of Tuscany or Italy you are working with if the venue is still undecided.",
       },
       {
-        title: "Tell us the craft preference",
+        title: "Celebration format",
         description:
-          "If hybrid film coverage matters to you, we can shape the conversation around it from the start.",
+          "Let us know whether this is a wedding weekend, a one-day wedding, an intimate wedding, or an elopement, and roughly how many people will be there.",
+      },
+      {
+        title: "Film priorities",
+        description:
+          "If film is important, tell us whether you care most about 35mm candor, medium-format portraits, or simply the overall hybrid balance.",
+      },
+      {
+        title: "Villa Raffaelli interest",
+        description:
+          "If you are asking about Villa Raffaelli, tell us whether you are thinking about portraits, private vows, or a very intimate wedding there.",
       },
     ],
   },
+  locationLinks: [
+    { label: "See the experience", href: "/experience", variant: "ghost" },
+    {
+      label: "Explore film coverage",
+      href: "/film-wedding-photography",
+      variant: "ghost",
+    },
+    { label: "See Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
+    { label: "Read the journal", href: "/journal", variant: "ghost" },
+  ],
   formIntro: {
     eyebrow: "Inquiry form",
-    heading: "Start here",
+    heading: "Start your inquiry here",
     body: [
-      "Share the essentials and anything that matters visually, emotionally, or practically. We read every message carefully, including whether film is part of what you are hoping for.",
+      "Share the essentials first. If you already know the venue, the guest count, and how important film is to you, include that now.",
+      "If you are still planning from abroad and deciding between locations, say where you are in the process. That helps us answer in a way that is actually useful.",
     ],
   },
   nextSteps: [
     "We aim to reply within two business days.",
-    "If it feels like a fit, we will suggest a call or next conversation.",
-    "If hybrid film coverage matters to you, tell us which parts of the day feel most important for it.",
-    "For private Villa Raffaelli-related imagery, we keep the conversation discreet and contextual.",
+    "If the date is open and the fit looks right, we will suggest the next conversation.",
+    "If film is a priority, tell us where you want it to matter most in the coverage.",
+    "If Villa Raffaelli is part of the plan, we keep that conversation private and specific to the actual use case.",
   ],
   cta: {
     title:
-      "If you want more context before writing, begin with the experience.",
-    body: "These pages will give you a clearer sense of how we guide, photograph, and shape hybrid film coverage before the conversation begins.",
+      "If you want more context before writing, start with the experience and film pages.",
+    body: "Those pages explain how we plan, photograph, and integrate film into the coverage before the conversation begins.",
     primaryCta: { label: "See the experience", href: "/experience" },
     secondaryCta: {
-      label: "Hybrid film approach",
+      label: "Explore film coverage",
       href: "/film-wedding-photography",
     },
   },
   seo: {
-    title: "Contact Dolcevilla Studio",
+    title: "Contact Dolcevilla Studio | Tuscany Wedding Photography Inquiry",
     description:
-      "Contact Dolcevilla Studio for Tuscany wedding photography, elopements, and hybrid film-and-digital celebrations rooted in place, atmosphere, and a premium client experience.",
+      "Contact Dolcevilla Studio to inquire about Tuscany wedding photography, wedding weekends, intimate celebrations, elopements, hybrid film coverage, and selected Villa Raffaelli use cases.",
     path: "/contact",
+    keywords: [
+      "contact dolcevilla studio",
+      "contact tuscany wedding photographer",
+      "inquire tuscany wedding photographer",
+      "tuscany wedding photography inquiry",
+    ],
   },
 });

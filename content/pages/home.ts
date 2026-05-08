@@ -6,13 +6,13 @@ export const homePage = servicePageContentSchema.parse({
   slug: "home",
   pageType: "home",
   hero: {
-    eyebrow: "Villa Raffaelli, Upper Tuscany",
+    eyebrow: "Dolcevilla Studio | Villa Raffaelli, North Tuscany",
     title:
-      "Tuscany wedding photography shaped by Villa Raffaelli and built on real film expertise.",
+      "Tuscany wedding photography shaped by film craft, digital reliability, and life at Villa Raffaelli.",
     subtitle:
-      "Dolcevilla Studio photographs weddings in Tuscany with a hybrid film-and-digital approach, deep local knowledge, and calm guidance for international couples planning from abroad.",
+      "We photograph weddings across Tuscany from our private villa studio near Lucca, using 35mm, medium format, and dependable digital coverage for couples who want beautiful images and expert guidance in equal measure.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
-    secondaryCta: { label: "See selected stories", href: "/journal" },
+    secondaryCta: { label: "Read the journal", href: "/journal" },
     imageIds: [
       "page.home.hero.primary",
       "page.home.hero.secondary",
@@ -22,12 +22,12 @@ export const homePage = servicePageContentSchema.parse({
     variant: "home",
   },
   intro: {
-    eyebrow: "Why couples choose us",
+    eyebrow: "Why Dolcevilla Studio",
     heading:
-      "A private Tuscan point of view, with the experience to use it well.",
+      "A real villa studio, a real darkroom culture, and a way of photographing that stays grounded in the day itself.",
     body: [
-      "Villa Raffaelli is the private creative base behind the studio: a world of old stone, quiet architecture, and mountain air that shaped how we see Tuscany, intimacy, and atmosphere.",
-      "That point of view is matched by working expertise. One photographer always carries film alongside digital coverage, moving between 35mm, 120 medium format, and selected large-format frames with the judgment to know where each tool belongs.",
+      "Villa Raffaelli is not a decorative backstory. It is our working base in north Tuscany, home to the studio and the analog culture behind it, from proofing and film handling to the slower visual discipline that comes with a real darkroom mindset.",
+      "That craft matters because weddings move quickly. We use film where it adds depth, texture, and presence, and we rely on digital where pace, changing light, and full coverage need certainty. The result feels tactile without ever feeling risky.",
     ],
   },
   gallery: buildGallery([
@@ -40,56 +40,56 @@ export const homePage = servicePageContentSchema.parse({
   ]),
   highlights: [
     {
-      title: "Villa Raffaelli at the core",
+      title: "Film that belongs in a wedding day",
       description:
-        "The brand begins in a private place with real atmosphere, not in generic destination-wedding styling.",
+        "35mm, medium format, and selected large-format frames are part of the way we work, with digital backup protecting the parts of the day that cannot slow down.",
     },
     {
-      title: "Film expertise, not film rhetoric",
+      title: "A private villa studio, not a borrowed aesthetic",
       description:
-        "35mm, medium format, and large format are part of a serious working method used with experience, intent, and restraint.",
+        "Villa Raffaelli shapes the work because it is where the studio lives, not because it makes a good line of marketing copy.",
     },
     {
-      title: "Guidance you can trust",
+      title: "Tuscany guidance that helps in practice",
       description:
-        "Most of our couples are planning from abroad and rely on us for clarity around timing, light, flow, and what will genuinely photograph well.",
+        "Most of our couples are planning from abroad and need clear advice on timing, light, portrait flow, travel rhythm, and which parts of Tuscany genuinely suit the celebration.",
     },
   ],
   craft: {
     variant: "editorial",
-    eyebrow: "Film expertise",
-    title: "Film and digital, used with judgment.",
-    body: "We do not treat film as decoration or digital as a compromise. Film gives the work tactility, depth, and emotional weight. Digital protects pace, changing light, family rhythm, and full-story coverage. The strength is knowing where each medium does its best work.",
+    eyebrow: "Film and digital",
+    title: "Real film craft, backed by digital coverage.",
+    body: "We do not sell film as nostalgia, and we do not use digital as a fallback story. We use each medium where it genuinely performs best, so the final work keeps the character of film and the dependability a wedding day deserves.",
     imageId: "page.home.craft.image",
     points: [
       {
-        title: "35mm for movement",
+        title: "35mm for energy",
         description:
-          "Loose, quick, and alive for arrivals, dinners, dancing, and the in-between moments that should still feel in motion.",
+          "Fast, alive, and perfect for arrivals, dinners, dancing, flash, and all the movement that should still feel immediate.",
       },
       {
-        title: "120 for portraits",
+        title: "120 for portraits and detail",
         description:
-          "A slower, more dimensional portrait language for faces, fabrics, interiors, and architecture.",
+          "A slower, richer format for faces, fabrics, interiors, florals, and architecture when depth and shape matter most.",
       },
       {
-        title: "Large format for stillness",
+        title: "Large format for selected frames",
         description:
-          "Reserved for the rare frames that deserve ceremony, patience, and a more permanent sense of presence.",
+          "Reserved for the rare moments that deserve more ceremony, more patience, and a stronger sense of permanence.",
       },
       {
-        title: "Digital for certainty",
+        title: "Digital for pace and backup",
         description:
-          "Essential where speed, low light, family rhythm, and full-story reliability matter most.",
+          "Essential for ceremonies, low light, family rhythm, fast transitions, and the kind of coverage that has to stay complete.",
       },
     ],
   },
   geography: {
-    eyebrow: "Our world",
+    eyebrow: "Based in north Tuscany",
     heading:
-      "Villa Raffaelli, Lucca, and the quieter side of Tuscany.",
+      "A villa studio near Lucca, with the rest of Tuscany within reach.",
     body: [
-      "We are based near Lucca, with Garfagnana, Florence, Versilia, Pisa, and the marble landscapes of Upper Tuscany all part of the world we know from the inside. That local knowledge helps us guide couples toward settings, light, and timing that feel refined rather than formulaic.",
+      "Our studio is in Garfagnana, near Lucca, in the greener mountain side of Tuscany. From there we work across Florence, Versilia, Pisa, and beyond, helping couples make better decisions about locations, timing, light, and how the region should actually live inside the wedding.",
     ],
     places: [
       "Villa Raffaelli",
@@ -111,48 +111,48 @@ export const homePage = servicePageContentSchema.parse({
   testimonials: testimonials.home,
   process: [
     {
-      title: "Discovery",
+      title: "First conversation",
       description:
-        "We start with the celebration, the setting, and how important film is to your vision.",
+        "We begin with your date, your plans, your venue, and how important film is to the way you want the day remembered.",
     },
     {
-      title: "Planning",
+      title: "Planning support",
       description:
-        "We advise on light, timing, portrait rhythm, and where film can add value without adding risk.",
+        "We advise on timing, portrait rhythm, travel flow, and where film will add value without making the schedule harder.",
     },
     {
-      title: "Coverage",
+      title: "Wedding day coverage",
       description:
-        "Film stays intentional, digital stays dependable, and the day remains calm because the approach is already thought through.",
+        "Film stays intentional, digital stays dependable, and the coverage never turns into a performance about cameras.",
     },
     {
       title: "Delivery",
       description:
-        "Your gallery is edited for atmosphere, coherence, and the right balance between tactile film character and complete story coverage.",
+        "Your gallery is edited for coherence, feeling, and the right balance between tactile film character and complete storytelling.",
     },
   ],
   investmentNote: {
     eyebrow: "Investment",
-    heading: "Most couples invest from the high four figures upward.",
+    heading: "Most couples invest from the high four figures upward for full wedding photography in Tuscany.",
     body: [
-      "This is a premium service for couples who care about taste, film expertise, guidance, and dependable full-story coverage.",
+      "This is for couples who care about strong photography, honest guidance, film expertise, and a service that remains calm and dependable from the first message to the final gallery.",
     ],
   },
   villa: {
     variant: "editorial",
     eyebrow: "Villa Raffaelli",
-    title: "The private origin of the studio, not a public venue pitch.",
-    body: "We speak about Villa Raffaelli because it explains the taste, restraint, and atmosphere behind the work better than generic brand language ever could. It remains private, but it still shapes the eye behind the studio.",
+    title: "The villa matters because it is where the studio lives and works.",
+    body: "Villa Raffaelli is part of the Home page because it is our real base in Tuscany, not because we need a myth around the brand. It shapes the way we see architecture, gardens, intimacy, and hospitality, and in selected cases it can also become part of a couple's portraits or private celebration.",
     imageId: "page.home.villa.image",
   },
   cta: {
-    eyebrow: "Inquire",
+    eyebrow: "Start here",
     title:
-      "If Villa Raffaelli, Tuscany, and real film expertise matter to you, start here.",
-    body: "Share your date, your setting, and how important film is to you. We will answer with clear guidance on fit, pacing, and the right balance of film and digital for your day.",
+      "Planning a wedding in Tuscany and want photography with more substance behind it?",
+    body: "Tell us your date, your venue, and whether film is an important part of the photography. We will reply with honest guidance on fit, coverage, and the right balance of film and digital for your day.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: {
-      label: "Explore the journal",
+      label: "Read the journal",
       href: "/journal",
       variant: "secondary",
     },
@@ -160,13 +160,14 @@ export const homePage = servicePageContentSchema.parse({
   seo: {
     title: "Tuscany Wedding Photographer | Dolcevilla Studio",
     description:
-      "Dolcevilla Studio is a Tuscany wedding photographer shaped by Villa Raffaelli, known for hybrid film-and-digital expertise and calm guidance for international couples planning in Italy.",
+      "Dolcevilla Studio is a Tuscany wedding photographer based at Villa Raffaelli near Lucca, offering film craft, dependable digital coverage, and clear local guidance for couples planning in Italy.",
     path: "/",
     keywords: [
       "tuscany wedding photographer",
+      "destination wedding photographer tuscany",
       "film wedding photographer tuscany",
       "lucca wedding photographer",
-      "villa raffaelli wedding photography",
+      "north tuscany wedding photographer",
     ],
   },
 });

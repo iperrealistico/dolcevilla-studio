@@ -14,7 +14,7 @@ export function EditorialTextBlock({ section }: { section: RichSection }) {
           <Heading className="text-3xl md:text-5xl">{section.heading}</Heading>
         </div>
       </FloatIn>
-      <FloatIn delay={0.08}>
+      <FloatIn delay={0.08} className="md:self-center">
         <RichText body={section.body} />
       </FloatIn>
     </Container>

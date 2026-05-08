@@ -47,7 +47,7 @@ export function JournalEntryHero({
           imageClassName="object-center"
           slideClassName="min-w-[84vw] sm:min-w-[64vw] lg:min-w-[35vw] xl:min-w-[29vw]"
           overlayClassName="bg-[linear-gradient(180deg,rgba(10,7,5,0.3)_0%,rgba(10,7,5,0.16)_20%,rgba(10,7,5,0.22)_42%,rgba(10,7,5,0.82)_100%)] md:bg-[linear-gradient(180deg,rgba(10,7,5,0.22)_0%,rgba(10,7,5,0.12)_18%,rgba(10,7,5,0.18)_42%,rgba(10,7,5,0.78)_100%)]"
-          autoScrollSpeedPxPerSecond={14}
+          autoScrollSpeedPxPerSecond={26}
           sizes="(min-width: 1536px) 28vw, (min-width: 1280px) 29vw, (min-width: 1024px) 35vw, (min-width: 640px) 64vw, 84vw"
         />
         <div className="absolute inset-x-0 top-0 h-[26%] bg-[linear-gradient(180deg,rgba(10,7,5,0.22),rgba(10,7,5,0.06),transparent)] md:h-[22%]" />

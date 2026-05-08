@@ -13,7 +13,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils/cn";
 import type { ImageAsset } from "@/types/gallery";
 
-const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 18;
+const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 30;
 const LOOP_RESET_BUFFER_PX = 2;
 const SEGMENT_COPIES = 3;
 const DEFAULT_HERO_SLIDE_SIZES =
@@ -84,6 +84,7 @@ export function HeroSequence({
   const hasInteractedRef = useRef(false);
   const isDraggingRef = useRef(false);
   const dragOriginXRef = useRef(0);
+  const dragOriginYRef = useRef(0);
   const dragOriginScrollLeftRef = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -189,7 +190,7 @@ export function HeroSequence({
   }
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "mouse" || event.button !== 0) {
+    if (event.pointerType === "mouse" && event.button !== 0) {
       return;
     }
 
@@ -202,6 +203,7 @@ export function HeroSequence({
     markInteracted();
     isDraggingRef.current = true;
     dragOriginXRef.current = event.clientX;
+    dragOriginYRef.current = event.clientY;
     dragOriginScrollLeftRef.current = viewport.scrollLeft;
     setIsDragging(true);
     viewport.setPointerCapture(event.pointerId);
@@ -212,8 +214,19 @@ export function HeroSequence({
       return;
     }
 
+    const deltaX = event.clientX - dragOriginXRef.current;
+    const deltaY = event.clientY - dragOriginYRef.current;
+
+    if (
+      event.pointerType !== "mouse" &&
+      Math.abs(deltaY) > Math.abs(deltaX) &&
+      Math.abs(deltaX) < 12
+    ) {
+      return;
+    }
+
     viewportRef.current.scrollLeft =
-      dragOriginScrollLeftRef.current - (event.clientX - dragOriginXRef.current);
+      dragOriginScrollLeftRef.current - deltaX;
     normalizeLoopPosition(viewportRef.current, segmentWidthRef.current);
   };
 
@@ -250,7 +263,7 @@ export function HeroSequence({
       <div
         ref={viewportRef}
         className={cn(
-          "absolute inset-0 overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain touch-pan-y [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={handlePointerDown}

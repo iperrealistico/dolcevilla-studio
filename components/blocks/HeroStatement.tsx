@@ -145,7 +145,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               imageClassName={styles.imageClassName}
               overlayClassName={styles.desktopOverlayClassName}
               slideClassName={styles.slideClassName}
-              autoScrollSpeedPxPerSecond={hero.variant === "home" ? 18 : 16}
+              autoScrollSpeedPxPerSecond={hero.variant === "home" ? 34 : 30}
             />
           </div>
           <a

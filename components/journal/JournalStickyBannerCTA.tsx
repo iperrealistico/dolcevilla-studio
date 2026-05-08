@@ -196,7 +196,7 @@ export function JournalStickyBannerCTA({
             transition={bannerTransition}
             className="pointer-events-none fixed inset-x-0 bottom-0 z-50 px-3 pt-2 xl:hidden"
           >
-            <div className="safe-bottom pointer-events-auto rounded-t-[2rem] border border-[var(--color-line)] bg-[var(--surface-banner)] px-4 py-3 shadow-[var(--shadow-floating)] backdrop-blur-md">
+            <div className="safe-bottom pointer-events-auto rounded-t-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-banner)] px-4 py-3 shadow-[var(--shadow-floating)] backdrop-blur-md">
               <div className="flex items-center gap-3">
                 <div className="min-w-0 flex-1">
                   {section.eyebrow ? (

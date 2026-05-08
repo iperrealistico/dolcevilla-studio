@@ -48,12 +48,12 @@
   --button-secondary-fg: var(--color-ink);
   --button-ghost-hover: rgb(255 255 255 / 0.6);
   --color-danger: #9b3a2c;
-  --radius-soft: 0.35rem;
-  --radius-card: 0.4rem;
-  --radius-panel: 0.45rem;
-  --radius-frame: 0.55rem;
-  --radius-control: 0.6rem;
-  --radius-pill: 0.6rem;
+  --radius-soft: 0.14rem;
+  --radius-card: 0.16rem;
+  --radius-panel: 0.18rem;
+  --radius-frame: 0.24rem;
+  --radius-control: 0.28rem;
+  --radius-pill: 0.32rem;
   --space-section: clamp(4rem, 7vw, 8rem);
   --space-content: clamp(1.25rem, 2vw, 2rem);
   --container-max: 88rem;

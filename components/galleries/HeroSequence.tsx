@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils/cn";
 import type { ImageAsset } from "@/types/gallery";
 
 const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 30;
+const AUTOPLAY_RESUME_DELAY_MS = 1100;
 const LOOP_RESET_BUFFER_PX = 2;
 const SEGMENT_COPIES = 3;
 const DEFAULT_HERO_SLIDE_SIZES =
@@ -81,22 +82,16 @@ export function HeroSequence({
   const segmentRef = useRef<HTMLDivElement | null>(null);
   const segmentWidthRef = useRef(0);
   const hasInitializedRef = useRef(false);
-  const hasInteractedRef = useRef(false);
   const isDraggingRef = useRef(false);
+  const isTouchingRef = useRef(false);
   const dragOriginXRef = useRef(0);
-  const dragOriginYRef = useRef(0);
   const dragOriginScrollLeftRef = useRef(0);
+  const resumeAutoplayAtRef = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const loopableSlides = useMemo(() => createLoopableSlides(images), [images]);
 
-  const markInteracted = () => {
-    if (hasInteractedRef.current) {
-      return;
-    }
-
-    hasInteractedRef.current = true;
-    setHasInteracted(true);
+  const pauseAutoplay = () => {
+    resumeAutoplayAtRef.current = performance.now() + AUTOPLAY_RESUME_DELAY_MS;
   };
 
   useEffect(() => {
@@ -147,7 +142,7 @@ export function HeroSequence({
   }, [loopableSlides.length]);
 
   useEffect(() => {
-    if (reduceMotion || hasInteracted || !loopableSlides.length) {
+    if (reduceMotion || !loopableSlides.length) {
       return undefined;
     }
 
@@ -161,8 +156,12 @@ export function HeroSequence({
 
       const viewport = viewportRef.current;
       const segmentWidth = segmentWidthRef.current;
+      const isPaused =
+        isDraggingRef.current ||
+        isTouchingRef.current ||
+        timestamp < resumeAutoplayAtRef.current;
 
-      if (viewport && segmentWidth && !isDraggingRef.current) {
+      if (viewport && segmentWidth && !isPaused) {
         viewport.scrollLeft +=
           ((timestamp - previousTimestamp) / 1000) *
           autoScrollSpeedPxPerSecond;
@@ -180,7 +179,6 @@ export function HeroSequence({
     };
   }, [
     autoScrollSpeedPxPerSecond,
-    hasInteracted,
     loopableSlides.length,
     reduceMotion,
   ]);
@@ -200,12 +198,12 @@ export function HeroSequence({
       return;
     }
 
-    markInteracted();
+    event.preventDefault();
+    pauseAutoplay();
     isDraggingRef.current = true;
-    dragOriginXRef.current = event.clientX;
-    dragOriginYRef.current = event.clientY;
-    dragOriginScrollLeftRef.current = viewport.scrollLeft;
     setIsDragging(true);
+    dragOriginXRef.current = event.clientX;
+    dragOriginScrollLeftRef.current = viewport.scrollLeft;
     viewport.setPointerCapture(event.pointerId);
   };
 
@@ -215,15 +213,7 @@ export function HeroSequence({
     }
 
     const deltaX = event.clientX - dragOriginXRef.current;
-    const deltaY = event.clientY - dragOriginYRef.current;
-
-    if (
-      event.pointerType !== "mouse" &&
-      Math.abs(deltaY) > Math.abs(deltaX) &&
-      Math.abs(deltaX) < 12
-    ) {
-      return;
-    }
+    pauseAutoplay();
 
     viewportRef.current.scrollLeft =
       dragOriginScrollLeftRef.current - deltaX;
@@ -237,15 +227,30 @@ export function HeroSequence({
 
     isDraggingRef.current = false;
     setIsDragging(false);
+    pauseAutoplay();
 
     if (viewportRef.current.hasPointerCapture(event.pointerId)) {
       viewportRef.current.releasePointerCapture(event.pointerId);
     }
   };
 
+  const handleTouchStart = () => {
+    isTouchingRef.current = true;
+    pauseAutoplay();
+  };
+
+  const handleTouchMove = () => {
+    pauseAutoplay();
+  };
+
+  const handleTouchEnd = () => {
+    isTouchingRef.current = false;
+    pauseAutoplay();
+  };
+
   const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) {
-      markInteracted();
+      pauseAutoplay();
     }
   };
 
@@ -263,7 +268,7 @@ export function HeroSequence({
       <div
         ref={viewportRef}
         className={cn(
-          "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain touch-pan-y [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain touch-auto select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={handlePointerDown}
@@ -272,7 +277,10 @@ export function HeroSequence({
         onPointerCancel={handlePointerRelease}
         onPointerLeave={handlePointerRelease}
         onScroll={handleScroll}
-        onTouchStart={markInteracted}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
         onWheel={handleWheel}
       >
         <div className="flex h-full items-stretch">

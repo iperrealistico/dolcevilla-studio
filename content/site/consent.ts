@@ -7,7 +7,7 @@ export const consentDoorwayContent = {
     "Choose whether optional analytics and marketing should be enabled before browsing the site further.",
   acceptAll: {
     title: "Allow the full studio experience",
-    body: "Enable analytics and marketing so we can understand how visitors arrive, which pages matter, and how to refine the experience over time.",
+    body: "Allow optional analytics and marketing so we can keep improving the site over time.",
   },
   essentialOnly: {
     title: "Continue with essential only",

@@ -16,8 +16,8 @@ export const journalPageContent = {
     body: "Tell us where in Tuscany you are getting married, whether film matters to you, and what kind of celebration you are planning. We will answer clearly about fit, coverage, and next steps.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: {
-      label: "See the experience",
-      href: "/experience",
+      label: "Explore film coverage",
+      href: "/film-wedding-photography",
       variant: "secondary",
     },
   }),

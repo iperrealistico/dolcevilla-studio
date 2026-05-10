@@ -1,22 +1,48 @@
 import type { Metadata } from "next";
 import { siteSettings } from "@/content/site/settings";
+import { getImageAsset } from "@/lib/images/imageManifest";
 import { absoluteUrl } from "@/lib/seo/canonical";
+import type { ServicePageContent } from "@/types/content";
 
 type MetadataInput = {
   title: string;
   description: string;
   path: string;
   image?: string;
+  imageAlt?: string;
   noindex?: boolean;
   keywords?: string[];
 };
 
+function resolvePrimaryPageImage(
+  page: Pick<ServicePageContent, "hero" | "craft" | "villa" | "gallery">,
+) {
+  const heroImageId = page.hero?.imageIds[0];
+
+  if (heroImageId) {
+    return getImageAsset(heroImageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
+  }
+
+  if (page.craft?.imageId) {
+    return getImageAsset(page.craft.imageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
+  }
+
+  if (page.villa?.imageId) {
+    return getImageAsset(page.villa.imageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
+  }
+
+  return page.gallery[0]?.image ?? null;
+}
+
 export function buildMetadata(seo: MetadataInput): Metadata {
   const url = absoluteUrl(seo.path);
   const image = absoluteUrl(seo.image ?? siteSettings.defaultOgImage);
+  const imageAlt = seo.imageAlt ?? seo.title;
 
   return {
+    metadataBase: new URL(siteSettings.siteUrl),
     manifest: "/manifest.webmanifest",
+    applicationName: siteSettings.siteName,
     icons: {
       icon: [
         { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -28,6 +54,8 @@ export function buildMetadata(seo: MetadataInput): Metadata {
     },
     title: seo.title,
     description: seo.description,
+    creator: siteSettings.siteName,
+    publisher: siteSettings.siteName,
     alternates: {
       canonical: url,
     },
@@ -45,7 +73,7 @@ export function buildMetadata(seo: MetadataInput): Metadata {
           url: image,
           width: 1600,
           height: 900,
-          alt: seo.title,
+          alt: imageAlt,
         },
       ],
     },
@@ -56,6 +84,24 @@ export function buildMetadata(seo: MetadataInput): Metadata {
       images: [image],
     },
   };
+}
+
+export function resolvePageMetadataImage(
+  page: Pick<ServicePageContent, "hero" | "craft" | "villa" | "gallery">,
+) {
+  return resolvePrimaryPageImage(page);
+}
+
+export function buildPageMetadata(
+  page: Pick<ServicePageContent, "seo" | "hero" | "craft" | "villa" | "gallery">,
+): Metadata {
+  const image = resolvePrimaryPageImage(page);
+
+  return buildMetadata({
+    ...page.seo,
+    image: page.seo.image ?? image?.src,
+    imageAlt: image?.alt,
+  });
 }
 
 export function buildDefaultMetadata(): Metadata {

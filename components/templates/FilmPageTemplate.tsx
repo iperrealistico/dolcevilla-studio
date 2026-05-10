@@ -10,7 +10,7 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { HeroStatement } from "@/components/blocks/HeroStatement";
 import { InvestmentNote } from "@/components/blocks/InvestmentNote";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
-import type { FAQItem, Point, RichSection, ServicePageContent, StoryCard } from "@/types/content";
+import type { FAQItem, GalleryItem, Point, RichSection, ServicePageContent, StoryCard } from "@/types/content";
 
 type FilmPageTemplateProps = {
   page: ServicePageContent;
@@ -20,11 +20,10 @@ type FilmPageTemplateProps = {
     reasons: Point[];
     whyBothIntro: RichSection;
     whyBoth: Point[];
-    formatsIntro: RichSection;
-    formats: Point[];
     skillsIntro: RichSection;
     skills: Point[];
     darkroom: RichSection;
+    darkroomGallery: GalleryItem[];
     faqs: FAQItem[];
   };
 };
@@ -61,14 +60,14 @@ export function FilmPageTemplate({
       <ScrollParallax from="right">
         <PointsEditorialBlock section={details.whyBothIntro} items={details.whyBoth} columns={3} />
       </ScrollParallax>
-      <ScrollParallax from="left">
-        <PointsEditorialBlock section={details.formatsIntro} items={details.formats} columns={3} />
-      </ScrollParallax>
       <ScrollParallax from="right">
         <PointsEditorialBlock section={details.skillsIntro} items={details.skills} columns={3} />
       </ScrollParallax>
       <ScrollParallax from="left">
         <EditorialTextBlock section={details.darkroom} />
+      </ScrollParallax>
+      <ScrollParallax from="right" intensity="lg">
+        <SignatureGallery items={details.darkroomGallery} />
       </ScrollParallax>
       <ScrollParallax from="right">
         <TestimonialsBlock items={page.testimonials} />

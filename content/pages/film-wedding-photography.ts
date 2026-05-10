@@ -124,51 +124,43 @@ export const filmWeddingPhotographyPage = servicePageContentSchema.parse({
 export const filmWeddingPhotographyDetails = {
   reasonsIntro: richSectionSchema.parse({
     eyebrow: "Why couples ask for film",
-    heading: "Ten reasons film still earns its place in wedding photography.",
+    heading: "Why film still feels different, even if you do not know much about cameras.",
     body: [
-      "This is not about nostalgia for old tools. It is about the real visual and practical differences film brings when it is used with experience.",
+      "This is not about nostalgia. These are the differences couples usually notice when film is used well on a real wedding day.",
     ],
   }),
   reasons: [
     {
       title: "Highlight handling",
-      description: "Film usually carries bright dresses, skin, candles, and window light with a softer transition than digital capture.",
+      description: "Lights and shadows often feel softer. Film usually keeps bright dresses, skin, candles, and window light from turning too harsh.",
     },
     {
       title: "Real grain",
-      description: "The grain is in the material itself, not added later in editing, and it changes the texture of the image in a way presets do not fully reproduce.",
+      description: "Film photos can still feel like physical objects, even on a screen. The texture comes from the film itself, not from an effect added later.",
     },
     {
       title: "Pace",
-      description: "Film forces slower, more deliberate decisions, and that shift in attention changes the photograph before the shutter is even pressed.",
+      description: "Film slows the photographer down in a good way. That extra care often changes the picture before it is even taken.",
     },
     {
       title: "Color separation",
-      description: "Skin, stone, fabric, greenery, and evening light often separate with a depth that feels different from digital color alone.",
+      description: "Colours can feel more like a soft pastel painting. Skin, stone, fabric, greenery, and evening light often sit apart more gently and clearly.",
     },
     {
       title: "A physical negative",
-      description: "There is a real piece of film behind the image, and that changes the way many couples think about permanence, authorship, and archive value.",
+      description: "Every film photo comes from a real negative. For many couples, that makes the image feel more permanent and more real.",
     },
     {
       title: "Portrait depth",
-      description: "Medium and large format can give portraits more weight, more stillness, and a stronger sense of presence.",
-    },
-    {
-      title: "Flash energy",
-      description: "35mm film and direct flash together can carry dinners, dancing, movement, and spontaneity with a look many couples want specifically because it does not feel too polished.",
+      description: "Medium and large format portraits often feel calmer, fuller, and more present.",
     },
     {
       title: "A stronger sense of occasion",
-      description: "Because each frame costs time and stock, film naturally makes certain moments feel more considered from the beginning.",
-    },
-    {
-      title: "Editing discipline",
-      description: "A film workflow encourages tighter selection and stronger sequencing across the final gallery.",
+      description: "Because each frame matters, film can make some moments feel more intentional from the start.",
     },
     {
       title: "Character you do not fully fake",
-      description: "You can borrow part of the palette digitally, but not the exact way stock, light, lens, and process interact.",
+      description: "You can imitate some of the look digitally, but not the exact mix of film, light, lens, and process.",
     },
   ].map((item) => pointSchema.parse(item)),
   whyBothIntro: richSectionSchema.parse({
@@ -198,27 +190,6 @@ export const filmWeddingPhotographyDetails = {
     {
       title: "Backup matters",
       description: "Professional wedding coverage needs redundancy, consistency, and a workflow that can absorb the unexpected without compromise.",
-    },
-  ].map((item) => pointSchema.parse(item)),
-  formatsIntro: richSectionSchema.parse({
-    eyebrow: "The formats",
-    heading: "35mm, medium format, and large format belong to different moments.",
-    body: [
-      "Each format has a different pace and a different visual effect. The point is not to use every tool all the time. The point is to know when each one becomes useful.",
-    ],
-  }),
-  formats: [
-    {
-      title: "35mm photography",
-      description: "35mm is the quickest film format we use. It belongs to movement, guest interaction, direct flash, arrivals, dinners, dancing, and the unpredictability of a real wedding.",
-    },
-    {
-      title: "Medium format",
-      description: "Medium format is slower and richer. It works best for portraits, details, interiors, and the frames that need more shape, depth, and visual weight.",
-    },
-    {
-      title: "Large format",
-      description: "Large format is rare by design. It asks for patience, precision, and collaboration, and it is best kept for a few quiet heirloom frames.",
     },
   ].map((item) => pointSchema.parse(item)),
   skillsIntro: richSectionSchema.parse({
@@ -254,6 +225,12 @@ export const filmWeddingPhotographyDetails = {
       "That knowledge shapes the whole workflow. It influences how we expose, how we edit, how we sequence, how we think about print, and how we protect the difference between real film work and a digital imitation of it.",
     ],
   }),
+  darkroomGallery: buildGallery([
+    { id: "page.film-wedding-photography.gallery.7", layoutVariant: "landscape" },
+    { id: "page.film-wedding-photography.gallery.10", layoutVariant: "landscape" },
+    { id: "page.film-wedding-photography.gallery.11", layoutVariant: "landscape" },
+    { id: "page.film-wedding-photography.gallery.12", layoutVariant: "landscape" },
+  ]),
   faqs: [
     {
       question: "Do you always shoot film?",

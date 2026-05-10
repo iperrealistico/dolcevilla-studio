@@ -10,7 +10,7 @@ import {
   journalSourceContainsPath,
   splitJournalSourceIntoSections,
 } from "@/lib/content/journalSource";
-import { imageManifest } from "@/lib/images/imageManifest";
+import { imageManifest, imageSlots } from "@/lib/images/imageManifest";
 
 const imageIds = new Set(Object.keys(imageManifest));
 
@@ -27,6 +27,45 @@ function assertPublicAsset(src: string) {
 
 function assertImageId(id: string) {
   assert(imageIds.has(id), `Unknown image id: ${id}`);
+}
+
+function collectPageImageIds(value: unknown, collected = new Set<string>()) {
+  if (!value) {
+    return collected;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectPageImageIds(item, collected));
+    return collected;
+  }
+
+  if (typeof value === "object") {
+    const record = value as Record<string, unknown>;
+
+    if (typeof record.imageId === "string") {
+      collected.add(record.imageId);
+    }
+
+    if (Array.isArray(record.imageIds)) {
+      record.imageIds.forEach((id) => {
+        if (typeof id === "string") {
+          collected.add(id);
+        }
+      });
+    }
+
+    if (record.image && typeof record.image === "object") {
+      const image = record.image as Record<string, unknown>;
+
+      if (typeof image.id === "string") {
+        collected.add(image.id);
+      }
+    }
+
+    Object.values(record).forEach((child) => collectPageImageIds(child, collected));
+  }
+
+  return collected;
 }
 
 export function validateJournalV3Contract(
@@ -132,8 +171,14 @@ export const validateContent = cache(async () => {
 
   const journalEntries = await getJournalEntries();
   const journalSlugs = new Set(journalEntries.map((entry) => entry.slug));
+  const liveNonBlogImageIds = new Set<string>();
 
   Object.values(pages).forEach((page) => {
+    collectPageImageIds(page).forEach((id) => {
+      assertImageId(id);
+      liveNonBlogImageIds.add(id);
+    });
+
     page.hero?.imageIds.forEach(assertImageId);
     page.stories.forEach((slug) =>
       assert(
@@ -155,6 +200,13 @@ export const validateContent = cache(async () => {
     if (entry.articleTemplate === "v3") {
       validateJournalV3Contract(entry);
     }
+  });
+
+  liveNonBlogImageIds.forEach((id) => {
+    assert(
+      Boolean((imageSlots as Record<string, { alt?: string }>)[id]?.alt),
+      `Live non-blog image id "${id}" must define explicit alt text in content/site/image-slots.json.`,
+    );
   });
 
   return {

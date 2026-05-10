@@ -21,10 +21,9 @@ export const privacyDetails = {
       body: "You can return to this panel later from the footer and change your choice at any time.",
     },
   ],
-  contactLabel: "Questions about privacy?",
+  contactLabel: "You can change this later",
   contactBody:
-    "Write to us directly and we will clarify how consent and inquiry data are handled.",
-  contactEmail: "hello@dolcevilla.studio",
+    "Use the footer controls any time you want to review or update these choices.",
   closeLabel: "Close privacy details",
   backToChoicesLabel: "Back to consent choices",
   backButtonLabel: "Back",

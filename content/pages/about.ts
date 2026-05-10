@@ -13,8 +13,8 @@ export const aboutPage = servicePageContentSchema.parse({
       "Dolcevilla Studio works from Villa Raffaelli in Garfagnana, near Lucca, with separate leads for creative direction, production, film handling, archive, postproduction, and final delivery. That structure is part of why the work feels calm to the couple and precise behind the scenes.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: {
-      label: "See the experience",
-      href: "/experience",
+      label: "Explore film coverage",
+      href: "/film-wedding-photography",
       variant: "secondary",
     },
     imageIds: [
@@ -150,7 +150,6 @@ export const aboutPage = servicePageContentSchema.parse({
     ],
   },
   locationLinks: [
-    { label: "See the experience", href: "/experience", variant: "ghost" },
     {
       label: "Explore film coverage",
       href: "/film-wedding-photography",

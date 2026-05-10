@@ -1,8 +1,4 @@
-import {
-  pointSchema,
-  richSectionSchema,
-  servicePageContentSchema,
-} from "@/lib/content/schemas";
+import { servicePageContentSchema } from "@/lib/content/schemas";
 import { buildGallery } from "@/lib/images/imageManifest";
 import { faqs } from "@/content/site/faqs";
 import { testimonials } from "@/content/site/testimonials";
@@ -119,11 +115,6 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
   },
   locationLinks: [
     {
-      label: "See the experience",
-      href: "/experience",
-      variant: "ghost",
-    },
-    {
       label: "Explore film coverage",
       href: "/film-wedding-photography",
       variant: "ghost",
@@ -166,103 +157,3 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
     ],
   },
 });
-
-export const villaRaffaelliDetails = {
-  identityIntro: richSectionSchema.parse({
-    eyebrow: "Why this page exists",
-    heading:
-      "Villa Raffaelli is on the site because it is part of the studio, not because we needed a venue story.",
-    body: [
-      "This villa is where Dolcevilla Studio works, develops film, and welcomes selected couples. It is part of the studio's daily life, which is why it appears here honestly: as a real place that sometimes becomes part of the work.",
-    ],
-  }),
-  identity: [
-    {
-      title: "The studio and darkroom are here",
-      description:
-        "Villa Raffaelli is our private base in Garfagnana, where the studio works every day and where the film side of the practice also lives.",
-    },
-    {
-      title: "It shaped the way we photograph",
-      description:
-        "Old rooms, stone surfaces, gardens, and changing mountain light have shaped how we photograph people, architecture, and atmosphere.",
-    },
-    {
-      title: "It stays a private home first",
-      description:
-        "We protect the villa as a real private property, which is why we do not run it like a venue built on constant turnover.",
-    },
-    {
-      title: "It offers a different Tuscany",
-      description:
-        "For the right couple, the villa offers privacy, control, and a quieter north-Tuscany setting that feels distinct from more public wedding locations.",
-    },
-  ].map((item) => pointSchema.parse(item)),
-  celebrationsIntro: richSectionSchema.parse({
-    eyebrow: "When it makes sense",
-    heading:
-      "The villa is best for portraits, private vows, and very intimate wedding days.",
-    body: [
-      "The point is not to fit every wedding into the villa. The point is to use it when the scale is small enough, the privacy matters enough, and the atmosphere of the place adds something genuine.",
-    ],
-  }),
-  celebrations: [
-    {
-      title: "Portrait sessions",
-      description:
-        "Some couples use the villa only for portraits because they want quiet time, architecture, and a setting that feels entirely their own.",
-    },
-    {
-      title: "Private vows",
-      description:
-        "For a private exchange of vows, the villa offers discretion, calm, and a sense of place without needing a production-heavy setup.",
-    },
-    {
-      title: "Very small weddings",
-      description:
-        "Small wedding days can work beautifully here when the guest count is limited and the plan respects the scale of the property.",
-    },
-    {
-      title: "One part of a larger Tuscany story",
-      description:
-        "The main celebration may happen elsewhere, while the villa becomes the place for getting ready, a first look, portraits, or a slower private moment.",
-    },
-  ].map((item) => pointSchema.parse(item)),
-  privacyIntro: richSectionSchema.parse({
-    eyebrow: "How access works",
-    heading: "Selectivity is part of the value, not a barrier added for effect.",
-    body: [
-      "We keep the process selective because Villa Raffaelli is a private villa first. Every inquiry starts with fit: the date, the number of guests, the privacy expectations, and whether the property is genuinely the right setting.",
-    ],
-  }),
-  privacy: [
-    {
-      title: "No public booking calendar",
-      description:
-        "We do not list the villa like a standard venue with instant availability, fixed packages, and open public dates.",
-    },
-    {
-      title: "The conversation comes first",
-      description:
-        "Before we discuss using the villa, we need to understand the kind of day you are planning and how much privacy you want from the setting.",
-    },
-    {
-      title: "Use stays limited",
-      description:
-        "We keep approved use intentionally limited so the villa never loses the protected feeling that makes it special in the first place.",
-    },
-    {
-      title: "Honest answers matter",
-      description:
-        "If your plans would be better served by a larger or more operational venue, we will say that clearly instead of forcing the villa into the wrong role.",
-    },
-  ].map((item) => pointSchema.parse(item)),
-  accessNote: richSectionSchema.parse({
-    eyebrow: "What that protects",
-    heading: "The villa keeps its character because it is not treated like inventory.",
-    body: [
-      "Villa Raffaelli only works because it still feels lived in, protected, and specific to this studio. We want couples to experience that reality, not a polished shell exhausted by constant turnover.",
-      "That is why some inquiries are a perfect fit for portraits but not for a wedding, or right for a private ceremony but not for a larger guest list. The answer depends on the actual use case, and we prefer that honesty over easy yeses.",
-    ],
-  }),
-};

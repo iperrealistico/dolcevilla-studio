@@ -1,12 +1,25 @@
 import { homePage } from "@/content/pages/home";
+import { NonBlogPageStructuredData } from "@/components/seo/NonBlogPageStructuredData";
 import { getExpandedStoryCardsBySlugs } from "@/lib/content/storyCards";
 import { SitePageTemplate } from "@/components/templates/SitePageTemplate";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildPageMetadata, resolvePageMetadataImage } from "@/lib/seo/metadata";
 
-export const metadata = buildMetadata(homePage.seo);
+export const metadata = buildPageMetadata(homePage);
 
 export default async function HomePage() {
   const stories = await getExpandedStoryCardsBySlugs(homePage.stories);
+  const image = resolvePageMetadataImage(homePage);
 
-  return <SitePageTemplate page={homePage} stories={stories} />;
+  return (
+    <>
+      <NonBlogPageStructuredData
+        title={homePage.seo.title}
+        description={homePage.seo.description}
+        path={homePage.seo.path}
+        pageType="home"
+        image={image}
+      />
+      <SitePageTemplate page={homePage} stories={stories} />
+    </>
+  );
 }

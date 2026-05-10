@@ -10,7 +10,6 @@ export const dictionary = uiDictionarySchema.parse({
     home: "Home",
     weddings: "Weddings",
     elopements: "Elopements",
-    experience: "Experience",
     film: "Film",
     journal: "Journal",
     about: "About",

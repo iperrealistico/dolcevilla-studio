@@ -41,16 +41,7 @@ export const contactPage = servicePageContentSchema.parse({
       },
     ],
   },
-  locationLinks: [
-    { label: "See the experience", href: "/experience", variant: "ghost" },
-    {
-      label: "Explore film coverage",
-      href: "/film-wedding-photography",
-      variant: "ghost",
-    },
-    { label: "See Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
-    { label: "Read the journal", href: "/journal", variant: "ghost" },
-  ],
+  locationLinks: [],
   formIntro: {
     eyebrow: "Inquiry form",
     heading: "Start your inquiry here",
@@ -67,12 +58,12 @@ export const contactPage = servicePageContentSchema.parse({
   ],
   cta: {
     title:
-      "If you want more context before writing, start with the experience and film pages.",
-    body: "Those pages explain how we plan, photograph, and integrate film into the coverage before the conversation begins.",
-    primaryCta: { label: "See the experience", href: "/experience" },
+      "If you want more context before writing, start with the film page and the journal.",
+    body: "Those pages explain how film coverage works and give you useful Tuscany planning context before the conversation begins.",
+    primaryCta: { label: "Explore film coverage", href: "/film-wedding-photography" },
     secondaryCta: {
-      label: "Explore film coverage",
-      href: "/film-wedding-photography",
+      label: "Read the journal",
+      href: "/journal",
     },
   },
   seo: {

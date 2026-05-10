@@ -72,29 +72,21 @@ export function PrivacyDialog() {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="mt-6 rounded-[var(--radius-panel)] border border-white/10 bg-[rgb(255_255_255_/_0.04)] p-4">
             <div className="text-sm leading-6 text-[rgb(244_235_224_/_0.72)]">
               <p className="font-semibold text-[var(--color-paper)]">
                 {privacyDetails.contactLabel}
               </p>
               <p>{privacyDetails.contactBody}</p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={showConsentChoices}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-white/12 px-5 py-3 text-sm font-semibold transition hover:bg-[rgb(255_255_255_/_0.08)]"
-              >
-                <ArrowLeft size={16} />
-                {privacyDetails.backButtonLabel}
-              </button>
-              <a
-                href={`mailto:${privacyDetails.contactEmail}`}
-                className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-pill)] bg-[rgb(255_255_255_/_0.92)] px-5 py-3 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-white"
-              >
-                {privacyDetails.contactEmail}
-              </a>
-            </div>
+            <button
+              type="button"
+              onClick={showConsentChoices}
+              className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[var(--radius-pill)] border border-white/12 px-5 py-3 text-sm font-semibold transition hover:bg-[rgb(255_255_255_/_0.08)] sm:w-auto"
+            >
+              <ArrowLeft size={16} />
+              {privacyDetails.backButtonLabel}
+            </button>
           </div>
         </motion.section>
       </div>

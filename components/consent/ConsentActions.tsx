@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ChartNoAxesColumnIncreasing,
+  ArrowUpRight,
   Settings2,
   ShieldCheck,
   X,
@@ -135,21 +135,20 @@ export function ConsentActions() {
             <button
               type="button"
               onClick={acceptAll}
-              className="w-full rounded-[var(--radius-frame)] border border-[rgb(248_236_211_/_0.9)] bg-[linear-gradient(135deg,rgb(246_233_205),rgb(232_214_179))] px-5 py-5 text-left text-[var(--color-ink)] shadow-[0_26px_60px_rgba(12,8,4,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_70px_rgba(12,8,4,0.28)]"
+              className="group w-full cursor-pointer rounded-[var(--radius-frame)] border border-white bg-white px-5 py-5 text-left shadow-[0_26px_60px_rgba(12,8,4,0.18)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_70px_rgba(12,8,4,0.24)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(34_27_23)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-base font-semibold">
+                  <p className="text-base font-semibold text-[rgb(20_15_12)]">
                     {consentDoorwayContent.acceptAll.title}
                   </p>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(44_34_24_/_0.82)]">
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(73_61_47)]">
                     {consentDoorwayContent.acceptAll.body}
                   </p>
                 </div>
-                <ChartNoAxesColumnIncreasing
-                  size={18}
-                  className="mt-1 shrink-0 text-[rgb(56_43_31_/_0.9)]"
-                />
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] bg-[rgb(20_15_12)] text-white transition group-hover:translate-x-0.5">
+                  <ArrowUpRight size={18} className="shrink-0" />
+                </span>
               </div>
             </button>
 

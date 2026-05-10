@@ -102,7 +102,6 @@ export const homePage = servicePageContentSchema.parse({
     ],
   },
   locationLinks: [
-    { label: "Experience", href: "/experience", variant: "ghost" },
     { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
     { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
     { label: "Journal", href: "/journal", variant: "ghost" },
@@ -131,13 +130,6 @@ export const homePage = servicePageContentSchema.parse({
         "Your gallery is edited for coherence, feeling, and the right balance between tactile film character and complete storytelling.",
     },
   ],
-  investmentNote: {
-    eyebrow: "Investment",
-    heading: "Most couples invest from the high four figures upward for full wedding photography in Tuscany.",
-    body: [
-      "This is for couples who care about strong photography, honest guidance, film expertise, and a service that remains calm and dependable from the first message to the final gallery.",
-    ],
-  },
   villa: {
     variant: "editorial",
     eyebrow: "Villa Raffaelli",

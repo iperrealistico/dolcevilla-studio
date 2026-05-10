@@ -5,7 +5,12 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 import { AnalyticsPageTracker } from "@/components/consent/AnalyticsPageTracker";
 import { ThemeScript } from "@/components/theme/ThemeProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildDefaultMetadata } from "@/lib/seo/metadata";
+import {
+  buildOrganizationJsonLd,
+  buildWebsiteJsonLd,
+} from "@/lib/seo/structuredData";
 import { ConsentScriptGate } from "@/components/consent/ConsentScriptGate";
 
 const displayFont = Bodoni_Moda({
@@ -40,6 +45,8 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        <JsonLd data={buildOrganizationJsonLd()} />
+        <JsonLd data={buildWebsiteJsonLd()} />
       </head>
       <body
         className={`${displayFont.variable} ${bodyFont.variable} antialiased`}

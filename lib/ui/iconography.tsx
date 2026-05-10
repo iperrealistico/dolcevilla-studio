@@ -9,7 +9,6 @@ import {
   MapPinned,
   NotebookText,
   ShieldCheck,
-  Sparkles,
   UsersRound,
 } from "lucide-react";
 
@@ -23,10 +22,6 @@ export type LinkIconConfig = {
 export function getNavigationIcon(href: string): LucideIcon {
   if (href === "/") {
     return House;
-  }
-
-  if (href === "/experience") {
-    return Sparkles;
   }
 
   if (href === "/film-wedding-photography") {

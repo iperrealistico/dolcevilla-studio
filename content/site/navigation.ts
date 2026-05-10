@@ -2,7 +2,6 @@ import { linkSchema } from "@/lib/content/schemas";
 
 export const navigationItems = [
   { label: "Home", href: "/" },
-  { label: "Experience", href: "/experience" },
   { label: "Film", href: "/film-wedding-photography" },
   { label: "Villa", href: "/villa-raffaelli" },
   { label: "Journal", href: "/journal" },

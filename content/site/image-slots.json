@@ -468,6 +468,15 @@
   "journal.super-8-vs-digital-wedding-video-in-tuscany-what-each-format-captures-best.ornament.orbit": {
     "asset": "journalSuper8VsDigitalWeddingVideoTuscanyOrnamentOrbit"
   },
+  "journal.drone-wedding-photography-in-tuscany-best-venues-rules-and-timing.cover": {
+    "asset": "journalDroneWeddingPhotographyTuscanyBestVenuesRulesTimingCover"
+  },
+  "journal.drone-wedding-photography-in-tuscany-best-venues-rules-and-timing.ornament.wash": {
+    "asset": "journalDroneWeddingPhotographyTuscanyBestVenuesRulesTimingOrnamentWash"
+  },
+  "journal.drone-wedding-photography-in-tuscany-best-venues-rules-and-timing.ornament.orbit": {
+    "asset": "journalDroneWeddingPhotographyTuscanyBestVenuesRulesTimingOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

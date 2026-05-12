@@ -61,19 +61,15 @@
   },
   "page.about.team.lisa": {
     "asset": "teamLisaMazzei",
-    "alt": "Editorial headshot of Lisa Mazzei against a warm textured studio backdrop."
+    "alt": "Portrait of Lisa Mazzei against a light studio backdrop."
   },
   "page.about.team.alberto": {
     "asset": "teamAlbertoPellegrinetti",
-    "alt": "Editorial headshot of Alberto Pellegrinetti against a warm textured studio backdrop."
+    "alt": "Portrait of Alberto Pellegrinetti against a light studio backdrop."
   },
   "page.about.team.leonardo": {
     "asset": "teamLeonardoFiori",
-    "alt": "Editorial headshot of Leonardo Fiori against a warm textured studio backdrop."
-  },
-  "page.about.team.francesco": {
-    "asset": "teamFrancescoTarantino",
-    "alt": "Editorial headshot of Francesco Tarantino against a warm textured studio backdrop."
+    "alt": "Portrait of Leonardo Fiori against a light studio backdrop."
   },
   "page.about.team.group": {
     "asset": "teamWiderStudioVillaRaffaelli"

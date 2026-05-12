@@ -36,13 +36,13 @@ export const aboutPage = servicePageContentSchema.parse({
   team: {
     eyebrow: "The studio",
     heading:
-      "Four principal leads, each responsible for a different part of the studio.",
+      "Three principal leads, each responsible for a different part of the studio.",
     body: [
-      "The visible core of Dolcevilla Studio sits with four people. Around them is a wider working circle of photographers, assistants, production support, and finishing hands who move to the same standard.",
+      "The visible core of Dolcevilla Studio sits with three people. Around them is a wider working circle of photographers, assistants, production support, and finishing hands who move to the same standard.",
       "For couples, that means the work stays personal without being fragile. There is a clear voice behind the studio, but also enough real structure to support destination weddings, film coverage, travel logistics, and careful delivery.",
     ],
     groupNote:
-      "Beyond the four principal leads is a wider 10-plus-person studio handling second coverage, videography, digital photography, film processing support, archive discipline, assistants, logistics, and finishing to one shared standard.",
+      "Beyond the three principal leads is a wider 10-plus-person studio handling second coverage, videography, digital photography, film processing support, archive discipline, assistants, logistics, and finishing to one shared standard.",
     supportingRoles: [],
     members: [
       {
@@ -65,13 +65,6 @@ export const aboutPage = servicePageContentSchema.parse({
         quote:
           "Film matters because it passes through real judgment at every stage, from exposure to scan to archive.",
         imageId: "page.about.team.leonardo",
-      },
-      {
-        name: "Francesco Tarantino",
-        role: "Head of Postproduction, Color, and Photographer",
-        quote:
-          "Finishing should protect skin, light, and texture, not smooth the life out of the pictures.",
-        imageId: "page.about.team.francesco",
       },
     ],
   },

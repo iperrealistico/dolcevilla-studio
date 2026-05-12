@@ -74,7 +74,7 @@ export const siteUi = {
       widerStudioSubtitle:
         "Second coverage, videography, digital photography, film handling, archive, and finishing all move to one shared standard.",
       widerStudioDescription:
-        "Beyond the four visible leads is a larger 10-plus-person studio of second photographers, videographers, film-processing support, archive hands, assistants, and finishing support moving with the same eye for light, restraint, hospitality, and finish.",
+        "Beyond the three visible leads is a larger 10-plus-person studio of second photographers, videographers, film-processing support, archive hands, assistants, and finishing support moving with the same eye for light, restraint, hospitality, and finish.",
       previousCardLabel: "Show previous team card",
       nextCardLabel: "Show next team card",
     },

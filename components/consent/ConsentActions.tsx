@@ -106,16 +106,6 @@ export function ConsentActions() {
                 {consentDoorwayContent.title}
               </p>
             </div>
-            {consent.hasInteracted ? (
-              <button
-                type="button"
-                aria-label={consentDoorwayContent.closeSettingsLabel}
-                onClick={closeConsentManager}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-white/14 bg-[rgb(18_15_12_/_0.32)] text-[var(--color-paper)] transition hover:bg-[rgb(18_15_12_/_0.5)]"
-              >
-                <X size={18} />
-              </button>
-            ) : null}
           </div>
         </motion.div>
       </div>
@@ -126,6 +116,17 @@ export function ConsentActions() {
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
         className="relative flex flex-col justify-center p-6 text-[var(--color-paper)] md:p-8 lg:p-10"
       >
+        {consent.hasInteracted ? (
+          <button
+            type="button"
+            aria-label={consentDoorwayContent.closeSettingsLabel}
+            onClick={closeConsentManager}
+            className="absolute right-6 top-6 z-20 inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-white/12 bg-[rgb(255_255_255_/_0.05)] text-[var(--color-paper)] transition hover:bg-[rgb(255_255_255_/_0.08)] md:right-8 md:top-8 lg:right-10 lg:top-10"
+          >
+            <X size={18} />
+          </button>
+        ) : null}
+
         <div id="consent-doorway-description" className="sr-only">
           {consentDoorwayContent.description}
         </div>

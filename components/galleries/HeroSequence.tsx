@@ -87,6 +87,7 @@ export function HeroSequence({
   const dragOriginXRef = useRef(0);
   const dragOriginScrollLeftRef = useRef(0);
   const resumeAutoplayAtRef = useRef(0);
+  const [isAutoplayVisible, setIsAutoplayVisible] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const loopableSlides = useMemo(() => createLoopableSlides(images), [images]);
 
@@ -142,7 +143,53 @@ export function HeroSequence({
   }, [loopableSlides.length]);
 
   useEffect(() => {
-    if (reduceMotion || !loopableSlides.length) {
+    if (!loopableSlides.length) {
+      return undefined;
+    }
+
+    const viewport = viewportRef.current;
+
+    if (!viewport) {
+      return undefined;
+    }
+
+    let isDocumentVisible = document.visibilityState === "visible";
+    let isViewportVisible = true;
+
+    const syncAutoplayVisibility = () => {
+      setIsAutoplayVisible(isDocumentVisible && isViewportVisible);
+    };
+
+    const handleVisibilityChange = () => {
+      isDocumentVisible = document.visibilityState === "visible";
+      syncAutoplayVisibility();
+    };
+
+    const intersectionObserver =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            ([entry]) => {
+              isViewportVisible = entry?.isIntersecting ?? true;
+              syncAutoplayVisibility();
+            },
+            {
+              threshold: 0.01,
+            },
+          );
+
+    intersectionObserver?.observe(viewport);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    syncAutoplayVisibility();
+
+    return () => {
+      intersectionObserver?.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [loopableSlides.length]);
+
+  useEffect(() => {
+    if (reduceMotion || !loopableSlides.length || !isAutoplayVisible) {
       return undefined;
     }
 
@@ -179,6 +226,7 @@ export function HeroSequence({
     };
   }, [
     autoScrollSpeedPxPerSecond,
+    isAutoplayVisible,
     loopableSlides.length,
     reduceMotion,
   ]);
@@ -199,8 +247,8 @@ export function HeroSequence({
     }
 
     event.preventDefault();
-    pauseAutoplay();
     isDraggingRef.current = true;
+    pauseAutoplay();
     setIsDragging(true);
     dragOriginXRef.current = event.clientX;
     dragOriginScrollLeftRef.current = viewport.scrollLeft;
@@ -275,7 +323,6 @@ export function HeroSequence({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerRelease}
         onPointerCancel={handlePointerRelease}
-        onPointerLeave={handlePointerRelease}
         onScroll={handleScroll}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}

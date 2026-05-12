@@ -10,6 +10,7 @@ const IDLE_EASE = 0.34;
 const INTERACTIVE_EASE = 0.4;
 const PRESSED_EASE = 0.56;
 const SNAP_DISTANCE_PX = 96;
+const SETTLE_DISTANCE_PX = 0.08;
 
 function subscribe() {
   return () => {};
@@ -116,6 +117,76 @@ export function StudioCursor() {
       }
     };
 
+    const clearAnimationFrame = () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
+
+    const syncCursorPosition = () => {
+      const cursor = cursorRef.current;
+
+      if (!cursor) {
+        return;
+      }
+
+      cursor.style.setProperty(
+        "--cursor-x",
+        `${currentRef.current.x.toFixed(2)}px`,
+      );
+      cursor.style.setProperty(
+        "--cursor-y",
+        `${currentRef.current.y.toFixed(2)}px`,
+      );
+    };
+
+    const step = () => {
+      const cursor = cursorRef.current;
+
+      if (!cursor || !visibleRef.current) {
+        clearAnimationFrame();
+        return;
+      }
+
+      const ease = pressedRef.current
+        ? PRESSED_EASE
+        : modeRef.current === "interactive"
+          ? INTERACTIVE_EASE
+          : IDLE_EASE;
+
+      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * ease;
+      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * ease;
+
+      syncCursorPosition();
+
+      const deltaX = targetRef.current.x - currentRef.current.x;
+      const deltaY = targetRef.current.y - currentRef.current.y;
+
+      if (
+        Math.abs(deltaX) <= SETTLE_DISTANCE_PX &&
+        Math.abs(deltaY) <= SETTLE_DISTANCE_PX
+      ) {
+        currentRef.current = {
+          x: targetRef.current.x,
+          y: targetRef.current.y,
+        };
+        syncCursorPosition();
+        clearAnimationFrame();
+        return;
+      }
+
+      frameRef.current = window.requestAnimationFrame(step);
+    };
+
+    const startAnimation = () => {
+      if (frameRef.current !== null || !visibleRef.current) {
+        return;
+      }
+
+      frameRef.current = window.requestAnimationFrame(step);
+    };
+
     const releasePress = () => {
       clearReleaseTimer();
       releaseTimeoutRef.current = window.setTimeout(() => {
@@ -140,11 +211,13 @@ export function StudioCursor() {
           y: event.clientY,
         };
         hasPointerRef.current = true;
+        syncCursorPosition();
       }
 
       setCustomCursorActive(true);
       updateVisible(true);
       updateMode(getCursorMode(event.target));
+      startAnimation();
     };
 
     const animateBurst = () => {
@@ -172,39 +245,12 @@ export function StudioCursor() {
     };
 
     const deactivateCustomCursor = () => {
+      clearAnimationFrame();
       setCustomCursorActive(false);
       updateVisible(false);
       updateMode("idle");
       clearReleaseTimer();
       updatePressed(false);
-    };
-
-    const step = () => {
-      const cursor = cursorRef.current;
-
-      if (cursor) {
-        const ease = pressedRef.current
-          ? PRESSED_EASE
-          : modeRef.current === "interactive"
-            ? INTERACTIVE_EASE
-            : IDLE_EASE;
-
-        currentRef.current.x +=
-          (targetRef.current.x - currentRef.current.x) * ease;
-        currentRef.current.y +=
-          (targetRef.current.y - currentRef.current.y) * ease;
-
-        cursor.style.setProperty(
-          "--cursor-x",
-          `${currentRef.current.x.toFixed(2)}px`,
-        );
-        cursor.style.setProperty(
-          "--cursor-y",
-          `${currentRef.current.y.toFixed(2)}px`,
-        );
-      }
-
-      frameRef.current = window.requestAnimationFrame(step);
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -250,7 +296,6 @@ export function StudioCursor() {
       }
     };
 
-    frameRef.current = window.requestAnimationFrame(step);
     syncDataAttributes();
 
     document.addEventListener("pointermove", handlePointerMove, {
@@ -266,10 +311,7 @@ export function StudioCursor() {
     window.addEventListener("blur", deactivateCustomCursor);
 
     return () => {
-      if (frameRef.current !== null) {
-        window.cancelAnimationFrame(frameRef.current);
-      }
-
+      clearAnimationFrame();
       clearReleaseTimer();
       deactivateCustomCursor();
       document.removeEventListener("pointermove", handlePointerMove);

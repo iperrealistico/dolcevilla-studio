@@ -42,7 +42,7 @@ export const aboutPage = servicePageContentSchema.parse({
       "For couples, that means the work stays personal without being fragile. There is a clear voice behind the studio, but also enough real structure to support destination weddings, film coverage, travel logistics, and careful delivery.",
     ],
     groupNote:
-      "Beyond the four principal leads is a wider studio handling production, second coverage, film processing support, archive discipline, and finishing to one shared standard.",
+      "Beyond the four principal leads is a wider 10-plus-person studio handling second coverage, videography, digital photography, film processing support, archive discipline, assistants, logistics, and finishing to one shared standard.",
     supportingRoles: [],
     members: [
       {

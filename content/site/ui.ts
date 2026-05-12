@@ -70,11 +70,11 @@ export const siteUi = {
       defaultEyebrow: "The studio",
       principalLeadEyebrow: "Principal lead",
       widerStudioEyebrow: "The wider studio",
-      widerStudioTitle: "A larger circle behind the work",
+      widerStudioTitle: "A wider 10+ person studio behind the leads",
       widerStudioSubtitle:
-        "Production, second coverage, film handling, archive, and finishing all move to one shared standard.",
+        "Second coverage, videography, digital photography, film handling, archive, and finishing all move to one shared standard.",
       widerStudioDescription:
-        "Beyond the four visible leads is a larger working studio moving with the same eye for light, restraint, hospitality, film handling, and finish.",
+        "Beyond the four visible leads is a larger 10-plus-person studio of second photographers, videographers, film-processing support, archive hands, assistants, and finishing support moving with the same eye for light, restraint, hospitality, and finish.",
       previousCardLabel: "Show previous team card",
       nextCardLabel: "Show next team card",
     },

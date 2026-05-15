@@ -473,6 +473,15 @@
   "journal.drone-wedding-photography-in-tuscany-best-venues-rules-and-timing.ornament.orbit": {
     "asset": "journalDroneWeddingPhotographyTuscanyBestVenuesRulesTimingOrnamentOrbit"
   },
+  "journal.best-wedding-villas-in-lucca.cover": {
+    "asset": "journalBestWeddingVillasLuccaCover"
+  },
+  "journal.best-wedding-villas-in-lucca.ornament.wash": {
+    "asset": "journalBestWeddingVillasLuccaOrnamentWash"
+  },
+  "journal.best-wedding-villas-in-lucca.ornament.orbit": {
+    "asset": "journalBestWeddingVillasLuccaOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

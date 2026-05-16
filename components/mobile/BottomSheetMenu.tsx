@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { navigationItems } from "@/content/site/navigation";
 import { siteUi } from "@/content/site/ui";
 import { useMobileUI } from "@/contexts/MobileUIContext";
@@ -45,14 +46,17 @@ export function BottomSheetMenu() {
                 <p className="text-[0.7rem] font-semibold tracking-[0.24em] text-[var(--color-mist)] uppercase">
                   {siteUi.mobileMenu.title}
                 </p>
-                <button
-                  type="button"
-                  aria-label={siteUi.mobileMenu.closeLabel}
-                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]"
-                  onClick={closeMenu}
-                >
-                  <X size={18} strokeWidth={1.8} aria-hidden="true" />
-                </button>
+                <div className="flex shrink-0 items-center gap-2">
+                  <ThemeToggle className="min-h-10 w-[4.45rem]" />
+                  <button
+                    type="button"
+                    aria-label={siteUi.mobileMenu.closeLabel}
+                    className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]"
+                    onClick={closeMenu}
+                  >
+                    <X size={18} strokeWidth={1.8} aria-hidden="true" />
+                  </button>
+                </div>
               </div>
               <nav className="flex-1 overflow-y-auto overscroll-contain px-[clamp(0.9rem,3.6vw,1.2rem)] pt-3 pb-2 [-webkit-overflow-scrolling:touch]">
                 <div className="space-y-2.5 pb-1">

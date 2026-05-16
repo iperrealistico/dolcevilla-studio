@@ -85,7 +85,7 @@ export function Header({ simplified = false }: HeaderProps) {
                 );
               })}
             </nav>
-            <ThemeToggle className="hidden" />
+            <ThemeToggle className="hidden lg:inline-grid" />
             <button
               type="button"
               aria-expanded={isMenuOpen}

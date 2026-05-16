@@ -2,10 +2,10 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -13,6 +13,11 @@ export type ThemeName = "light" | "dark";
 
 const THEME_STORAGE_KEY = "dolcevilla-theme";
 const DEFAULT_THEME: ThemeName = "dark";
+const THEME_EVENT = "dolcevilla-theme-change";
+const THEME_TRANSITION_CLASS = "theme-transitioning";
+const THEME_TRANSITION_DURATION_MS = 460;
+
+let themeTransitionTimer: number | null = null;
 
 type ThemeContextValue = {
   theme: ThemeName;
@@ -32,6 +37,28 @@ function applyTheme(theme: ThemeName) {
   root.style.colorScheme = theme;
 }
 
+function queueThemeTransition() {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return;
+  }
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const root = document.documentElement;
+  root.classList.add(THEME_TRANSITION_CLASS);
+
+  if (themeTransitionTimer !== null) {
+    window.clearTimeout(themeTransitionTimer);
+  }
+
+  themeTransitionTimer = window.setTimeout(() => {
+    root.classList.remove(THEME_TRANSITION_CLASS);
+    themeTransitionTimer = null;
+  }, THEME_TRANSITION_DURATION_MS);
+}
+
 function readStoredTheme(): ThemeName | null {
   if (typeof window === "undefined") {
     return null;
@@ -40,6 +67,29 @@ function readStoredTheme(): ThemeName | null {
   const value = window.localStorage.getItem(THEME_STORAGE_KEY);
 
   return value === "light" || value === "dark" ? value : null;
+}
+
+function readThemeSnapshot(): ThemeName {
+  return resolveInitialTheme();
+}
+
+function readServerThemeSnapshot(): ThemeName {
+  return DEFAULT_THEME;
+}
+
+function subscribeToThemeStore(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => undefined;
+  }
+
+  const handleChange = () => onStoreChange();
+  window.addEventListener("storage", handleChange);
+  window.addEventListener(THEME_EVENT, handleChange);
+
+  return () => {
+    window.removeEventListener("storage", handleChange);
+    window.removeEventListener(THEME_EVENT, handleChange);
+  };
 }
 
 function resolveInitialTheme(): ThemeName {
@@ -74,23 +124,34 @@ export function ThemeScript() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeName>(() => resolveInitialTheme());
+  const theme = useSyncExternalStore(
+    subscribeToThemeStore,
+    readThemeSnapshot,
+    readServerThemeSnapshot,
+  );
 
-  useEffect(() => {
-    applyTheme(theme);
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-  }, [theme]);
+  const setTheme = useCallback((nextTheme: ThemeName) => {
+    if (resolveInitialTheme() === nextTheme) {
+      return;
+    }
+
+    queueThemeTransition();
+    applyTheme(nextTheme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    window.dispatchEvent(new Event(THEME_EVENT));
+  }, []);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }, [setTheme, theme]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({
       theme,
       setTheme,
-      toggleTheme: () =>
-        setTheme((currentTheme) =>
-          currentTheme === "dark" ? "light" : "dark",
-        ),
+      toggleTheme,
     }),
-    [theme],
+    [theme, setTheme, toggleTheme],
   );
 
   return (

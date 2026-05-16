@@ -89,6 +89,92 @@ summary:focus-visible {
   color: color-mix(in srgb, var(--color-mist) 78%, transparent);
 }
 
+html.theme-transitioning,
+html.theme-transitioning body,
+html.theme-transitioning button,
+html.theme-transitioning a,
+html.theme-transitioning input,
+html.theme-transitioning textarea,
+html.theme-transitioning select,
+html.theme-transitioning div,
+html.theme-transitioning section,
+html.theme-transitioning article,
+html.theme-transitioning aside,
+html.theme-transitioning header,
+html.theme-transitioning footer,
+html.theme-transitioning nav,
+html.theme-transitioning span,
+html.theme-transitioning p,
+html.theme-transitioning h1,
+html.theme-transitioning h2,
+html.theme-transitioning h3,
+html.theme-transitioning h4,
+html.theme-transitioning h5,
+html.theme-transitioning h6,
+html.theme-transitioning svg {
+  transition-duration: 360ms;
+  transition-property:
+    background, background-color, border-color, box-shadow, color, fill, filter,
+    opacity, stroke, text-shadow;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle {
+  isolation: isolate;
+}
+
+.theme-toggle__thumb {
+  position: absolute;
+  inset-block: 0.24rem;
+  left: 0.24rem;
+  z-index: 0;
+  width: calc((100% - 0.68rem) / 2);
+  border: 1px solid var(--color-line);
+  border-radius: calc(var(--radius-control) - 0.08rem);
+  background: var(--button-primary-bg);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.14);
+  transform: translateX(0);
+  transition:
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.theme-toggle[data-theme="light"] .theme-toggle__thumb {
+  transform: translateX(calc(100% + 0.2rem));
+}
+
+.theme-toggle__icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-mist);
+  opacity: 0.72;
+  transform: scale(0.88) rotate(-10deg);
+  transition:
+    color 260ms ease,
+    opacity 260ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle[data-theme="dark"] .theme-toggle__icon--dark,
+.theme-toggle[data-theme="light"] .theme-toggle__icon--light {
+  color: var(--button-primary-fg);
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__thumb,
+  .theme-toggle__icon {
+    transition: none;
+  }
+}
+
 html[data-custom-cursor="enabled"],
 html[data-custom-cursor="enabled"] body,
 html[data-custom-cursor="enabled"] * {

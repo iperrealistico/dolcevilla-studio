@@ -15,19 +15,30 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   return (
     <button
       type="button"
-      aria-label={`Switch to ${nextTheme} theme`}
+      role="switch"
+      aria-checked={theme === "light"}
+      aria-label="Light theme"
       title={`Switch to ${nextTheme} theme`}
+      data-theme={theme}
       className={cn(
-        "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-floating)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--surface-chip-hover)]",
+        "theme-toggle relative inline-grid min-h-11 w-[4.75rem] shrink-0 grid-cols-2 items-center overflow-hidden rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-toggle)] text-[var(--color-mist)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--surface-chip-hover)]",
         className,
       )}
       onClick={toggleTheme}
     >
-      {theme === "dark" ? (
-        <SunMedium size={18} strokeWidth={1.8} aria-hidden="true" />
-      ) : (
-        <MoonStar size={18} strokeWidth={1.8} aria-hidden="true" />
-      )}
+      <span className="theme-toggle__thumb" aria-hidden="true" />
+      <span
+        className="theme-toggle__icon theme-toggle__icon--dark"
+        aria-hidden="true"
+      >
+        <MoonStar size={17} strokeWidth={1.8} />
+      </span>
+      <span
+        className="theme-toggle__icon theme-toggle__icon--light"
+        aria-hidden="true"
+      >
+        <SunMedium size={17} strokeWidth={1.8} />
+      </span>
     </button>
   );
 }

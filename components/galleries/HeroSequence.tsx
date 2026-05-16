@@ -210,8 +210,7 @@ export function HeroSequence({
 
       if (viewport && segmentWidth && !isPaused) {
         viewport.scrollLeft +=
-          ((timestamp - previousTimestamp) / 1000) *
-          autoScrollSpeedPxPerSecond;
+          ((timestamp - previousTimestamp) / 1000) * autoScrollSpeedPxPerSecond;
         normalizeLoopPosition(viewport, segmentWidth);
       }
 
@@ -263,8 +262,7 @@ export function HeroSequence({
     const deltaX = event.clientX - dragOriginXRef.current;
     pauseAutoplay();
 
-    viewportRef.current.scrollLeft =
-      dragOriginScrollLeftRef.current - deltaX;
+    viewportRef.current.scrollLeft = dragOriginScrollLeftRef.current - deltaX;
     normalizeLoopPosition(viewportRef.current, segmentWidthRef.current);
   };
 
@@ -316,7 +314,7 @@ export function HeroSequence({
       <div
         ref={viewportRef}
         className={cn(
-          "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain touch-auto select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "absolute inset-0 touch-auto overflow-x-auto overflow-y-hidden overscroll-x-contain select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={handlePointerDown}
@@ -350,12 +348,14 @@ export function HeroSequence({
                     alt={image.alt}
                     fill
                     priority={segmentIndex === 1 && imageIndex < 2}
-                    loading={segmentIndex === 1 && imageIndex < 3 ? "eager" : "lazy"}
+                    loading={
+                      segmentIndex === 1 && imageIndex < 3 ? "eager" : "lazy"
+                    }
                     sizes={sizes}
                     placeholder="blur"
                     blurDataURL={image.blurDataURL}
                     draggable={false}
-                    className={cn("select-none object-cover", imageClassName)}
+                    className={cn("object-cover select-none", imageClassName)}
                     style={{
                       objectPosition: image.objectPosition ?? image.focalPoint,
                     }}
@@ -366,12 +366,14 @@ export function HeroSequence({
           ))}
         </div>
       </div>
-      <div
-        className={cn(
-          "pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,9,8,0.08),rgba(10,9,8,0.56))]",
-          overlayClassName,
-        )}
-      />
+      {overlayClassName ? (
+        <div
+          className={cn(
+            "pointer-events-none absolute inset-0",
+            overlayClassName,
+          )}
+        />
+      ) : null}
     </div>
   );
 }

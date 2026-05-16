@@ -17,7 +17,6 @@ type HeroVariantStyle = {
   desktopContentClassName: string;
   desktopTitleClassName: string;
   desktopCopyClassName: string;
-  desktopOverlayClassName: string;
   imageClassName: string;
   slideClassName: string;
   mobileTitleClassName: string;
@@ -39,11 +38,8 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   home: {
     desktopFrameClassName: "md:min-h-[min(78dvh,47rem)]",
     desktopContentClassName: "md:max-w-[41rem] xl:max-w-[44rem]",
-    desktopTitleClassName:
-      "md:max-w-[12ch] md:text-[4rem] xl:text-[4.7rem]",
+    desktopTitleClassName: "md:max-w-[12ch] md:text-[4rem] xl:text-[4.7rem]",
     desktopCopyClassName: "md:max-w-[29rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.58))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.82)_0%,rgba(3,3,4,0.58)_28%,rgba(3,3,4,0.18)_58%,rgba(3,3,4,0.06)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.72)_100%)]",
     imageClassName: "object-[58%_center] md:object-center",
     slideClassName:
       "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[38vw] xl:min-w-[32vw]",
@@ -54,11 +50,8 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   service: {
     desktopFrameClassName: "md:min-h-[min(72dvh,42rem)]",
     desktopContentClassName: "md:max-w-[38rem] xl:max-w-[42rem]",
-    desktopTitleClassName:
-      "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.25rem]",
+    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.25rem]",
     desktopCopyClassName: "md:max-w-[28rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.56))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.8)_0%,rgba(3,3,4,0.54)_30%,rgba(3,3,4,0.16)_60%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.68)_100%)]",
     imageClassName: "object-[60%_center] md:object-center",
     slideClassName:
       "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[37vw] xl:min-w-[31vw]",
@@ -69,11 +62,8 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
   editorial: {
     desktopFrameClassName: "md:min-h-[min(70dvh,41rem)]",
     desktopContentClassName: "md:max-w-[37rem] xl:max-w-[40rem]",
-    desktopTitleClassName:
-      "md:max-w-[12ch] md:text-[3.55rem] xl:text-[4.1rem]",
+    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.55rem] xl:text-[4.1rem]",
     desktopCopyClassName: "md:max-w-[27rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.54))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.78)_0%,rgba(3,3,4,0.5)_32%,rgba(3,3,4,0.14)_62%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.66)_100%)]",
     imageClassName: "object-[60%_center] md:object-center",
     slideClassName:
       "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw]",
@@ -87,8 +77,6 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
     desktopTitleClassName:
       "md:max-w-[13ch] md:text-[3.35rem] xl:text-[3.95rem]",
     desktopCopyClassName: "md:max-w-[26rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.52))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.76)_0%,rgba(3,3,4,0.48)_32%,rgba(3,3,4,0.14)_62%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.62)_100%)]",
     imageClassName: "object-[62%_center] md:object-center",
     slideClassName:
       "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw]",
@@ -102,8 +90,6 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
     desktopTitleClassName:
       "md:max-w-[13ch] md:text-[3.05rem] xl:text-[3.55rem]",
     desktopCopyClassName: "md:max-w-[24rem]",
-    desktopOverlayClassName:
-      "bg-[linear-gradient(180deg,rgba(6,6,7,0.06),rgba(6,6,7,0.5))] md:bg-[linear-gradient(90deg,rgba(3,3,4,0.74)_0%,rgba(3,3,4,0.46)_34%,rgba(3,3,4,0.14)_64%,rgba(3,3,4,0.04)_100%),linear-gradient(180deg,rgba(3,3,4,0.08)_0%,rgba(3,3,4,0.58)_100%)]",
     imageClassName: "object-[64%_center] md:object-center",
     slideClassName:
       "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[35vw] xl:min-w-[29vw]",
@@ -143,7 +129,6 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
             <HeroSequence
               images={heroSlides}
               imageClassName={styles.imageClassName}
-              overlayClassName={styles.desktopOverlayClassName}
               slideClassName={styles.slideClassName}
               autoScrollSpeedPxPerSecond={hero.variant === "home" ? 34 : 30}
             />
@@ -173,13 +158,13 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
           >
             <div
               className={cn(
-                "pointer-events-none relative space-y-5 border border-[var(--color-line)] bg-[var(--surface-panel-strong)] px-5 py-6 shadow-[var(--shadow-soft)] md:space-y-6 md:rounded-[var(--radius-frame)] md:border-white/12 md:bg-[rgb(10_9_8_/_0.42)] md:px-7 md:py-7 md:shadow-[0_30px_70px_rgba(0,0,0,0.24)] md:backdrop-blur-md",
+                "hero-title-box pointer-events-none relative space-y-5 border px-5 py-6 md:space-y-6 md:rounded-[var(--radius-frame)] md:px-7 md:py-7",
                 styles.desktopContentClassName,
               )}
             >
               {hero.eyebrow ? (
                 <FloatIn from="left">
-                  <Eyebrow className="relative mb-0 inline-flex rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-4 py-2 text-[var(--color-mist)] shadow-[var(--shadow-soft)] md:border-white/16 md:bg-[rgb(255_255_255_/_0.08)] md:text-[rgb(244_235_224_/_0.84)] md:shadow-none md:backdrop-blur-sm">
+                  <Eyebrow className="hero-eyebrow relative mb-0 inline-flex rounded-[var(--radius-pill)] border px-4 py-2">
                     {hero.eyebrow}
                   </Eyebrow>
                 </FloatIn>
@@ -187,7 +172,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               <FloatIn from="left" delay={0.08}>
                 <h1
                   className={cn(
-                    "font-display-face relative leading-[0.92] tracking-[-0.06em] text-[var(--color-ink)] md:text-[var(--color-paper)]",
+                    "hero-title font-display-face relative leading-[0.92] tracking-[-0.06em]",
                     styles.mobileTitleClassName,
                     styles.desktopTitleClassName,
                   )}
@@ -198,7 +183,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
               <FloatIn delay={0.16}>
                 <p
                   className={cn(
-                    "relative text-[0.98rem] leading-7 text-[var(--color-mist)] md:text-lg md:leading-8 md:text-[rgb(244_235_224_/_0.84)]",
+                    "hero-copy relative text-[0.98rem] leading-7 md:text-lg md:leading-8",
                     styles.mobileCopyClassName,
                     styles.desktopCopyClassName,
                   )}
@@ -221,7 +206,7 @@ export function HeroStatement({ hero }: { hero: HeroContent }) {
                     <LinkButton
                       href={hero.secondaryCta.href}
                       variant="secondary"
-                      className="min-h-[3.5rem] w-full border-[var(--color-line)] bg-[var(--surface-panel-soft)] px-6 text-[0.95rem] md:min-h-11 md:w-auto md:border-white/16 md:bg-[rgb(255_255_255_/_0.1)] md:px-5 md:text-sm md:text-[var(--color-paper)] md:backdrop-blur-sm"
+                      className="hero-secondary-link min-h-[3.5rem] w-full px-6 text-[0.95rem] md:min-h-11 md:w-auto md:px-5 md:text-sm"
                     >
                       {hero.secondaryCta.label}
                     </LinkButton>

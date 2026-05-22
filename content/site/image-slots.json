@@ -491,6 +491,15 @@
   "journal.micro-wedding-vs-full-wedding-weekend-in-tuscany-costs-guest-experience-and-venue-fit.ornament.orbit": {
     "asset": "journalMicroWeddingVsWeekendTuscanyOrnamentOrbit"
   },
+  "journal.unplugged-luxury-weddings-in-tuscany-how-to-keep-the-experience-intimate-and-the-photos-better.cover": {
+    "asset": "journalUnpluggedLuxuryWeddingsTuscanyIntimatePhotosCover"
+  },
+  "journal.unplugged-luxury-weddings-in-tuscany-how-to-keep-the-experience-intimate-and-the-photos-better.ornament.wash": {
+    "asset": "journalUnpluggedLuxuryWeddingsTuscanyIntimatePhotosOrnamentWash"
+  },
+  "journal.unplugged-luxury-weddings-in-tuscany-how-to-keep-the-experience-intimate-and-the-photos-better.ornament.orbit": {
+    "asset": "journalUnpluggedLuxuryWeddingsTuscanyIntimatePhotosOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

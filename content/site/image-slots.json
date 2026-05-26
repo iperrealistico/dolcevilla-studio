@@ -500,6 +500,15 @@
   "journal.unplugged-luxury-weddings-in-tuscany-how-to-keep-the-experience-intimate-and-the-photos-better.ornament.orbit": {
     "asset": "journalUnpluggedLuxuryWeddingsTuscanyIntimatePhotosOrnamentOrbit"
   },
+  "journal.wedding-photographer-and-videographer-in-tuscany-should-you-book-one-studio-or-two.cover": {
+    "asset": "journalWeddingPhotographerVideographerTuscanyOneStudioTwoCover"
+  },
+  "journal.wedding-photographer-and-videographer-in-tuscany-should-you-book-one-studio-or-two.ornament.wash": {
+    "asset": "journalWeddingPhotographerVideographerTuscanyOneStudioTwoOrnamentWash"
+  },
+  "journal.wedding-photographer-and-videographer-in-tuscany-should-you-book-one-studio-or-two.ornament.orbit": {
+    "asset": "journalWeddingPhotographerVideographerTuscanyOneStudioTwoOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

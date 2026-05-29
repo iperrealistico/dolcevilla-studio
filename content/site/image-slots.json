@@ -482,6 +482,15 @@
   "journal.best-wedding-villas-in-lucca.ornament.orbit": {
     "asset": "journalBestWeddingVillasLuccaOrnamentOrbit"
   },
+  "journal.best-villa-wedding-venues-in-tuscany.cover": {
+    "asset": "journalBestVillaWeddingVenuesTuscanyCover"
+  },
+  "journal.best-villa-wedding-venues-in-tuscany.ornament.wash": {
+    "asset": "journalBestVillaWeddingVenuesTuscanyOrnamentWash"
+  },
+  "journal.best-villa-wedding-venues-in-tuscany.ornament.orbit": {
+    "asset": "journalBestVillaWeddingVenuesTuscanyOrnamentOrbit"
+  },
   "journal.micro-wedding-vs-full-wedding-weekend-in-tuscany-costs-guest-experience-and-venue-fit.cover": {
     "asset": "journalMicroWeddingVsWeekendTuscanyCover"
   },

@@ -518,6 +518,15 @@
   "journal.wedding-photographer-and-videographer-in-tuscany-should-you-book-one-studio-or-two.ornament.orbit": {
     "asset": "journalWeddingPhotographerVideographerTuscanyOneStudioTwoOrnamentOrbit"
   },
+  "journal.same-sex-wedding-in-tuscany-ceremony-options-legal-notes-and-venue-tips.cover": {
+    "asset": "journalSameSexWeddingTuscanyGuideCover"
+  },
+  "journal.same-sex-wedding-in-tuscany-ceremony-options-legal-notes-and-venue-tips.ornament.wash": {
+    "asset": "journalSameSexWeddingTuscanyGuideOrnamentWash"
+  },
+  "journal.same-sex-wedding-in-tuscany-ceremony-options-legal-notes-and-venue-tips.ornament.orbit": {
+    "asset": "journalSameSexWeddingTuscanyGuideOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

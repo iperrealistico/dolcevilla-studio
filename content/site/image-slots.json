@@ -527,6 +527,15 @@
   "journal.same-sex-wedding-in-tuscany-ceremony-options-legal-notes-and-venue-tips.ornament.orbit": {
     "asset": "journalSameSexWeddingTuscanyGuideOrnamentOrbit"
   },
+  "journal.best-wedding-venues-in-fiesole-for-views-over-florence.cover": {
+    "asset": "journalBestWeddingVenuesFiesoleFlorenceCover"
+  },
+  "journal.best-wedding-venues-in-fiesole-for-views-over-florence.ornament.wash": {
+    "asset": "journalBestWeddingVenuesFiesoleFlorenceOrnamentWash"
+  },
+  "journal.best-wedding-venues-in-fiesole-for-views-over-florence.ornament.orbit": {
+    "asset": "journalBestWeddingVenuesFiesoleFlorenceOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

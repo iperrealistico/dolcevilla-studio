@@ -536,6 +536,15 @@
   "journal.best-wedding-venues-in-fiesole-for-views-over-florence.ornament.orbit": {
     "asset": "journalBestWeddingVenuesFiesoleFlorenceOrnamentOrbit"
   },
+  "journal.is-a-tuscany-wedding-more-expensive-than-a-wedding-at-home.cover": {
+    "asset": "journalTuscanyWeddingMoreExpensiveThanHomeCover"
+  },
+  "journal.is-a-tuscany-wedding-more-expensive-than-a-wedding-at-home.ornament.wash": {
+    "asset": "journalTuscanyWeddingMoreExpensiveThanHomeOrnamentWash"
+  },
+  "journal.is-a-tuscany-wedding-more-expensive-than-a-wedding-at-home.ornament.orbit": {
+    "asset": "journalTuscanyWeddingMoreExpensiveThanHomeOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

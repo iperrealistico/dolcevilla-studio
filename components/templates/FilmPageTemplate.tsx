@@ -27,8 +27,6 @@ type FilmPageTemplateProps = {
     reasons: Point[];
     whyBothIntro: RichSection;
     whyBoth: Point[];
-    skillsIntro: RichSection;
-    skills: Point[];
     darkroom: RichSection;
     darkroomGallery: GalleryItem[];
     faqs: FAQItem[];
@@ -79,15 +77,8 @@ export function FilmPageTemplate({
           />
         </ScrollParallax>
       ) : null}
-      <ScrollParallax from="right">
-        <PointsEditorialBlock
-          section={details.skillsIntro}
-          items={details.skills}
-          columns={3}
-        />
-      </ScrollParallax>
       <ScrollParallax from="left">
-        <EditorialTextBlock section={details.darkroom} />
+        <EditorialTextBlock section={details.darkroom} layout="balanced" />
       </ScrollParallax>
       <ScrollParallax from="right" intensity="lg">
         <SignatureGallery items={details.darkroomGallery} />
@@ -102,7 +93,7 @@ export function FilmPageTemplate({
         <FAQBlock items={details.faqs} />
       </ScrollParallax>
       <ScrollParallax from="left">
-        <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
+        <StoryCardGrid stories={stories} maxItems={3} />
       </ScrollParallax>
       <ScrollParallax from="right" intensity="lg">
         <CTASection section={page.cta} />

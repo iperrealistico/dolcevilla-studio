@@ -48,6 +48,24 @@ export function SitePageTemplate({
   page,
   stories = [],
 }: SitePageTemplateProps) {
+  const useBalancedIntro =
+    page.pageType === "home" || page.pageType === "about";
+  const hasGeography = Boolean(
+    page.geography &&
+      (page.geography.heading ||
+        page.geography.body.length ||
+        page.geography.places.length),
+  );
+  const hasLocationLinks = page.locationLinks.length > 0;
+  const hasProcess = page.process.length > 0;
+  const hasTestimonials = page.testimonials.length > 0;
+  const hasInvestmentNote = Boolean(
+    page.investmentNote &&
+      (page.investmentNote.heading || page.investmentNote.body.length),
+  );
+  const hasVilla = Boolean(page.villa && (page.villa.title || page.villa.body));
+  const hasFaqs = page.faqs.length > 0;
+
   return (
     <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       {page.hero ? (
@@ -57,7 +75,10 @@ export function SitePageTemplate({
       ) : null}
       {page.hero ? (
         <ScrollParallax from="left">
-          <EditorialTextBlock section={page.intro} />
+          <EditorialTextBlock
+            section={page.intro}
+            layout={useBalancedIntro ? "balanced" : "default"}
+          />
         </ScrollParallax>
       ) : (
         <ScrollParallax from="left">
@@ -99,42 +120,52 @@ export function SitePageTemplate({
           }
         />
       </ScrollParallax>
-      <ScrollParallax from="left">
-        <GeographyBlock geography={page.geography} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <LocationLinks items={page.locationLinks} />
-      </ScrollParallax>
-      {stories.length ? (
+      {hasGeography ? (
         <ScrollParallax from="left">
-          <StoryCardGrid
-            stories={stories}
-            maxItems={3}
-            showMoreHref="/journal"
-          />
+          <GeographyBlock geography={page.geography} />
         </ScrollParallax>
       ) : null}
-      {page.pageType === "home" ? (
+      {hasLocationLinks ? (
         <ScrollParallax from="right">
-          <ExperiencePreview steps={page.process} />
+          <LocationLinks items={page.locationLinks} />
         </ScrollParallax>
-      ) : (
+      ) : null}
+      {stories.length ? (
+        <ScrollParallax from="left">
+          <StoryCardGrid stories={stories} maxItems={3} />
+        </ScrollParallax>
+      ) : null}
+      {hasProcess ? (
+        page.pageType === "home" ? (
+          <ScrollParallax from="right">
+            <ExperiencePreview steps={page.process} />
+          </ScrollParallax>
+        ) : (
+          <ScrollParallax from="right">
+            <ProcessPreviewBlock steps={page.process} />
+          </ScrollParallax>
+        )
+      ) : null}
+      {hasTestimonials ? (
+        <ScrollParallax from="left">
+          <TestimonialsBlock items={page.testimonials} />
+        </ScrollParallax>
+      ) : null}
+      {hasInvestmentNote ? (
         <ScrollParallax from="right">
-          <ProcessPreviewBlock steps={page.process} />
+          <InvestmentNote section={page.investmentNote} />
         </ScrollParallax>
-      )}
-      <ScrollParallax from="left">
-        <TestimonialsBlock items={page.testimonials} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <InvestmentNote section={page.investmentNote} />
-      </ScrollParallax>
-      <ScrollParallax from="left">
-        <VillaIdentityBlock villa={page.villa} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <FAQBlock items={page.faqs} />
-      </ScrollParallax>
+      ) : null}
+      {hasVilla ? (
+        <ScrollParallax from="left">
+          <VillaIdentityBlock villa={page.villa} />
+        </ScrollParallax>
+      ) : null}
+      {hasFaqs ? (
+        <ScrollParallax from="right">
+          <FAQBlock items={page.faqs} />
+        </ScrollParallax>
+      ) : null}
       {page.pageType === "contact" ? (
         <ScrollParallax from="left" intensity="lg">
           <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start xl:gap-14">

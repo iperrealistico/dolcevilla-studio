@@ -85,11 +85,7 @@ export const homePage = servicePageContentSchema.parse({
       "Massa Carrara",
     ],
   },
-  locationLinks: [
-    { label: "Film", href: "/film-wedding-photography", variant: "ghost" },
-    { label: "Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
-    { label: "Journal", href: "/journal", variant: "ghost" },
-  ],
+  locationLinks: [],
   stories: [],
   testimonials: testimonials.home,
   process: [

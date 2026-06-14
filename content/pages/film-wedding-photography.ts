@@ -227,36 +227,6 @@ export const filmWeddingPhotographyDetails = {
     ],
   }),
   whyBoth: [] as { title: string; description: string }[],
-  skillsIntro: richSectionSchema.parse({
-    eyebrow: "Why few do it well",
-    heading:
-      "Hybrid film coverage only works when the photographer can manage it under pressure.",
-    body: [
-      "It is one thing to like film. It is another to meter it accurately, switch formats quickly, direct people calmly, and still keep a wedding day moving without gaps in coverage.",
-    ],
-  }),
-  skills: [
-    {
-      title: "Metering under pressure",
-      description:
-        "Film demands stronger exposure judgment and a deeper understanding of light than a fully reactive digital workflow.",
-    },
-    {
-      title: "Switching formats without losing pace",
-      description:
-        "35mm, medium format, large format, and digital each ask for different handling, loading habits, and timing decisions in real time.",
-    },
-    {
-      title: "Knowing when to move to digital",
-      description:
-        "Good hybrid work depends on judgment. Part of the expertise is knowing when film adds value and when digital is the better choice.",
-    },
-    {
-      title: "Handling the analog side properly",
-      description:
-        "Negatives, proofing, scanning, archiving, and print sensitivity all shape the final result long before the gallery is delivered.",
-    },
-  ].map((item) => pointSchema.parse(item)),
   darkroom: richSectionSchema.parse({
     eyebrow: "The darkroom",
     heading: "The darkroom matters because it keeps the film promise honest.",

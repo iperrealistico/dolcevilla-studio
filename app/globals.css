@@ -123,6 +123,14 @@ html.theme-transitioning svg {
   isolation: isolate;
 }
 
+:root[data-theme="light"] .theme-toggle {
+  background: color-mix(in srgb, var(--color-shell) 88%, var(--color-paper) 12%);
+}
+
+:root[data-theme="light"] .theme-toggle:hover {
+  background: color-mix(in srgb, var(--color-shell) 94%, var(--color-paper) 6%);
+}
+
 .theme-toggle__thumb {
   position: absolute;
   inset-block: 0.24rem;

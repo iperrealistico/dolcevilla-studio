@@ -27,7 +27,7 @@ export function VillaPageTemplate({ page, stories }: VillaPageTemplateProps) {
         </ScrollParallax>
       ) : null}
       <ScrollParallax from="left">
-        <EditorialTextBlock section={page.intro} />
+        <EditorialTextBlock section={page.intro} layout="balanced" />
       </ScrollParallax>
       {page.gallery.length ? (
         <ScrollParallax from="right" intensity="lg">
@@ -58,7 +58,7 @@ export function VillaPageTemplate({ page, stories }: VillaPageTemplateProps) {
         <FAQBlock items={page.faqs} />
       </ScrollParallax>
       <ScrollParallax from="right">
-        <StoryCardGrid stories={stories} maxItems={3} showMoreHref="/journal" />
+        <StoryCardGrid stories={stories} maxItems={3} />
       </ScrollParallax>
       <ScrollParallax from="left" intensity="lg">
         <CTASection section={page.cta} />

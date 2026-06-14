@@ -287,13 +287,13 @@ export async function JournalEntryTemplate({
           </div>
         </section>
 
+        {sourceAnalysis.photographerSegueCount === 0 ? (
+          <CTASection section={journalEntryTemplateContent.fallbackCta} />
+        ) : null}
         {relatedStories.length ? (
           <section className="pt-10 md:pt-14 lg:pt-16">
             <RelatedStories stories={relatedStories} />
           </section>
-        ) : null}
-        {sourceAnalysis.photographerSegueCount === 0 ? (
-          <CTASection section={journalEntryTemplateContent.fallbackCta} />
         ) : null}
       </div>
       <JournalStickyBannerCTA

@@ -6,7 +6,7 @@ import { pageSlugs } from "@/content/pages";
 export async function buildSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const journalEntries = await getJournalEntries();
 
-  const staticEntries = ["", "journal", ...pageSlugs.filter((slug) => slug !== "home")]
+  const staticEntries = ["", "gallery", "journal", ...pageSlugs.filter((slug) => slug !== "home")]
     .filter((value, index, array) => array.indexOf(value) === index)
     .map((path) => ({
       url: absoluteUrl(path ? `/${path}` : "/"),

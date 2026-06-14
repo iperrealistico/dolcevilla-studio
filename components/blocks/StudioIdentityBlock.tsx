@@ -4,17 +4,17 @@ import { Container } from "@/components/ui/Container";
 import { siteUi } from "@/content/site/ui";
 import { getImageAsset } from "@/lib/images/imageManifest";
 
-export function VillaIdentityBlock({
-  villa,
+export function StudioIdentityBlock({
+  studio,
 }: {
-  villa?: ServicePageContent["villa"];
+  studio?: ServicePageContent["studio"];
 }) {
-  if (!villa) {
+  if (!studio) {
     return null;
   }
 
   const image = getImageAsset(
-    (villa.imageId ?? "shared.villa.fallback") as never,
+    (studio.imageId ?? "shared.studio.fallback") as never,
   );
 
   return (
@@ -23,13 +23,13 @@ export function VillaIdentityBlock({
         <div className="grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-center">
           <div>
             <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-              {villa.eyebrow ?? siteUi.sections.villa.defaultEyebrow}
+              {studio.eyebrow ?? siteUi.sections.studio.defaultEyebrow}
             </p>
             <h3 className="font-display-face mt-3 text-3xl tracking-[-0.03em] md:text-4xl">
-              {villa.title}
+              {studio.title}
             </h3>
             <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-mist)]">
-              {villa.body}
+              {studio.body}
             </p>
           </div>
           <div className="overflow-hidden rounded-[var(--radius-panel)] border border-[var(--color-line)] bg-[var(--surface-panel-soft)] shadow-[var(--shadow-card)]">

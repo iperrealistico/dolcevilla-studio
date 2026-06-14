@@ -13,12 +13,15 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import type { ServicePageContent, StoryCard } from "@/types/content";
 
-type VillaPageTemplateProps = {
+type StudioPageTemplateProps = {
   page: ServicePageContent;
   stories: StoryCard[];
 };
 
-export function VillaPageTemplate({ page, stories }: VillaPageTemplateProps) {
+export function StudioPageTemplate({
+  page,
+  stories,
+}: StudioPageTemplateProps) {
   return (
     <div className="space-y-10 pb-16 md:space-y-14 md:pb-20">
       {page.hero ? (
@@ -45,23 +48,29 @@ export function VillaPageTemplate({ page, stories }: VillaPageTemplateProps) {
       <ScrollParallax from="left">
         <GeographyBlock geography={page.geography} />
       </ScrollParallax>
-      <ScrollParallax from="right">
-        <LocationLinks items={page.locationLinks} />
-      </ScrollParallax>
-      <ScrollParallax from="left">
-        <TestimonialsBlock items={page.testimonials} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <InvestmentNote section={page.investmentNote} />
-      </ScrollParallax>
+      {page.locationLinks.length ? (
+        <ScrollParallax from="right">
+          <LocationLinks items={page.locationLinks} />
+        </ScrollParallax>
+      ) : null}
+      {page.testimonials.length ? (
+        <ScrollParallax from="left">
+          <TestimonialsBlock items={page.testimonials} />
+        </ScrollParallax>
+      ) : null}
+      {page.investmentNote ? (
+        <ScrollParallax from="right">
+          <InvestmentNote section={page.investmentNote} />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="left">
         <FAQBlock items={page.faqs} />
       </ScrollParallax>
-      <ScrollParallax from="right">
-        <StoryCardGrid stories={stories} maxItems={3} />
-      </ScrollParallax>
       <ScrollParallax from="left" intensity="lg">
         <CTASection section={page.cta} />
+      </ScrollParallax>
+      <ScrollParallax from="right">
+        <StoryCardGrid stories={stories} maxItems={3} />
       </ScrollParallax>
     </div>
   );

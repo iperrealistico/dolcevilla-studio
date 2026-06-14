@@ -154,8 +154,8 @@ export function validateJournalV3Contract(
     `Journal entry "${entry.slug}" must include a natural backlink to /film-wedding-photography.`,
   );
   assert(
-    journalSourceContainsPath(entry.source, "/villa-raffaelli"),
-    `Journal entry "${entry.slug}" must include a natural backlink to /villa-raffaelli.`,
+    journalSourceContainsPath(entry.source, "/studio"),
+    `Journal entry "${entry.slug}" must include a natural backlink to /studio.`,
   );
 
   return {

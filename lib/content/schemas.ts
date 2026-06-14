@@ -126,10 +126,18 @@ export const heroSchema = z.object({
   description: z.string().optional(),
   primaryCta: linkSchema,
   secondaryCta: linkSchema.optional(),
-  imageIds: z.array(z.string().min(1)).min(1),
+  imageIds: z.array(z.string().min(1)).default([]),
   variant: z
-    .enum(["home", "service", "editorial", "landing", "ads"])
+    .enum(["minimal", "home", "service", "editorial", "landing", "ads"])
     .default("service"),
+}).superRefine((hero, ctx) => {
+  if (hero.variant !== "minimal" && hero.imageIds.length === 0) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Non-minimal heroes must provide at least one image id.",
+      path: ["imageIds"],
+    });
+  }
 });
 
 export const geographySchema = z.object({
@@ -139,7 +147,7 @@ export const geographySchema = z.object({
   places: z.array(z.string().min(1)).min(1),
 });
 
-export const villaIdentitySchema = z.object({
+export const studioIdentitySchema = z.object({
   variant: z.enum(["minimal", "editorial", "quote"]).default("minimal"),
   eyebrow: z.string().optional(),
   title: z.string().min(1),
@@ -239,7 +247,7 @@ export const servicePageContentSchema = z.object({
   process: z.array(processStepSchema).default([]),
   investmentNote: richSectionSchema.optional(),
   faqs: z.array(faqItemSchema).default([]),
-  villa: villaIdentitySchema.optional(),
+  studio: studioIdentitySchema.optional(),
   cta: ctaSectionSchema,
   seo: seoSchema,
   formIntro: richSectionSchema.optional(),

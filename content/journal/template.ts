@@ -1,3 +1,5 @@
+import { sharedSiteCta } from "@/content/site/sharedCta";
+
 export const journalEntryTemplateContent = {
   breadcrumbs: {
     home: "Home",
@@ -29,12 +31,6 @@ export const journalEntryTemplateContent = {
     },
   },
   fallbackCta: {
-    title: "Planning something with place and atmosphere at its center?",
-    body: "Tell us about the world you’re building and we’ll take it from there.",
-    primaryCta: {
-      label: "Start your inquiry",
-      href: "/contact",
-      variant: "primary",
-    },
+    ...sharedSiteCta,
   },
 } as const;

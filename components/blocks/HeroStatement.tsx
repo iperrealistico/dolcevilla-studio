@@ -35,6 +35,18 @@ function getMobileHeroContentId(hero: HeroContent) {
 }
 
 const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
+  minimal: {
+    desktopFrameClassName: "md:min-h-[min(72dvh,42rem)]",
+    desktopContentClassName: "md:max-w-[38rem] xl:max-w-[42rem]",
+    desktopTitleClassName: "md:max-w-[12ch] md:text-[3.7rem] xl:text-[4.25rem]",
+    desktopCopyClassName: "md:max-w-[28rem]",
+    imageClassName: "object-[60%_center] md:object-center",
+    slideClassName:
+      "min-w-[84vw] sm:min-w-[62vw] lg:min-w-[37vw] xl:min-w-[31vw]",
+    mobileTitleClassName: "max-w-[11ch] text-[2.35rem] sm:text-[2.7rem]",
+    mobileCopyClassName: "max-w-[34ch]",
+    mobileImageHeightClassName: "min-h-[clamp(20rem,46svh,25rem)]",
+  },
   home: {
     desktopFrameClassName: "md:min-h-[min(78dvh,47rem)]",
     desktopContentClassName: "md:max-w-[41rem] xl:max-w-[44rem]",
@@ -100,6 +112,32 @@ const HERO_VARIANT_STYLES: Record<HeroContent["variant"], HeroVariantStyle> = {
 };
 
 export function HeroStatement({ hero }: { hero: HeroContent }) {
+  if (hero.variant === "minimal") {
+    return (
+      <section className="relative pt-10 md:pt-12">
+        <Container>
+          {hero.eyebrow ? (
+            <FloatIn from="left">
+              <p className="mb-3 text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
+                {hero.eyebrow}
+              </p>
+            </FloatIn>
+          ) : null}
+          <FloatIn from="left" delay={0.08}>
+            <h1 className="font-display-face max-w-4xl text-5xl leading-[0.94] tracking-[-0.05em] md:text-7xl">
+              {hero.title}
+            </h1>
+          </FloatIn>
+          <FloatIn delay={0.16}>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-mist)]">
+              {hero.subtitle}
+            </p>
+          </FloatIn>
+        </Container>
+      </section>
+    );
+  }
+
   const heroSlides = hero.imageIds.map((id) => {
     const image = getImageAsset(id as never);
 

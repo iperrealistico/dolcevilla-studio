@@ -38,7 +38,7 @@ export function InquiryForm() {
       photographyBudgetRange: "",
       message: "",
       filmInterest: false,
-      villaInterest: false,
+      studioInterest: false,
       honey: "",
     },
   });
@@ -174,9 +174,9 @@ export function InquiryForm() {
         <input
           className="mt-1 size-4"
           type="checkbox"
-          {...form.register("villaInterest")}
+          {...form.register("studioInterest")}
         />
-        {inquiryFormContent.checkboxes.villaInterest}
+        {inquiryFormContent.checkboxes.studioInterest}
       </label>
       <input type="hidden" {...form.register("pageUrl")} />
       <input type="hidden" {...form.register("referrer")} />

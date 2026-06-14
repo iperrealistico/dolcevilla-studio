@@ -1,7 +1,10 @@
 import { CTASection } from "@/components/blocks/CTASection";
-import { CraftIdentityBlock } from "@/components/blocks/CraftIdentityBlock";
 import { EditorialTextBlock } from "@/components/blocks/EditorialTextBlock";
 import { FAQBlock } from "@/components/blocks/FAQBlock";
+import {
+  FilmFormatSection,
+  type FilmFormatItem,
+} from "@/components/blocks/FilmFormatSection";
 import { PointsEditorialBlock } from "@/components/blocks/PointsEditorialBlock";
 import { SignatureGallery } from "@/components/blocks/SignatureGallery";
 import { StoryCardGrid } from "@/components/blocks/StoryCardGrid";
@@ -23,8 +26,8 @@ type FilmPageTemplateProps = {
   page: ServicePageContent;
   stories: StoryCard[];
   details: {
-    reasonsIntro: RichSection;
-    reasons: Point[];
+    formatsIntro: RichSection;
+    formats: readonly FilmFormatItem[];
     whyBothIntro: RichSection;
     whyBoth: Point[];
     darkroom: RichSection;
@@ -59,13 +62,9 @@ export function FilmPageTemplate({
         </ScrollParallax>
       ) : null}
       <ScrollParallax from="right">
-        <CraftIdentityBlock craft={page.craft} layout="feature-grid" />
-      </ScrollParallax>
-      <ScrollParallax from="left">
-        <PointsEditorialBlock
-          section={details.reasonsIntro}
-          items={details.reasons}
-          columns={2}
+        <FilmFormatSection
+          section={details.formatsIntro}
+          items={details.formats}
         />
       </ScrollParallax>
       {details.whyBoth.length ? (
@@ -80,23 +79,27 @@ export function FilmPageTemplate({
       <ScrollParallax from="left">
         <EditorialTextBlock section={details.darkroom} layout="balanced" />
       </ScrollParallax>
-      <ScrollParallax from="right" intensity="lg">
-        <SignatureGallery items={details.darkroomGallery} />
-      </ScrollParallax>
+      {details.darkroomGallery.length ? (
+        <ScrollParallax from="right" intensity="lg">
+          <SignatureGallery items={details.darkroomGallery} />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="right">
         <TestimonialsBlock items={page.testimonials} />
       </ScrollParallax>
-      <ScrollParallax from="left">
-        <InvestmentNote section={page.investmentNote} />
-      </ScrollParallax>
+      {page.investmentNote ? (
+        <ScrollParallax from="left">
+          <InvestmentNote section={page.investmentNote} />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="right">
         <FAQBlock items={details.faqs} />
       </ScrollParallax>
-      <ScrollParallax from="left">
-        <StoryCardGrid stories={stories} maxItems={3} />
-      </ScrollParallax>
       <ScrollParallax from="right" intensity="lg">
         <CTASection section={page.cta} />
+      </ScrollParallax>
+      <ScrollParallax from="left">
+        <StoryCardGrid stories={stories} maxItems={3} />
       </ScrollParallax>
     </div>
   );

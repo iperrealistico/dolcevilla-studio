@@ -59,12 +59,12 @@ export const siteUi = {
     craft: {
       defaultEyebrow: "Hybrid craft",
     },
-    villa: {
-      defaultEyebrow: "Villa Raffaelli",
+    studio: {
+      defaultEyebrow: "The studio",
       landingTitle:
-        "Villa Raffaelli remains a private source of the brand’s point of view.",
+        "The studio remains a private source of the brand's point of view.",
       landingBody:
-        "It appears here only as an origin story, not as a public venue funnel.",
+        "It appears here as a real base of operations, not as a public venue funnel.",
     },
     team: {
       defaultEyebrow: "The studio",

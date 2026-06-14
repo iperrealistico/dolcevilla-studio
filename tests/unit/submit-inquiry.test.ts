@@ -11,7 +11,7 @@ const validInquiry: InquiryFormValues = {
   celebrationType: "wedding-weekend",
   photographyBudgetRange: "€8k-12k",
   message: "We are planning a relaxed Tuscany wedding weekend and would love to talk.",
-  villaInterest: false,
+  studioInterest: false,
   honey: "",
 };
 

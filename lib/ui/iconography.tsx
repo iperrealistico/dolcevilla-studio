@@ -4,6 +4,7 @@ import {
   Camera,
   Cookie,
   House,
+  Images,
   Instagram,
   Mail,
   MapPinned,
@@ -28,7 +29,11 @@ export function getNavigationIcon(href: string): LucideIcon {
     return Camera;
   }
 
-  if (href === "/villa-raffaelli") {
+  if (href === "/gallery") {
+    return Images;
+  }
+
+  if (href === "/studio") {
     return MapPinned;
   }
 
@@ -84,9 +89,13 @@ export function getLinkIconConfig(
     return { Icon: Camera, placement: "left" };
   }
 
+  if (normalizedHref === "/gallery" || normalizedLabel.includes("gallery")) {
+    return { Icon: Images, placement: "left" };
+  }
+
   if (
-    normalizedHref === "/villa-raffaelli" ||
-    normalizedLabel.includes("villa")
+    normalizedHref === "/studio" ||
+    normalizedLabel.includes("studio")
   ) {
     return { Icon: MapPinned, placement: "left" };
   }

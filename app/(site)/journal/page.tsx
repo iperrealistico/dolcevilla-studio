@@ -25,8 +25,8 @@ export default async function JournalIndexPage() {
       />
       <div className="space-y-10 pb-16 pt-10 md:space-y-14 md:pb-20 md:pt-12">
         <EditorialTextBlock section={journalPageContent.intro} layout="balanced" />
-        <StoryCardGrid stories={stories} />
         <CTASection section={journalPageContent.cta} />
+        <StoryCardGrid stories={stories} />
       </div>
     </>
   );

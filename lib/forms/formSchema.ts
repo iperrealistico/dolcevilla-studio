@@ -16,7 +16,7 @@ export const inquiryFormSchema = z.object({
     .min(1, inquiryFormContent.validation.photographyBudgetRange),
   message: z.string().min(20, inquiryFormContent.validation.message),
   filmInterest: z.boolean().default(false),
-  villaInterest: z.boolean().default(false),
+  studioInterest: z.boolean().default(false),
   pageUrl: z.string().optional(),
   referrer: z.string().optional(),
   utmSource: z.string().optional(),

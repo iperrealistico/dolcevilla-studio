@@ -19,7 +19,7 @@ Some body copy with a natural link to /film-wedding-photography.
 
 ## Second chapter
 
-Some body copy with a natural link to /villa-raffaelli.
+Some body copy with a natural link to /studio.
 
 <JournalPlanningNote title="Planning note">
   <p>Stay close to the light.</p>

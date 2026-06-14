@@ -79,22 +79,22 @@ test("journal index is reachable after consent", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("villa raffaelli page is reachable and renders the dedicated heading", async ({
+test("studio page is reachable and renders the dedicated heading", async ({
   page,
 }) => {
-  await page.goto("/villa-raffaelli");
+  await page.goto("/studio");
   await page
     .getByRole("button", { name: "Continue with essential only" })
     .click();
 
   await expect(
     page.getByRole("heading", {
-      name: "Our private creative base in the mountains of north Tuscany.",
+      name: "A private studio setting in Tuscany for portraits, private vows, and very intimate weddings.",
     }),
   ).toBeVisible();
 });
 
-test("villa navigation link is present in the desktop header", async ({
+test("studio navigation link is present in the desktop header", async ({
   page,
 }) => {
   await page.goto("/");
@@ -103,22 +103,22 @@ test("villa navigation link is present in the desktop header", async ({
     .click();
 
   await expect(
-    page.getByRole("navigation").getByRole("link", { name: "Villa" }),
+    page.getByRole("navigation").getByRole("link", { name: "Studio" }),
   ).toBeVisible();
 
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "Villa" })
+    .getByRole("link", { name: "Studio" })
     .click();
 
   await expect(
     page.getByRole("heading", {
-      name: "Our private creative base in the mountains of north Tuscany.",
+      name: "A private studio setting in Tuscany for portraits, private vows, and very intimate weddings.",
     }),
   ).toBeVisible();
 });
 
-test("villa navigation link is present in the mobile bottom sheet menu", async ({
+test("studio navigation link is present in the mobile bottom sheet menu", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -130,12 +130,12 @@ test("villa navigation link is present in the mobile bottom sheet menu", async (
   await page.getByRole("button", { name: "Open navigation" }).click();
   const mobileMenu = page.locator("nav.space-y-3");
 
-  await expect(mobileMenu.getByRole("link", { name: "Villa" })).toBeVisible();
-  await mobileMenu.getByRole("link", { name: "Villa" }).click();
+  await expect(mobileMenu.getByRole("link", { name: "Studio" })).toBeVisible();
+  await mobileMenu.getByRole("link", { name: "Studio" }).click();
 
   await expect(
     page.getByRole("heading", {
-      name: "Our private creative base in the mountains of north Tuscany.",
+      name: "A private studio setting in Tuscany for portraits, private vows, and very intimate weddings.",
     }),
   ).toBeVisible();
 });

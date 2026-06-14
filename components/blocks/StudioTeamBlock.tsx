@@ -412,8 +412,8 @@ export function StudioTeamBlock({
   };
 
   return (
-    <Container>
-      <section className="relative overflow-visible rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-article-frame)] px-6 py-8 shadow-[var(--shadow-card)] md:px-8 md:py-10 lg:px-10">
+    <section className="relative overflow-visible space-y-8 md:space-y-10">
+      <Container>
         <div className="max-w-4xl space-y-4">
           <p className="text-xs font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
             {team.eyebrow ?? siteUi.sections.team.defaultEyebrow}
@@ -427,137 +427,137 @@ export function StudioTeamBlock({
             ))}
           </div>
         </div>
+      </Container>
+
+      <div
+        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onFocusCapture={handleFocusCapture}
+        onBlurCapture={handleBlurCapture}
+      >
+        {slides.length > 1 ? (
+          <>
+            <button
+              type="button"
+              aria-label={siteUi.sections.team.previousCardLabel}
+              onClick={() => handleArrowClick(-1)}
+              className="absolute top-[38%] left-3 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:left-5 lg:left-7"
+            >
+              <ArrowLeft size={18} strokeWidth={1.75} />
+            </button>
+            <button
+              type="button"
+              aria-label={siteUi.sections.team.nextCardLabel}
+              onClick={() => handleArrowClick(1)}
+              className="absolute top-[38%] right-3 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:right-5 lg:right-7"
+            >
+              <ArrowRight size={18} strokeWidth={1.75} />
+            </button>
+          </>
+        ) : null}
 
         <div
-          className="relative mt-10"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          onFocusCapture={handleFocusCapture}
-          onBlurCapture={handleBlurCapture}
+          ref={viewportRef}
+          className="flex gap-5 overflow-x-auto overscroll-x-contain px-5 py-4 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] md:px-8 lg:px-10 [&::-webkit-scrollbar]:hidden"
+          style={{ scrollPaddingInline: "2.5rem" }}
+          onScroll={updateScrollState}
+          onWheel={handleWheel}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
         >
-          {slides.length > 1 ? (
-            <>
-              <button
-                type="button"
-                aria-label={siteUi.sections.team.previousCardLabel}
-                onClick={() => handleArrowClick(-1)}
-                className="absolute top-[38%] left-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:left-4"
-              >
-                <ArrowLeft size={18} strokeWidth={1.75} />
-              </button>
-              <button
-                type="button"
-                aria-label={siteUi.sections.team.nextCardLabel}
-                onClick={() => handleArrowClick(1)}
-                className="absolute top-[38%] right-2 z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-control)] border border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] backdrop-blur-md transition hover:bg-[var(--surface-chip-hover)] md:right-4"
-              >
-                <ArrowRight size={18} strokeWidth={1.75} />
-              </button>
-            </>
-          ) : null}
+          {slides.map((slide, index) => (
+            <motion.article
+              key={slide.key}
+              ref={(node) => {
+                slideRefs.current[index] = node;
+              }}
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.58,
+                ease: [0.22, 1, 0.36, 1],
+                delay: reduceMotion ? 0 : index * 0.06,
+              }}
+              className={`${cardBaseClass} ${
+                isDragging ? "cursor-grabbing" : "cursor-grab"
+              } max-w-[84vw] min-w-[84vw] sm:max-w-[23rem] sm:min-w-[23rem] lg:max-w-[25rem] lg:min-w-[25rem]`}
+            >
+              <div className="relative overflow-hidden rounded-t-[var(--radius-frame)]">
+                <Image
+                  src={slide.image.src}
+                  alt={slide.image.alt}
+                  width={slide.image.width}
+                  height={slide.image.height}
+                  sizes="(min-width: 1024px) 25rem, (min-width: 640px) 23rem, 84vw"
+                  placeholder="blur"
+                  blurDataURL={slide.image.blurDataURL}
+                  className={
+                    slide.kind === "studio"
+                      ? "aspect-[4/5] w-full object-cover brightness-[1.04] contrast-[1.05] grayscale"
+                      : "aspect-[4/5] w-full object-cover contrast-[1.03] grayscale transition-[filter,transform] duration-700 ease-out group-focus-within:grayscale-0 group-hover:grayscale-0"
+                  }
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,11,0.02),rgba(18,14,11,0.14)_58%,rgba(18,14,11,0.48))]" />
 
-          <div
-            ref={viewportRef}
-            className="flex gap-5 overflow-x-auto overscroll-x-contain px-4 py-4 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] md:px-6 lg:px-7 [&::-webkit-scrollbar]:hidden"
-            style={{ scrollPaddingInline: "1.75rem" }}
-            onScroll={updateScrollState}
-            onWheel={handleWheel}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-          >
-            {slides.map((slide, index) => (
-              <motion.article
-                key={slide.key}
-                ref={(node) => {
-                  slideRefs.current[index] = node;
-                }}
-                initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.58,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: reduceMotion ? 0 : index * 0.06,
-                }}
-                className={`${cardBaseClass} ${
-                  isDragging ? "cursor-grabbing" : "cursor-grab"
-                } max-w-[82vw] min-w-[82vw] sm:max-w-[22rem] sm:min-w-[22rem] lg:max-w-[24rem] lg:min-w-[24rem]`}
-              >
-                <div className="relative overflow-hidden rounded-t-[var(--radius-frame)]">
-                  <Image
-                    src={slide.image.src}
-                    alt={slide.image.alt}
-                    width={slide.image.width}
-                    height={slide.image.height}
-                    sizes="(min-width: 1024px) 24rem, (min-width: 640px) 22rem, 82vw"
-                    placeholder="blur"
-                    blurDataURL={slide.image.blurDataURL}
-                    className={
-                      slide.kind === "studio"
-                        ? "aspect-[4/5] w-full object-cover brightness-[1.04] contrast-[1.05] grayscale"
-                        : "aspect-[4/5] w-full object-cover contrast-[1.03] grayscale transition-[filter,transform] duration-700 ease-out group-focus-within:grayscale-0 group-hover:grayscale-0"
-                    }
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,11,0.02),rgba(18,14,11,0.14)_58%,rgba(18,14,11,0.48))]" />
-
+                <motion.div
+                  initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: reduceMotion ? 0 : 0.12 + index * 0.05,
+                  }}
+                  className="absolute inset-x-0 bottom-0 space-y-3 p-5 text-[var(--color-paper)]"
+                >
+                  <p className="text-[11px] font-semibold tracking-[0.24em] text-[rgb(244_235_224_/_0.82)] uppercase">
+                    {slide.eyebrow}
+                  </p>
+                  <h3 className="font-display-face min-h-[3.95rem] max-w-[14ch] text-[2rem] leading-[0.96] tracking-[-0.04em] md:min-h-[4.45rem] md:text-[2.25rem]">
+                    {slide.kind === "member"
+                      ? getMemberTitleLines(slide.title).map((line) => (
+                          <span
+                            key={`${slide.key}-${line}`}
+                            className="block"
+                          >
+                            {line}
+                          </span>
+                        ))
+                      : slide.title}
+                  </h3>
                   <motion.div
-                    initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={
+                      reduceMotion ? false : { opacity: 0, scaleX: 0.65 }
+                    }
+                    animate={{ opacity: 1, scaleX: 1 }}
                     transition={{
-                      duration: 0.5,
+                      duration: 0.48,
                       ease: [0.22, 1, 0.36, 1],
-                      delay: reduceMotion ? 0 : 0.12 + index * 0.05,
+                      delay: reduceMotion ? 0 : 0.18 + index * 0.05,
                     }}
-                    className="absolute inset-x-0 bottom-0 space-y-3 p-5 text-[var(--color-paper)]"
-                  >
-                    <p className="text-[11px] font-semibold tracking-[0.24em] text-[rgb(244_235_224_/_0.82)] uppercase">
-                      {slide.eyebrow}
-                    </p>
-                    <h3 className="font-display-face min-h-[3.95rem] max-w-[14ch] text-[2rem] leading-[0.96] tracking-[-0.04em] md:min-h-[4.45rem] md:text-[2.25rem]">
-                      {slide.kind === "member"
-                        ? getMemberTitleLines(slide.title).map((line) => (
-                            <span
-                              key={`${slide.key}-${line}`}
-                              className="block"
-                            >
-                              {line}
-                            </span>
-                          ))
-                        : slide.title}
-                    </h3>
-                    <motion.div
-                      initial={
-                        reduceMotion ? false : { opacity: 0, scaleX: 0.65 }
-                      }
-                      animate={{ opacity: 1, scaleX: 1 }}
-                      transition={{
-                        duration: 0.48,
-                        ease: [0.22, 1, 0.36, 1],
-                        delay: reduceMotion ? 0 : 0.18 + index * 0.05,
-                      }}
-                      className="h-px origin-left bg-[rgb(244_235_224_/_0.76)]"
-                    />
-                  </motion.div>
-                </div>
+                    className="h-px origin-left bg-[rgb(244_235_224_/_0.76)]"
+                  />
+                </motion.div>
+              </div>
 
-                <div className="flex flex-1 flex-col justify-between gap-5 px-5 pt-4 pb-5">
-                  <div className="space-y-3">
-                    <p className="text-[11px] font-semibold tracking-[0.18em] text-[var(--color-mist)] uppercase">
-                      {slide.subtitle}
-                    </p>
-                    <p className="text-sm leading-7 text-[var(--color-mist)]">
-                      {slide.description}
-                    </p>
-                  </div>
+              <div className="flex flex-1 flex-col justify-between gap-5 px-5 pt-4 pb-5">
+                <div className="space-y-3">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] text-[var(--color-mist)] uppercase">
+                    {slide.subtitle}
+                  </p>
+                  <p className="text-sm leading-7 text-[var(--color-mist)]">
+                    {slide.description}
+                  </p>
                 </div>
-              </motion.article>
-            ))}
-          </div>
+              </div>
+            </motion.article>
+          ))}
         </div>
-      </section>
-    </Container>
+      </div>
+    </section>
   );
 }

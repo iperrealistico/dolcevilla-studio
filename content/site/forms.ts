@@ -32,8 +32,8 @@ export const inquiryFormContent = {
   checkboxes: {
     filmInterest:
       "Film is important to us, including 35mm, 120, or selected large-format frames",
-    villaInterest:
-      "We want to discuss Villa Raffaelli for portraits, private vows, or a very intimate wedding",
+    studioInterest:
+      "We want to discuss the Studio for portraits, private vows, or a very intimate wedding",
   },
   submitLabel: "Send inquiry",
   sendingLabel: "Sending...",

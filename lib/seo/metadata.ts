@@ -15,7 +15,7 @@ type MetadataInput = {
 };
 
 function resolvePrimaryPageImage(
-  page: Pick<ServicePageContent, "hero" | "craft" | "villa" | "gallery">,
+  page: Pick<ServicePageContent, "hero" | "craft" | "studio" | "gallery">,
 ) {
   const heroImageId = page.hero?.imageIds[0];
 
@@ -27,8 +27,8 @@ function resolvePrimaryPageImage(
     return getImageAsset(page.craft.imageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
   }
 
-  if (page.villa?.imageId) {
-    return getImageAsset(page.villa.imageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
+  if (page.studio?.imageId) {
+    return getImageAsset(page.studio.imageId as keyof typeof import("@/lib/images/imageManifest").imageManifest);
   }
 
   return page.gallery[0]?.image ?? null;
@@ -87,13 +87,13 @@ export function buildMetadata(seo: MetadataInput): Metadata {
 }
 
 export function resolvePageMetadataImage(
-  page: Pick<ServicePageContent, "hero" | "craft" | "villa" | "gallery">,
+  page: Pick<ServicePageContent, "hero" | "craft" | "studio" | "gallery">,
 ) {
   return resolvePrimaryPageImage(page);
 }
 
 export function buildPageMetadata(
-  page: Pick<ServicePageContent, "seo" | "hero" | "craft" | "villa" | "gallery">,
+  page: Pick<ServicePageContent, "seo" | "hero" | "craft" | "studio" | "gallery">,
 ): Metadata {
   const image = resolvePrimaryPageImage(page);
 

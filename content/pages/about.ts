@@ -1,6 +1,5 @@
 import { servicePageContentSchema } from "@/lib/content/schemas";
-import { buildGallery } from "@/lib/images/imageManifest";
-import { testimonials } from "@/content/site/testimonials";
+import { sharedSiteCta } from "@/content/site/sharedCta";
 
 export const aboutPage = servicePageContentSchema.parse({
   slug: "about",
@@ -8,21 +7,17 @@ export const aboutPage = servicePageContentSchema.parse({
   hero: {
     eyebrow: "About Dolcevilla Studio",
     title:
-      "A Tuscany wedding studio built on real film craft, dependable digital coverage, and clearly defined roles.",
+      "A Tuscany wedding studio built on film craft, digital dependability, and clearly defined roles.",
     subtitle:
-      "Dolcevilla Studio works from Villa Raffaelli in Garfagnana, near Lucca, with separate leads for creative direction, production, film handling, archive, postproduction, and final delivery. That structure is part of why the work feels calm to the couple and precise behind the scenes.",
+      "Dolcevilla Studio works from Garfagnana, near Lucca, with separate responsibility for creative direction, production, film handling, archive, postproduction, and final delivery. That structure helps the work feel calm to the couple and precise behind the scenes.",
     primaryCta: { label: "Start your inquiry", href: "/contact" },
     secondaryCta: {
       label: "Explore film coverage",
       href: "/film-wedding-photography",
       variant: "secondary",
     },
-    imageIds: [
-      "page.about.hero.primary",
-      "page.about.hero.secondary",
-      "page.about.hero.tertiary",
-    ],
-    variant: "editorial",
+    imageIds: [],
+    variant: "minimal",
   },
   intro: {
     eyebrow: "Who we are",
@@ -36,13 +31,13 @@ export const aboutPage = servicePageContentSchema.parse({
   team: {
     eyebrow: "The studio",
     heading:
-      "Three principal leads, each responsible for a different part of the studio.",
+      "Five principal leads, each responsible for a different part of the studio.",
     body: [
-      "The visible core of Dolcevilla Studio sits with three people. Around them is a wider working circle of photographers, assistants, production support, and finishing hands who move to the same standard.",
+      "The visible core of Dolcevilla Studio sits with five people. Around them is a wider working circle of photographers, assistants, production support, and finishing hands who move to the same standard.",
       "For couples, that means the work stays personal without being fragile. There is a clear voice behind the studio, but also enough real structure to support destination weddings, film coverage, travel logistics, and careful delivery.",
     ],
     groupNote:
-      "Beyond the three principal leads is a wider 10-plus-person studio handling second coverage, videography, digital photography, film processing support, archive discipline, assistants, logistics, and finishing to one shared standard.",
+      "Beyond the five principal leads is a wider 10-plus-person studio handling second coverage, videography, digital photography, film processing support, archive discipline, assistants, logistics, and finishing to one shared standard.",
     supportingRoles: [],
     members: [
       {
@@ -66,43 +61,34 @@ export const aboutPage = servicePageContentSchema.parse({
           "Film matters because it passes through real judgment at every stage, from exposure to scan to archive.",
         imageId: "page.about.team.leonardo",
       },
+      {
+        name: "Francesco Tarantino",
+        role: "Photographer, Postproduction, and Final Image Finishing",
+        quote:
+          "Postproduction should give the gallery continuity and atmosphere, without polishing away the life the day already had.",
+        imageId: "page.about.team.francesco",
+      },
+      {
+        name: "Mirko Ciabatti",
+        role: "16mm Film Videographer and Motion-Picture Coverage",
+        quote:
+          "Film motion should add rhythm, memory, and atmosphere to the day without turning the wedding into a second production.",
+        imageId: "page.about.team.mirko",
+      },
     ],
   },
-  gallery: buildGallery([
-    { id: "page.about.gallery.1", layoutVariant: "portrait" },
-    { id: "page.about.gallery.2", layoutVariant: "portrait" },
-    { id: "page.about.gallery.3", layoutVariant: "landscape" },
-    { id: "page.about.gallery.4", layoutVariant: "landscape" },
-    { id: "page.about.gallery.5", layoutVariant: "landscape" },
-    { id: "page.about.gallery.6", layoutVariant: "portrait" },
-  ]),
-  highlights: [
-    {
-      title: "Clear responsibilities",
-      description:
-        "Creative direction, production, film handling, archive, and finishing are not blurred into one vague promise. Different people carry different parts of the work.",
-    },
-    {
-      title: "Real analog practice",
-      description:
-        "Film is part of the studio because there is real lab knowledge behind it: rolls, negatives, proofing, scans, archive discipline, and decisions made by people who know the material.",
-    },
-    {
-      title: "A real Tuscany base",
-      description:
-        "Villa Raffaelli in Garfagnana is not just a visual backdrop. It is where the studio works, meets, plans, and builds its sense of place.",
-    },
-  ],
+  gallery: [],
+  highlights: [],
   geography: {
     eyebrow: "Where the studio lives",
     heading:
-      "Based at Villa Raffaelli in Garfagnana, near Lucca, with the rest of Tuscany within reach.",
+      "Based in Garfagnana, near Lucca, with the rest of Tuscany within reach.",
     body: [
       "The studio works from the quieter mountain side of north Tuscany, not from a placeless office and not from a city borrowed only for marketing. That location shapes the pace of the work and gives the team a real relationship with the region.",
       "It also helps in practical terms. Couples planning from abroad often need advice on movement, weather, light, and which parts of Tuscany genuinely fit the celebration. Local knowledge matters more when it can actually guide decisions.",
     ],
     places: [
-      "Villa Raffaelli",
+      "Studio",
       "Garfagnana",
       "Near Lucca",
       "North Tuscany",
@@ -111,54 +97,24 @@ export const aboutPage = servicePageContentSchema.parse({
       "Versilia",
     ],
   },
-  locationLinks: [
-    {
-      label: "Explore film coverage",
-      href: "/film-wedding-photography",
-      variant: "ghost",
-    },
-    { label: "See Villa Raffaelli", href: "/villa-raffaelli", variant: "ghost" },
-    { label: "Start your inquiry", href: "/contact", variant: "ghost" },
-  ],
+  locationLinks: [],
   stories: [],
-  testimonials: [...testimonials.home, ...testimonials.services],
-  investmentNote: {
-    eyebrow: "Why this structure matters",
-    heading:
-      "Good wedding photography depends on more than one person knowing how to use a camera.",
-    body: [
-      "When the planning, capture, film handling, archive, and finishing are all taken seriously, the result feels more coherent for the couple and more dependable under pressure. That is the standard the studio is built around.",
-    ],
-  },
-  villa: {
-    variant: "editorial",
-    eyebrow: "Villa Raffaelli",
-    title: "Villa Raffaelli matters because it is the studio's real base, not a brand prop.",
-    body: "The villa is where the studio works and where its relationship with north Tuscany became concrete. It shaped the visual language, but it also houses the day-to-day discipline behind the work, from planning and hospitality to the film side of the practice.",
-    imageId: "page.about.villa.image",
-  },
+  testimonials: [],
   cta: {
     eyebrow: "Get in touch",
-    title: "If you want to know who will actually shape the work, start here.",
-    body: "Tell us your date, your venue, and what matters most to you in the photography. We will answer clearly about fit, approach, and how the studio would handle your celebration.",
-    primaryCta: { label: "Start your inquiry", href: "/contact" },
-    secondaryCta: {
-      label: "Read the journal",
-      href: "/journal",
-      variant: "secondary",
-    },
+    ...sharedSiteCta,
   },
   seo: {
     title: "About Dolcevilla Studio | Tuscany Wedding Photography Team",
     description:
-      "Learn about Dolcevilla Studio, a Tuscany wedding photography team based at Villa Raffaelli near Lucca, with dedicated leads for direction, film lab, archive, postproduction, and hybrid coverage.",
+      "Learn about Dolcevilla Studio, a Tuscany wedding photography team based at a private studio near Lucca, with dedicated leads for direction, film lab, archive, postproduction, and hybrid coverage.",
     path: "/about",
     keywords: [
       "Dolcevilla Studio",
       "tuscany wedding photography team",
       "film and digital wedding photographers in tuscany",
       "lucca wedding photography studio",
-      "villa raffaelli studio",
+      "private studio near lucca",
     ],
   },
 });

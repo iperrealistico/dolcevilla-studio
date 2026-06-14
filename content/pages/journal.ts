@@ -1,4 +1,5 @@
 import { richSectionSchema, ctaSectionSchema, seoSchema } from "@/lib/content/schemas";
+import { sharedSiteCta } from "@/content/site/sharedCta";
 
 export const journalPageContent = {
   intro: richSectionSchema.parse({
@@ -12,14 +13,7 @@ export const journalPageContent = {
   }),
   cta: ctaSectionSchema.parse({
     eyebrow: "Planning your celebration",
-    title: "When a guide helps you narrow the place, the format, or the pace, the next step is a real conversation.",
-    body: "Tell us where in Tuscany you are getting married, whether film matters to you, and what kind of celebration you are planning. We will answer clearly about fit, coverage, and next steps.",
-    primaryCta: { label: "Start your inquiry", href: "/contact" },
-    secondaryCta: {
-      label: "Explore film coverage",
-      href: "/film-wedding-photography",
-      variant: "secondary",
-    },
+    ...sharedSiteCta,
   }),
   seo: seoSchema.parse({
     title: "Tuscany Wedding Photography Journal | Dolcevilla Studio",

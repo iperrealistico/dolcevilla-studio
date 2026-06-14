@@ -8,6 +8,8 @@ import { LinkButton } from "@/components/ui/LinkButton";
 export function CTASection({ section }: { section: CTASectionContent }) {
   const showMailAccent =
     section.primaryCta.href.startsWith("/contact") || section.primaryCta.href.startsWith("mailto:");
+  const buttonClassName =
+    "min-h-14 w-full px-6 text-base sm:w-auto md:min-h-16 md:px-8 md:text-lg";
 
   return (
     <Container className="rounded-[var(--radius-frame)] bg-[linear-gradient(135deg,#14100d,#3a3027)] px-6 py-10 text-[var(--color-paper)] shadow-[var(--shadow-card)] md:px-10">
@@ -19,9 +21,29 @@ export function CTASection({ section }: { section: CTASectionContent }) {
           <Heading className="max-w-3xl text-[var(--color-paper)]">{section.title}</Heading>
           <p className="mt-4 max-w-2xl text-base leading-8 text-[rgb(244_235_224_/_0.78)]">{section.body}</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <LinkButton href={section.primaryCta.href}>{section.primaryCta.label}</LinkButton>
+            <LinkButton
+              href={section.primaryCta.href}
+              variant="secondary"
+              className={buttonClassName}
+              style={{
+                backgroundColor: "var(--color-paper)",
+                borderColor: "rgba(255,255,255,0.18)",
+                color: "var(--color-ink)",
+              }}
+            >
+              {section.primaryCta.label}
+            </LinkButton>
             {section.secondaryCta ? (
-              <LinkButton href={section.secondaryCta.href} variant="secondary">
+              <LinkButton
+                href={section.secondaryCta.href}
+                variant="secondary"
+                className={`${buttonClassName} border-white/12 hover:bg-[rgb(45_37_31)]`}
+                style={{
+                  backgroundColor: "rgba(15,12,10,0.92)",
+                  borderColor: "rgba(255,255,255,0.12)",
+                  color: "var(--color-paper)",
+                }}
+              >
                 {section.secondaryCta.label}
               </LinkButton>
             ) : null}

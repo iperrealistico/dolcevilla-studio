@@ -30,8 +30,8 @@ export const dictionary = uiDictionarySchema.parse({
     photographyBudgetRange: "Photography budget range",
     message: "Message",
     filmInterest: "Interested in hybrid film coverage",
-    villaInterest:
-      "Curious about portraits or a very private Villa Raffaelli context",
+    studioInterest:
+      "Curious about portraits or a very private Studio context",
     success: "Your inquiry is on its way. We will reply with care.",
   },
   footer: {

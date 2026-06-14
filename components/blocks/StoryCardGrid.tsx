@@ -75,21 +75,19 @@ export function StoryCardGrid({
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,13,10,0.22)_0%,rgba(17,13,10,0.4)_26%,rgba(17,13,10,0.76)_100%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_38%)]" />
-              <div className="relative z-10 grid min-h-[25rem] w-full place-items-center p-5 md:p-6">
-                <div className="w-full overflow-hidden rounded-[var(--radius-panel)] border border-[rgb(255_255_255_/_0.14)] bg-[rgb(255_255_255_/_0.09)] p-5 shadow-[0_20px_44px_rgba(10,7,5,0.18)] backdrop-blur-xl">
-                  <div className="space-y-4">
-                    <p className="inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.24em] text-[rgb(246_237_227_/_0.8)] uppercase">
-                      <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
-                      <span>{story.location}</span>
+              <div className="relative z-10 flex min-h-[25rem] w-full items-center justify-center p-5 md:min-h-[27rem] md:p-6">
+                <div className="flex aspect-square w-full max-w-[26rem] flex-col overflow-hidden rounded-[var(--radius-panel)] border border-[rgb(255_255_255_/_0.14)] bg-[rgb(255_255_255_/_0.09)] p-5 shadow-[0_20px_44px_rgba(10,7,5,0.18)] backdrop-blur-xl md:p-6">
+                  <p className="inline-flex shrink-0 items-center gap-2 text-[0.68rem] font-semibold tracking-[0.24em] text-[rgb(246_237_227_/_0.8)] uppercase">
+                    <MapPinned size={13} strokeWidth={1.8} aria-hidden="true" />
+                    <span>{story.location}</span>
+                  </p>
+                  <div className="mt-4 flex min-h-0 flex-1 flex-col">
+                    <h3 className="line-clamp-5 font-display-face text-[2rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-paper)] text-pretty">
+                      {story.title}
+                    </h3>
+                    <p className="mt-auto line-clamp-4 pt-4 text-sm leading-7 text-pretty text-[rgb(246_237_227_/_0.82)]">
+                      {story.excerpt}
                     </p>
-                    <div className="space-y-3">
-                      <h3 className="line-clamp-5 font-display-face text-[2rem] leading-[0.96] tracking-[-0.04em] text-[var(--color-paper)] text-pretty">
-                        {story.title}
-                      </h3>
-                      <p className="line-clamp-4 text-sm leading-7 text-pretty text-[rgb(246_237_227_/_0.82)]">
-                        {story.excerpt}
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>

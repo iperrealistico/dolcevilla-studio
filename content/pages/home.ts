@@ -38,23 +38,7 @@ export const homePage = servicePageContentSchema.parse({
     { id: "page.home.gallery.5", layoutVariant: "portrait" },
     { id: "page.home.gallery.6", layoutVariant: "landscape" },
   ]),
-  highlights: [
-    {
-      title: "Film that belongs in a wedding day",
-      description:
-        "35mm, medium format, and selected large-format frames are part of the way we work, with digital backup protecting the parts of the day that cannot slow down.",
-    },
-    {
-      title: "A private villa studio, not a borrowed aesthetic",
-      description:
-        "Villa Raffaelli shapes the work because it is where the studio lives, not because it makes a good line of marketing copy.",
-    },
-    {
-      title: "Tuscany guidance that helps in practice",
-      description:
-        "Most of our couples are planning from abroad and need clear advice on timing, light, portrait flow, travel rhythm, and which parts of Tuscany genuinely suit the celebration.",
-    },
-  ],
+  highlights: [],
   craft: {
     variant: "editorial",
     eyebrow: "Film and digital",

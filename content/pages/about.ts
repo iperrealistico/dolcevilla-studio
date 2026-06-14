@@ -93,37 +93,6 @@ export const aboutPage = servicePageContentSchema.parse({
         "Villa Raffaelli in Garfagnana is not just a visual backdrop. It is where the studio works, meets, plans, and builds its sense of place.",
     },
   ],
-  craft: {
-    variant: "editorial",
-    eyebrow: "The craft",
-    title:
-      "The film side is real, and the digital side is treated with the same seriousness.",
-    body:
-      "35mm, medium format, selected large-format frames, and digital coverage all ask for different decisions. The point is not to mention formats for prestige. The point is to know what each one does well and who in the studio is responsible for carrying that standard through capture, scanning, color, and delivery.",
-    imageId: "page.about.craft.image",
-    points: [
-      {
-        title: "35mm for movement and energy",
-        description:
-          "Fast enough for arrivals, dinners, dance floors, flash, and the parts of a wedding that should still feel immediate.",
-      },
-      {
-        title: "120 for portraits and detail",
-        description:
-          "Slower, richer, and better suited to faces, interiors, architecture, florals, and the frames that need more shape and depth.",
-      },
-      {
-        title: "Large format for selected heirloom frames",
-        description:
-          "Used rarely and deliberately, when time, stillness, and collaboration line up for a few frames that deserve more ceremony.",
-      },
-      {
-        title: "Darkroom literacy and finishing discipline",
-        description:
-          "The analog side does not stop at shooting. Proof sheets, negatives, scans, archive care, and final finishing all shape the way the studio works.",
-      },
-    ],
-  },
   geography: {
     eyebrow: "Where the studio lives",
     heading:

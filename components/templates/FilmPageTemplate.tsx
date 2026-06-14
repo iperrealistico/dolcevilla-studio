@@ -10,7 +10,14 @@ import { WhyChooseUs } from "@/components/blocks/WhyChooseUs";
 import { HeroStatement } from "@/components/blocks/HeroStatement";
 import { InvestmentNote } from "@/components/blocks/InvestmentNote";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
-import type { FAQItem, GalleryItem, Point, RichSection, ServicePageContent, StoryCard } from "@/types/content";
+import type {
+  FAQItem,
+  GalleryItem,
+  Point,
+  RichSection,
+  ServicePageContent,
+  StoryCard,
+} from "@/types/content";
 
 type FilmPageTemplateProps = {
   page: ServicePageContent;
@@ -41,27 +48,43 @@ export function FilmPageTemplate({
         </ScrollParallax>
       ) : null}
       <ScrollParallax from="left">
-        <EditorialTextBlock section={page.intro} />
+        <EditorialTextBlock section={page.intro} layout="balanced" />
       </ScrollParallax>
       {page.gallery.length ? (
         <ScrollParallax from="right" intensity="lg">
           <SignatureGallery items={page.gallery} />
         </ScrollParallax>
       ) : null}
+      {page.highlights.length ? (
+        <ScrollParallax from="left">
+          <WhyChooseUs items={page.highlights} />
+        </ScrollParallax>
+      ) : null}
+      <ScrollParallax from="right">
+        <CraftIdentityBlock craft={page.craft} layout="feature-grid" />
+      </ScrollParallax>
       <ScrollParallax from="left">
-        <WhyChooseUs items={page.highlights} />
+        <PointsEditorialBlock
+          section={details.reasonsIntro}
+          items={details.reasons}
+          columns={2}
+        />
       </ScrollParallax>
+      {details.whyBoth.length ? (
+        <ScrollParallax from="right">
+          <PointsEditorialBlock
+            section={details.whyBothIntro}
+            items={details.whyBoth}
+            columns={3}
+          />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="right">
-        <CraftIdentityBlock craft={page.craft} />
-      </ScrollParallax>
-      <ScrollParallax from="left">
-        <PointsEditorialBlock section={details.reasonsIntro} items={details.reasons} columns={2} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <PointsEditorialBlock section={details.whyBothIntro} items={details.whyBoth} columns={3} />
-      </ScrollParallax>
-      <ScrollParallax from="right">
-        <PointsEditorialBlock section={details.skillsIntro} items={details.skills} columns={3} />
+        <PointsEditorialBlock
+          section={details.skillsIntro}
+          items={details.skills}
+          columns={3}
+        />
       </ScrollParallax>
       <ScrollParallax from="left">
         <EditorialTextBlock section={details.darkroom} />

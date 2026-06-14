@@ -49,23 +49,7 @@ export const villaRaffaelliPage = servicePageContentSchema.parse({
     { id: "page.villa-raffaelli.gallery.7", layoutVariant: "landscape" },
     { id: "page.villa-raffaelli.gallery.8", layoutVariant: "landscape" },
   ]),
-  highlights: [
-    {
-      title: "Private by nature",
-      description:
-        "Because Villa Raffaelli is a private property first, it still feels protected, personal, and free from the rhythm of constant public bookings.",
-    },
-    {
-      title: "Best for intimate formats",
-      description:
-        "The villa is strongest for portraits, private vows, and very small wedding days where calm, discretion, and atmosphere matter more than scale.",
-    },
-    {
-      title: "A quieter side of Tuscany",
-      description:
-        "Garfagnana gives the villa mountain air, deep privacy, and practical reach from Lucca and Pisa without the feeling of an overused postcard location.",
-    },
-  ],
+  highlights: [],
   craft: {
     variant: "editorial",
     eyebrow: "Best use cases",

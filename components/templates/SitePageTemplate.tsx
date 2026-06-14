@@ -84,11 +84,20 @@ export function SitePageTemplate({
           <SignatureGallery items={page.gallery} />
         </ScrollParallax>
       ) : null}
-      <ScrollParallax from="left">
-        <WhyChooseUs items={page.highlights} />
-      </ScrollParallax>
+      {page.highlights.length ? (
+        <ScrollParallax from="left">
+          <WhyChooseUs items={page.highlights} />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="right">
-        <CraftIdentityBlock craft={page.craft} />
+        <CraftIdentityBlock
+          craft={page.craft}
+          layout={
+            page.pageType === "home" || page.pageType === "contact"
+              ? "feature-grid"
+              : "default"
+          }
+        />
       </ScrollParallax>
       <ScrollParallax from="left">
         <GeographyBlock geography={page.geography} />

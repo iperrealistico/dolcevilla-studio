@@ -34,11 +34,13 @@ export function VillaPageTemplate({ page, stories }: VillaPageTemplateProps) {
           <SignatureGallery items={page.gallery} />
         </ScrollParallax>
       ) : null}
-      <ScrollParallax from="left">
-        <WhyChooseUs items={page.highlights} />
-      </ScrollParallax>
+      {page.highlights.length ? (
+        <ScrollParallax from="left">
+          <WhyChooseUs items={page.highlights} />
+        </ScrollParallax>
+      ) : null}
       <ScrollParallax from="right">
-        <CraftIdentityBlock craft={page.craft} />
+        <CraftIdentityBlock craft={page.craft} layout="feature-grid" />
       </ScrollParallax>
       <ScrollParallax from="left">
         <GeographyBlock geography={page.geography} />

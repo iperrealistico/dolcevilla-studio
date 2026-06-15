@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Mail } from "lucide-react";
 import type { CTASection as CTASectionContent } from "@/types/content";
 import { Container } from "@/components/ui/Container";
@@ -34,18 +35,12 @@ export function CTASection({ section }: { section: CTASectionContent }) {
               {section.primaryCta.label}
             </LinkButton>
             {section.secondaryCta ? (
-              <LinkButton
+              <Link
                 href={section.secondaryCta.href}
-                variant="secondary"
-                className={`${buttonClassName} border-white/12 hover:bg-[rgb(45_37_31)]`}
-                style={{
-                  backgroundColor: "rgba(15,12,10,0.92)",
-                  borderColor: "rgba(255,255,255,0.12)",
-                  color: "var(--color-paper)",
-                }}
+                className="inline-flex items-center py-2 text-base font-semibold text-[rgb(244_235_224_/_0.88)] no-underline transition hover:text-[var(--color-paper)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-4 focus-visible:ring-offset-[rgb(28_22_18)] md:text-lg"
               >
                 {section.secondaryCta.label}
-              </LinkButton>
+              </Link>
             ) : null}
           </div>
         </div>

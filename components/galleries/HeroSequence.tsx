@@ -9,11 +9,14 @@ import {
   type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
 } from "react";
+import { useCoarsePointer } from "@/hooks/useCoarsePointer";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils/cn";
 import type { ImageAsset } from "@/types/gallery";
 
 const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 30;
+const MOBILE_AUTOPLAY_INITIAL_DELAY_MS = 2200;
+const MOBILE_AUTOPLAY_INTERVAL_MS = 3200;
 const AUTOPLAY_RESUME_DELAY_MS = 1100;
 const LOOP_RESET_BUFFER_PX = 2;
 const SEGMENT_COPIES = 3;
@@ -68,6 +71,23 @@ function normalizeLoopPosition(
   }
 }
 
+function getSlideStride(segment: HTMLDivElement) {
+  const [firstSlide, secondSlide] = Array.from(segment.children) as HTMLElement[];
+
+  if (firstSlide && secondSlide) {
+    return secondSlide.offsetLeft - firstSlide.offsetLeft;
+  }
+
+  if (!firstSlide) {
+    return 0;
+  }
+
+  const segmentStyles = window.getComputedStyle(segment);
+  const gap = Number.parseFloat(segmentStyles.columnGap || segmentStyles.gap || "0");
+
+  return firstSlide.offsetWidth + gap;
+}
+
 export function HeroSequence({
   images,
   className,
@@ -78,9 +98,11 @@ export function HeroSequence({
   autoScrollSpeedPxPerSecond = DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND,
 }: HeroSequenceProps) {
   const reduceMotion = useReducedMotion();
+  const isCoarsePointer = useCoarsePointer();
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const segmentRef = useRef<HTMLDivElement | null>(null);
   const segmentWidthRef = useRef(0);
+  const slideStrideRef = useRef(0);
   const hasInitializedRef = useRef(false);
   const isDraggingRef = useRef(false);
   const isTouchingRef = useRef(false);
@@ -89,6 +111,7 @@ export function HeroSequence({
   const resumeAutoplayAtRef = useRef(0);
   const [isAutoplayVisible, setIsAutoplayVisible] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [loadedImageIds, setLoadedImageIds] = useState<Record<string, true>>({});
   const loopableSlides = useMemo(() => createLoopableSlides(images), [images]);
 
   const pauseAutoplay = () => {
@@ -111,6 +134,7 @@ export function HeroSequence({
       }
 
       segmentWidthRef.current = segmentWidth;
+      slideStrideRef.current = getSlideStride(segment);
 
       if (!hasInitializedRef.current) {
         viewport.scrollLeft = segmentWidth;
@@ -189,7 +213,12 @@ export function HeroSequence({
   }, [loopableSlides.length]);
 
   useEffect(() => {
-    if (reduceMotion || !loopableSlides.length || !isAutoplayVisible) {
+    if (
+      reduceMotion ||
+      isCoarsePointer ||
+      !loopableSlides.length ||
+      !isAutoplayVisible
+    ) {
       return undefined;
     }
 
@@ -226,15 +255,63 @@ export function HeroSequence({
   }, [
     autoScrollSpeedPxPerSecond,
     isAutoplayVisible,
+    isCoarsePointer,
     loopableSlides.length,
     reduceMotion,
   ]);
+
+  useEffect(() => {
+    if (
+      reduceMotion ||
+      !isCoarsePointer ||
+      !loopableSlides.length ||
+      !isAutoplayVisible
+    ) {
+      return undefined;
+    }
+
+    let timeoutId = 0;
+
+    const scheduleAdvance = (delayMs: number) => {
+      timeoutId = window.setTimeout(() => {
+        const viewport = viewportRef.current;
+        const slideStride = slideStrideRef.current;
+        const now = performance.now();
+        const isPaused =
+          isDraggingRef.current ||
+          isTouchingRef.current ||
+          now < resumeAutoplayAtRef.current;
+
+        if (!viewport || !slideStride || isPaused) {
+          scheduleAdvance(420);
+          return;
+        }
+
+        viewport.scrollTo({
+          left: viewport.scrollLeft + slideStride,
+          behavior: "smooth",
+        });
+
+        scheduleAdvance(MOBILE_AUTOPLAY_INTERVAL_MS);
+      }, delayMs);
+    };
+
+    scheduleAdvance(MOBILE_AUTOPLAY_INITIAL_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [isAutoplayVisible, isCoarsePointer, loopableSlides.length, reduceMotion]);
 
   if (!loopableSlides.length) {
     return null;
   }
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (isCoarsePointer) {
+      return;
+    }
+
     if (event.pointerType === "mouse" && event.button !== 0) {
       return;
     }
@@ -255,7 +332,7 @@ export function HeroSequence({
   };
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (!isDraggingRef.current || !viewportRef.current) {
+    if (isCoarsePointer || !isDraggingRef.current || !viewportRef.current) {
       return;
     }
 
@@ -267,7 +344,7 @@ export function HeroSequence({
   };
 
   const handlePointerRelease = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (!viewportRef.current) {
+    if (isCoarsePointer || !viewportRef.current) {
       return;
     }
 
@@ -304,6 +381,19 @@ export function HeroSequence({
     normalizeLoopPosition(viewportRef.current, segmentWidthRef.current);
   };
 
+  const handleImageLoaded = (imageId: string) => {
+    setLoadedImageIds((current) => {
+      if (current[imageId]) {
+        return current;
+      }
+
+      return {
+        ...current,
+        [imageId]: true,
+      };
+    });
+  };
+
   return (
     <div
       className={cn(
@@ -314,8 +404,11 @@ export function HeroSequence({
       <div
         ref={viewportRef}
         className={cn(
-          "absolute inset-0 touch-auto overflow-x-auto overflow-y-hidden overscroll-x-contain select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-          isDragging ? "cursor-grabbing" : "cursor-grab",
+          "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          isCoarsePointer
+            ? "snap-x snap-mandatory [touch-action:pan-x_pinch-zoom]"
+            : "",
+          isCoarsePointer ? "" : isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -335,33 +428,46 @@ export function HeroSequence({
               ref={segmentIndex === 0 ? segmentRef : null}
               className="flex h-full shrink-0 gap-2 pr-2 sm:gap-3 sm:pr-3"
             >
-              {loopableSlides.map((image, imageIndex) => (
-                <div
-                  key={`${image.id}-${segmentIndex}`}
-                  className={cn(
-                    "relative h-full min-w-[80vw] overflow-hidden rounded-[var(--radius-frame)] border border-white/12 bg-[var(--surface-panel-strong)] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw] 2xl:min-w-[28vw]",
-                    slideClassName,
-                  )}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    priority={segmentIndex === 1 && imageIndex < 2}
-                    loading={
-                      segmentIndex === 1 && imageIndex < 3 ? "eager" : "lazy"
-                    }
-                    sizes={sizes}
-                    placeholder="blur"
-                    blurDataURL={image.blurDataURL}
-                    draggable={false}
-                    className={cn("object-cover select-none", imageClassName)}
-                    style={{
-                      objectPosition: image.objectPosition ?? image.focalPoint,
-                    }}
-                  />
-                </div>
-              ))}
+              {loopableSlides.map((image, imageIndex) => {
+                const shouldPrioritize =
+                  segmentIndex === 1 && imageIndex === 0;
+                const shouldEagerLoad =
+                  segmentIndex === 1 && imageIndex === 0;
+
+                return (
+                  <div
+                    key={`${image.id}-${segmentIndex}`}
+                    className={cn(
+                      "relative h-full min-w-[80vw] overflow-hidden rounded-[var(--radius-frame)] border border-white/12 bg-[var(--surface-panel-strong)] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw] 2xl:min-w-[28vw]",
+                      isCoarsePointer ? "snap-start" : "",
+                      slideClassName,
+                    )}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      priority={shouldPrioritize}
+                      loading={shouldEagerLoad ? "eager" : "lazy"}
+                      fetchPriority={shouldPrioritize ? "high" : "low"}
+                      sizes={sizes}
+                      placeholder="blur"
+                      blurDataURL={image.blurDataURL}
+                      draggable={false}
+                      decoding="async"
+                      onLoad={() => handleImageLoaded(image.id)}
+                      className={cn(
+                        "object-cover select-none transition-opacity duration-700 ease-out",
+                        loadedImageIds[image.id] ? "opacity-100" : "opacity-0",
+                        imageClassName,
+                      )}
+                      style={{
+                        objectPosition: image.objectPosition ?? image.focalPoint,
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
           ))}
         </div>

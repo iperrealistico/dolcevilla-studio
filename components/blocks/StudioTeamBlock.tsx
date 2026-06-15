@@ -30,7 +30,7 @@ type TeamSlide = {
 };
 
 const cardBaseClass =
-  "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] select-none shadow-[var(--shadow-card)] md:min-h-[39rem]";
+  "group relative flex min-h-[33rem] shrink-0 flex-col overflow-hidden rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel-strong)] select-none md:min-h-[39rem]";
 
 function getMemberTitleLines(title: string): string[] {
   const words = title.trim().split(/\s+/).filter(Boolean);
@@ -461,7 +461,7 @@ export function StudioTeamBlock({
 
         <div
           ref={viewportRef}
-          className="flex gap-5 overflow-x-auto overscroll-x-contain px-5 py-4 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] md:px-8 lg:px-10 [&::-webkit-scrollbar]:hidden"
+          className="flex gap-5 overflow-x-auto overscroll-x-contain px-5 pt-4 pb-0 [-ms-overflow-style:none] [scrollbar-width:none] md:px-8 lg:px-10 [&::-webkit-scrollbar]:hidden"
           style={{ scrollPaddingInline: "2.5rem" }}
           onScroll={updateScrollState}
           onWheel={handleWheel}

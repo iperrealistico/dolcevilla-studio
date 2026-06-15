@@ -1,5 +1,6 @@
 import { servicePageContentSchema } from "@/lib/content/schemas";
 import { sharedSiteCta } from "@/content/site/sharedCta";
+import { homePage } from "@/content/pages/home";
 
 export const contactPage = servicePageContentSchema.parse({
   slug: "contact",
@@ -35,6 +36,7 @@ export const contactPage = servicePageContentSchema.parse({
         "Your gallery is edited for coherence, feeling, and the right balance between tactile film character and complete storytelling.",
     },
   ],
+  geography: homePage.geography,
   locationLinks: [],
   formIntro: {
     eyebrow: "Inquiry form",

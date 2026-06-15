@@ -43,7 +43,7 @@ export const dictionary = uiDictionarySchema.parse({
     title: "Choose how the site should accompany you",
     body: "Optional analytics and marketing remain off until you explicitly allow them.",
     essentialOnly: "Continue with essential only",
-    acceptAll: "Allow the full studio experience",
+    acceptAll: "Enter the full studio experience",
   },
   cta: {
     inquire: "Start your inquiry",

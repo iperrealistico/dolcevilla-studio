@@ -44,13 +44,20 @@ export function buildMetadata(seo: MetadataInput): Metadata {
     manifest: "/manifest.webmanifest",
     applicationName: siteSettings.siteName,
     icons: {
+      shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
       icon: [
         { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
         { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
         { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+        { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
         { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
       ],
-      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      apple: [
+        { url: "/apple-touch-icon-120x120.png", sizes: "120x120", type: "image/png" },
+        { url: "/apple-touch-icon-152x152.png", sizes: "152x152", type: "image/png" },
+        { url: "/apple-touch-icon-167x167.png", sizes: "167x167", type: "image/png" },
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
     },
     title: seo.title,
     description: seo.description,

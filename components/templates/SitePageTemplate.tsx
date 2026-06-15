@@ -136,7 +136,7 @@ export function SitePageTemplate({
           />
         </ScrollParallax>
       ) : null}
-      {hasGeography ? (
+      {hasGeography && page.pageType !== "contact" ? (
         <ScrollParallax from="left">
           <GeographyBlock geography={page.geography} />
         </ScrollParallax>
@@ -248,6 +248,11 @@ export function SitePageTemplate({
       {stories.length ? (
         <ScrollParallax from="left">
           <StoryCardGrid stories={stories} maxItems={3} />
+        </ScrollParallax>
+      ) : null}
+      {hasGeography && page.pageType === "contact" ? (
+        <ScrollParallax from="left">
+          <GeographyBlock geography={page.geography} />
         </ScrollParallax>
       ) : null}
     </div>

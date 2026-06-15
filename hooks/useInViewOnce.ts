@@ -4,15 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 export function useInViewOnce<T extends HTMLElement>(enabled = true) {
   const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(!enabled);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    if (!enabled) {
-      setInView(true);
-      return undefined;
-    }
-
-    if (inView || !ref.current) {
+    if (!enabled || inView || !ref.current) {
       return undefined;
     }
 

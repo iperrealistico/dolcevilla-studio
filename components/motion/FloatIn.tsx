@@ -30,6 +30,7 @@ export function FloatIn({
   const { ref, inView } = useInViewOnce<HTMLDivElement>(!disableAnimation);
   const initialX = from === "left" ? -distance : from === "right" ? distance : 0;
   const initialY = from === "bottom" ? distance : distance * 0.32;
+  const initialScale = 1 - Math.min(amount, 0.18) * 0.15;
 
   if (disableAnimation) {
     return <div className={className}>{children}</div>;
@@ -45,7 +46,7 @@ export function FloatIn({
           opacity: 0,
           x: initialX,
           y: initialY,
-          scale: 0.982,
+          scale: initialScale,
         }
       }
       animate={inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : undefined}

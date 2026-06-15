@@ -54,11 +54,13 @@ export function FilmFormatSection({ section, items }: FilmFormatSectionProps) {
         </div>
 
         <div className="mt-10 space-y-10">
-          <FormatGroup
-            title="Photography"
-            description="These four tools belong to the still-photography side of the coverage."
-            items={photographyItems}
-          />
+          <div className="grid gap-5 md:grid-cols-2">
+            {photographyItems.map((item, index) => (
+              <FloatIn key={item.title} delay={index * 0.05}>
+                <FormatCard item={item} />
+              </FloatIn>
+            ))}
+          </div>
           <div className="grid gap-5 md:grid-cols-2">
             {videoItems.map((item, index) => (
               <FloatIn key={item.title} delay={index * 0.05}>
@@ -69,39 +71,6 @@ export function FilmFormatSection({ section, items }: FilmFormatSectionProps) {
         </div>
       </div>
     </Container>
-  );
-}
-
-function FormatGroup({
-  title,
-  description,
-  items,
-}: {
-  title: string;
-  description: string;
-  items: readonly FilmFormatItem[];
-}) {
-  return (
-    <div className="space-y-5">
-      <div className="flex flex-col gap-3 border-b border-[var(--color-line)] pb-4 md:flex-row md:items-end md:justify-between">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex rounded-full border border-[var(--color-line)] bg-[var(--color-shell)] px-3 py-1 text-[0.68rem] font-semibold tracking-[0.28em] text-[var(--color-mist)] uppercase">
-            {title}
-          </span>
-        </div>
-        <p className="max-w-[42rem] text-sm leading-7 text-[var(--color-mist)] md:text-base">
-          {description}
-        </p>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-2">
-        {items.map((item, index) => (
-          <FloatIn key={item.title} delay={index * 0.05}>
-            <FormatCard item={item} />
-          </FloatIn>
-        ))}
-      </div>
-    </div>
   );
 }
 

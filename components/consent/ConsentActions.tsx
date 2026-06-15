@@ -156,37 +156,35 @@ export function ConsentActions() {
             <button
               type="button"
               onClick={essentialOnly}
-              className="w-full rounded-[var(--radius-panel)] border border-white/12 bg-[rgb(255_255_255_/_0.05)] px-5 py-5 text-left transition hover:bg-[rgb(255_255_255_/_0.08)]"
+              className="w-full rounded-[var(--radius-panel)] px-1 py-1.5 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(34_27_23)]"
             >
-              <p className="text-base font-semibold text-[var(--color-paper)]">
-                {consentDoorwayContent.essentialOnly.title}
-              </p>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-[rgb(244_235_224_/_0.7)]">
-                {consentDoorwayContent.essentialOnly.body}
-              </p>
+              <div className="border-l border-white/10 pl-4 md:pl-5">
+                <p className="text-[0.98rem] font-medium text-[rgb(244_235_224_/_0.8)] transition hover:text-[rgb(244_235_224_/_0.9)]">
+                  {consentDoorwayContent.essentialOnly.title}
+                </p>
+                <p className="mt-1.5 max-w-xl text-sm leading-6 text-[rgb(244_235_224_/_0.52)]">
+                  {consentDoorwayContent.essentialOnly.body}
+                </p>
+              </div>
             </button>
           </div>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Button
+            <button
               type="button"
-              variant="ghost"
-              className="border border-white/12 bg-[rgb(255_255_255_/_0.04)] px-4 hover:bg-[rgb(255_255_255_/_0.08)]"
-              style={{ color: "var(--color-paper)" }}
               onClick={() => setShowPreferences((current) => !current)}
-              icon={
-                <Settings2
-                  size={16}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                  className="shrink-0 opacity-85"
-                />
-              }
+              className="inline-flex items-center gap-2 text-sm font-medium text-[rgb(244_235_224_/_0.58)] transition hover:text-[rgb(244_235_224_/_0.78)] focus-visible:outline-none focus-visible:underline focus-visible:underline-offset-4"
             >
+              <Settings2
+                size={16}
+                strokeWidth={1.8}
+                aria-hidden="true"
+                className="shrink-0 opacity-65"
+              />
               {showPreferences
                 ? consentDoorwayContent.hideDetailedChoicesLabel
                 : consentDoorwayContent.chooseManuallyLabel}
-            </Button>
+            </button>
             <button
               type="button"
               onClick={openPrivacyManager}

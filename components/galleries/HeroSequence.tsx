@@ -15,9 +15,7 @@ import { cn } from "@/lib/utils/cn";
 import type { ImageAsset } from "@/types/gallery";
 
 const DEFAULT_HERO_AUTOSCROLL_PX_PER_SECOND = 30;
-const MOBILE_AUTOPLAY_INITIAL_DELAY_MS = 2200;
-const MOBILE_AUTOPLAY_INTERVAL_MS = 3200;
-const AUTOPLAY_RESUME_DELAY_MS = 1100;
+const AUTOPLAY_RESUME_DELAY_MS = 1800;
 const LOOP_RESET_BUFFER_PX = 2;
 const SEGMENT_COPIES = 3;
 const DEFAULT_HERO_SLIDE_SIZES =
@@ -71,23 +69,6 @@ function normalizeLoopPosition(
   }
 }
 
-function getSlideStride(segment: HTMLDivElement) {
-  const [firstSlide, secondSlide] = Array.from(segment.children) as HTMLElement[];
-
-  if (firstSlide && secondSlide) {
-    return secondSlide.offsetLeft - firstSlide.offsetLeft;
-  }
-
-  if (!firstSlide) {
-    return 0;
-  }
-
-  const segmentStyles = window.getComputedStyle(segment);
-  const gap = Number.parseFloat(segmentStyles.columnGap || segmentStyles.gap || "0");
-
-  return firstSlide.offsetWidth + gap;
-}
-
 export function HeroSequence({
   images,
   className,
@@ -102,7 +83,6 @@ export function HeroSequence({
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const segmentRef = useRef<HTMLDivElement | null>(null);
   const segmentWidthRef = useRef(0);
-  const slideStrideRef = useRef(0);
   const hasInitializedRef = useRef(false);
   const isDraggingRef = useRef(false);
   const isTouchingRef = useRef(false);
@@ -134,7 +114,6 @@ export function HeroSequence({
       }
 
       segmentWidthRef.current = segmentWidth;
-      slideStrideRef.current = getSlideStride(segment);
 
       if (!hasInitializedRef.current) {
         viewport.scrollLeft = segmentWidth;
@@ -213,12 +192,7 @@ export function HeroSequence({
   }, [loopableSlides.length]);
 
   useEffect(() => {
-    if (
-      reduceMotion ||
-      isCoarsePointer ||
-      !loopableSlides.length ||
-      !isAutoplayVisible
-    ) {
+    if (reduceMotion || !loopableSlides.length || !isAutoplayVisible) {
       return undefined;
     }
 
@@ -252,56 +226,7 @@ export function HeroSequence({
     return () => {
       window.cancelAnimationFrame(animationFrame);
     };
-  }, [
-    autoScrollSpeedPxPerSecond,
-    isAutoplayVisible,
-    isCoarsePointer,
-    loopableSlides.length,
-    reduceMotion,
-  ]);
-
-  useEffect(() => {
-    if (
-      reduceMotion ||
-      !isCoarsePointer ||
-      !loopableSlides.length ||
-      !isAutoplayVisible
-    ) {
-      return undefined;
-    }
-
-    let timeoutId = 0;
-
-    const scheduleAdvance = (delayMs: number) => {
-      timeoutId = window.setTimeout(() => {
-        const viewport = viewportRef.current;
-        const slideStride = slideStrideRef.current;
-        const now = performance.now();
-        const isPaused =
-          isDraggingRef.current ||
-          isTouchingRef.current ||
-          now < resumeAutoplayAtRef.current;
-
-        if (!viewport || !slideStride || isPaused) {
-          scheduleAdvance(420);
-          return;
-        }
-
-        viewport.scrollTo({
-          left: viewport.scrollLeft + slideStride,
-          behavior: "smooth",
-        });
-
-        scheduleAdvance(MOBILE_AUTOPLAY_INTERVAL_MS);
-      }, delayMs);
-    };
-
-    scheduleAdvance(MOBILE_AUTOPLAY_INITIAL_DELAY_MS);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [isAutoplayVisible, isCoarsePointer, loopableSlides.length, reduceMotion]);
+  }, [autoScrollSpeedPxPerSecond, isAutoplayVisible, loopableSlides.length, reduceMotion]);
 
   if (!loopableSlides.length) {
     return null;
@@ -405,9 +330,7 @@ export function HeroSequence({
         ref={viewportRef}
         className={cn(
           "absolute inset-0 overflow-x-auto overflow-y-hidden overscroll-x-contain select-none [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-          isCoarsePointer
-            ? "snap-x snap-mandatory [touch-action:pan-x_pinch-zoom]"
-            : "",
+          isCoarsePointer ? "[touch-action:pan-x_pinch-zoom]" : "",
           isCoarsePointer ? "" : isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={handlePointerDown}
@@ -439,7 +362,6 @@ export function HeroSequence({
                     key={`${image.id}-${segmentIndex}`}
                     className={cn(
                       "relative h-full min-w-[80vw] overflow-hidden rounded-[var(--radius-frame)] border border-white/12 bg-[var(--surface-panel-strong)] sm:min-w-[62vw] lg:min-w-[36vw] xl:min-w-[30vw] 2xl:min-w-[28vw]",
-                      isCoarsePointer ? "snap-start" : "",
                       slideClassName,
                     )}
                   >

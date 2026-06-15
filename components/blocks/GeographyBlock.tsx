@@ -18,7 +18,12 @@ export function GeographyBlock({ geography }: { geography: ServicePageContent["g
           <Heading className="text-3xl md:text-5xl">{geography.heading}</Heading>
         </div>
         <div className="flex self-start md:mt-auto">
-          <div className="flex h-20 w-20 items-center justify-center rounded-[var(--radius-frame)] border border-[var(--color-line)] bg-[var(--surface-panel)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] sm:h-24 sm:w-24">
+          <div
+            className="flex h-20 w-20 items-center justify-center rounded-[var(--radius-frame)] border border-[var(--color-line)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] sm:h-24 sm:w-24"
+            style={{
+              background: "color-mix(in srgb, var(--color-shell) 84%, var(--surface-panel-strong) 16%)",
+            }}
+          >
             <MapPinned size={30} strokeWidth={1.7} className="sm:h-[2.125rem] sm:w-[2.125rem]" />
           </div>
         </div>

@@ -37,7 +37,7 @@ export function CTASection({ section }: { section: CTASectionContent }) {
             {section.secondaryCta ? (
               <Link
                 href={section.secondaryCta.href}
-                className="inline-flex items-center py-2 text-base font-semibold text-[rgb(244_235_224_/_0.88)] no-underline transition hover:text-[var(--color-paper)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-4 focus-visible:ring-offset-[rgb(28_22_18)] md:text-lg"
+                className="inline-flex self-center items-center justify-center py-2 text-center text-base font-semibold text-[rgb(244_235_224_/_0.88)] no-underline transition hover:text-[var(--color-paper)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-4 focus-visible:ring-offset-[rgb(28_22_18)] md:text-lg"
               >
                 {section.secondaryCta.label}
               </Link>

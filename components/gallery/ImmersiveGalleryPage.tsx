@@ -297,11 +297,10 @@ function GalleryTile({
     placement.shellClassName,
   );
   const cardClassName =
-    "group relative block w-full overflow-hidden rounded-[calc(var(--radius-frame)+0.08rem)] border border-[var(--color-line)] bg-[var(--surface-panel)] p-2 text-left shadow-[var(--shadow-card)] backdrop-blur-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]/35";
+    "group relative block w-full overflow-visible rounded-[var(--radius-frame)] text-left transition-transform duration-500 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ink)]/35";
   const frameClassName =
-    "relative overflow-hidden rounded-[var(--radius-frame)] bg-[var(--surface-panel-soft)]";
-  const imageClassName =
-    "h-auto w-full object-cover transition duration-700 ease-out group-hover:scale-[1.02]";
+    "relative overflow-hidden rounded-[var(--radius-frame)]";
+  const imageClassName = "h-auto w-full object-cover transition duration-500 ease-out";
   const openLabel = `Open image: ${image.alt}`;
 
   if (disableAnimation) {
@@ -350,8 +349,8 @@ function GalleryTile({
           delay: Math.min(index * 0.016, 0.16),
           ease: [0.22, 1, 0.36, 1],
         }}
-        whileHover={{ y: -4, scale: 1.01 }}
-        whileTap={{ scale: 0.992 }}
+        whileHover={{ scale: 1.018 }}
+        whileTap={{ scale: 0.996 }}
         onClick={onOpen}
         aria-label={openLabel}
       >
@@ -369,6 +368,18 @@ function GalleryTile({
           />
         </div>
       </motion.button>
+    </div>
+  );
+}
+
+function GalleryLoopSeparator() {
+  return (
+    <div
+      aria-hidden="true"
+      data-gallery-loop-separator="true"
+      className="pointer-events-none px-1 py-2 sm:py-3 lg:py-4"
+    >
+      <div className="h-px w-full bg-[linear-gradient(90deg,transparent,rgba(140,123,103,0.12)_16%,rgba(140,123,103,0.34)_50%,rgba(140,123,103,0.12)_84%,transparent)] dark:bg-[linear-gradient(90deg,transparent,rgba(232,226,215,0.06)_16%,rgba(232,226,215,0.18)_50%,rgba(232,226,215,0.06)_84%,transparent)]" />
     </div>
   );
 }
@@ -567,11 +578,11 @@ export function ImmersiveGalleryPage({ page }: { page: GalleryPageContent }) {
           <div
             ref={contentRef}
             data-gallery-content="true"
-            className="flex flex-col gap-3 md:gap-4 lg:gap-5"
+            className="flex flex-col"
           >
-            {Array.from({ length: GALLERY_CYCLES }).map((_, cycleIndex) => (
+            {Array.from({ length: GALLERY_CYCLES }).flatMap((_, cycleIndex) => [
               <section
-                key={cycleIndex}
+                key={`cycle-${cycleIndex}`}
                 className={cn(
                   "grid items-start",
                   getGalleryGridClassName(columnCount),
@@ -591,8 +602,11 @@ export function ImmersiveGalleryPage({ page }: { page: GalleryPageContent }) {
                     ))}
                   </div>
                 ))}
-              </section>
-            ))}
+              </section>,
+              cycleIndex < GALLERY_CYCLES - 1 ? (
+                <GalleryLoopSeparator key={`loop-separator-${cycleIndex}`} />
+              ) : null,
+            ])}
           </div>
         </div>
       </div>

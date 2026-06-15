@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { useInViewOnce } from "@/hooks/useInViewOnce";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSimplifiedMotion } from "@/hooks/useSimplifiedMotion";
 import { cn } from "@/lib/utils/cn";
@@ -25,33 +26,30 @@ export function FloatIn({
 }: FloatInProps) {
   const reduceMotion = useReducedMotion();
   const simplifyMotion = useSimplifiedMotion();
+  const disableAnimation = reduceMotion || simplifyMotion;
+  const { ref, inView } = useInViewOnce<HTMLDivElement>(!disableAnimation);
   const initialX = from === "left" ? -distance : from === "right" ? distance : 0;
   const initialY = from === "bottom" ? distance : distance * 0.32;
 
-  if (reduceMotion || simplifyMotion) {
+  if (disableAnimation) {
     return <div className={className}>{children}</div>;
   }
 
   return (
     <motion.div
-      className={cn("mobile-motion-static will-change-transform", className)}
-      style={{
-        willChange: "transform, opacity, filter",
-        backfaceVisibility: "hidden",
-        contain: "layout style",
-      }}
+      ref={ref}
+      className={cn("mobile-motion-static transform-gpu", className)}
+      style={{ backfaceVisibility: "hidden" }}
       initial={
         {
           opacity: 0,
           x: initialX,
           y: initialY,
-          scale: 0.965,
-          filter: "blur(12px)",
+          scale: 0.982,
         }
       }
-      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: true, amount }}
-      transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1], delay }}
+      animate={inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : undefined}
+      transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1], delay }}
     >
       {children}
     </motion.div>

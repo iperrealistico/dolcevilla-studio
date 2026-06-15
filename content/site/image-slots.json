@@ -73,11 +73,11 @@
   },
   "page.about.team.francesco": {
     "asset": "teamFrancescoTarantino",
-    "alt": "Portrait of Francesco Tarantino in a patterned shirt against a warm studio backdrop."
+    "alt": "Portrait of Francesco Tarantino wearing a patterned shirt."
   },
   "page.about.team.mirko": {
     "asset": "teamMirkoCiabatti",
-    "alt": "Portrait of Mirko Ciabatti in a burgundy shirt against a cool studio backdrop."
+    "alt": "Portrait of Mirko Ciabatti wearing a burgundy shirt."
   },
   "page.about.team.group": {
     "asset": "teamWiderStudioVillaRaffaelli"
@@ -308,6 +308,18 @@
   "page.film-wedding-photography.formats.16mm": {
     "asset": "journalSuper8VsDigitalWeddingVideoTuscanyCover",
     "alt": "A motion-picture film cartridge held into the light, representing the film-video side of coverage."
+  },
+  "page.film-wedding-photography.darkroom.1": {
+    "asset": "darkroomHangingPrintsRedLight",
+    "alt": "Wedding prints hanging to dry in a working darkroom under red safelight."
+  },
+  "page.film-wedding-photography.darkroom.2": {
+    "asset": "darkroomChemistryTraysHands",
+    "alt": "Hands guiding photographic paper through chemistry trays in a red-lit darkroom."
+  },
+  "page.film-wedding-photography.darkroom.3": {
+    "asset": "darkroomEnlargerWorkbench",
+    "alt": "A classic enlarger and darkroom tools arranged on a professional workbench."
   },
   "page.studio.hero.primary": {
     "asset": "villaRaffaelliHeroPrimaryGenerated",

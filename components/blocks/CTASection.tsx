@@ -26,9 +26,9 @@ export function CTASection({ section }: { section: CTASectionContent }) {
               variant="secondary"
               className={buttonClassName}
               style={{
-                backgroundColor: "var(--color-paper)",
+                backgroundColor: "rgb(246 239 230 / 0.98)",
                 borderColor: "rgba(255,255,255,0.18)",
-                color: "var(--color-ink)",
+                color: "rgb(15 12 10 / 0.96)",
               }}
             >
               {section.primaryCta.label}

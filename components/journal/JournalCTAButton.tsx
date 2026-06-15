@@ -21,7 +21,7 @@ const sizeClasses = {
 
 const toneClasses = {
   contact:
-    "border-[rgb(196_154_92_/_0.3)] bg-[linear-gradient(135deg,rgba(248,233,205,0.98),rgba(222,186,126,0.98))] text-[var(--color-ink)] shadow-[0_22px_48px_rgba(120,85,34,0.16)]",
+    "border-[rgb(196_154_92_/_0.3)] bg-[linear-gradient(135deg,rgba(248,233,205,0.98),rgba(222,186,126,0.98))] shadow-[0_22px_48px_rgba(120,85,34,0.16)]",
   home: "border-[var(--color-line)] bg-[var(--surface-badge)] text-[var(--color-ink)] shadow-[var(--shadow-soft)]",
 } as const;
 
@@ -63,6 +63,13 @@ export function JournalCTAButton({
       <span aria-hidden="true" className="journal-cta-pulse-ring" />
       <Link
         href={href}
+        style={
+          tone === "contact"
+            ? {
+                color: "rgb(15 12 10 / 0.96)",
+              }
+            : undefined
+        }
         className={cn(
           "journal-cta-highlight relative inline-flex max-w-full items-center justify-center rounded-[var(--radius-pill)] border font-semibold no-underline transition duration-300 hover:-translate-y-0.5 hover:no-underline",
           sizeClasses[size],

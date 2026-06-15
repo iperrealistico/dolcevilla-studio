@@ -951,7 +951,7 @@ export const imageAssetLibrary = {
   teamFrancescoTarantino: createAsset(
     "team-francesco-tarantino",
     "/images/brand/team/francesco-tarantino-headshot.webp",
-    "Portrait of Francesco Tarantino in a patterned shirt against a warm studio backdrop.",
+    "Portrait of Francesco Tarantino wearing a patterned shirt.",
     1400,
     1750,
     "stone",
@@ -959,7 +959,7 @@ export const imageAssetLibrary = {
   teamMirkoCiabatti: createAsset(
     "team-mirko-ciabatti",
     "/images/brand/team/mirko-ciabatti-headshot.webp",
-    "Portrait of Mirko Ciabatti in a burgundy shirt against a cool studio backdrop.",
+    "Portrait of Mirko Ciabatti wearing a burgundy shirt.",
     1400,
     1750,
     "stone",

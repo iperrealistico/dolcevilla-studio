@@ -59,11 +59,13 @@ export function FilmFormatSection({ section, items }: FilmFormatSectionProps) {
             description="These four tools belong to the still-photography side of the coverage."
             items={photographyItems}
           />
-          <FormatGroup
-            title="Video on film"
-            description="These two belong to motion-picture coverage and stay separate from the photographic job."
-            items={videoItems}
-          />
+          <div className="grid gap-5 md:grid-cols-2">
+            {videoItems.map((item, index) => (
+              <FloatIn key={item.title} delay={index * 0.05}>
+                <FormatCard item={item} />
+              </FloatIn>
+            ))}
+          </div>
         </div>
       </div>
     </Container>

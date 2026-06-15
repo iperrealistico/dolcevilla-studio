@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useLightbox } from "@/contexts/LightboxContext";
 import type { GalleryItem } from "@/types/gallery";
 import { DEFAULT_IMAGE_SIZES } from "@/lib/images/imageConfig";
+import { useInViewOnce } from "@/hooks/useInViewOnce";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSimplifiedMotion } from "@/hooks/useSimplifiedMotion";
 
@@ -18,12 +19,14 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
   const { openLightbox } = useLightbox();
   const reduceMotion = useReducedMotion();
   const simplifyMotion = useSimplifiedMotion();
+  const disableAnimation = reduceMotion || simplifyMotion;
+  const { ref, inView } = useInViewOnce<HTMLButtonElement>(!disableAnimation);
   const initialX = index % 3 === 0 ? -28 : index % 3 === 2 ? 28 : 0;
   const initialY = 52;
   const buttonClassName =
     "group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-[var(--radius-frame)] border border-white/20 bg-[var(--color-shell)] text-left shadow-[0_28px_60px_rgba(26,20,15,0.14)]";
 
-  if (reduceMotion || simplifyMotion) {
+  if (disableAnimation) {
     return (
       <button
         type="button"
@@ -51,27 +54,22 @@ export function ImageCard({ item, gallery, index = 0 }: ImageCardProps) {
 
   return (
     <motion.button
+      ref={ref}
       type="button"
-      className={`mobile-motion-static ${buttonClassName}`}
-      style={{
-        willChange: "transform, opacity, filter",
-        backfaceVisibility: "hidden",
-        contain: "layout paint style",
-      }}
+      className={`mobile-motion-static transform-gpu ${buttonClassName}`}
+      style={{ backfaceVisibility: "hidden" }}
       initial={
         {
           opacity: 0,
           x: initialX,
           y: initialY,
-          scale: 0.96,
-          filter: "blur(16px)",
+          scale: 0.982,
         }
       }
-      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.18 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : undefined}
       transition={{
-        duration: 0.86,
-        delay: index * 0.05,
+        duration: 0.72,
+        delay: Math.min(index * 0.035, 0.18),
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -6, scale: 1.018 }}

@@ -2,11 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export function useInViewOnce<T extends HTMLElement>() {
+export function useInViewOnce<T extends HTMLElement>(enabled = true) {
   const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
+  const [inView, setInView] = useState(!enabled);
 
   useEffect(() => {
+    if (!enabled) {
+      setInView(true);
+      return undefined;
+    }
+
     if (inView || !ref.current) {
       return undefined;
     }
@@ -24,7 +29,7 @@ export function useInViewOnce<T extends HTMLElement>() {
     observer.observe(ref.current);
 
     return () => observer.disconnect();
-  }, [inView]);
+  }, [enabled, inView]);
 
   return { ref, inView };
 }

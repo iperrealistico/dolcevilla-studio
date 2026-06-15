@@ -186,7 +186,20 @@ export const filmWeddingPhotographyDetails = {
       "That knowledge shapes the whole workflow. It influences how we expose, how we edit, how we sequence, how we think about print, and how we protect the difference between real film work and a digital imitation of it.",
     ],
   }),
-  darkroomGallery: buildGallery([]),
+  darkroomGallery: buildGallery([
+    {
+      id: "page.film-wedding-photography.darkroom.1",
+      layoutVariant: "landscape",
+    },
+    {
+      id: "page.film-wedding-photography.darkroom.2",
+      layoutVariant: "landscape",
+    },
+    {
+      id: "page.film-wedding-photography.darkroom.3",
+      layoutVariant: "landscape",
+    },
+  ]),
   faqs: [
     {
       question: "Do you always shoot film?",

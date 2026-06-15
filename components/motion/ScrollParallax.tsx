@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { useInViewOnce } from "@/hooks/useInViewOnce";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSimplifiedMotion } from "@/hooks/useSimplifiedMotion";
 import { cn } from "@/lib/utils/cn";
@@ -56,83 +57,41 @@ function AnimatedScrollParallax({
   Pick<ScrollParallaxProps, "children" | "from" | "intensity" | "delay">
 > &
   Pick<ScrollParallaxProps, "className">) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 92%", "end 18%"],
-  });
+  const { ref, inView } = useInViewOnce<HTMLDivElement>();
 
   const settings = intensityMap[intensity];
   const xStart =
     from === "left" ? -settings.entry : from === "right" ? settings.entry : 0;
   const yStart = from === "bottom" ? settings.entry : settings.entry * 0.42;
-  const driftX =
-    from === "left" ? [16, -8] : from === "right" ? [-16, 8] : [0, 0];
-  const driftY =
-    from === "bottom"
-      ? [settings.drift, -settings.lift]
-      : [settings.drift * 0.58, -settings.lift];
-  const rotation =
-    from === "left"
-      ? [-0.8, 0.25]
-      : from === "right"
-        ? [0.8, -0.25]
-        : [0.18, 0];
-
-  const x = useTransform(scrollYProgress, [0, 1], driftX);
-  const y = useTransform(scrollYProgress, [0, 1], driftY);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 1], [0.972, 1, 1.01]);
-  const rotate = useTransform(scrollYProgress, [0, 1], rotation);
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.16, 0.82, 1],
-    [0.2, 1, 1, 0.94],
-  );
 
   return (
     <motion.div
       ref={ref}
-      className={cn("mobile-motion-static will-change-transform", className)}
-      style={{
-        x,
-        y,
-        scale,
-        rotate,
-        opacity,
-        willChange: "transform, opacity",
-        backfaceVisibility: "hidden",
-        contain: "layout style",
+      className={cn("mobile-motion-static transform-gpu", className)}
+      style={{ backfaceVisibility: "hidden" }}
+      initial={{
+        opacity: 0,
+        x: xStart,
+        y: yStart,
+        scale: 0.982,
+      }}
+      animate={
+        inView
+          ? {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+            }
+          : undefined
+      }
+      transition={{
+        duration: 0.78,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
       }}
     >
-      <motion.div
-        className="mobile-motion-static"
-        style={{
-          willChange: "transform, opacity, filter",
-          backfaceVisibility: "hidden",
-        }}
-        initial={{
-          opacity: 0,
-          x: xStart,
-          y: yStart,
-          scale: 0.965,
-          filter: "blur(18px)",
-        }}
-        whileInView={{
-          opacity: 1,
-          x: 0,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-        }}
-        viewport={{ once: true, amount: 0.12 }}
-        transition={{
-          duration: 0.95,
-          ease: [0.22, 1, 0.36, 1],
-          delay,
-        }}
-      >
-        {children}
-      </motion.div>
+      {children}
     </motion.div>
   );
 }

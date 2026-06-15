@@ -1,4 +1,3 @@
-import { CTASection } from "@/components/blocks/CTASection";
 import { EditorialTextBlock } from "@/components/blocks/EditorialTextBlock";
 import { StoryCardGrid } from "@/components/blocks/StoryCardGrid";
 import { NonBlogPageStructuredData } from "@/components/seo/NonBlogPageStructuredData";
@@ -25,7 +24,6 @@ export default async function JournalIndexPage() {
       />
       <div className="space-y-10 pb-16 pt-10 md:space-y-14 md:pb-20 md:pt-12">
         <EditorialTextBlock section={journalPageContent.intro} layout="balanced" />
-        <CTASection section={journalPageContent.cta} />
         <StoryCardGrid stories={stories} />
       </div>
     </>

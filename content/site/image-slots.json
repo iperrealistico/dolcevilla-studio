@@ -589,6 +589,15 @@
   "journal.is-a-tuscany-wedding-more-expensive-than-a-wedding-at-home.ornament.orbit": {
     "asset": "journalTuscanyWeddingMoreExpensiveThanHomeOrnamentOrbit"
   },
+  "journal.do-you-need-a-wedding-planner-for-a-tuscany-destination-wedding.cover": {
+    "asset": "journalDoYouNeedWeddingPlannerTuscanyDestinationWeddingCover"
+  },
+  "journal.do-you-need-a-wedding-planner-for-a-tuscany-destination-wedding.ornament.wash": {
+    "asset": "journalDoYouNeedWeddingPlannerTuscanyDestinationWeddingOrnamentWash"
+  },
+  "journal.do-you-need-a-wedding-planner-for-a-tuscany-destination-wedding.ornament.orbit": {
+    "asset": "journalDoYouNeedWeddingPlannerTuscanyDestinationWeddingOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."

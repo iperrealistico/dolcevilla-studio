@@ -607,6 +607,15 @@
   "journal.do-you-need-a-wedding-planner-for-a-tuscany-destination-wedding.ornament.orbit": {
     "asset": "journalDoYouNeedWeddingPlannerTuscanyDestinationWeddingOrnamentOrbit"
   },
+  "journal.why-a-hybrid-film-and-digital-wedding-gallery-makes-sense-in-tuscany.cover": {
+    "asset": "journalWhyHybridFilmAndDigitalWeddingGalleryMakesSenseInTuscanyCover"
+  },
+  "journal.why-a-hybrid-film-and-digital-wedding-gallery-makes-sense-in-tuscany.ornament.wash": {
+    "asset": "journalWhyHybridFilmAndDigitalWeddingGalleryMakesSenseInTuscanyOrnamentWash"
+  },
+  "journal.why-a-hybrid-film-and-digital-wedding-gallery-makes-sense-in-tuscany.ornament.orbit": {
+    "asset": "journalWhyHybridFilmAndDigitalWeddingGalleryMakesSenseInTuscanyOrnamentOrbit"
+  },
   "consent.doorway.image": {
     "asset": "consentDoorwayImageGenerated",
     "alt": "A couple standing in a doorway with the sky framed behind them."
